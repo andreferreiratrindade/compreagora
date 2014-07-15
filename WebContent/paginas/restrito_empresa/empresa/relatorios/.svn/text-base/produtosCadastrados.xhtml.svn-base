@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/templates/empresa/principalEmpresa.xhtml">
+
+	<ui:define name="corpo">
+
+		<div id="desktop" style="margin-top: 10px;">
+			<div
+				style="width: 960px; margin: auto; height: 750px; margin-top: 10px">
+
+				<div style="float: right; width: 730px">
+					<h:outputText value="Relatório de todos os produtos cadastrados"
+						style="font-size : 20px" />
+					<h:form>
+						<p:commandButton actionListener="#{relatorioBean.allProdutos()}"
+							value="Gerar Relatório" ajax="false" />
+					</h:form>
+
+					<h:form>
+						<p:commandButton actionListener="#{relatorioBean.cantina()}"
+							value="Cantina" ajax="false">
+							<p:fileDownload value="#{relatorioBean.file}" />
+						</p:commandButton>
+					</h:form>
+
+					<h:form>
+						<p:commandButton actionListener="#{relatorioBean.entrega()}"
+							value="Entrega" ajax="false">
+							<p:fileDownload value="#{relatorioBean.file}" />
+						</p:commandButton>
+					</h:form>
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+</ui:composition>
+</html>

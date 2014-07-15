@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+<ui:composition>
+	<div id="desktop">
+		<h:panelGrid style="width:960px;margin:auto">
+			<div>
+				<p:commandLink action="/principal.jsf?faces-redirect=true" id="home"
+					style="position: absolute;margin-left: 21px;margin-top: -5px;">
+					<h:graphicImage library="imagens/ImagensForm" name="bandeira2.png" />
+					<f:setPropertyActionListener
+						target="#{contextUtil.categoriaEmpresa}" value="#{-1}" />
+				</p:commandLink>
+				<p:tooltip for="home">
+					<h:outputText value="Inicio" />
+				</p:tooltip>
+
+				<p:commandLink oncomplete="dlgAjuda.show()" id="lnkAjuda"
+					style="position: absolute;margin-left: 80px;margin-top: -9px;">
+					<h:graphicImage library="imagens/ImagensForm" name="bandeira3.png" />
+
+				</p:commandLink>
+
+				<p:tooltip for="lnkAjuda">
+					<h:outputText value="Ajuda" />
+				</p:tooltip>
+
+				<p:commandLink id="faleConosco"
+					style="position: absolute; margin-left: 140px;margin-top: -13px;"
+					action="/paginas/publico/clienteEmailContato.jsf?faces-redirect=true">
+					<h:graphicImage library="imagens/ImagensForm" name="bandeira1.png" />
+					<f:setPropertyActionListener
+						target="#{contextUtil.categoriaEmpresa}" value="#{-1}" />
+				</p:commandLink>
+
+				<p:tooltip for="faleConosco">
+					<h:outputText value="Fale Conosco" />
+				</p:tooltip>
+
+				<div id="CategoriaEmpresa" style="">
+			
+					<h:outputText value="#{contextUtil.categoriaEmpresaStr}"
+						style="font-size: 40px;float: right;
+						font-family: Estrangelo Edessa; color: #354866;" />
+				</div>
+			</div>
+		</h:panelGrid>
+	</div>
+	<p:dialog id="dlgAjuda" header="Ajuda - Como realizar um pedido"
+		widgetVar="dlgAjuda" modal="true" showEffect="slide"
+		style="background-color: #F74646;">
+		<h:graphicImage library="imagens/ImagensForm" name="passo2.png" />
+	</p:dialog>
+</ui:composition>
+</html>

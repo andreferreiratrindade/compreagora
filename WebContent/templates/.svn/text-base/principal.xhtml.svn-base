@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	>
+<h:head>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="keywords"
+		content="lanchonete, restaurante, compre agora, delivery" />
+	<title>Compre Agora</title>
+	<link rel="shortcut icon" href="#{resource['imagens/icones:logo.gif']}" />
+	<h:outputStylesheet library="/css" name="estilo.css" />
+	<h:outputScript name="easySlider1.7.js" library="scripts" />
+	<h:outputScript name="jquery.js" library="scripts/lib" />
+
+
+	<script type="text/javascript">
+		$(document).ready(function(){	
+			$("#slider").easySlider({
+				auto: true, 
+				continuous: true
+			});
+		});	
+	</script>
+
+</h:head>
+<h:body>
+	<div id="container" style="max-width: 100%;">
+		<div id="topo">
+			<ui:insert name="topo">
+				<ui:include src="topo.xhtml" />
+			</ui:insert>
+		</div>
+
+		<div id="menuSelecionaEmpresa">
+			<ui:insert name="menuSelecionaEmpresa">
+				<ui:include src="menuSelecionaEmpresa.xhtml" />
+			</ui:insert>
+		</div>
+		<div id="informacoes" style="margin-top: 0px;">
+
+			<ui:insert name="informacoes" />
+			<ui:include src="informacoes.xhtml" />
+		</div>
+
+		<div id="corpo" style="margin-top: 20px;">
+
+			<ui:insert name="corpo" />
+		</div>
+
+		<div id="rodape2" style="background: rgb(52, 2, 56)">
+			<ui:insert name="rodape2">
+				<ui:include src="rodape2.xhtml" />
+			</ui:insert>
+		</div>
+	</div>
+</h:body>
+</html>

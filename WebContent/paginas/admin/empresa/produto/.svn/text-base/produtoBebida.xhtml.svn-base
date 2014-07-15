@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/templates/manterEmpresa/principalManterEmpresa.xhtml">
+
+	<ui:define name="corpo">
+
+		<div id="desktop" style="margin-top: 10px;">
+			<div
+				style="width: 960px; margin: auto; height: 750px; margin-top: 10px">
+				<div style="float: right; width: 651px">
+					<h:form id="form">
+
+						<p:dataTable value="#{manterProdutoBebidaBean.bebidas}"
+							var="bebida" paginator="true" rows="6"
+							emptyMessage="Nenhum produto encontrado." id="bebidas">
+							<p:column headerText="Imagem">
+								<center>
+									<h:graphicImage library="imagens/produto/bebida"
+										name="#{bebida.idProduto}.gif" width="100" height="100" />
+								</center>
+							</p:column>
+							<p:column headerText="Descrição">
+								<h:outputText value="#{bebida.descricao}" id="descricao" />
+							</p:column>
+							<p:column headerText="Estoque">
+								<center>
+									<h:outputText value="#{bebida.estoque}" id="estoque" />
+								</center>
+							</p:column>
+							<p:column headerText="Valor">
+								<h:outputText value="R$ " />
+								<h:outputText value="#{bebida.valor}" size="3" id="valor">
+									<f:convertNumber pattern="#,###,##0.00" />
+								</h:outputText>
+							</p:column>
+							<p:column headerText="Ativo">
+								<center>
+									<h:graphicImage library="imagens/icones"
+										name="#{bebida.ativo}.gif" width="13px" />
+								</center>
+							</p:column>
+							<p:column headerText="Atualizar">
+								<center>
+									<p:commandButton value="Atualizar"
+										oncomplete="dlgAtualizarBebida.show()"
+										update=":formDlgAtualizarBebida"
+										style="background-color: cornflowerblue;color: #000;">
+										<f:setPropertyActionListener
+											target="#{manterProdutoBebidaBean.bebida}" value="#{bebida}" />
+									</p:commandButton>
+								</center>
+							</p:column>
+						</p:dataTable>
+					</h:form>
+					<p:fieldset legend="Novo bebida" style="margin-top: 10px;">
+						<h:form id="formNovaBebida">
+							<h:panelGrid columns="2" style="margin:auto">
+								<h:column>
+									<h:outputText value="*" style="color: #F00;float:right" />
+									<h:outputText value="Descrição" style="float:right" />
+								</h:column>
+								<p:inputText value="#{manterProdutoBebidaBean.bebida.descricao}" />
+								<h:column>
+									<h:outputText value="*" style="color: #F00;float:right" />
+									<h:outputText value="Valor" style="float:right" />
+								</h:column>
+								<p:inputText value="#{manterProdutoBebidaBean.bebida.valor}">
+									<f:convertNumber pattern="#,###,##0.00" />
+								</p:inputText>
+								<h:column>
+									<h:outputText value="*" style="color: #F00;float:right" />
+									<h:outputText value="Estoque" style="float:right" />
+								</h:column>
+								<p:inputText value="#{manterProdutoBebidaBean.bebida.estoque}" />
+							</h:panelGrid>
+							<h:outputText id="contador" style="margin-left: 505px;" />
+
+							<center>
+
+								<p:fileUpload label="Procurar imagem"
+									fileUploadListener="#{manterProdutoBebidaBean.uploadAction}" />
+								<h:outputText
+									value="* A imagem a ser inserida deverá ter o formato de GIF" />
+							</center>
+
+							<br />
+							<p:commandButton value="Adicionar bebida"
+								actionListener="#{manterProdutoBebidaBean.salvarBebida}"
+								update=":form:bebidas :formNovaBebida"
+								style="background-color: cornflowerblue;color: #000;" />
+						</h:form>
+					</p:fieldset>
+				</div>
+			</div>
+		</div>
+
+		<h:form id="formDlgAtualizarBebida">
+			<p:dialog id="dlgAtualizarBebida" header="Atualizar Bebida"
+				widgetVar="dlgAtualizarBebida" modal="true" showEffect="slide">
+
+				<h:graphicImage library="imagens/produto/bebida"
+					name="#{manterProdutoBebidaBean.bebida.idProduto}.gif"
+					style="width:100px;height:100px;margin:auto" />
+				<h:panelGrid>
+					<h:outputText value="Descrição" />
+					<p:inputText value="#{manterProdutoBebidaBean.bebida.descricao}"
+						size="28" />
+					<h:outputText value="Estoque" />
+					<p:spinner value="#{manterProdutoBebidaBean.bebida.estoque}"
+						min="0" max="500" size="2" />
+
+					<h:outputText value="Valor" />
+					<p:inputText value="#{manterProdutoBebidaBean.bebida.valor}"
+						size="4">
+						<f:convertNumber pattern="#,###,##0.00" />
+					</p:inputText>
+					<p:commandButton
+						actionListener="#{manterProdutoBebidaBean.atualizaProdutoBebida}"
+						value="Atualizar" update=":form:bebidas"
+						style="background-color: cornflowerblue;color: #000;"
+						oncomplete="dlgAtualizarBebida.hide()" />
+				</h:panelGrid>
+			</p:dialog>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

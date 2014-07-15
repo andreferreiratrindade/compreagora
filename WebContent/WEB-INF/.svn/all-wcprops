@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/compreagora/!svn/ver/3/tcc/WebContent/WEB-INF
+END
+faces-config.xml
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/compreagora/!svn/ver/3/tcc/WebContent/WEB-INF/faces-config.xml
+END
+sun-jaxws.xml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/compreagora/!svn/ver/3/tcc/WebContent/WEB-INF/sun-jaxws.xml
+END
+applicationContext-security.xml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/compreagora/!svn/ver/22/tcc/WebContent/WEB-INF/applicationContext-security.xml
+END
+applicationContext.xml
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/compreagora/!svn/ver/3/tcc/WebContent/WEB-INF/applicationContext.xml
+END
+web.xml
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/compreagora/!svn/ver/12/tcc/WebContent/WEB-INF/web.xml
+END

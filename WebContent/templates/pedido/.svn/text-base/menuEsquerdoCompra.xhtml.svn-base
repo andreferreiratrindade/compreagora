@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+<ui:composition>
+	<div id="desktop" style="margin-top: 20px">
+		<h:form style="width: 960px; margin: auto;">
+			<p:messages id="messagesForm" showDetail="true" autoUpdate="true"
+				closable="true" />
+		</h:form>
+		<div style="width: 960px; margin: auto;">
+			<div style="float: left; width: 300px;">
+
+				<h:form id="formPainel">
+					<p:commandLink styleClass="menuLink" value="Lanches"
+						style="display: #{pedidoBean.verificaTiposProdutos(0)};"
+						action="#{pedidoBean.mudaTelaLanche()}">
+					</p:commandLink>
+
+					<p:commandLink styleClass="menuLink" value="Pizza"
+						style="display: #{pedidoBean.verificaTiposProdutos(1)};margin-top:5px"
+						action="#{pedidoBean.mudaTelaPizza()}">
+					</p:commandLink>
+
+					<p:commandLink styleClass="menuLink" value="Marmitex"
+						style="display: #{pedidoBean.verificaTiposProdutos(2)};margin-top:5px"
+						action="#{pedidoBean.mudaTelaMarmitex()}">
+					</p:commandLink>
+					<p:commandLink styleClass="menuLink" value="Bebida"
+						style="display: #{pedidoBean.verificaTiposProdutos(3)};margin-top:5px"
+						action="#{pedidoBean.mudaTelaBebida()}">
+					</p:commandLink>
+					<p:commandLink styleClass="menuLink" value="Água"
+						style="display: #{pedidoBean.verificaTiposProdutos(4)};margin-top:5px"
+						action="#{pedidoBean.mudaTelaAgua()}">
+					</p:commandLink>
+					<p:commandLink styleClass="menuLink" value="Gás"
+						style="display: #{pedidoBean.verificaTiposProdutos(5)};margin-top:5px"
+						action="#{pedidoBean.mudaTelaGas()}">
+					</p:commandLink>
+					<h:graphicImage name="folha.png" library="imagens/icones"
+						style="width: 300px;margin-top: 20px;position: absolute;height: 446px;" />
+
+
+					<div id="painelPedido"
+						style="position: relative; margin-top: 48px; margin-left: 25px">
+
+						<div style="min-height: 286px;">
+							<h:dataTable var="pedidoProduto"
+								style="width: 266px;margin: auto 0px;"
+								value="#{pedidoBean.pedido.pedidoProdutos}">
+								<h:column>
+									<span style="margin-left: 7px; font-size: 16px;"> <h:outputText
+											id="textoDescricao"
+											value="#{pedidoProduto.produtoAvulso.produto.descricao}" />
+									</span>
+									<p:tooltip for="textoDescricao">
+										<h:outputText
+											value="#{pedidoProduto.produtoAvulso.produto.descricao}" />
+									</p:tooltip>
+								</h:column>
+								<h:column>
+									<span style="float: right;"> <h:outputText
+											value="#{pedidoProduto.valorTotal()}">
+											<f:convertNumber pattern="#,###,##0.00" />
+										</h:outputText> &nbsp; <p:commandLink id="lnkDeletar"
+											oncomplete="dlgDeletarProduto.show()" update=":formDeletar">
+											<h:graphicImage library="imagens/icones" name="deletar.gif" />
+											<f:setPropertyActionListener value="#{pedidoProduto}"
+												target="#{pedidoBean.pedidoProduto}" />
+										</p:commandLink> <p:tooltip for="lnkDeletar">
+											<h:outputText value="Deletar" />
+										</p:tooltip>
+									</span>
+								</h:column>
+							</h:dataTable>
+						</div>
+						<div style="margin-top: 17px">
+
+							<h:panelGrid columns="1" style="margin:auto">
+
+
+								<h:panelGrid columns="3"
+									style="float:right;font-size: 18px;width: 212px;">
+									<h:outputText value="Valor Total" />
+									<h:outputText value="R$ " style="float:right" />
+									<h:outputText value="#{pedidoBean.pedido.valorTotal}">
+										<f:convertNumber pattern="#,###,##0.00" />
+									</h:outputText>
+								</h:panelGrid>
+								<center>
+									<p:commandLink value="Comprar" oncomplete="dlgConcluir.show()"
+										style="float:right;margin-right: 46px;width: 130px;text-decoration: none;
+									 height: 40px;border-bottom: 2px solid #EA0000;margin-top: -5px; color: blue;font-size: 45px; font-family:Vladimir Script"
+										actionListener="#{pedidoBean.atualizaTaxaEntregaFirst}"
+										update=":idConcluir"
+										disabled="#{!pedidoBean.verificaValorMin()}" />
+								</center>
+							</h:panelGrid>
+							<div style="margin-top: 24px;">
+								<h:outputText value="Valor minimo R$ 6,00"
+									style="margin-left:5px" />
+							</div>
+						</div>
+					</div>
+				</h:form>
+			</div>
+		</div>
+	</div>
+
+
+</ui:composition>
+</html>
+

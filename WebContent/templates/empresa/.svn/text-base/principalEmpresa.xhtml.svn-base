@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="keywords"
+		content="lanchonete, restaurante, compre agora, delivery" />
+	<title>Compre Agora</title>
+	<link rel="shortcut icon" href="#{resource['imagens/icones:logo.gif']}" />
+	<h:outputStylesheet library="/css" name="estilo.css" />
+	<script type="text/javascript"
+		src="resources/scripts/altera_display.js"></script>
+
+
+	<style type="text/css">
+</style>
+</h:head>
+<h:body>
+	<div id="container" style="max-width: 100%;">
+		<div id="topo">
+			<ui:insert name="topo">
+				<ui:include src="../topo.xhtml" />
+			</ui:insert>
+		</div>
+
+
+		<div id="menuEsquerdo" style="margin-top: 0px;">
+
+			<ui:insert name="menuEsquerdo" />
+			<ui:include src="menuEsquerdo.xhtml" />
+		</div>
+
+
+		<div id="corpo" style="margin-top: 0px;">
+
+			<ui:insert name="corpo" />
+		</div>
+
+	</div>
+</h:body>
+</html>

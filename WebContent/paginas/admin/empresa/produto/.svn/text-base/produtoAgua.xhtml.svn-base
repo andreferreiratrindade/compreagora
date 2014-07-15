@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition
+	template="/templates/manterEmpresa/principalManterEmpresa.xhtml">
+
+	<ui:define name="corpo">
+		<div id="desktop" style="margin-top: 10px;">
+			<div
+				style="width: 960px; margin: auto; height: 750px; margin-top: 10px">
+				<div style="float: right; width: 651px">
+					<h:form id="form">
+
+						<p:dataTable value="#{manterProdutoAguaBean.listAgua}" var="agua"
+							paginator="true" rows="6"
+							emptyMessage="Nenhum produto encontrado." id="listAgua">
+							<p:column headerText="Imagem">
+								<h:graphicImage library="imagens/produto/agua"
+									name="#{agua.idProduto}.gif" width="100" height="100" />
+							</p:column>
+							<p:column headerText="Descrição">
+								<h:outputText value="#{agua.descricao}" title="Descrição"
+									id="descricao" />
+							</p:column>
+							<p:column headerText="Estoque">
+								<center>
+									<h:outputText value="#{agua.estoque}" id="estoque" />
+								</center>
+							</p:column>
+							<p:column headerText="Valor">
+								<h:outputText value="R$ " />
+								<h:outputText value="#{agua.valor}" title="Valor" size="3"
+									id="valor">
+									<f:convertNumber pattern="#,###,##0.00" />
+								</h:outputText>
+							</p:column>
+							<p:column headerText="Ativo">
+								<center>
+									<h:graphicImage library="imagens/icones"
+										name="#{agua.ativo}.gif" width="13px" />
+								</center>
+							</p:column>
+							<p:column headerText="Atuzalizar">
+
+								<p:commandButton value="Atualizar"
+									oncomplete="dlgAtualizarAgua.show()"
+									update=":formDlgAtualizarAgua"
+									style="background-color: cornflowerblue;color: #000;">
+									<f:setPropertyActionListener
+										target="#{manterProdutoAguaBean.agua}" value="#{agua}" />
+								</p:commandButton>
+
+							</p:column>
+						</p:dataTable>
+					</h:form>
+
+					<p:fieldset legend="Novo Agua" style="margin-top: 10px;">
+						<h:form id="formNovoAgua">
+
+							<h:panelGrid columns="2" style="margin:auto">
+								<h:column>
+									<h:outputText value="*" style="color: #F00;float:right" />
+									<h:outputText value="Descrição" style="float:right" />
+								</h:column>
+								<p:inputText value="#{manterProdutoAguaBean.agua.descricao}" />
+								<h:column>
+									<h:outputText value="*" style="color: #F00;float:right" />
+									<h:outputText value="Estoque" style="float:right" />
+								</h:column>
+								<p:inputText value="#{manterProdutoAguaBean.agua.estoque}" />
+								<h:column>
+									<h:outputText value="*" style="color: #F00;float:right" />
+									<h:outputText value="Valor" style="float:right" />
+								</h:column>
+								<p:inputText value="#{manterProdutoAguaBean.agua.valor}">
+									<f:convertNumber pattern="#,###,##0.00" />
+								</p:inputText>
+
+
+
+							</h:panelGrid>
+							<h:outputText id="contador" style="margin-left: 505px;" />
+							<br />
+
+							<center>
+								<p:fileUpload label="Procurar imagem"
+									fileUploadListener="#{manterProdutoAguaBean.uploadAction}" />
+								<h:outputText
+									value="* A imagem a ser inserida deverá ter o formato de GIF" />
+							</center>
+							<br />
+							<p:commandButton value="Adicionar Agua"
+								actionListener="#{manterProdutoAguaBean.salvarAgua}"
+								update=":form:listAgua :formNovoAgua"
+								style="background-color: cornflowerblue;color: #000;" />
+						</h:form>
+					</p:fieldset>
+				</div>
+			</div>
+		</div>
+
+		<h:form id="formDlgAtualizarAgua">
+			<p:dialog id="dlgAtualizarAgua" header="Atualizar Agua"
+				widgetVar="dlgAtualizarAgua" modal="true" showEffect="slide">
+
+				<h:graphicImage library="imagens/produto/agua"
+					name="#{manterProdutoAguaBean.agua.idProduto}.gif"
+					style="width:100px;height:100px;margin:auto" />
+				<h:panelGrid>
+					<h:outputText value="Descrição" />
+					<p:inputText value="#{manterProdutoAguaBean.agua.descricao}"
+						size="28" />
+
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+					<h:outputText value="Valor" />
+					<h:outputText value="Ativo" style="foat:right" />
+					<p:inputText value="#{manterProdutoAguaBean.agua.valor}" size="4">
+						<f:convertNumber pattern="#,###,##0.00" />
+					</p:inputText>
+
+					<p:selectBooleanCheckbox
+						value="#{manterProdutoAguaBean.agua.ativo}" style="foat:right" />
+				</h:panelGrid>
+
+				<p:commandButton update=":form:listAgua"
+					actionListener="#{manterProdutoAguaBean.atualizaProdutoAgua}"
+					value="Atualizar"
+					style="background-color: cornflowerblue;color: #000;"
+					oncomplete="dlgAtualizarAgua.hide()" />
+			</p:dialog>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

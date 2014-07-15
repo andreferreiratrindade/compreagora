@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/templates/principal.xhtml">
+	<ui:define name="corpo">
+		<!-- 
+	Display para DeskTop
+ -->
+
+
+		<div id="desktop"
+			style="width: 960px; margin: auto; margin-top: 123px;">
+
+			<div id="slider" style="margin: auto; width: 960px">
+				<ul>
+					<li><h:graphicImage name="promocao.png"
+							library="imagens/destaque" /></li>
+					<li><h:graphicImage name="promocao2.png"
+							library="imagens/destaque" /></li>
+					<li><h:graphicImage name="promocao3.png"
+							library="imagens/destaque" /></li>
+				</ul>
+			</div>
+			<h:form id="formCorpo" style="margin: auto;min-height: 350px;">
+				<center>
+					
+					<h:graphicImage library="imagens/ImagensForm"
+						name="comoRealizarCompra.png"
+						style="position:relative;margin-top: 60px;" />
+				</center>
+			</h:form>
+		</div>
+
+
+		<!-- 
+	Display para Mobile
+ -->
+		<div id="celular" style="height: 380px;">
+			<h:form>
+				<center>
+					<h:outputText value="Selecione uma categoria"
+						style="font-size: 25px;margin-top:10px;color:#354866;font-family: Estrangelo Edessa;" />
+				</center>
+				<div style="width: 90%; margin: auto; margin-top: 16px;">
+
+
+					<p:commandLink styleClass="menuLink" value="Lanchonete" style="background-color:yellow; color:#354866 !important"
+						action="/paginas/categoria/endereco/selecionaEndereco.jsf?faces-redirect=true">
+						<f:setPropertyActionListener
+							target="#{contextUtil.categoriaEmpresa}" value="#{0}" />
+					</p:commandLink>
+
+					<p:commandLink styleClass="menuLink" value="Pizzaria"
+						style="margin-top:5px; background-color:yellow; color:#354866 !important"
+						action="/paginas/categoria/endereco/selecionaEndereco.jsf?faces-redirect=true">
+						<f:setPropertyActionListener
+							target="#{contextUtil.categoriaEmpresa}" value="#{1}" />
+					</p:commandLink>
+
+					<p:commandLink styleClass="menuLink" value="Restaurante"
+						style="margin-top:5px; background-color:yellow; color:#354866 !important"
+						action="/paginas/categoria/endereco/selecionaEndereco.jsf?faces-redirect=true">
+						<f:setPropertyActionListener
+							target="#{contextUtil.categoriaEmpresa}" value="#{2}" />
+					</p:commandLink>
+
+					<p:commandLink styleClass="menuLink" value="Bebida"
+						style="margin-top:5px; background-color:yellow; color:#354866 !important"
+						action="/paginas/categoria/endereco/selecionaEndereco.jsf?faces-redirect=true">
+						<f:setPropertyActionListener
+							target="#{contextUtil.categoriaEmpresa}" value="#{3}" />
+					</p:commandLink>
+
+					<p:commandLink styleClass="menuLink" value="Agua"
+						style="margin-top:5px; background-color:yellow; color:#354866 !important"
+						action="/paginas/categoria/endereco/selecionaEndereco.jsf?faces-redirect=true">
+						<f:setPropertyActionListener
+							target="#{contextUtil.categoriaEmpresa}" value="#{4}" />
+					</p:commandLink>
+
+					<p:commandLink styleClass="menuLink" value="Gas"
+						style="margin-top:5px; background-color:yellow; color:#354866 !important"
+						action="/paginas/categoria/endereco/selecionaEndereco.jsf?faces-redirect=true">
+						<f:setPropertyActionListener
+							target="#{contextUtil.categoriaEmpresa}" value="#{5}" />
+					</p:commandLink>
+				</div>
+			</h:form>
+		</div>
+<!-- 
+	Display para Tablet
+ -->
+<div id="tablet">
+	
+	
+	 </div>
+	</ui:define>
+</ui:composition>
+</html>

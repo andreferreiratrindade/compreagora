@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://rodrigouchoa.com/jsf">
+<ui:composition template="/templates/principal.xhtml">
+	<ui:define name="corpo">
+		<div id="desktop" style="margin-top:65px">
+			<h:form id="formFaleConosco">
+				<p:panel style="margin:auto;width: 950px;height: 450px;"
+					header="Enviar E-mail" id="painel">
+					<h:panelGrid columns="1" style="margin:auto">
+						<h:outputText value="lanchonetprojeto@gmail.com"
+							style="font-size:17px;float:right" />
+						<h:outputText value="Nome" />
+						<p:inputText value="#{emailFaleConosco.nome}" size="77" />
+						<p:editor value="#{emailFaleConosco.menssagem}"
+							style="margin-top: 10px;" />
+					</h:panelGrid>
+					<h:panelGrid columns="2" style="float:right;margin-right: 257px;">
+						<p:commandButton actionListener="#{emailFaleConosco.sendEmail}"
+							value="Enviar" id="btSalvar" onstart="blokpendencia.show()"
+							onsuccess="blokpendencia.hide()"
+							style="background-color: cornflowerblue;color: #000;" />
+						<p:commandButton value="Cancelar" ajax="false"
+							style="background-color: #E92B2B;color: #000"
+							action="principal.jsf" />
+					</h:panelGrid>
+				</p:panel>
+			</h:form>
+			<p:blockUI widgetVar="blokpendencia" block=":formFaleConosco">
+				<h:graphicImage library="imagens/icones"
+					name="carregandoCadastro.gif" />
+			</p:blockUI>
+			<p:dialog id="dlgLoading" closable="false" draggable="false"
+				widgetVar="dlgLoading" modal="true">
+				<h:graphicImage library="imagens/icones" name="carregando.gif" />
+			</p:dialog>
+			<br></br>
+			<br></br>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

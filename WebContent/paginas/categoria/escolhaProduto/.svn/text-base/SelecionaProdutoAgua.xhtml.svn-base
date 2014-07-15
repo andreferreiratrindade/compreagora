@@ -1,0 +1,346 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/templates/pedido/principalCompra.xhtml">
+
+	<ui:define name="corpo">
+		<div id="desktop" style="margin-top: 10px;">
+			<div
+				style="width: 960px; margin: auto; height: 820px; margin-top: 10px">
+
+				<div style="float: right; width: 651px">
+					<h:form>
+						<p:dataGrid value="#{pedidoBean.listAguaDM}" var="agua"
+							paginator="true" columns="1" rows="6">
+							<h:panelGrid columns="5" style="width: 692px;">
+								<h:column>
+									<h:graphicImage library="imagens/produto/agua"
+										name="#{agua.idProduto}.gif" width="100" height="100"
+										style="float:left" />
+									<h:outputText title="Descrição" value="#{agua.descricao}"
+										style="font-size: 20px;" />
+									<br />
+									<h:panelGrid style="width: 300px;">
+										<h:outputText value="" />
+									</h:panelGrid>
+									<h:panelGrid
+										style="margin-top: -48px;float: right;margin-right: 17px;margin-top: -15px;">
+										<h:panelGrid columns="2"
+											style="font-size: 20px;margin-left: 8px;">
+											<h:outputText value="R$" />
+											<h:outputText value="#{agua.valor}">
+												<f:convertNumber pattern="#,###,##0.00" />
+											</h:outputText>
+										</h:panelGrid>
+										<p:commandButton
+											value="#{agua.ativo ? 'Adicionar' : 'Indisponivel'}"
+											actionListener="#{pedidoBean.adicionaAgua}"
+											disabled="#{!agua.ativo}" update=":formPainel"
+											style="margin-right: 43px;background-color: cornflowerblue;color: #000;width: 108px; ">
+										</p:commandButton>
+									</h:panelGrid>
+								</h:column>
+
+							</h:panelGrid>
+							<hr width="635px" />
+						</p:dataGrid>
+					</h:form>
+				</div>
+			</div>
+			<!-- Concluir  -->
+			<p:dialog id="dialogConcluir" header="Concluir"
+				widgetVar="dlgConcluir" modal="true" showEffect="slide"
+				style="margin:auto;" dynamic="true" resizable="false">
+				<h:form id="idConcluir">
+					<p:messages id="messages" showDetail="true" autoUpdate="true"
+						closable="true" />
+					<p:tabView orientation="left" style="height: 331px;width: 800px;">
+						<p:tab title="Produtos">
+							<p:dataTable var="meuPedidoProduto"
+								value="#{pedidoBean.pedido.pedidoProdutos}" paginator="true"
+								rows="5" style="min-width: 370px;">
+								<f:facet name="header">Produtos</f:facet>
+								<p:column headerText="Descrição">
+									<h:outputText
+										value="#{meuPedidoProduto.produtoAvulso.produto.descricao}  " />
+								</p:column>
+								<p:column headerText="Valor">
+									<center>
+										<h:outputText value="R$ " />
+										<h:outputText
+											value="#{meuPedidoProduto.produtoAvulso.valorTotal()}">
+											<f:convertNumber pattern="#,###,##0.00" />
+										</h:outputText>
+									</center>
+								</p:column>
+								<p:column headerText="Personalizado">
+									<center>
+										<p:commandButton oncomplete="infoDialogProduto.show()"
+											icon="ui-icon-search"
+											disabled="#{meuPedidoProduto.observacao==null?true:false}"
+											update=":formDialogProduto">
+											<f:setPropertyActionListener
+												target="#{pedidoBean.pedidoProduto}"
+												value="#{meuPedidoProduto}" />
+										</p:commandButton>
+									</center>
+								</p:column>
+							</p:dataTable>
+						</p:tab>
+						<p:tab title="Finalizar Pedido">
+
+							<div style="margin-top: -10px">
+								<h:panelGrid columns="2">
+									<p:commandButton value="Outro Endereco"
+										oncomplete="dlgEndereco.show()"
+										actionListener="#{pedidoBean.novoEndereco}"
+										style="float:right;background-color: cornflowerblue;color: #000;" />
+								</h:panelGrid>
+								<br />
+								<h:panelGrid columns="2">
+									<h:outputText
+										value="#{pedidoBean.enderecoCliente.endereco.logradouro}, " />
+
+									<h:outputText
+										value="#{pedidoBean.enderecoCliente.endereco.numero}" />
+
+									<h:outputText
+										value="Bairro #{pedidoBean.enderecoCliente.endereco.bairroCidade} - " />
+
+									<h:outputText
+										value="#{pedidoBean.enderecoCliente.endereco.bairroCidade.cidade}" />
+
+									<h:outputText
+										value="CEP: #{pedidoBean.enderecoCliente.endereco.cep}" />
+
+									<h:outputText
+										value="#{pedidoBean.enderecoCliente.endereco.complemento}" />
+								</h:panelGrid>
+							</div>
+							<p:separator />
+							<div style="margin-top: 30px">
+								<h:panelGrid columns="2">
+									<h:outputText value="Taxa de Entrega: R$" style="float:right" />
+									<h:outputText value="#{pedidoBean.pedido.taxa}">
+										<f:convertNumber pattern="#,###,##0.00" />
+									</h:outputText>
+								</h:panelGrid>
+								<h:panelGrid columns="2">
+									<h:outputText value="Total à pagar R$"
+										style="float:right;font-size: 18px;font-style: oblique;" />
+									<h:outputText value="#{pedidoBean.valorTotalMaisTaxa}"
+										style="font-size: 18px;font-style: oblique;">
+										<f:convertNumber pattern="#,###,##0.00" />
+									</h:outputText>
+								</h:panelGrid>
+								<div style="width: 350px">
+									<h:panelGrid columns="2" style="float:left">
+										<h:dataTable value="#{pedidoBean.formasDePagamentoDM}"
+											var="fdp" style="width:50px">
+											<h:column>
+												<h:graphicImage library="imagens/icones/formaDePagamento"
+													name="#{fdp.idFormaDePagamento}.png" />
+											</h:column>
+										</h:dataTable>
+										<h:panelGrid>
+											<p:selectOneRadio value="#{pedidoBean.formaDePagamento}"
+												layout="grid" columns="1" style="margin-top:-3px">
+												<f:selectItems value="#{pedidoBean.formasDePagamento}"
+													var="fdp" itemLabel="#{fdp}" />
+												<f:ajax execute="@form" render=":idConcluir" />
+											</p:selectOneRadio>
+										</h:panelGrid>
+									</h:panelGrid>
+									<div style="float: right">
+
+										<h:outputText value="Troco para: " />
+										<p:inputText value="#{pedidoBean.pedido.troco}" size="5"
+											disabled="#{pedidoBean.formaDePagamento == 'Dinheiro' ? false : true}">
+											<f:convertNumber pattern="#,###,##0.00" />
+											<p:ajax event="keyup" update="btComprar" />
+										</p:inputText>
+										<br /> <span> <h:outputText value="*"
+												style="color: #F00;" /> <h:outputText
+												value="Troco deve ser maior" />
+										</span> <br />
+										<h:outputText value="que o valor total do pedido" />
+									</div>
+								</div>
+								<br /> <br />
+								<h:panelGrid columns="2" style="float:right">
+									<p:commandButton value="Comprar" id="btComprar"
+										style="background-color: #1FFF00;color: #0F0101;"
+										action="#{pedidoBean.salvarPedido}"
+										disabled="#{!pedidoBean.habilitarBotaoSalvar()}"
+										oncomplete="dlgConcluir.hide()">
+										<f:setPropertyActionListener
+											target="#{contextUtil.categoriaEmpresa}" value="#{-1}" />
+									</p:commandButton>
+
+									<p:commandButton value="Cancelar"
+										oncomplete="dlgConcluir.hide()"
+										style="background-color: #E92B2B;color: #000;float:right" />
+								</h:panelGrid>
+							</div>
+						</p:tab>
+					</p:tabView>
+				</h:form>
+			</p:dialog>
+			<!-- Alterar Endereço -->
+			<p:dialog id="dialogEndereco" header="Novo Endereco"
+				widgetVar="dlgEndereco" modal="true" showEffect="slide"
+				dynamic="true" resizable="false">
+
+				<h:form id="formOutroEndereco">
+					<h:panelGrid columns="3">
+						<h:column>
+							<h:outputText value="*" style="color: #F00;float:right" />
+							<h:outputText value="Cidade" style="float:right" />
+						</h:column>
+						<p:autoComplete id="cidade" forceSelection="true" var="cidade"
+							itemLabel="#{cidade.descCidade}" itemValue="#{cidade}"
+							value="#{pedidoBean.enderecoCliente.endereco.bairroCidade.cidade}"
+							completeMethod="#{autoCompleteController.completaCidade}"
+							dropdown="true" required="true" converter="converterCidade">
+							<p:ajax event="itemSelect"
+								listener="#{autoCompleteController.handleSelect}"
+								update="bairro" />
+						</p:autoComplete>
+						<p:message for="cidade" display="icon" />
+						<h:column>
+							<h:outputText value="*" style="color: #F00;float:right" />
+							<h:outputText value="Bairro" style="float:right" />
+						</h:column>
+						<p:autoComplete id="bairro"
+							value="#{pedidoBean.enderecoCliente.endereco.bairroCidade}"
+							forceSelection="true" dropdown="true" scrollHeight="200"
+							completeMethod="#{autoCompleteController.completaBairro}"
+							var="bairro" itemLabel="#{bairro.descBairro}"
+							itemValue="#{bairro}" required="true" converter="converterBairro">
+						</p:autoComplete>
+						<p:message for="bairro" display="icon" />
+						<h:column>
+							<h:outputText value="*" style="color: #F00;float:right" />
+							<h:outputText value="Logradouro" style="float:right" />
+						</h:column>
+						<p:inputText
+							value="#{pedidoBean.enderecoCliente.endereco.logradouro}"
+							size="30" id="logradouro" />
+						<p:message for="logradouro" display="icon" />
+						<h:column>
+							<h:outputText value="*" style="color: #F00;float:right" />
+							<h:outputText value="Numero" style="float:right" />
+						</h:column>
+						<p:inputText value="#{pedidoBean.enderecoCliente.endereco.numero}"
+							id="numero" />
+						<p:message for="numero" display="icon" />
+						<h:column>
+							<h:outputText value="*" style="color: #F00;float:right" />
+							<h:outputText value="CEP" style="float:right" />
+						</h:column>
+						<p:inputMask value="#{pedidoBean.enderecoCliente.endereco.cep}"
+							id="cep" required="true" mask="99999-999" label="CEP"
+							converter="converterCEP" />
+						<p:message for="cep" display="icon" />
+						<h:outputText value="Complemento:" style="float:right" />
+						<p:inputTextarea
+							value="#{pedidoBean.enderecoCliente.endereco.complemento}"
+							maxlength="100" counterTemplate="{0} Caracteres"
+							counter="contador" cols="32" />
+						<h:outputText id="contador" style="float:right" />
+
+					</h:panelGrid>
+					<h:panelGrid columns="2" style="float:right">
+						<p:commandButton actionListener="#{pedidoBean.salvarNovoEndereco}"
+							value="Salvar" oncomplete="dlgEndereco.hide()"
+							update=":idConcluir"
+							style="background-color: cornflowerblue;color: #000;">
+
+						</p:commandButton>
+					</h:panelGrid>
+				</h:form>
+			</p:dialog>
+			<!-- Deletar Produto  -->
+			<h:form id="formDeletar">
+				<p:dialog id="dialogDeletarProduto" header="Deletar Produto"
+					widgetVar="dlgDeletarProduto" modal="true" showEffect="slide"
+					resizable="false">
+
+					<h:panelGrid columns="2">
+						<h:column>
+							<h:outputText
+								value="#{pedidoBean.pedidoProduto.produtoAvulso.produto.descricao}" />
+						</h:column>
+						<h:column>
+							<h:panelGrid style="float:right" columns="2">
+								<h:outputText value="R$ " />
+								<h:outputText
+									value="#{pedidoBean.pedidoProduto.produtoAvulso.valorTotal()}">
+									<f:convertNumber pattern="#,###,##0.00" />
+								</h:outputText>
+							</h:panelGrid>
+						</h:column>
+					</h:panelGrid>
+					<br />
+					<br />
+					<h:form prependId="false">
+						<center>
+							<p:commandButton value="Deletar"
+								actionListener="#{pedidoBean.deletarProduto}"
+								oncomplete="dlgDeletarProduto.hide()" ajax="true"
+								update=":formPainel"
+								style="background-color: cornflowerblue;color: #000" />
+						</center>
+					</h:form>
+				</p:dialog>
+			</h:form>
+			<!-- Colocar Alguma observação no Produto -->
+
+			<!-- Informar a situação do Produto se tiver observacao  -->
+			<h:form id="formDialogProduto">
+				<p:dialog id="infoDialogProduto" header="Produto Personalizado"
+					widgetVar="infoDialogProduto" resizable="false" modal="true"
+					showEffect="slite">
+					<h:panelGrid style="width:300px">
+
+						<h:panelGrid>
+							<h:dataTable var="avulso"
+								value="#{pedidoBean.pedidoProduto.produtoAvulso.avulsos}">
+								<h:column>
+									<h:outputText value="#{avulso.descricao}" />
+								</h:column>
+								<h:column>
+									<h:panelGrid style="float:right" columns="2">
+										<h:outputText value="R$ " />
+										<h:outputText value="#{avulso.valor}">
+											<f:convertNumber pattern="#,###,##0.00" />
+										</h:outputText>
+									</h:panelGrid>
+								</h:column>
+							</h:dataTable>
+						</h:panelGrid>
+						<br />
+						<h:outputText value="#{pedidoBean.pedidoProduto.observacao}" />
+					</h:panelGrid>
+				</p:dialog>
+			</h:form>
+		</div>
+
+
+		<div id="celular"></div>
+		<script>
+			$(document).ready(function() {
+				$('.menu-anchor').on('click touchstart', function(e) {
+					$('html').toggleClass('menu-active');
+					e.preventDefault();
+				});
+			})
+		</script>
+	</ui:define>
+</ui:composition>
+</html>

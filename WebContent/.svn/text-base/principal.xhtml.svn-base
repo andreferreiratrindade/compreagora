@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/templates/principal.xhtml">
+	<ui:define name="corpo">
+		<!-- 
+	Display para DeskTop
+ -->
+
+		<div id="desktop"
+			style="width: 960px; margin: auto; margin-top: 123px;">
+			
+			
+			
+			
+			
+
+			<div id="slider" style="margin: auto; width: 960px">
+				<ul>
+					<li><h:graphicImage name="promocao.png"
+							library="imagens/destaque" /></li>
+					<li><h:graphicImage name="promocao2.png"
+							library="imagens/destaque" /></li>
+					<li><h:graphicImage name="promocao3.png"
+							library="imagens/destaque" /></li>
+				</ul>
+			</div>
+
+
+			<h:form id="formCorpo" style="margin: auto;min-height: 350px;">
+
+				<center>
+					<h:graphicImage library="imagens/ImagensForm"
+						name="comoRealizarCompra.png"
+						style="position:relative;margin-top: 60px;" />
+
+				</center>
+
+
+			</h:form>
+		</div>
+
+
+		<!-- 
+	Display para Mobile
+ -->
+		<div id="celular"></div>
+
+	</ui:define>
+</ui:composition>
+</html>

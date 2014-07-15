@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags">
+<ui:composition>
+	<!-- Display DeskTop -->
+	<div id="desktop">
+		<span
+			style="background: rgb(40, 51, 109);; height: 90px; position: absolute; width: 100%; top: 0" />
+
+		<h:form style="margin-top:-8px !important;width: 960px;margin: auto;">
+
+			<h:graphicImage library="imagens/icones" name="logo.png"
+				style="position: absolute; width: 283px; top: 10px;" />
+
+			<div align="right"
+				style="position: inherit; margin-top: 43px; margin-right: 10px; font-size: 11px;">
+				<sec:isAnonymous>
+					<p:commandButton value="Quero me cadastrar"
+						action="#{clienteBean.novo}" style="background: #FEFFFC">
+						<f:setPropertyActionListener
+							target="#{contextUtil.categoriaEmpresa}" value="#{-1}" />
+					</p:commandButton>&nbsp;  &nbsp;
+				<p:commandButton value="Entrar"
+						action="/paginas/publico/login.jsf?faces-redirect=true"
+						styleClass="ui-priority-primary">
+						<f:setPropertyActionListener
+							target="#{contextUtil.categoriaEmpresa}" value="#{-1}" />
+					</p:commandButton>
+				</sec:isAnonymous>
+				<sec:ifAnyGranted roles="ROLE_SUP">
+					<div style="margin-top: -23px;">
+						<h:outputText value="#{contextUtil.clienteLogado.nome}"
+							style="color: #FFF;font-size: x-large;margin-right: 12px;font-family: sans-serif;position: relative;" />
+
+
+						<p:commandButton value="Clientes"
+							action="/paginas/admin/cliente/clientesCadastrados.jsf?faces-redirect=true"
+							style="background-color: #FEFFFC;top: -11px;margin-right: 15px;" />
+						<p:commandButton value="Empresa"
+							action="/paginas/admin/empresa/areaAdministrativa.jsf?faces-redirect=true"
+							style="background-color: #FEFFFC;top: -11px;margin-right: 2px;" />
+						&nbsp;&nbsp; <span> <a title="Sair"
+							style="position: relative;"
+							href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
+								<h:graphicImage library="imagens/icones" name="sair.png"
+									width="80px" />
+						</a>
+						</span>
+					</div>
+				</sec:ifAnyGranted>
+				<sec:ifAnyGranted roles="ROLE_ADM">
+					<div style="margin-top: -23px;">
+						<h:outputText value="#{contextUtil.clienteLogado.nome}"
+							style="color: #FFF;font-size: x-large;margin-right: 12px;font-family: sans-serif;position: relative;" />
+
+						<p:commandButton value="Administrativo"
+							style="background-color: #FEFFFC;top: -11px;margin-right: 2px;"
+							action="/paginas/restrito_empresa/empresa/PedidosDeClientes.jsf?faces-redirect=true" />
+						<span> <a title="Sair" style="position: relative;"
+							href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
+								<h:graphicImage library="imagens/icones" name="sair.png"
+									width="88px;" />
+						</a>
+						</span>
+					</div>
+				</sec:ifAnyGranted>
+				<sec:ifAnyGranted roles="ROLE_CLI">
+
+
+					<div style="margin-top: -24px;">
+
+						<h:outputText value="#{contextUtil.clienteLogado.nome}"
+							style="color: #FFF;font-size: x-large;font-family: sans-serif;position: relative;" />
+					</div>
+					<p:commandButton id="dynaButton" value="Minha Conta" type="button"
+						style="float:right" styleClass="ui-priority-primary" />
+
+
+					<p:menu overlay="true" trigger="dynaButton" my="left top"
+						at="left bottom">
+						<p:submenu>
+							<p:menuitem value="Meus Pedidos"
+								action="/paginas/publico/meusPedidos.jsf?faces-redirect=true">
+								<f:setPropertyActionListener
+									target="#{contextUtil.categoriaEmpresa}" value="#{-1}" />
+							</p:menuitem>
+							<p:separator />
+							<p:menuitem value="Editar Conta"
+								action="#{clienteBean.alterarCliente}">
+								<f:setPropertyActionListener
+									target="#{contextUtil.categoriaEmpresa}" value="#{-1}" />
+							</p:menuitem>
+							<p:separator />
+							<p:menuitem value="Sair">
+								<center>
+									<a title="Sair"
+										href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
+										<h:graphicImage library="imagens/icones" name="sair.png"
+											width="88px" />
+									</a>
+								</center>
+							</p:menuitem>
+						</p:submenu>
+					</p:menu>
+
+					<div style="margin-top: 43px;"></div>
+				</sec:ifAnyGranted>
+			</div>
+		</h:form>
+	</div>
+	<!-- Display Mobile -->
+	<div id="celular">
+		<span
+			style="background: #333; height: 90px; position: absolute; width: 100%; z-index: 999; top: 0;">
+			<center>
+				<sec:isAnonymous>
+					<h:panelGrid columns="5">
+						<p:commandButton value="Cadastre-se" action="#{clienteBean.novo}"
+							style="background-color: #FEFFFC;font-size: 11px;" />
+						<a href="/lanchonet/principal.jsf"> <h:graphicImage
+								library="imagens/icones" name="CelularLogo.png"
+								style="width: 50px;" />
+						</a>
+						<p:commandButton value="Login"
+							action="/paginas/publico/login.jsf?faces-redirect=true"
+							style="background-color: #FEFFFC;font-size: 11px;width: 86px;" />
+
+					</h:panelGrid>
+				</sec:isAnonymous>
+			</center> <sec:ifAnyGranted roles="ROLE_CLI">
+				<center>
+					<a href="/lanchonet/principal.jsf"> <h:graphicImage
+							library="imagens/icones" name="CelularLogo.png"
+							style="width: 50px;" />
+					</a>
+				</center>
+				<a title="Sair" style="float: right; margin-top: -39px;"
+					href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
+					<h:graphicImage library="imagens/icones" name="sair.png"
+						width="88px;" />
+				</a>
+				<center>
+					<h:panelGrid columns="2">
+						<h:form>
+							<p:commandButton id="dynaButton" type="button" value="|||"
+								style="background-color: cornflowerblue;" />
+
+
+
+							<p:menu overlay="true" trigger="dynaButton" my="left top"
+								at="left bottom"
+								style="background-color: rgba(206, 220, 247, 1);width: 140px;">
+								<p:submenu>
+									<p:menuitem value="Meus Pedidos"
+										action="/paginas/publico/meusPedidos.jsf?faces-redirect=true" />
+									<p:menuitem value="Editar Conta"
+										action="#{clienteBean.alterarCliente}" />
+								</p:submenu>
+
+							</p:menu>
+						</h:form>
+						<h:outputText value="#{contextUtil.clienteLogado.nome}" />
+					</h:panelGrid>
+				</center>
+			</sec:ifAnyGranted>
+		</span>
+
+		<h:form id="formTopoMenu">
+			<menu>
+				<ul>
+					<li><a href="#">Editar Conta</a></li>
+					<li><a href="#">Meus Pedidos</a></li>
+					<li><a href="#">Sair</a></li>
+				</ul>
+			</menu>
+		</h:form>
+	</div>
+</ui:composition>
+</html>

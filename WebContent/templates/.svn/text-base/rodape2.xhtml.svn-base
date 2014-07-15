@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+<ui:composition>
+	<div id="desktop" style="width: 960px; margin: auto;">
+		<h:form style="font-family: cursive;">
+			<h:panelGrid>
+				<br />
+				<h:outputText value="Quem somos ?" style="color:#FFF;font-size:26px" />
+				<br />
+				<h:outputText style="color:#FFF;font-size:20px"
+					value="Compre agora é um site de delivery online, onde visa 
+proporcionar maior conforto para suas compras.
+
+Disponiblizamos para você uma vasta rede de conveniados com os melhores preços da região, seleciona uma categoria e confira.
+" />
+
+				<p:commandLink id="faleConosco" style="color:#FFF; font-size:20px"
+					action="/paginas/publico/clienteEmailContato.jsf?faces-redirect=true">
+				Nos ajude com sua opinião, mande-nos um E-mail.
+				<f:setPropertyActionListener
+						target="#{contextUtil.categoriaEmpresa}" value="#{-1}" />
+				</p:commandLink>
+
+			</h:panelGrid>
+			<br />
+
+			<br />
+		</h:form>
+	</div>
+
+
+
+	<div id="celular"></div>
+</ui:composition>
+</html>

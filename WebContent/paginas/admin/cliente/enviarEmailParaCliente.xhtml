@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/templates/principal.xhtml">
+
+	<ui:define name="corpo">
+		<p:layout id="LayoutEmail"
+			style="width:960px;margin:auto;height:500px;margin-top: 63px;">
+			<p:layoutUnit position="west" resizable="true" size="200"
+				minSize="40" maxSize="200">
+				<h:form prependId="false">
+					<p:menu style="margin:auto;width: 179px;background-color:#FFF">
+						<p:submenu>
+							<p:menuitem value="Enviar e-mail"
+								action="enviarEmailParaCliente.jsf" />
+						</p:submenu>
+						<p:submenu>
+							<p:menuitem value="Clientens Cadastrados"
+								action="clientesCadastrados.jsf" />
+						</p:submenu>
+					</p:menu>
+				</h:form>
+			</p:layoutUnit>
+			<p:layoutUnit position="center" header="Enviar Email">
+				<h:form>
+					<h:panelGrid style="margin: auto;margin-top: 10px;">
+						<h:outputText value="lanchonetprojeto@gmail.com"
+							style="font-size:17px;float:right" />
+						<h:outputText value="Assunto" style="margin-top:10px" />
+						<p:inputText value="#{clientesAdminBean.assunto}" size="77" />
+
+						<p:editor value="#{clientesAdminBean.menssagem}"
+							style="margin-top: 10px;" />
+
+						<h:panelGrid columns="2" style="float:right">
+							<p:commandButton value="Enviar"
+								action="#{clientesAdminBean.enviarEmailParaTodosClientes}"
+								style="background-color: cornflowerblue;color: #000;"
+								onstart="dlgLoading.show()" onsuccess="dlgLoading.hide()" />
+							<p:commandButton value="Cancelar"
+								style="background-color: #E92B2B;color: #000" />
+						</h:panelGrid>
+					</h:panelGrid>
+				</h:form>
+			</p:layoutUnit>
+		</p:layout>
+		<p:dialog id="dlgLoading" closable="false" draggable="false"
+			widgetVar="dlgLoading" modal="true">
+			<h:graphicImage library="imagens/icones" name="carregando.gif" />
+		</p:dialog>
+	</ui:define>
+</ui:composition>
+</html>

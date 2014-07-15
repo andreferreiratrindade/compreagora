@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition
+	template="/templates/manterEmpresa/principalManterEmpresa.xhtml">
+
+	<ui:define name="corpo">
+
+		<div id="desktop" style="margin-top: 10px;">
+			<div
+				style="width: 960px; margin: auto; height: 750px; margin-top: 10px">
+				<div style="float: right; width: 651px">
+					<h:form id="form">
+						<p:dataTable var="atendimento"
+							value="#{empresaBean.empresaAtendimentos}" id="tabelaAtendimento"
+							paginator="true" rows="15">
+							<f:facet name="header">
+				Lugar de Atendimento
+				</f:facet>
+							<p:column headerText="Cidade">
+								<h:outputText value="#{atendimento.bairro.cidade.descCidade}" />
+							</p:column>
+							<p:column headerText="Bairro">
+								<h:outputText value="#{atendimento.bairro.descBairro}" />
+							</p:column>
+							<p:column headerText="Taxa">
+								<h:outputText value="#{atendimento.taxa}" />
+							</p:column>
+
+							<p:column headerText="Ativo">
+								<center>
+									<h:graphicImage library="imagens/icones"
+										name="#{atendimento.ativo}.gif" width="13px" />
+								</center>
+							</p:column>
+						</p:dataTable>
+
+						<p:fieldset legend="Novo Local" style="margin-top: 10px;">
+							<h:panelGrid columns="2" style="margin:auto">
+								<h:column>
+									<h:outputText value="*" style="color: #F00;float:right" />
+									<h:outputText value="Cidade" style="float:right" />
+								</h:column>
+								<p:autoComplete id="cidade" forceSelection="true" var="cidade"
+									itemLabel="#{cidade.descCidade}" itemValue="#{cidade}"
+									completeMethod="#{autoCompleteController.completaCidade}"
+									dropdown="true" required="true" converter="converterCidade">
+									<p:ajax event="itemSelect"
+										listener="#{autoCompleteController.handleSelect}"
+										update="bairro" />
+								</p:autoComplete>
+								<h:column>
+									<h:outputText value="*" style="float:right;color: #F00;" />
+									<h:outputText value="Bairro" style="float:right" />
+								</h:column>
+
+								<p:autoComplete id="bairro"
+									value="#{empresaBean.empresaAtendimento.bairro}"
+									forceSelection="true"
+									completeMethod="#{autoCompleteController.completaBairro}"
+									var="bairro" itemLabel="#{bairro.descBairro}"
+									itemValue="#{bairro}" required="true"
+									converter="converterBairro" dropdown="true" scrollHeight="200">
+								</p:autoComplete>
+								<h:column>
+									<h:outputText value="*" style="color: #F00;float:right" />
+									<h:outputText value="Tempo do percurso" style="float:right" />
+								</h:column>
+
+								<p:inputText
+									value="#{empresaBean.empresaAtendimento.tempoEspera}"
+									required="true" />
+								<h:column>
+									<h:outputText value="*" style="color: #F00;float:right" />
+									<h:outputText value="Taxa" style="float:right" />
+								</h:column>
+
+								<p:inputText value="#{empresaBean.empresaAtendimento.taxa}"
+									required="true">
+									<f:convertNumber pattern="#,###,##0.00" />
+								</p:inputText>
+							</h:panelGrid>
+							<h:form>
+								<p:commandButton value="Cancelar"
+									action="ManterEmpresa.jsf?faces-redirect=true"
+									style="float:right;background-color: #E92B2B;color: #000"
+									ajax="false" />
+
+								<p:commandButton value="Salvar"
+									action="#{empresaBean.salvarLocalAtendimento}"
+									style="float:right;background-color: cornflowerblue;color: #000"
+									update=":form:tabelaAtendimento" />
+							</h:form>
+						</p:fieldset>
+
+
+					</h:form>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

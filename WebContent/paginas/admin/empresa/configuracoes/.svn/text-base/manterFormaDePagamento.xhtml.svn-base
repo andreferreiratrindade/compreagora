@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/templates/areaAdmin/principalAreaAdmin.xhtml">
+	<ui:define name="corpo">
+		<div id="desktop" style="margin-top: 10px;">
+			<div
+				style="width: 775px; margin: auto; height: 473px; margin-top: 10px">
+				<div style="float: right; width: 651px">
+
+					<h:form id="formGrid" style="margin:auto; width: 960px;">
+
+						<p:dataTable value="#{formaDePagamentoBean.formasDePagamento}"
+							var="formaPagamento" paginator="true" rows="30"
+							style="width:600px" ajax="false">
+							<f:facet name="header">
+				Formas de Pagamento Cadastradas</f:facet>
+							<p:column headerText="Tipo">
+								<h:outputText value="#{formaPagamento.tipo}" />
+							</p:column>
+							<p:column headerText="Imagem">
+								<h:graphicImage library="imagens/icones/formaDePagamento"
+									name="#{formaPagamento.idFormaDePagamento}.png" />
+							</p:column>
+						</p:dataTable>
+
+
+					</h:form>
+
+					<br />
+					<p:fieldset legend="Nova Forma de Pagamento"
+						style="margin-top: 10px;  margin:auto; ">
+						<h:form id="formNovo" style="margin:auto; ">
+
+							<h:panelGrid columns="2" style="margin:auto">
+								<h:column>
+									<h:outputText value="*" style="color: #F00;float:right" />
+									<h:outputText value="Descrição" style="float:right" />
+								</h:column>
+								<p:inputText
+									value="#{formaDePagamentoBean.formaDePagamento.tipo}" />
+							</h:panelGrid>
+							<center>
+								<p:fileUpload label="Procurar imagem"
+									fileUploadListener="#{formaDePagamentoBean.uploadAction}" />
+								<h:outputText
+									value="* A imagem a ser inserida deverá ter o formato de PNG" />
+							</center>
+							<br />
+							<p:commandButton value="Adicionar Lanche"
+								actionListener="#{formaDePagamentoBean.salvar}"
+								update=":formGrid :formNovo"
+								style="background-color: cornflowerblue;color: #000;" />
+						</h:form>
+					</p:fieldset>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

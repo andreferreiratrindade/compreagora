@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/compreagora/!svn/ver/3/tcc/src/br/util
+END
+LoginMB.java
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/compreagora/!svn/ver/3/tcc/src/br/util/LoginMB.java
+END
+DAOException.java
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/compreagora/!svn/ver/3/tcc/src/br/util/DAOException.java
+END
+FileUpload.java
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/compreagora/!svn/ver/20/tcc/src/br/util/FileUpload.java
+END
+JpaUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/compreagora/!svn/ver/3/tcc/src/br/util/JpaUtil.java
+END
+UtilException.java
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/compreagora/!svn/ver/3/tcc/src/br/util/UtilException.java
+END
+DAOFactoy.java
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/compreagora/!svn/ver/4/tcc/src/br/util/DAOFactoy.java
+END
+FacesUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/compreagora/!svn/ver/3/tcc/src/br/util/FacesUtil.java
+END
+RNException.java
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/compreagora/!svn/ver/3/tcc/src/br/util/RNException.java
+END

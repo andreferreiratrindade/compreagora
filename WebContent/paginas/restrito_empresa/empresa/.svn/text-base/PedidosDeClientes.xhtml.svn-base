@@ -1,0 +1,351 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/templates/empresa/principalEmpresa.xhtml">
+
+	<ui:define name="corpo">
+
+		<div id="desktop" style="margin-top: 10px;">
+			<div
+				style="width: 960px; margin: auto; min-height: 810px; margin-top: 10px">
+
+				<div style="float: right; width: 760px">
+
+					<h:panelGrid style="margin:auto;">
+						<h:form style="float:right; ">
+							<p:clock mode="server" pattern="HH:mm:ss dd/MM/yyyy" />
+						</h:form>
+						<h:form style="float:left;margin-top: -28px;">
+							<p:commandButton value="Legenda" oncomplete="dlgLegenda.show()"
+								style="background-color: cornflowerblue;color: #000;float:left" />
+						</h:form>
+						<h:form id="formTablePedidos">
+							<p:dataTable value="#{pedidosClientesBean.pedidoDataModel}"
+								var="pedido" id="listaPedidos" paginator="true" rows="10"
+								rowKey="#{pedido.idPedido}"
+								selection="#{pedidosClientesBean.pedido}" selectionMode="single"
+								emptyMessage="Nenhum produto encontrado.">
+								<p:ajax event="rowSelect"
+									update=":formInfoPedido :formEnderecoCliente"
+									listener="#{pedidosClientesBean.atualizaProdutos}" />
+
+								<p:column headerText="Pedido">
+									<h:outputText value="#{pedido.idPedido}" style="margin:auto" />
+								</p:column>
+								<p:column headerText="Nome do solicitante">
+									<h:outputText value="#{pedido.enderecoCliente.cliente.nome}" />
+								</p:column>
+								<p:column headerText="Valor">
+
+									<h:outputText value="#{pedido.valorTotal}" style="margin:auto">
+										<f:convertNumber pattern="#,###,##0.00" />
+									</h:outputText>
+
+								</p:column>
+								<p:column headerText="Status" sortBy="#{pedido.statusPedido}">
+									<center>
+										<h:graphicImage width="30" height="30"
+											library="imagens/status"
+											name="statusIcone#{pedido.statusPedido}.png"
+											style="margin:auto" id="imgStatus" />
+										<p:tooltip for="imgStatus">
+											<h:outputText value="#{pedido.statusAtual()}" />
+										</p:tooltip>
+									</center>
+								</p:column>
+								<p:column headerText="Data de Inicio"
+									sortBy="#{pedido.dataHoraIn}">
+									<h:outputText value="#{pedido.dataHoraIn}">
+										<f:convertDateTime type="date" dateStyle="short"
+											pattern="dd/MM/yyyy HH:mm" timeZone="America/Sao_Paulo" />
+									</h:outputText>
+								</p:column>
+								<p:column headerText="Data de Termino">
+									<h:outputText value="#{pedido.dataHoraFim}">
+										<f:convertDateTime type="date" dateStyle="short"
+											pattern="dd/MM/yyyy HH:mm" timeZone="America/Sao_Paulo" />
+									</h:outputText>
+								</p:column>
+							</p:dataTable>
+						</h:form>
+						<h:form id="formInfoPedido">
+							<p:fieldset legend="Pedido">
+								<h:panelGrid columns="2" style="width: 501px;margin: auto;">
+									<h:outputText
+										value="Pedido Nº #{pedidosClientesBean.pedido.idPedido}"
+										style="float:left;font-size:20px" />
+									<h:outputText value="#{pedidosClientesBean.pedido.dataHoraIn}"
+										style="float:right;font-size:20px">
+										<f:convertDateTime type="date" pattern="dd/MM/yyyy HH:mm"
+											timeZone="America/Sao_Paulo" />
+									</h:outputText>
+
+									<h:outputText
+										value="#{pedidosClientesBean.pedido.enderecoCliente.cliente.nome}"
+										style="font-size:20px" />
+
+								</h:panelGrid>
+								<center>
+									<h:graphicImage library="imagens/status"
+										name="Status#{pedidosClientesBean.pedido.statusPedido}.png"
+										style="width:500px; heigth:100px" />
+								</center>
+								<p:commandButton value="Prosseguir"
+									actionListener="#{pedidosClientesBean.atualizaStatus}"
+									disabled="#{pedidosClientesBean.pedido.statusPedido>=4?true:false}"
+									oncomplete="imprimePedido.show()" update=":formImprimePedido"
+									style="margin-left: 606px;background-color: #1FFF00;color: #0F0101;" />
+
+								<p:dataTable value="#{pedidosClientesBean.pedidoProdutos}"
+									var="pedidoProduto" id="infoDataTableProdutos"
+									emptyMessage="Nenhum produto encontrado."
+									style="min-width:350px;margin:auto ;margin-top:10px">
+									<f:facet name="header">Produtos</f:facet>
+									<p:column headerText="Descrição">
+										<h:outputText
+											value="#{pedidoProduto.produtoAvulso.produto.descricao}" />
+									</p:column>
+									<p:column headerText="Valor">
+										<center>
+											<h:outputText value="R$ " />
+											<h:outputText
+												value="#{pedidoProduto.produtoAvulso.valorTotal()}">
+												<f:convertNumber pattern="#,###,##0.00" />
+											</h:outputText>
+										</center>
+									</p:column>
+									<p:column headerText="Personalizado">
+										<center>
+											<p:commandButton icon="ui-icon-search"
+												disabled="#{pedidoProduto.observacao==null?true:false}"
+												oncomplete="infoDialogProduto.show()"
+												update=":formDialogProduto">
+												<f:setPropertyActionListener
+													target="#{pedidosClientesBean.pedidoProduto}"
+													value="#{pedidoProduto}" />
+											</p:commandButton>
+										</center>
+									</p:column>
+								</p:dataTable>
+								<div style="width: 500px; margin: auto">
+									<div style="float: left">
+										<h:panelGrid columns="2">
+											<h:column>
+												<h:graphicImage library="imagens/icones/formaDePagamento"
+													name="#{pedidosClientesBean.pedido.formaDePagamento.idFormaDePagamento}.png" />
+
+												<h:outputText
+													value="#{pedidosClientesBean.pedido.formaDePagamento}"
+													style="margin-left:5px" />
+											</h:column>
+											<h:outputText />
+											<h:outputText value="Taxa de entrega: R$ "
+												style="float:right" />
+											<h:outputText value="#{pedidosClientesBean.pedido.taxa}">
+												<f:convertNumber pattern="#,###,##0.00" />
+											</h:outputText>
+											<h:outputText value="Troco para: R$ " style="float:right" />
+											<h:outputText value="#{pedidosClientesBean.pedido.troco}">
+												<f:convertNumber pattern="#,###,##0.00" />
+											</h:outputText>
+										</h:panelGrid>
+									</div>
+									<div style="float: right">
+										<h:panelGrid columns="2"
+											style="margin:0 auto; margin-top: 24px;">
+
+											<h:outputText value="Valor Total: R$"
+												style="float:right;font-size: 18px;font-style: oblique;" />
+											<h:outputText
+												value="#{pedidosClientesBean.pedido.valorTotal}"
+												style="font-size: 18px;font-style: oblique;">
+												<f:convertNumber pattern="#,###,##0.00" />
+											</h:outputText>
+
+										</h:panelGrid>
+									</div>
+
+								</div>
+
+							</p:fieldset>
+						</h:form>
+						<h:form id="formEnderecoCliente">
+							<p:fieldset legend="Cliente">
+								<h:panelGrid columns="2">
+									<h:panelGrid columns="1">
+
+										<h:outputText
+											value="#{pedidosClientesBean.pedido.enderecoCliente.cliente.nome}" />
+
+										<h:outputText
+											value="#{pedidosClientesBean.pedido.enderecoCliente.cliente.email}" />
+
+										<h:outputText
+											value="#{pedidosClientesBean.pedido.enderecoCliente.cliente.telefone}" />
+
+										<h:outputText
+											value="#{pedidosClientesBean.pedido.enderecoCliente.cliente.celular}" />
+
+
+									</h:panelGrid>
+									<h:panelGrid columns="2" style="margin-left:150px">
+										<h:outputText
+											value="#{pedidosClientesBean.pedido.enderecoCliente.descEndereco}" />
+										<h:outputText />
+										<h:outputText
+											value="#{pedidosClientesBean.pedido.enderecoCliente.endereco.logradouro}, " />
+
+										<h:outputText
+											value="#{pedidosClientesBean.pedido.enderecoCliente.endereco.numero}" />
+
+										<h:outputText
+											value="#{pedidosClientesBean.pedido.enderecoCliente.endereco.bairroCidade.descBairro}, " />
+
+										<h:outputText
+											value="#{pedidosClientesBean.pedido.enderecoCliente.endereco.bairroCidade.cidade.descCidade} " />
+										<h:outputText
+											value="CEP: #{pedidosClientesBean.pedido.enderecoCliente.endereco.cep}" />
+										<h:outputText />
+
+										<h:outputText
+											value="Complemento: #{pedidosClientesBean.pedido.enderecoCliente.endereco.complemento}" />
+
+										<h:outputText />
+									</h:panelGrid>
+								</h:panelGrid>
+							</p:fieldset>
+						</h:form>
+					</h:panelGrid>
+					<h:form id="formDialogProduto">
+						<p:dialog id="infoDialogProduto" header="Produto Personalizado"
+							widgetVar="infoDialogProduto" resizable="false" modal="true"
+							showEffect="slite">
+							<h:panelGrid style="width:300px">
+
+								<h:panelGrid>
+									<h:dataTable var="avulso"
+										value="#{pedidosClientesBean.avulsos}">
+										<h:column>
+											<h:outputText value="#{avulso.descricao}" />
+										</h:column>
+										<h:column>
+											<h:panelGrid style="float:right" columns="2">
+												<h:outputText value="R$ " />
+												<h:outputText value="#{avulso.valor}">
+													<f:convertNumber pattern="#,###,##0.00" />
+												</h:outputText>
+											</h:panelGrid>
+										</h:column>
+									</h:dataTable>
+								</h:panelGrid>
+								<br />
+								<h:outputText
+									value="#{pedidosClientesBean.pedidoProduto.observacao}" />
+							</h:panelGrid>
+						</p:dialog>
+					</h:form>
+					<p:dialog id="dlgLegenda" header="Legenda" widgetVar="dlgLegenda"
+						resizable="false" modal="true" showEffect="slite">
+						<h:panelGrid columns="2" style="width: 368px;margin:auto">
+
+							<h:graphicImage library="imagens/status" name="statusIcone1.png" />
+							<h:column>
+								<h:outputText value="Aguardando"
+									style="font-size:20px;color:#FF7A00;" />
+								<br />
+								<h:outputText
+									value="Cliente fez um pedido e o mesmo ainda está aguardando na fila de pedidos da empresa" />
+							</h:column>
+
+							<h:graphicImage library="imagens/status" name="statusIcone2.png" />
+							<h:column>
+								<h:outputText value="Processando Pedido"
+									style="font-size:20px;color:#FF7A00;" />
+								<br />
+								<h:outputText value="Empresa está preparando o pedido" />
+							</h:column>
+							<h:graphicImage library="imagens/status" name="statusIcone3.png" />
+							<h:column>
+								<h:outputText value="Enviado"
+									style="font-size:20px;color:#FF7A00;" />
+								<br />
+								<h:outputText
+									value="Empresa concluiu o pedido e agora o pedido já foi despachado para o endereço do cliente" />
+							</h:column>
+							<h:graphicImage library="imagens/status" name="statusIcone4.png" />
+							<h:column>
+								<h:outputText value="Concluido"
+									style="font-size:20px;color:#FF7A00;" />
+								<br />
+								<h:outputText
+									value="O pedido foi entregue ao cliente com sucesso." />
+							</h:column>
+						</h:panelGrid>
+					</p:dialog>
+
+					<p:dialog id="imprimePedido" header="Imprimir Pedido"
+						widgetVar="imprimePedido" resizable="false" modal="true"
+						showEffect="slite">
+						<h:form id="formImprimePedido">
+
+							<h:panelGrid columns="2">
+								<h:column>
+									<h:outputText value="Nº Pedido: " />
+								</h:column>
+								<h:column>
+									<h:outputText value="#{pedidosClientesBean.pedido.idPedido}" />
+								</h:column>
+								<h:column>
+									<h:outputText value="Valor Total: " />
+								</h:column>
+								<h:column>
+									<h:outputText value="#{pedidosClientesBean.pedido.valorTotal}" />
+								</h:column>
+								<h:column>
+									<h:outputText value="Status Atual: " />
+								</h:column>
+								<h:column>
+									<h:outputText
+										value="#{pedidosClientesBean.pedido.statusAtual()}" />
+								</h:column>
+							</h:panelGrid>
+							<br />
+							<br />
+							<br />
+							<p:commandButton
+								actionListener="#{pedidosClientesBean.imprimirPedido()}"
+								value="Imprimir"
+								disabled="#{pedidosClientesBean.pedido.statusPedido>=4?true:false}"
+								onclick="PrimeFaces.monitorDownload(start, stop);" ajax="false">
+								<p:fileDownload value="#{pedidosClientesBean.file}" />
+							</p:commandButton>
+
+							<p:commandButton value="Não Imprimir"
+								action="PedidosDeClientes.jsf" oncomplete="imprimePedido.hide()"
+								ajax="false">
+							</p:commandButton>
+						</h:form>
+					</p:dialog>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+function start() {
+   
+}
+ 
+function stop() {
+    PF('imprimePedido').hide();
+    window.location.reload();
+}
+</script>
+	</ui:define>
+</ui:composition>
+</html>
+

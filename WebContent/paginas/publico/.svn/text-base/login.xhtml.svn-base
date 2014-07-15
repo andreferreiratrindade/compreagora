@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/templates/principal.xhtml">
+	<ui:define name="corpo">
+		<h:panelGrid columns="2"
+			style="border-radius: 11px; margin:0 auto; margin-top: 90px;">
+			<p:panel>
+				<h:panelGrid rendered="#{!empty param.login_error}">
+
+					<span style="background-color: #F70;"> Erro ao efetuar o
+						login. Tente novamente</span>
+				</h:panelGrid>
+
+				<form id="login" method="post" style="border-radius: 11px;"
+					action="#{request.contextPath}/j_spring_security_check">
+					<h:panelGrid>
+						<h:outputText value="E-mail" />
+						<p:inputText type="text" id="j_username" size="33" required="true" />
+						<h:outputText value="Senha" />
+						<p:password id="j_password" size="33" required="true" />
+					</h:panelGrid>
+					<h:form>
+						<p:commandButton type="submit" value="Entrar" ajax="false"
+							styleClass="ui-priority-primary"
+							style="margin-left: 174px; margin-top: 6px;" />
+					</h:form>
+
+				</form>
+
+				<h:form>
+					<p:commandLink value="Esqueci minha Senha"
+						oncomplete="dlgEsqueciSenha.show()" />
+
+				</h:form>
+			</p:panel>
+		</h:panelGrid>
+
+		<p:dialog id="dlgEsqueciSenha" header="Esqueci Minha Senha"
+			widgetVar="dlgEsqueciSenha" modal="true" showEffect="slide"
+			dynamic="true" width="307px">
+			<h:form id="formDlgEsqueciSenha">
+				<p:messages id="menssagens" showDetail="true" autoUpdate="true"
+					closable="true" />
+				<h:panelGrid columns="1">
+					<h:outputText value="Para recuperar a senha é facil." />
+					<h:outputText
+						value="Informe seu e-mail e iremos te enviar uma nova senha." />
+					<br />
+				</h:panelGrid>
+
+				<h:outputText value="E-mail" />
+				<h:panelGrid columns="1">
+					<p:inputText value="#{clienteBean.email}" size="35" required="true"
+						id="email" />
+
+					<p:commandButton onstart="dlgLoading.show()"
+						onsuccess="dlgLoading.hide()" value="Enviar"
+						actionListener="#{clienteBean.esqueciMinhaSenha}"
+						style="float:right;background-color: cornflowerblue;color: #000; margin-top:10px"
+						update=":formDlgEsqueciSenha" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+		<p:dialog id="dlgLoading" closable="false" draggable="false"
+			widgetVar="dlgLoading" modal="true">
+			<h:graphicImage library="imagens/icones" name="carregando.gif" />
+		</p:dialog>
+	</ui:define>
+</ui:composition>
+</html>

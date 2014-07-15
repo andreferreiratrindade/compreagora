@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition
+	template="/templates/manterEmpresa/principalManterEmpresa.xhtml">
+	<ui:define name="corpo">
+		<div id="desktop" style="margin-top: 10px;">
+			<div
+				style="width: 960px; margin: auto; height: 750px; margin-top: 10px">
+				<div style="float: right; width: 651px">
+
+
+					<h:form id="form">
+						<p:dataTable value="#{categoriaEmpresaBean.categorias}" var="cat">
+							<f:facet name="header">
+				Categorias disponiveis
+				</f:facet>
+							<p:column headerText="Tipo">
+								<h:outputText value="#{cat.tipoCategoria}" />
+							</p:column>
+							<p:column headerText="Adicionar">
+								<p:commandButton value="Adicionar"
+									actionListener="#{categoriaEmpresaBean.addCategoria}"
+									update=":form">
+
+								</p:commandButton>
+							</p:column>
+						</p:dataTable>
+						<br />
+						<br />
+						<p:dataTable value="#{categoriaEmpresaBean.categoriasEmpresa}"
+							var="cat">
+							<f:facet name="header">
+				Categorias da Empresa
+				</f:facet>
+							<p:column headerText="Tipo">
+								<h:outputText value="#{cat.tipoCategoria}" />
+							</p:column>
+							<p:column headerText="Remover">
+								<p:commandButton value="Remover"
+									actionListener="#{categoriaEmpresaBean.removerCategoria}"
+									update=":form">
+
+								</p:commandButton>
+							</p:column>
+						</p:dataTable>
+
+					</h:form>
+
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

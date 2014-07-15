@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/templates/manterEmpresa/principalManterEmpresa.xhtml">
+
+	<ui:define name="corpo">
+		<div id="desktop" style="margin-top: 10px;">
+			<div
+				style="width: 960px; margin: auto; height: 750px; margin-top: 10px">
+				<div style="float: right; width: 651px">
+
+					<h:form id="form">
+						<p:dataTable var="horaFunc"
+							value="#{empresaBean.horarioFuncionamentoList}">
+							<f:facet name="header">
+				Horarios de Atendimento
+				</f:facet>
+							<p:column headerText="Dia da Semana">
+								<h:outputText value="#{horaFunc.diaDaSemana.descricao}" />
+							</p:column>
+							<p:column headerText="Inicio">
+								<center>
+									<p:inputMask value="#{horaFunc.horaInicio}" mask="99:99" />
+								</center>
+							</p:column>
+							<p:column headerText="Fim">
+								<center>
+									<p:inputMask value="#{horaFunc.horaFim}" mask="99:99" />
+								</center>
+							</p:column>
+							<p:column headerText="Funciona neste dia ?">
+								<center>
+									<p:selectBooleanCheckbox value="#{horaFunc.ativo}" />
+								</center>
+							</p:column>
+						</p:dataTable>
+						<h:panelGrid style="margin: auto;margin-top: 10px;" columns="2">
+							<p:commandButton value="Salvar"
+								actionListener="#{empresaBean.salvarHorario}" ajax="false"
+								style="background-color: cornflowerblue;color: #000;float:left" />
+							<p:commandButton value="Cencelar" ajax="false"
+								action="ManterEmpresa.jsf?faces-redirect=true"
+								style="background-color: #E92B2B;color: #000;float:right" />
+						</h:panelGrid>
+					</h:form>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

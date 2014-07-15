@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+<ui:composition>
+
+	<div id="desktop" style="margin-top: 30px;">
+
+		<h:form style="height:20px;margin:auto; width:960px">
+
+			<br />
+			<nav id="menu" style="margin-top: -4px;">
+			<ul>
+				<li><p:commandLink value="Lanchonete"
+						action="/paginas/categoria/endereco/selecionaEndereco.jsf?faces-redirect=true"
+						style="text-decoration: none" onclick="window.scrollTo(0,0);"
+						styleClass="selecionaEmpresa">
+
+						<f:setPropertyActionListener
+							target="#{contextUtil.categoriaEmpresa}" value="#{0}" />
+					</p:commandLink></li>
+				<li><p:commandLink value="Pizzaria"
+						styleClass="selecionaEmpresa"
+						action="/paginas/categoria/endereco/selecionaEndereco.jsf?faces-redirect=true"
+						style="text-decoration: none">
+
+
+						<f:setPropertyActionListener
+							target="#{contextUtil.categoriaEmpresa}" value="#{1}" />
+					</p:commandLink></li>
+				<li><p:commandLink value="Restaurante"
+						styleClass="selecionaEmpresa"
+						action="/paginas/categoria/endereco/selecionaEndereco.jsf?faces-redirect=true"
+						style="text-decoration: none">
+						<f:setPropertyActionListener
+							target="#{contextUtil.categoriaEmpresa}" value="#{2}" />
+					</p:commandLink></li>
+				<li><p:commandLink value="Bebida" styleClass="selecionaEmpresa"
+						action="/paginas/categoria/endereco/selecionaEndereco.jsf?faces-redirect=true"
+						style="text-decoration: none;">
+						<f:setPropertyActionListener
+							target="#{contextUtil.categoriaEmpresa}" value="#{3}" />
+					</p:commandLink></li>
+				<li><p:commandLink value="Água"
+						styleClass="selecionaEmpresa"
+						action="/paginas/categoria/endereco/selecionaEndereco.jsf?faces-redirect=true"
+						style="text-decoration: none;">
+						<f:setPropertyActionListener
+							target="#{contextUtil.categoriaEmpresa}" value="#{4}" />
+					</p:commandLink></li>
+				<li><p:commandLink value="Gás"
+						styleClass="selecionaEmpresa"
+						action="/paginas/categoria/endereco/selecionaEndereco.jsf?faces-redirect=true"
+						style="text-decoration: none;">
+						<f:setPropertyActionListener
+							target="#{contextUtil.categoriaEmpresa}" value="#{5}" />
+					</p:commandLink></li>
+			</ul>
+			</nav>
+
+
+
+			<p:dialog header="Quem Somos" widgetVar="dialogQuemSomos"
+				resizable="false" rendered="true" modal="true" showEffect="slide"
+				width="500">
+				<h:form prependId="false">
+					<h:panelGrid columns="1" style="margin-bottom:10px">
+
+						<h:outputLabel value="Lancho Net" />
+						<h:outputLabel
+							value="Empresa de produtos alimenticios na Internet" />
+						<h:outputLabel value="Desenvolvedores:" />
+						<h:outputLabel value="Andre Ferreira Trindade" />
+						<h:outputLabel value="Frank Almeida da Silva" />
+					</h:panelGrid>
+				</h:form>
+			</p:dialog>
+		</h:form>
+		<br /> <br />
+	</div>
+
+	<div id="celular"></div>
+</ui:composition>
+</html>

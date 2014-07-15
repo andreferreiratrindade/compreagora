@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition
+	template="/templates/manterEmpresa/principalManterEmpresa.xhtml">
+	<ui:define name="corpo">
+		<div id="desktop" style="margin-top: 10px;">
+			<div
+				style="width: 960px; margin: auto; height: 750px; margin-top: 10px">
+				<div style="float: right; width: 651px">
+					<h:form id="formManterEmpresa">
+						<h:panelGrid style="font-family: sans-serif;float:left">
+							<p:fieldset legend="Empresa">
+								<h:panelGrid columns="2">
+									<h:graphicImage width="150" height="100"
+										library="imagens/empresa"
+										name="Empresa#{empresaBean.empresa.idEmpresa}.jpg"
+										style="float:left" />
+									<h:panelGrid columns="2">
+										<h:outputText value="Razão Social: " style="float:right;" />
+										<h:outputText value="#{empresaBean.empresa.razaoSocial}" />
+										<h:outputText value="Telefone: " style="float:right;" />
+										<h:outputText value="#{empresaBean.empresa.telefone}" />
+									</h:panelGrid>
+								</h:panelGrid>
+							</p:fieldset>
+							<p:fieldset legend="Endereço">
+								<h:panelGrid columns="2">
+									<h:outputText value="Cidade: " style="float:right;" />
+									<h:outputText
+										value="#{empresaBean.empresa.endereco.bairroCidade.cidade}" />
+									<h:outputText value="Bairro: " style="float:right;" />
+									<h:outputText
+										value="#{empresaBean.empresa.endereco.bairroCidade}" />
+									<h:outputText value="Logradouro: " style="float:right;" />
+									<h:outputText
+										value="#{empresaBean.empresa.endereco.logradouro}" />
+									<h:outputText value="Numero: " style="float:right;" />
+									<h:outputText value="#{empresaBean.empresa.endereco.numero}" />
+									<h:outputText value="CEP: " style="float:right;" />
+									<h:outputText value="#{empresaBean.empresa.endereco.cep}" />
+								</h:panelGrid>
+							</p:fieldset>
+						</h:panelGrid>
+						<p:fieldset legend="Login" style="margin-top: 3px;">
+							<h:panelGrid style="margin:auto">
+								<h:outputText value="#{empresaBean.cliente.email}" />
+							</h:panelGrid>
+						</p:fieldset>
+						<p:fieldset legend="Dias de Atendiemento"
+							style="margin-top: 52px;width: 180px;margin-right: 57px;float: right;">
+							<h:panelGrid columns="2" style="margin:auto">
+								<h:outputText value="Domingo" />
+								<h:outputText value="#{empresaBean.empresa.domingo()}"
+									escape="false" />
+								<h:outputText value="Segunda" />
+								<h:outputText value="#{empresaBean.empresa.segunda()}"
+									escape="false" />
+								<h:outputText value="Terça" />
+								<h:outputText value="#{empresaBean.empresa.terca()}"
+									escape="false" />
+								<h:outputText value="Quarta" />
+								<h:outputText value="#{empresaBean.empresa.quarta()}"
+									escape="false" />
+								<h:outputText value="Quinta" />
+								<h:outputText value="#{empresaBean.empresa.quinta()}"
+									escape="false" />
+								<h:outputText value="Sexta" />
+								<h:outputText value="#{empresaBean.empresa.sexta()}"
+									escape="false" />
+								<h:outputText value="Sábado" />
+								<h:outputText value="#{empresaBean.empresa.sabado()}"
+									escape="false" />
+							</h:panelGrid>
+						</p:fieldset>
+					</h:form>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

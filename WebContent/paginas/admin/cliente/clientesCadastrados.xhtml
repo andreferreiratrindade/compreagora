@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/templates/principal.xhtml">
+	<ui:define name="corpo">
+		<p:layout id="LayoutTodosOsClientes"
+			style="width:960px;margin:auto;height:700px;margin-top: 63px;
+			">
+			<p:layoutUnit position="west" resizable="true" size="200"
+				minSize="40" maxSize="200">
+				<h:form>
+					<p:menu style="margin:auto;width: 179px;background-color:#FFF">
+						<p:submenu>
+							<p:menuitem value="Enviar e-mail"
+								action="enviarEmailParaCliente.jsf?faces-redirect=true" />
+						</p:submenu>
+						<p:submenu>
+							<p:menuitem value="Clientens Cadastrados"
+								action="clientesCadastrados.jsf?faces-redirect=true" />
+						</p:submenu>
+					</p:menu>
+				</h:form>
+			</p:layoutUnit>
+			<p:layoutUnit position="center" header="Clientes Cadastrados">
+				<p:dataTable value="#{clientesAdminBean.clientes}" var="cliente"
+					paginator="true" rows="30">
+					<p:column headerText="Nome">
+						<h:outputText value="#{cliente.nome}" />
+					</p:column>
+					<p:column headerText="E-mail">
+						<h:outputText value="#{cliente.email}" />
+					</p:column>
+					<p:column headerText="Telefone">
+						<h:outputText value="#{cliente.telefone}" />
+					</p:column>
+					<p:column headerText="Celular">
+						<h:outputText value="#{cliente.celular}" />
+					</p:column>
+				</p:dataTable>
+			</p:layoutUnit>
+		</p:layout>
+	</ui:define>
+</ui:composition>
+</html>

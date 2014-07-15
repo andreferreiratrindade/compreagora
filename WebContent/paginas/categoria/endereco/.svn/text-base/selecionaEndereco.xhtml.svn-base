@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/templates/principal.xhtml">
+	<ui:define name="corpo">
+		<!-- 
+	Display para DeskTop
+ -->		<div id="desktop" style="min-height: 427px; margin-bottom: 30px;">
+
+			<h:form id="formCorpo" style="width: 960px;margin: auto;">
+
+				<center>
+					<h:outputText value="Busque seu endereço"
+						style="font-size: 38px; color: yellow; font-family: sans-serif;" />
+				</center>
+				<center>
+					<h:graphicImage library="imagens/ImagensForm" name="pesquisa.png"
+						style="position:relative;margin-top: 36px;margin-bottom: 10px;" />
+
+				</center>
+
+				<div class="barraTransparente" />
+				<h:panelGrid style="margin:auto; margin-top:-90px">
+
+					<h:panelGrid columns="2" style="width:457px">
+						<h:outputText value="Cidade:"
+							style="font-size: 20px;color: #354866;font-family:sans-serif;position: relative;" />
+
+						<h:outputText value="Bairro:"
+							style="font-size: 20px;color: #354866;font-family: sans-serif;position: 
+								relative;margin-right: -15px;" />
+					</h:panelGrid>
+
+					<h:panelGrid columns="3" style="width: 668px;margin-top: -14px;">
+
+						<p:autoComplete id="autoCompleteCidade" forceSelection="true"
+							value="#{autoCompleteController.cidade}" var="cidade"
+							itemLabel="#{cidade.descCidade}" itemValue="#{cidade}"
+							completeMethod="#{autoCompleteController.completaCidade}"
+							dropdown="true" required="true" converter="converterCidade"
+							style="position: relative;" label="Cidade"
+							requiredMessage="Informe sua cidade e depois seu bairro">
+							<p:ajax event="itemSelect"
+								listener="#{autoCompleteController.handleSelect}"
+								update="autoCompleteBairro" />
+
+						</p:autoComplete>
+
+						<p:autoComplete id="autoCompleteBairro"
+							value="#{autoCompleteController.bairro}" forceSelection="true"
+							completeMethod="#{autoCompleteController.completaBairro}"
+							var="bairro" itemLabel="#{bairro.descBairro}"
+							itemValue="#{bairro}" required="true" converter="converterBairro"
+							dropdown="true" scrollHeight="200"
+							style="margin-left: 33px; position: relative;margin-top: 34px;"
+							label="Bairro" requiredMessage="Informe seu bairro">
+							<p:ajax event="itemSelect"
+								listener="#{autoCompleteController.atualizaSelecaoEmpresa}" />
+						</p:autoComplete>
+
+						<p:commandLink update=":dataGridEmpresas" id="buscar"
+							value="Buscar" styleClass="buttonPesquisa"
+							style="position: relative; margin-right: 10%; float: right; margin-top: -7px;"
+							actionListener="#{autoCompleteController.semanaToInt}"
+							onclick="window.scrollTo(0, 200);" onstart="dlgLoading.show()"
+							onsuccess="dlgLoading.hide()">
+
+						</p:commandLink>
+					</h:panelGrid>
+				</h:panelGrid>
+			</h:form>
+
+
+			<h:form id="dataGridEmpresas"
+				style="width:961px !important; margin:0 auto;margin-top: 42px;">
+
+				<p:dataGrid value="#{autoCompleteController.empresas}" var="empresa"
+					paginator="true" columns="4" ajax="false"
+					emptyMessage="Nunhuma empresa atende a esse local">
+					<p:column>
+						<h:panelGrid style="position: absolute;">
+							<h:graphicImage library="imagens/empresa"
+								name="#{empresa.diaAtendimento}.gif" />
+						</h:panelGrid>
+						<p:commandLink action="#{pedidoBean.adicionaEmpresa}"
+							disabled="#{!empresa.diaAtendimento}" id="lnk">
+							<h:graphicImage width="150" height="100"
+								library="imagens/empresa" name="Empresa#{empresa.idEmpresa}.jpg" />
+							<f:setPropertyActionListener target="#{pedidoBean.empresa}"
+								value="#{empresa}" />
+							<f:setPropertyActionListener
+								target="#{pedidoBean.categoriaEmpresa}"
+								value="#{contextUtil.categoriaEmpresa}" />
+						</p:commandLink>
+						<p:tooltip for="lnk">
+							<h:panelGrid>
+								<center>
+									<h:outputText value="#{empresa.nomeFant}"
+										style="font-size:16px" />
+									<h:outputText value="#{empresa.telefone}" />
+								</center>
+								<h:panelGrid columns="2">
+									<h:outputText value="Domingo" />
+									<h:outputText value="#{empresa.domingo()}" escape="false" />
+									<h:outputText value="Segunda" />
+									<h:outputText value="#{empresa.segunda()}" escape="false" />
+									<h:outputText value="Terça" />
+									<h:outputText value="#{empresa.terca()}" escape="false" />
+									<h:outputText value="Quarta" />
+									<h:outputText value="#{empresa.quarta()}" escape="false" />
+									<h:outputText value="Quinta" />
+									<h:outputText value="#{empresa.quinta()}" escape="false" />
+									<h:outputText value="Sexta" />
+									<h:outputText value="#{empresa.sexta()}" escape="false" />
+									<h:outputText value="Sábado" />
+									<h:outputText value="#{empresa.sabado()}" escape="false" />
+								</h:panelGrid>
+							</h:panelGrid>
+						</p:tooltip>
+					</p:column>
+				</p:dataGrid>
+			</h:form>
+
+
+			<p:dialog id="dlgLoading" closable="false" draggable="false"
+				widgetVar="dlgLoading" modal="true">
+				<h:graphicImage library="imagens/icones" name="carregando.gif" />
+			</p:dialog>
+		</div>
+
+
+		<!-- 
+	Display para Mobile
+ -->
+		<div id="celular"></div>
+
+	</ui:define>
+</ui:composition>
+</html>

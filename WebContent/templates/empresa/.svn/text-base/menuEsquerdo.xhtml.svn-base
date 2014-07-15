@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+<ui:composition>
+	<div id="desktop" style="margin-top: 66px;">
+
+		<div style="width: 960px; margin: auto;">
+			<div style="float: left;">
+
+				<h:form id="formPainel">
+					<p:menu style="margin:auto;width: 179px;background-color:#FFF">
+						<p:submenu>
+							<p:menuitem value="Pedidos"
+								action="/paginas/restrito_empresa/empresa/PedidosDeClientes.jsf?faces-redirect=true">
+							</p:menuitem>
+
+						</p:submenu>
+						<p:submenu label="Relatorios">
+							<p:menuitem value="Produtos Cadastrados"
+								action="/paginas/restrito_empresa/empresa/relatorios/produtosCadastrados.jsf?faces-redirect=true">
+							</p:menuitem>
+							<p:menuitem value="Produtos mais pedidos"
+								action="/paginas/restrito_empresa/empresa/relatorios/produtosMaisPedidos.jsf?faces-redirect=true">
+							</p:menuitem>
+							<p:menuitem value="Faturamento"
+								action="/paginas/restrito_empresa/empresa/relatorios/faturamento.jsf?faces-redirect=true">
+							</p:menuitem>
+						</p:submenu>
+
+						<p:submenu label="Configurações">
+							<p:menuitem value="Manter Lanche"
+								action="/paginas/restrito_empresa/empresa/ManterProdutoLanche?faces-redirect=true">
+							</p:menuitem>
+							<p:menuitem value="Manter Bebida"
+								action="/paginas/restrito_empresa/empresa/ManterProdutoBebida?faces-redirect=true">
+							</p:menuitem>
+							<p:menuitem value="Manter Marmitex"
+								action="/paginas/restrito_empresa/empresa/ManterProdutoMarmitex?faces-redirect=true">
+							</p:menuitem>
+							<p:menuitem value="Manter Pizza"
+								action="/paginas/restrito_empresa/empresa/ManterProdutoPizza?faces-redirect=true">
+							</p:menuitem>
+							<p:menuitem value="Manter Gas"
+								action="/paginas/restrito_empresa/empresa/ManterProdutoGas?faces-redirect=true">
+							</p:menuitem>
+							<p:menuitem value="Manter Agua"
+								action="/paginas/restrito_empresa/empresa/ManterProdutoAgua?faces-redirect=true">
+							</p:menuitem>
+						</p:submenu>
+					</p:menu>
+				</h:form>
+			</div>
+		</div>
+	</div>
+
+
+</ui:composition>
+</html>
+

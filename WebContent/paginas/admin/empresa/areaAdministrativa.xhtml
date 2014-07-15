@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/templates/areaAdmin/principalAreaAdmin.xhtml">
+
+	<ui:define name="corpo">
+
+		<div id="desktop" style="margin-top: 10px;">
+			<div
+				style="width: 960px; margin: auto; height: 750px; margin-top: 10px">
+				<div style="float: right; width: 651px">
+					<h:form id="dataGridEmpresas" style="margin:auto;">
+						<p:dataGrid value="#{produtoBean.empresas}" var="empresa"
+							paginator="true" columns="3" style="width:300px" ajax="false">
+							<f:facet name="header">
+				Empresas Cadastradas</f:facet>
+							<p:column>
+								<h:commandLink action="#{empresaBean.manterEmpresa}">
+									<h:graphicImage width="150" height="100"
+										library="imagens/empresa"
+										name="Empresa#{empresa.idEmpresa}.jpg" />
+									<f:setPropertyActionListener target="#{empresaBean.empresa}"
+										value="#{empresa}" />
+								</h:commandLink>
+							</p:column>
+						</p:dataGrid>
+						
+					</h:form>
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+</ui:composition>
+</html>
