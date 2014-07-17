@@ -161,7 +161,7 @@ public class PedidoRNTest {
 	public static void initCliente() {
 		Permissao permissao = new Permissao();
 		permissao.setPermissao("ROLE_CLI");
-
+		permissao.setIdPermissao(3);
 		PermissaoDAO permissaoDAO = DAOFactoy.criarPermissao();
 		permissaoDAO.salve(permissao);
 

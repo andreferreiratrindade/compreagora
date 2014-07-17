@@ -8,7 +8,11 @@ import br.Endereco.EnderecoDAO;
 import br.EnderecoCliente.EnderecoCliente;
 import br.EnderecoCliente.EnderecoClienteDAO;
 import br.Permissao.Permissao;
+import br.Permissao.PermissaoDAO;
+import br.Permissao.PermissaoEnum;
+import br.Permissao.PermissaoRN;
 import br.util.DAOFactoy;
+import br.util.JpaUtil;
 
 public class ClienteRN {
 	private ClienteDAO clienteDAO;
@@ -22,9 +26,10 @@ public class ClienteRN {
 	}
 
 	public void salvarLoginEmpresa(Cliente cliente) {
-		Permissao permissao = new Permissao();
-		permissao.setPermissao("ROLE_ADM");
-		permissao.setIdPermissao(6); // 6
+		PermissaoRN permissaoRN = new PermissaoRN();
+
+		Permissao permissao = permissaoRN
+				.getPermissaoByDescricao(PermissaoEnum.ROLE_ADM.name());
 
 		cliente.setPermissao(permissao);
 		this.clienteDAO.salve(cliente);
@@ -32,10 +37,10 @@ public class ClienteRN {
 
 	public void salvar(Cliente cliente, Endereco endereco,
 			EnderecoCliente enderecoCliente) {
+		PermissaoRN permissaoRN = new PermissaoRN();
 
-		Permissao permissao = new Permissao();
-		permissao.setPermissao("ROLE_CLI");
-		permissao.setIdPermissao(7);
+		Permissao permissao = permissaoRN
+				.getPermissaoByDescricao(PermissaoEnum.ROLE_CLI.name());
 
 		cliente.setPermissao(permissao);
 

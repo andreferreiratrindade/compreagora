@@ -51,15 +51,19 @@ public class CategoriaDao implements Dao<Categoria> {
 		return this.session.find(Categoria.class, id);
 	}
 
-
-
 	public Categoria getCategoriaComEnum(CategoriaENUM tipoCategoria) {
 
 		EasyCriteria<Categoria> easyCriteria = EasyCriteriaFactory
 				.createQueryCriteria(session, Categoria.class);
 		easyCriteria.andEquals("tipoCategoria", tipoCategoria);
 
-		return easyCriteria.getSingleResult();
+		List<Categoria> categorias = easyCriteria.getResultList();
+
+		if (categorias != null) {
+			
+		}
+		
+		return categorias.get(0);
 	}
 
 }

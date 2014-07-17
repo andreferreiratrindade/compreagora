@@ -5,6 +5,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import com.uaihebert.factory.EasyCriteriaFactory;
+import com.uaihebert.model.EasyCriteria;
+
+import br.Produto.Produto;
 import br.dao.Dao;
 
 public class PermissaoDAO implements Dao<Permissao> {
@@ -50,6 +54,13 @@ public class PermissaoDAO implements Dao<Permissao> {
 		return this.session.find(Permissao.class, id);
 	}
 
+	public Permissao getPermissaoByDescricao(String descricao) {
+		EasyCriteria<Permissao> easyCriteria = EasyCriteriaFactory
+				.createQueryCriteria(session, Permissao.class);
 
+		easyCriteria.andEquals("permissao", descricao);
+
+		return (Permissao) easyCriteria.getSingleResult();
+	}
 
 }

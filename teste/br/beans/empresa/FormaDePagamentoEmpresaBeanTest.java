@@ -76,17 +76,4 @@ public class FormaDePagamentoEmpresaBeanTest {
 
 	}
 
-	@Test
-	public void deveRetornarListaBool() {
-
-		
-		 FormaDePagamentoEmpresaBean fpdBean = new
-				 FormaDePagamentoEmpresaBean();
-		 
-		 fpdBean.init();
-		 
-		 
-		 
 	}
-
-}

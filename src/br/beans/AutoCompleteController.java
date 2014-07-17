@@ -119,7 +119,7 @@ public class AutoCompleteController implements Serializable {
 	}
 
 	public void atualizaSelecaoEmpresa(SelectEvent event) {
-		
+
 		empresas = new ArrayList<Empresa>();
 		bairro = (Bairro) event.getObject();
 
@@ -133,7 +133,7 @@ public class AutoCompleteController implements Serializable {
 				CategoriaENUM.values()[contextUtil.getCategoriaEmpresa()]);
 
 		for (Empresa x : tempEmpresa) {
-			x.setDiaAtendimento(dia - 1);
+			x.getHorarioFuncionamento().size();
 			empresas.add(x);
 		}
 

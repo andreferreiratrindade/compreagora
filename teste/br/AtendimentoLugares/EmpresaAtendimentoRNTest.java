@@ -19,6 +19,7 @@ import br.Empresa.FormaDePagamento.FormaDePagamentoRN;
 import br.Endereco.Endereco;
 import br.Permissao.Permissao;
 import br.Permissao.PermissaoDAO;
+import br.Permissao.PermissaoEnum;
 import br.util.DAOFactoy;
 import br.util.JpaUtil;
 
@@ -39,8 +40,7 @@ public class EmpresaAtendimentoRNTest {
 	public static void initEmpresaAtendimento() {
 
 		Permissao permissao = new Permissao();
-		permissao.setPermissao("ROLE_ADM");
-
+		permissao.setPermissao(PermissaoEnum.ROLE_ADM.name());
 		PermissaoDAO permissaoDAO = DAOFactoy.criarPermissao();
 		permissaoDAO.salve(permissao);
 

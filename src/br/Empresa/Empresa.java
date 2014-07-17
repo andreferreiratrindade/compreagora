@@ -45,7 +45,7 @@ public class Empresa implements Serializable, IEmpresaDiaDaSemana,
 	private String razaoSocial;
 	private String nomeFant;
 	private String telefone;
-	private boolean diaAtendimento;
+	private boolean aberto;
 	private boolean ativo;
 
 	@OneToMany
@@ -173,50 +173,12 @@ public class Empresa implements Serializable, IEmpresaDiaDaSemana,
 		this.telefone = telefone;
 	}
 
-	public boolean isDiaAtendimento() {
-		return diaAtendimento;
+	public boolean isAberto() {
+		return aberto ;
 	}
 
-	@SuppressWarnings("deprecation")
-	public void setDiaAtendimento(int num) {
-		TimeZone.setDefault(TimeZone.getTimeZone("America/Sao_Paulo"));
-
-		this.diaAtendimento = false;
-		SimpleDateFormat formatador = new SimpleDateFormat("HH:mm");
-
-		Date dMin = null;
-		try {
-			dMin = formatador.parse(getHorarioFuncionamento().get(num)
-					.getHoraInicio());
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		Date dMax = null;
-		try {
-			dMax = formatador.parse(getHorarioFuncionamento().get(num)
-					.getHoraFim());
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		Date dAgora = null;
-		try {
-			dAgora = formatador.parse(new Date().getHours() + ":"
-					+ new Date().getMinutes());
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		if (getHorarioFuncionamento().get(num).isAtivo()) {
-
-			if (!((dAgora.after(dMax) || (dAgora.before(dMin))))) {
-				this.diaAtendimento = true;
-			}
-		}
+	public void setAberto(boolean aberto) {
+		this.aberto = aberto;
 	}
 
 	@Override
@@ -224,10 +186,10 @@ public class Empresa implements Serializable, IEmpresaDiaDaSemana,
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((CNPJ == null) ? 0 : CNPJ.hashCode());
+		result = prime * result + (aberto ? 1231 : 1237);
 		result = prime * result + (ativo ? 1231 : 1237);
 		result = prime * result
 				+ ((categorias == null) ? 0 : categorias.hashCode());
-		result = prime * result + (diaAtendimento ? 1231 : 1237);
 		result = prime
 				* result
 				+ ((empresaAtendimentos == null) ? 0 : empresaAtendimentos
@@ -267,14 +229,14 @@ public class Empresa implements Serializable, IEmpresaDiaDaSemana,
 				return false;
 		} else if (!CNPJ.equals(other.CNPJ))
 			return false;
+		if (aberto != other.aberto)
+			return false;
 		if (ativo != other.ativo)
 			return false;
 		if (categorias == null) {
 			if (other.categorias != null)
 				return false;
 		} else if (!categorias.equals(other.categorias))
-			return false;
-		if (diaAtendimento != other.diaAtendimento)
 			return false;
 		if (empresaAtendimentos == null) {
 			if (other.empresaAtendimentos != null)
@@ -393,10 +355,6 @@ public class Empresa implements Serializable, IEmpresaDiaDaSemana,
 		return info;
 	}
 
-	public void setDiaAtendimento(boolean diaAtendimento) {
-		this.diaAtendimento = diaAtendimento;
-	}
-
 	public void removeCategoria(Categoria cat) {
 		categorias.remove(cat);
 
@@ -404,7 +362,7 @@ public class Empresa implements Serializable, IEmpresaDiaDaSemana,
 
 	@Override
 	public Object onCycleDetected(Context arg0) {
-	
+
 		Empresa e = new Empresa();
 		e.setIdEmpresa(this.idEmpresa);
 

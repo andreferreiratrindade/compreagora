@@ -23,6 +23,7 @@ import br.Empresa.FormaDePagamento.FormaDePagamentoRN;
 import br.Endereco.Endereco;
 import br.Permissao.Permissao;
 import br.Permissao.PermissaoDAO;
+import br.Permissao.PermissaoEnum;
 import br.ProdutoAvulso.Avulso;
 import br.ProdutoAvulso.AvulsoRN;
 import br.util.DAOFactoy;
@@ -75,13 +76,12 @@ public class EmpresaRNTest {
 		formaDePagamento = new FormaDePagamento();
 		formaDePagamento.setTipo("Visa Debito");
 		fdpRN.salvar(formaDePagamento);
-
 	}
 
 	public static void iniciandoEmpresa() {
 
 		Permissao permissao = new Permissao();
-		permissao.setPermissao("ROLE_ADM");
+		permissao.setPermissao(PermissaoEnum.ROLE_ADM.name());
 
 		PermissaoDAO permissaoDAO = DAOFactoy.criarPermissao();
 		permissaoDAO.salve(permissao);
@@ -139,22 +139,22 @@ public class EmpresaRNTest {
 		empresaAtendimento.setEmpresa(empresa);
 		empresaAtendimentoDao.salve(empresaAtendimento);
 
-		 AvulsoRN avulsoRN = new AvulsoRN();
-		 Avulso avulso = new Avulso();
-		 avulso.setDescricao("Batata Frita");
-		 avulso.setValor(10);
-		 avulso.setTipoAvulso(CategoriaENUM.Lanche);
-		 avulso.setEmpresa(empresa);
-		 avulsoRN.salvarAvulso(avulso);
+		AvulsoRN avulsoRN = new AvulsoRN();
+		Avulso avulso = new Avulso();
+		avulso.setDescricao("Batata Frita");
+		avulso.setValor(10);
+		avulso.setTipoAvulso(CategoriaENUM.Lanche);
+		avulso.setEmpresa(empresa);
+		avulsoRN.salvarAvulso(avulso);
 
 	}
 
-	 @Test
-	 public void deveListarAvulsosCadastrados() {
-	 AvulsoRN avulsoRN = new AvulsoRN();
-	 List<Avulso> avulsos = avulsoRN.listar(1, CategoriaENUM.Lanche);
-	 assertEquals(1, avulsos.size());
-	 }
+	@Test
+	public void deveListarAvulsosCadastrados() {
+		AvulsoRN avulsoRN = new AvulsoRN();
+		List<Avulso> avulsos = avulsoRN.listar(1, CategoriaENUM.Lanche);
+		assertEquals(1, avulsos.size());
+	}
 
 	@Test
 	public void deveListarEmpresas() {
@@ -200,7 +200,7 @@ public class EmpresaRNTest {
 		Empresa empresa = empresaRN.getEmpresa(1);
 
 		List<FormaDePagamento> fpds = empresa.getFormasDePagamento();
-		assertEquals(1, fpds.size());
+		assertEquals(2, fpds.size());
 		FormaDePagamento fdp = fpds.get(0);
 
 		assertEquals("Dinheiro", fdp.getTipo());
@@ -208,9 +208,6 @@ public class EmpresaRNTest {
 
 	@Test
 	public void deveRetornarEmpresaAtendimentoValido() {
-		EmpresaRN empresaRN = new EmpresaRN();
-		int idEmpresa;
-		int idBairro;
 
 	}
 

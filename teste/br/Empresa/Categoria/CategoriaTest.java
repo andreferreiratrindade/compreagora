@@ -48,7 +48,7 @@ public class CategoriaTest {
 		Categoria categoria = categoriaDao
 				.getCategoriaComEnum(CategoriaENUM.Lanche);
 
-		assertEquals("LANCHE", categoria.getTipoCategoria().name());
+		assertEquals("Lanche", categoria.getTipoCategoria().name());
 	}
 
 	@Test
@@ -56,7 +56,7 @@ public class CategoriaTest {
 		CategoriaDao categoriaDao = DAOFactoy.criarCategoria();
 		Categoria categoria = categoriaDao.getUnico(1);
 
-		assertEquals("LANCHE", categoria.getTipoCategoria().name());
+		assertEquals("Lanche", categoria.getTipoCategoria().name());
 
 	}
 

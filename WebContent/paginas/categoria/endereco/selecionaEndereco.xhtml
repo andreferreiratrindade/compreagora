@@ -86,10 +86,10 @@
 					<p:column>
 						<h:panelGrid style="position: absolute;">
 							<h:graphicImage library="imagens/empresa"
-								name="#{empresa.diaAtendimento}.gif" />
+								name="#{empresa.aberto}.gif" />
 						</h:panelGrid>
 						<p:commandLink action="#{pedidoBean.adicionaEmpresa}"
-							disabled="#{!empresa.diaAtendimento}" id="lnk">
+							disabled="#{!empresa.aberto}" id="lnk">
 							<h:graphicImage width="150" height="100"
 								library="imagens/empresa" name="Empresa#{empresa.idEmpresa}.jpg" />
 							<f:setPropertyActionListener target="#{pedidoBean.empresa}"
@@ -201,7 +201,7 @@
 					<p:column>
 
 						<p:commandLink action="#{pedidoBean.adicionaEmpresa}"
-							disabled="#{!empresa.diaAtendimento}" id="lnk"
+							disabled="#{!empresa.aberto}" id="lnk"
 							styleClass="buttonAddEmpresa">
 							<h:outputText value="#{empresa.razaoSocial}" />
 							<f:setPropertyActionListener target="#{pedidoBean.empresa}"
@@ -212,7 +212,7 @@
 
 							<h:panelGrid style="float:right">
 								<h:graphicImage library="imagens/empresa"
-									name="#{empresa.diaAtendimento}.gif" />
+									name="#{empresa.aberto}.gif" />
 							</h:panelGrid>
 						</p:commandLink>
 

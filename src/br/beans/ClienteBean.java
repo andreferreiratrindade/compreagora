@@ -1,12 +1,7 @@
 package br.beans;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -16,17 +11,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
-
-import net.sf.jasperreports.engine.JRDataSource;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperRunManager;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 import org.springframework.util.DigestUtils;
 
@@ -38,7 +22,6 @@ import br.Empresa.EmpresaRN;
 import br.Endereco.Endereco;
 import br.EnderecoCliente.EnderecoCliente;
 import br.beans.menssagem.Menssagem;
-import br.relatorio.Relatorio;
 import br.util.Email.Email;
 import br.util.Email.EmailDestino;
 
@@ -55,7 +38,6 @@ public class ClienteBean implements Serializable {
 	private EnderecoCliente enderecoCliente;
 	private DataModel<Cliente> listaCliente;
 	private String email = null;
-	private JasperPrint jasperPrint;
 
 	public ClienteBean() {
 		cliente = new Cliente();

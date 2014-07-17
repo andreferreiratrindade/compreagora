@@ -1,20 +1,17 @@
 package br.Cliente;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.dao.support.DaoSupport;
 
-import static org.junit.Assert.*;
-import br.Permissao.Permissao;
 import br.util.DAOFactoy;
 import br.util.JpaUtil;
-import static org.junit.Assert.*;
 public class ClienteDaoTest {
 
 	private static List<Cliente> clientes;

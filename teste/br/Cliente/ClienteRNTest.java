@@ -18,6 +18,7 @@ import br.EnderecoCliente.EnderecoCliente;
 import br.EnderecoCliente.EnderecoClienteDAO;
 import br.Permissao.Permissao;
 import br.Permissao.PermissaoDAO;
+import br.Permissao.PermissaoEnum;
 import br.util.DAOFactoy;
 import br.util.JpaUtil;
 
@@ -41,8 +42,7 @@ public class ClienteRNTest {
 
 	public static void inicializaValores() {
 		Permissao permissao = new Permissao();
-		permissao.setPermissao("ROLE_CLI");
-
+		permissao.setPermissao(PermissaoEnum.ROLE_CLI.name());
 		PermissaoDAO permissaoDAO = DAOFactoy.criarPermissao();
 		permissaoDAO.salve(permissao);
 
