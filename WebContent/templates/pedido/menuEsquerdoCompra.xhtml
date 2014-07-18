@@ -15,30 +15,30 @@
 			<div style="float: left; width: 300px;">
 
 				<h:form id="formPainel">
-					<p:commandLink styleClass="menuLink" value="Lanches"
-						style="display: #{pedidoBean.verificaTiposProdutos(0)};"
+					<p:commandLink styleClass="#{pedidoBean.verificaTiposProdutos(0) ? 'menuLinkSelecionado' : 'menuLink' }" value="Lanches"
+						style="display: #{pedidoBean.verificaTiposProdutos(0) ? 'block' : 'none' };"
 						action="#{pedidoBean.mudaTelaLanche()}">
 					</p:commandLink>
 
 					<p:commandLink styleClass="menuLink" value="Pizza"
-						style="display: #{pedidoBean.verificaTiposProdutos(1)};margin-top:5px"
+						style="display: #{pedidoBean.verificaTiposProdutos(1)? 'block' : 'none'};margin-top:5px"
 						action="#{pedidoBean.mudaTelaPizza()}">
 					</p:commandLink>
 
 					<p:commandLink styleClass="menuLink" value="Marmitex"
-						style="display: #{pedidoBean.verificaTiposProdutos(2)};margin-top:5px"
+						style="display: #{pedidoBean.verificaTiposProdutos(2)? 'block' : 'none'};margin-top:5px"
 						action="#{pedidoBean.mudaTelaMarmitex()}">
 					</p:commandLink>
 					<p:commandLink styleClass="menuLink" value="Bebida"
-						style="display: #{pedidoBean.verificaTiposProdutos(3)};margin-top:5px"
+						style="display: #{pedidoBean.verificaTiposProdutos(3)? 'block' : 'none'};margin-top:5px"
 						action="#{pedidoBean.mudaTelaBebida()}">
 					</p:commandLink>
 					<p:commandLink styleClass="menuLink" value="Água"
-						style="display: #{pedidoBean.verificaTiposProdutos(4)};margin-top:5px"
+						style="display: #{pedidoBean.verificaTiposProdutos(4)? 'block' : 'none'};margin-top:5px"
 						action="#{pedidoBean.mudaTelaAgua()}">
 					</p:commandLink>
 					<p:commandLink styleClass="menuLink" value="Gás"
-						style="display: #{pedidoBean.verificaTiposProdutos(5)};margin-top:5px"
+						style="display: #{pedidoBean.verificaTiposProdutos(5)? 'block' : 'none'};margin-top:5px"
 						action="#{pedidoBean.mudaTelaGas()}">
 					</p:commandLink>
 					<h:graphicImage name="folha.png" library="imagens/icones"

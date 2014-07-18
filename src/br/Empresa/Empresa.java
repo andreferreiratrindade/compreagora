@@ -369,4 +369,8 @@ public class Empresa implements Serializable, IEmpresaDiaDaSemana,
 		return e;
 	}
 
+	public void abrirOuFechar() {
+		this.aberto = !this.aberto;
+	}
+
 }

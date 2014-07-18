@@ -7,13 +7,11 @@
 	padding: 0;
 }
 
-@media screen and (min-width: 481px) and (max-width: 959px){
-	
+@media screen and (min-width: 481px) and (max-width: 959px) {
 	#desktop {
 		display: none;
 	}
-	
-	#celular{
+	#celular {
 		display: none;
 	}
 }
@@ -43,8 +41,8 @@
 	#desktop {
 		display: none;
 	}
-	#tablet{
-	display: none;
+	#tablet {
+		display: none;
 	}
 	.b:hover {
 		background: #6CBAEE
@@ -80,8 +78,9 @@
 		background: none;
 		font-size: 16px;
 		width: 100%;
-		background: #ec4b1b url("../resources/imagens/ImagensForm/head_bg_mobile.png")
-			center no-repeat;
+		background: #ec4b1b
+			url("../resources/imagens/ImagensForm/head_bg_mobile.png") center
+			no-repeat;
 		-webkit-background-size: cover;
 		-moz-background-size: cover;
 		-o-background-size: cover;
@@ -362,8 +361,35 @@
 }
 
 @media screen and (min-width: 960px) {
-		#tablet{
-	display: none;
+	#tablet {
+		display: none;
+	}
+	.menuLinkSelecionado {
+		background-color: #468C3C !important;
+		border-radius: 5px;
+		color: #F9FAFA;
+		display: inline-block;
+		font-family: CorpidHeavy;
+		font-size: 20px;
+		padding: 0.65em 1em 0.55em;
+		text-decoration: none;
+		transition-duration: 1.2s;
+		transition-property: background-color;
+		-webkit-appearance: none;
+		height: 18px;
+	}
+	.empresaSelecinada {
+		color: white !important;
+		background: rgb(40, 51, 109);
+		display: inline-block;
+		font-family: Estrangelo Edessa;
+		font-size: 24px;
+		padding: 0.65em 0.54em;
+		text-decoration: none;
+		transition-duration: 1.2s;
+		transition-property: background-color;
+		-webkit-appearance: none;
+		height: 18px;
 	}
 	ul.bjqs {
 		position: relative;

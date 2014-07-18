@@ -32,13 +32,21 @@ public class ClienteDAO implements Dao<Cliente> {
 	}
 
 	public Cliente buscarPorEmail(String email) {
+		
 		EasyCriteria<Cliente> easyCriteria = EasyCriteriaFactory
 				.createQueryCriteria(session, Cliente.class);
-		if (email != null) {
-			easyCriteria.andEquals("email", email);
+		
+		easyCriteria.andEquals("email", email);
+
+		@SuppressWarnings("unused")
+		List<Cliente> clientes = easyCriteria.getResultList();
+
+		if (clientes.isEmpty()) {
+			return null;
+		} else {
+			return clientes.get(0);
 		}
 
-		return (Cliente) easyCriteria.getSingleResult();
 	}
 
 	public boolean verificaEmailCadastrado(String email) {
@@ -92,10 +100,11 @@ public class ClienteDAO implements Dao<Cliente> {
 	}
 
 	public Cliente realizarLoginCliente(String login, String senha) {
-		
-		EasyCriteria<Cliente> easyCriteria = EasyCriteriaFactory.createQueryCriteria(session, Cliente.class);
+
+		EasyCriteria<Cliente> easyCriteria = EasyCriteriaFactory
+				.createQueryCriteria(session, Cliente.class);
 		easyCriteria.andEquals("email", login).andEquals("senha", senha);
-		
+
 		return easyCriteria.getSingleResult();
 	}
 }

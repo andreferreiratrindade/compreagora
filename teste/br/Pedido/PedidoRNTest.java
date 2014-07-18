@@ -7,7 +7,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
+
 import br.AtendimentoLugares.Bairro;
 import br.AtendimentoLugares.BairroDAO;
 import br.AtendimentoLugares.Cidade;
@@ -21,23 +25,21 @@ import br.Empresa.EmpresaDAO;
 import br.Empresa.EmpresaRN;
 import br.Empresa.FormaDePagamento.FormaDePagamento;
 import br.Empresa.FormaDePagamento.FormaDePagamentoRN;
-import br.Endereco.Endereco;
 import br.EnderecoCliente.EnderecoCliente;
 import br.EnderecoCliente.EnderecoClienteDAO;
 import br.PedidoProduto.PedidoProduto;
-import br.Permissao.Permissao;
-import br.Permissao.PermissaoDAO;
 import br.Produto.Lanche;
 import br.Produto.ProdutoDAO;
 import br.Produto.ProdutoRN;
+import br.builders.ClienteBuilder;
 import br.util.DAOFactoy;
 import br.util.JpaUtil;
 
 public class PedidoRNTest {
 
+	@BeforeClass
 	public static void setUp() {
 		JpaUtil.getEntityManager().getTransaction().begin();
-		initBairroCidade();
 		initFormaDePagamento();
 		initEmrpesa();
 		initProduto();
@@ -48,6 +50,7 @@ public class PedidoRNTest {
 		JpaUtil.getEntityManager().getTransaction().begin();
 	}
 
+	@AfterClass
 	public static void setDown() {
 		JpaUtil.getEntityManager().getTransaction().commit();
 		JpaUtil.closeEntityManager();
@@ -138,60 +141,19 @@ public class PedidoRNTest {
 		ProdutoRN produtoRN = new ProdutoRN();
 
 		Lanche lanche = new Lanche();
-		lanche.setTempoEspera(15); // colocar em minutos
+		lanche.setTempoEspera(15); // tempo em minutos
 		lanche.setEmpresa(empresa);
 		produtoRN.salve(lanche);
 	}
 
-	public static void initBairroCidade() {
-		// Salvando uma cidade no banco para o teste
-		Cidade cidade = new Cidade();
-		cidade.setDescCidade("Governador Valadares");
-		CidadeDAO cidadeDao = DAOFactoy.criarCidade();
-		cidadeDao.salve(cidade);
-
-		// Salvando um bairro no banco para o teste
-		Bairro bairro = new Bairro();
-		bairro.setCidade(cidade);
-		bairro.setDescBairro("Nova Vila Bretas");
-		BairroDAO bairroDao = DAOFactoy.criarBairro();
-		bairroDao.salve(bairro);
-	}
-
+	
 	public static void initCliente() {
-		Permissao permissao = new Permissao();
-		permissao.setPermissao("ROLE_CLI");
-		permissao.setIdPermissao(3);
-		PermissaoDAO permissaoDAO = DAOFactoy.criarPermissao();
-		permissaoDAO.salve(permissao);
-
-		BairroDAO bairroDao = DAOFactoy.criarBairro();
-		Bairro bairro = bairroDao.getUnico(1);
-
-		Endereco endereco = new Endereco();
-		endereco.setBairroCidade(bairro);
-
-		EnderecoCliente enderecoCliente = new EnderecoCliente();
-		enderecoCliente.setDescEndereco("Minha Casa");
-
-		Cliente tempCliente = new Cliente();
-		tempCliente.setAtivo(true);
-		tempCliente.setEmail("dede@gmail.com");
-		tempCliente.setNome("André Ferreira Trindade");
-
-		ClienteRN clienteRN = new ClienteRN();
-		clienteRN.salvar(tempCliente, endereco, enderecoCliente);
+		ClienteBuilder clienteBuilder = new ClienteBuilder();
+		clienteBuilder.criar();
 	}
 
-	public void deveTestarEmpresa() {
-		EmpresaDAO empresaDAO = DAOFactoy.criarEmpresa();
 
-		Empresa empresa = empresaDAO.getUnico(1);
-
-		assertEquals("Lanchonete Doce Mel", empresa.getNomeFant());
-
-	}
-
+	@Test
 	public void deveTestarProduto() {
 		EmpresaDAO empresaDAO = DAOFactoy.criarEmpresa();
 
@@ -204,6 +166,7 @@ public class PedidoRNTest {
 		assertEquals(1, produtos.size());
 	}
 
+	@Test
 	public void deveTempoEsperaTotalDoPedido() {
 		PedidoRN pedidoRN = new PedidoRN();
 		Pedido pedido = pedidoRN.getPedido(1);
@@ -213,6 +176,7 @@ public class PedidoRNTest {
 		assertEquals(22, tempo);
 	}
 
+	@Test
 	public void deveListarPedidos() {
 
 		ClienteRN clienteRN = new ClienteRN();
@@ -227,17 +191,15 @@ public class PedidoRNTest {
 
 	}
 
+	@Test
 	public void deveRetornarTempoDePercurso() {
 		PedidoRN pedidoRN = new PedidoRN();
-
-		EmpresaRN empresaRN = new EmpresaRN();
-
-		EnderecoClienteDAO enderecoCliente = DAOFactoy.criarEnderecoCliente();
 
 		int tempo = pedidoRN.calculaTempoDePercurso(1, 1);
 		assertEquals(7, tempo);
 	}
 
+	@Test
 	public void deveCalcularTempo() {
 
 		PedidoRN pedidoRN = new PedidoRN();
@@ -245,6 +207,7 @@ public class PedidoRNTest {
 		assertEquals(22, tempo);
 	}
 
+	@Test
 	public void deveRetornarFormaDePagamentoDaEmpresa() {
 		EmpresaRN empresaRN = new EmpresaRN();
 		Empresa empresa = empresaRN.getEmpresa(1);
@@ -255,6 +218,7 @@ public class PedidoRNTest {
 		assertEquals(2, formasDePagamento.size());
 	}
 
+	@Test
 	public void deveVerificarFormaDePagamentoNoPedido() {
 		EmpresaRN empresaRN = new EmpresaRN();
 		Empresa empresa = empresaRN.getEmpresa(1);
@@ -274,13 +238,14 @@ public class PedidoRNTest {
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		Date dataInicio = new java.util.Date(format.parse("01/01/2014")
 				.getTime());
+
 		Date dataFim = new java.util.Date(format.parse("01/03/2014").getTime());
 
 		PedidoRN pedidoRN = new PedidoRN();
 		List<Pedido> pedidos = pedidoRN.relatorioDeFaturamento(idEmpresa,
 				dataInicio, dataFim);
 
-		assertEquals(2, pedidos.size());
+		assertEquals(1, pedidos.size());
 	}
 
 }

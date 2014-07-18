@@ -100,4 +100,6 @@ public class ContextUtil implements Serializable {
 	public void setClienteLogado(Cliente cliente) {
 		this.clienteLogado = cliente;
 	}
+	
+	
 }

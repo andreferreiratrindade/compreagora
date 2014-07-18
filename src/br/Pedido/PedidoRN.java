@@ -90,10 +90,13 @@ public class PedidoRN {
 		int tempo = 0;
 
 		EmpresaAtendimentoRN empresaAtendimentoRN = new EmpresaAtendimentoRN();
+
 		EmpresaAtendimento empAten = empresaAtendimentoRN
 				.empresaAtendimentoEmpresaComBairro(idEmpresa, idBairro);
 
-		tempo += empAten.getTempoEspera();
+		if (empAten != null) {
+			tempo += empAten.getTempoEspera();
+		}
 
 		return tempo;
 	}

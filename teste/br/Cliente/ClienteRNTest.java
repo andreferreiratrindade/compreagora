@@ -1,33 +1,26 @@
 package br.Cliente;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
 import org.junit.AfterClass;
-import org.junit.Before;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import br.AtendimentoLugares.Bairro;
-import br.AtendimentoLugares.BairroDAO;
-import br.AtendimentoLugares.Cidade;
-import br.AtendimentoLugares.CidadeDAO;
-import br.Endereco.Endereco;
 import br.EnderecoCliente.EnderecoCliente;
 import br.EnderecoCliente.EnderecoClienteDAO;
-import br.Permissao.Permissao;
-import br.Permissao.PermissaoDAO;
-import br.Permissao.PermissaoEnum;
+import br.builders.ClienteBuilder;
 import br.util.DAOFactoy;
 import br.util.JpaUtil;
 
 public class ClienteRNTest {
 
+
 	@BeforeClass
 	public static void setUp() {
 		JpaUtil.getEntityManager().getTransaction().begin();
-
 		inicializaValores();
 		JpaUtil.getEntityManager().getTransaction().commit();
 		JpaUtil.getEntityManager().close();
@@ -41,39 +34,9 @@ public class ClienteRNTest {
 	}
 
 	public static void inicializaValores() {
-		Permissao permissao = new Permissao();
-		permissao.setPermissao(PermissaoEnum.ROLE_CLI.name());
-		PermissaoDAO permissaoDAO = DAOFactoy.criarPermissao();
-		permissaoDAO.salve(permissao);
 
-		// Salvando uma cidade no banco para o teste
-		Cidade cidade = new Cidade();
-		cidade.setDescCidade("Governador Valadares");
-		
-		CidadeDAO cidadeDao = DAOFactoy.criarCidade();
-		cidadeDao.salve(cidade);
-
-		// Salvando um bairro no banco para o teste
-		Bairro bairro = new Bairro();
-		bairro.setCidade(cidade);
-		bairro.setDescBairro("Nova Vila Bretas");
-		
-		BairroDAO bairroDao = DAOFactoy.criarBairro();
-		bairroDao.salve(bairro);
-
-		Endereco endereco = new Endereco();
-		endereco.setBairroCidade(bairro);
-
-		EnderecoCliente enderecoCliente = new EnderecoCliente();
-		enderecoCliente.setDescEndereco("Minha Casa");
-
-		Cliente tempCliente = new Cliente();
-		tempCliente.setAtivo(true);
-		tempCliente.setEmail("dede@gmail.com");
-		tempCliente.setNome("André Ferreira Trindade");
-
-		ClienteRN clienteRN = new ClienteRN();
-		clienteRN.salvar(tempCliente, endereco, enderecoCliente);
+		ClienteBuilder clienteBuilder = new ClienteBuilder();
+		clienteBuilder.criar();
 	}
 
 	@Test
@@ -101,21 +64,26 @@ public class ClienteRNTest {
 	@Test
 	public void deveVerificarEnderecos() {
 		ClienteRN clienteRN = new ClienteRN();
-
 		Cliente cliente = clienteRN.buscarPorEmail("dede@gmail.com");
 
 		List<EnderecoCliente> enderecoClientes = cliente.getEnderecoCliente();
 
 		assertEquals(2, enderecoClientes.size());
 
-
 	}
 
 	@Test
-	public void deveBuscarPorEmail() {
+	public void deveRetornarClienteNull() {
+		ClienteRN clienteRN = new ClienteRN();
+		Cliente cliente = clienteRN.buscarPorEmail("dedeasdas1@gmail.com");
+		Assert.assertNull(cliente);
+	}
+
+	@Test
+	public void deveRetornarClientePeloEmail() {
 		ClienteRN clienteRN = new ClienteRN();
 		Cliente cliente = clienteRN.buscarPorEmail("dede@gmail.com");
-
 		assertEquals("André Ferreira Trindade", cliente.getNome());
 	}
+
 }

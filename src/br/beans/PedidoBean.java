@@ -468,9 +468,9 @@ public class PedidoBean implements Serializable {
 		}
 	}
 
-	public Object verificaTiposProdutos(Long tipoProduto) {
+	public boolean verificaTiposProdutos(Long tipoProduto) {
 
-		return tiposProdutos.contains(tipoProduto) ? "block" : "none";
+		return tiposProdutos.contains(tipoProduto) ? true : false;
 	}
 
 	public String adicionaEmpresa() {

@@ -14,12 +14,13 @@
 				<h:form id="formPainel">
 					<p:menu style="margin:auto;width: 179px;background-color:#FFF">
 						<p:submenu>
-							<p:menuitem value="Pedidos"
-								action="/paginas/restrito_empresa/empresa/PedidosDeClientes.jsf?faces-redirect=true">
+							<p:menuitem
+								value="#{ empresaBean.empresa.aberto ? 'Fechar' : 'Abrir' }" update="formPainel" 
+								actionListener="#{empresaBean.abrirOufecharEmpresa}">
 							</p:menuitem>
 
 						</p:submenu>
-						
+
 						<p:submenu>
 							<p:menuitem value="Pedidos"
 								action="/paginas/restrito_empresa/empresa/PedidosDeClientes.jsf?faces-redirect=true">
@@ -30,7 +31,7 @@
 							<p:menuitem value="Produtos Cadastrados"
 								action="/paginas/restrito_empresa/empresa/relatorios/produtosCadastrados.jsf?faces-redirect=true">
 							</p:menuitem>
-							
+
 							<p:menuitem value="Faturamento"
 								action="/paginas/restrito_empresa/empresa/relatorios/faturamento.jsf?faces-redirect=true">
 							</p:menuitem>

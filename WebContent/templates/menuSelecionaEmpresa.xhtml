@@ -9,52 +9,49 @@
 
 	<div id="desktop" style="margin-top: 30px;">
 
-		<h:form style="height:20px;margin:auto; width:960px;position: relative;">
+		<h:form
+			style="height:20px;margin:auto; width:960px;position: relative;">
 
 			<br />
 			<nav id="menu" style="margin-top: -4px;">
 			<ul>
 				<li><p:commandLink value="Lanchonete"
 						action="/paginas/categoria/endereco/selecionaEndereco.jsf?faces-redirect=true"
-						style="text-decoration: none" onclick="window.scrollTo(0,0);"
-						styleClass="selecionaEmpresa">
+						onclick="window.scrollTo(0,0);"
+						styleClass=" #{contextUtil.categoriaEmpresa == 0 ? 'empresaSelecinada' : 'selecionaEmpresa'}">
 
 						<f:setPropertyActionListener
 							target="#{contextUtil.categoriaEmpresa}" value="#{0}" />
 					</p:commandLink></li>
 				<li><p:commandLink value="Pizzaria"
-						styleClass="selecionaEmpresa"
 						action="/paginas/categoria/endereco/selecionaEndereco.jsf?faces-redirect=true"
-						style="text-decoration: none">
+						styleClass=" #{contextUtil.categoriaEmpresa == 1 ? 'empresaSelecinada' : 'selecionaEmpresa'}">
 
 
 						<f:setPropertyActionListener
 							target="#{contextUtil.categoriaEmpresa}" value="#{1}" />
 					</p:commandLink></li>
 				<li><p:commandLink value="Restaurante"
-						styleClass="selecionaEmpresa"
 						action="/paginas/categoria/endereco/selecionaEndereco.jsf?faces-redirect=true"
-						style="text-decoration: none">
+						styleClass=" #{contextUtil.categoriaEmpresa == 2 ? 'empresaSelecinada' : 'selecionaEmpresa'}">
 						<f:setPropertyActionListener
 							target="#{contextUtil.categoriaEmpresa}" value="#{2}" />
 					</p:commandLink></li>
-				<li><p:commandLink value="Bebida" styleClass="selecionaEmpresa"
+				<li><p:commandLink value="Bebida"
 						action="/paginas/categoria/endereco/selecionaEndereco.jsf?faces-redirect=true"
-						style="text-decoration: none;">
+						styleClass=" #{contextUtil.categoriaEmpresa == 3 ? 'empresaSelecinada' : 'selecionaEmpresa'}">
 						<f:setPropertyActionListener
 							target="#{contextUtil.categoriaEmpresa}" value="#{3}" />
 					</p:commandLink></li>
 				<li><p:commandLink value="Água"
-						styleClass="selecionaEmpresa"
 						action="/paginas/categoria/endereco/selecionaEndereco.jsf?faces-redirect=true"
-						style="text-decoration: none;">
+						styleClass=" #{contextUtil.categoriaEmpresa == 4 ? 'empresaSelecinada' : 'selecionaEmpresa'}">
 						<f:setPropertyActionListener
 							target="#{contextUtil.categoriaEmpresa}" value="#{4}" />
 					</p:commandLink></li>
 				<li><p:commandLink value="Gás"
-						styleClass="selecionaEmpresa"
 						action="/paginas/categoria/endereco/selecionaEndereco.jsf?faces-redirect=true"
-						style="text-decoration: none;">
+						styleClass=" #{contextUtil.categoriaEmpresa == 5 ? 'empresaSelecinada' : 'selecionaEmpresa'}">
 						<f:setPropertyActionListener
 							target="#{contextUtil.categoriaEmpresa}" value="#{5}" />
 					</p:commandLink></li>

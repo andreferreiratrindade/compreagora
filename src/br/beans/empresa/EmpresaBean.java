@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
@@ -254,5 +256,34 @@ public class EmpresaBean implements Serializable {
 				.getIdEmpresa()));
 
 		return "/paginas/admin/empresa/configuracoes/manterEmpresa.jsf";
+	}
+
+	public void abrirOufecharEmpresa() {
+
+		EmpresaRN empresaRN = new EmpresaRN();
+		if (empresa == null) {
+			empresa = getEmpresaLogado();
+		}
+		empresa.abrirOuFechar();
+		empresaRN.update(empresa);
+	}
+
+	public Empresa getEmpresaLogado() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		ExternalContext external = context.getExternalContext();
+		String login = external.getRemoteUser();
+
+		if (this.cliente == null || !login.equals(this.cliente.getEmail())) {
+
+			if (login != null) {
+				ClienteRN usuarioRN = new ClienteRN();
+				this.cliente = usuarioRN.buscarPorEmail(login);
+				EmpresaRN empresaRN = new EmpresaRN();
+				empresa = empresaRN.getEmpresa(Integer.parseInt(cliente
+						.getLogin()));
+			}
+		}
+
+		return empresa;
 	}
 }

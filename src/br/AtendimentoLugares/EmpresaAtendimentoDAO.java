@@ -72,7 +72,10 @@ public class EmpresaAtendimentoDAO implements Dao<EmpresaAtendimento> {
 					.andEquals("empresa.idEmpresa", idEmpresa)
 					.innerJoin("bairro").andEquals("bairro.idBairro", idBairro);
 
-			return easyCriteria.getSingleResult();
+			List<EmpresaAtendimento> empAtendimentos = easyCriteria.getResultList();
+			
+			return empAtendimentos.isEmpty() ? null : empAtendimentos.get(0);
+			
 		} catch (Exception e) {
 			System.out.println("Erro ao buscar Bairro na Empresa: "
 					+ e.toString());
