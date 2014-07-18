@@ -42,20 +42,16 @@
 											value="#{marmitex.ativo ? 'Adicionar' : 'Indisponivel'}"
 											actionListener="#{pedidoBean.adicionaMarmitex}"
 											styleClass="buttonAdd" disabled="#{!marmitex.ativo}"
-											update=":formPainel" style="margin-right: 43px;">
+											update=":formPainel" style="margin-right: 43px;width: 84px;">
 										</p:commandLink>
 
-										<p:commandButton value="Personalizar"
+										<p:commandLink value="Personalizar"
 											actionListener="#{pedidoBean.personalizaMarmitex}"
 											disabled="#{!marmitex.ativo}" styleClass="buttonPersonalizar"
 											oncomplete="dlgEditarProduto.show()" update=":idEditar"
-											style="margin-right: 43px;">
-
-										</p:commandButton>
-
+											style="margin-right: 43px;"/>
 									</h:panelGrid>
 								</h:column>
-
 							</h:panelGrid>
 							<hr width="635px" />
 						</p:dataGrid>

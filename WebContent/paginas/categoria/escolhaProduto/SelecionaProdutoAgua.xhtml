@@ -489,7 +489,7 @@
 				</p:accordionPanel>
 
 			</h:form>
-			<p:dataGrid value="#{pedidoBean.aguasDM}" var="agua"
+			<p:dataGrid value="#{pedidoBean.listAguaDM}" var="agua"
 				paginator="true" columns="1" rows="6" style="margin-top:5px">
 				<f:facet name="header">
 					<h:outputText value="Aguas" style="font-size:15px" />
@@ -510,7 +510,7 @@
 						value="#{agua.ativo ? 'Adicionar' : 'Indisponivel'}"
 						actionListener="#{pedidoBean.adicionaAgua}"
 						disabled="#{!agua.ativo}" styleClass="buttonAdd"
-						update=":formPedidoCelular" style="float:left" />
+						update=":formPedidoCelular" style="float:left;width: 84px;" />
 					<p:commandLink value="Detalhes"
 						action="#{pedidoBean.detalhesProdutoAgua}"
 						update=":formDetalhesAgua"

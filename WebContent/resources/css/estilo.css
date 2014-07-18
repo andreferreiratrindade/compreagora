@@ -272,6 +272,21 @@
 		height: 25px !important;
 		color: #FFFCFC !important;
 	}
+	.menuLinkSelecionado {
+		background-color: #468C3C !important;
+		border-radius: 5px;
+		width: 84%;
+		display: inline-block;
+		font-family: Estrangelo Edessa;
+		font-size: 20px !important;
+		padding: 0.65em 1em 0.55em;
+		text-decoration: none;
+		transition-duration: 1.2s;
+		transition-property: background-color;
+		-webkit-appearance: none;
+		height: 25px !important;
+		color: #F9FAFA !important;
+	}
 	.buttonCancelar {
 		border-radius: 5px;
 		background-color: red;

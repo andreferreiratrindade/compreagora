@@ -15,35 +15,46 @@
 			<div style="float: left; width: 300px;">
 
 				<h:form id="formPainel">
-					<p:commandLink styleClass="#{pedidoBean.verificaTiposProdutos(0) ? 'menuLinkSelecionado' : 'menuLink' }" value="Lanches"
+					<p:commandLink
+						styleClass="#{pedidoBean.itemMenu == 0 ? 'menuLinkSelecionado' : 'menuLink' }"
+						value="Lanches"
 						style="display: #{pedidoBean.verificaTiposProdutos(0) ? 'block' : 'none' };"
 						action="#{pedidoBean.mudaTelaLanche()}">
 					</p:commandLink>
 
-					<p:commandLink styleClass="menuLink" value="Pizza"
+					<p:commandLink
+						styleClass="#{pedidoBean.itemMenu == 1 ? 'menuLinkSelecionado' : 'menuLink' }"
+						value="Pizza"
 						style="display: #{pedidoBean.verificaTiposProdutos(1)? 'block' : 'none'};margin-top:5px"
 						action="#{pedidoBean.mudaTelaPizza()}">
 					</p:commandLink>
 
-					<p:commandLink styleClass="menuLink" value="Marmitex"
+					<p:commandLink
+						styleClass="#{pedidoBean.itemMenu == 2 ? 'menuLinkSelecionado' : 'menuLink' }"
+						value="Marmitex"
 						style="display: #{pedidoBean.verificaTiposProdutos(2)? 'block' : 'none'};margin-top:5px"
 						action="#{pedidoBean.mudaTelaMarmitex()}">
 					</p:commandLink>
-					<p:commandLink styleClass="menuLink" value="Bebida"
+					<p:commandLink
+						styleClass="#{pedidoBean.itemMenu == 3 ? 'menuLinkSelecionado' : 'menuLink' }"
+						value="Bebida"
 						style="display: #{pedidoBean.verificaTiposProdutos(3)? 'block' : 'none'};margin-top:5px"
 						action="#{pedidoBean.mudaTelaBebida()}">
 					</p:commandLink>
-					<p:commandLink styleClass="menuLink" value="Água"
+					<p:commandLink
+						styleClass="#{pedidoBean.itemMenu == 4 ? 'menuLinkSelecionado' : 'menuLink' }"
+						value="Água"
 						style="display: #{pedidoBean.verificaTiposProdutos(4)? 'block' : 'none'};margin-top:5px"
 						action="#{pedidoBean.mudaTelaAgua()}">
 					</p:commandLink>
-					<p:commandLink styleClass="menuLink" value="Gás"
+					<p:commandLink
+						styleClass="#{pedidoBean.itemMenu == 5 ? 'menuLinkSelecionado' : 'menuLink' }"
+						value="Gás"
 						style="display: #{pedidoBean.verificaTiposProdutos(5)? 'block' : 'none'};margin-top:5px"
 						action="#{pedidoBean.mudaTelaGas()}">
 					</p:commandLink>
 					<h:graphicImage name="folha.png" library="imagens/icones"
 						style="width: 300px;margin-top: 20px;position: absolute;height: 446px;" />
-
 
 					<div id="painelPedido"
 						style="position: relative; margin-top: 48px; margin-left: 25px">

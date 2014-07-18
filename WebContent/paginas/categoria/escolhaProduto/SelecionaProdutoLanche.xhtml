@@ -44,7 +44,7 @@
 											actionListener="#{pedidoBean.adicionaLanche()}"
 											disabled="#{!lanche.ativo}" update=":formPainel"
 											id="buttonAdd" styleClass="buttonAdd"
-											style="margin-right: 43px">
+											style="margin-right: 43px;width: 84px;">
 										</p:commandLink>
 
 										<p:commandLink value="Personalizar"
@@ -409,29 +409,42 @@
 				<p:accordionPanel style="bacground-color:#354866">
 					<p:tab title="Produtos">
 
-						<p:commandLink styleClass="menuLink" value="Lanches"
+						<p:commandLink
+							styleClass="#{pedidoBean.itemMenu == 0 ? 'menuLinkSelecionado' : 'menuLink' }"
+							value="Lanches"
 							style="display: #{pedidoBean.verificaTiposProdutos(0)};"
 							action="#{pedidoBean.mudaTelaLanche()}">
 						</p:commandLink>
 
-						<p:commandLink styleClass="menuLink" value="Pizza"
+						<p:commandLink
+							styleClass="#{pedidoBean.itemMenu == 1
+							? 'menuLinkSelecionado' : 'menuLink' }"
+							value="Pizza"
 							style="display: #{pedidoBean.verificaTiposProdutos(1)};margin-top:5px"
 							action="#{pedidoBean.mudaTelaPizza()}">
 						</p:commandLink>
 
-						<p:commandLink styleClass="menuLink" value="Marmitex"
+						<p:commandLink
+							styleClass="#{pedidoBean.itemMenu == 2 ? 'menuLinkSelecionado' : 'menuLink' }"
+							value="Marmitex"
 							style="display: #{pedidoBean.verificaTiposProdutos(2)};margin-top:5px"
 							action="#{pedidoBean.mudaTelaMarmitex()}">
 						</p:commandLink>
-						<p:commandLink styleClass="menuLink" value="Bebida"
+						<p:commandLink
+							styleClass="#{pedidoBean.itemMenu == 3 ? 'menuLinkSelecionado' : 'menuLink' }"
+							value="Bebida"
 							style="display: #{pedidoBean.verificaTiposProdutos(3)};margin-top:5px"
 							action="#{pedidoBean.mudaTelaBebida()}">
 						</p:commandLink>
-						<p:commandLink styleClass="menuLink" value="Água"
+						<p:commandLink
+							styleClass="#{pedidoBean.itemMenu == 4 ? 'menuLinkSelecionado' : 'menuLink' }"
+							value="Água"
 							style="display: #{pedidoBean.verificaTiposProdutos(4)};margin-top:5px"
 							action="#{pedidoBean.mudaTelaAgua()}">
 						</p:commandLink>
-						<p:commandLink styleClass="menuLink" value="Gás"
+						<p:commandLink
+							styleClass="#{pedidoBean.itemMenu == 5 ? 'menuLinkSelecionado' : 'menuLink' }"
+							value="Gás"
 							style="display: #{pedidoBean.verificaTiposProdutos(5)};margin-top:5px"
 							action="#{pedidoBean.mudaTelaGas()}">
 						</p:commandLink>
@@ -777,14 +790,11 @@
 				</h:form>
 			</p:dialog>
 		</div>
-	
-	<!-- 
+
+		<!-- 
 	Display para Tablet
  -->
-<div id="tablet">
-	
-	
-	 </div>
+		<div id="tablet"></div>
 	</ui:define>
 </ui:composition>
 </html>

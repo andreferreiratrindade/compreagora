@@ -56,6 +56,7 @@ public class PedidoBean implements Serializable {
 	private static final int TOTAL_PRODUTO = 13;
 	private Cliente cliente = null;
 	private Empresa empresa = null;
+	private int itemMenu;
 	private Lanche lanche;
 	private Bebida bebida;
 	private Pizza pizza;
@@ -95,6 +96,15 @@ public class PedidoBean implements Serializable {
 	private ListDataModel<Agua> listAguaDM;
 	private ListDataModel<Gas> listGasDM;
 	private float avulsoValorTotal;
+
+	
+	public int getItemMenu() {
+		return itemMenu;
+	}
+
+	public void setItemMenu(int itemMenu) {
+		this.itemMenu = itemMenu;
+	}
 
 	public float getAvulsoValorTotal() {
 		return avulsoValorTotal;
@@ -441,7 +451,7 @@ public class PedidoBean implements Serializable {
 	public void novo() {
 
 		tiposProdutos = new ArrayList<Long>();
-
+		itemMenu = 0;
 		EmpresaRN empresaRN = new EmpresaRN();
 		Empresa empresaTemp = empresaRN.getEmpresa(empresa.getIdEmpresa());
 		empresaTemp.getCategorias().size();
@@ -476,7 +486,8 @@ public class PedidoBean implements Serializable {
 	public String adicionaEmpresa() {
 
 		novo();
-
+		
+		
 		Map<Integer, String> mapTipoEnum = new HashMap<Integer, String>();
 		mapTipoEnum.put(CategoriaENUM.Lanche.ordinal(), mudaTelaLanche());
 		mapTipoEnum.put(CategoriaENUM.Pizza.ordinal(), mudaTelaPizza());
@@ -485,6 +496,7 @@ public class PedidoBean implements Serializable {
 		mapTipoEnum.put(CategoriaENUM.Agua.ordinal(), mudaTelaAgua());
 		mapTipoEnum.put(CategoriaENUM.Marmitex.ordinal(), mudaTelaMarmitex());
 
+		itemMenu = categoriaEmpresa;
 		return mapTipoEnum.get(categoriaEmpresa);
 	}
 
@@ -494,6 +506,7 @@ public class PedidoBean implements Serializable {
 			ProdutoRN produtoRN = new ProdutoRN();
 			this.marmitexsDM = new ListDataModel<Marmitex>(
 					produtoRN.listarMarmitex(empresa.getIdEmpresa()));
+			this.itemMenu = 2;
 			return "/paginas/categoria/escolhaProduto/SelecionaProdutoMarmitex?faces-redirect=true";
 		}
 		return null;
@@ -505,6 +518,7 @@ public class PedidoBean implements Serializable {
 			ProdutoRN produtoRN = new ProdutoRN();
 			this.bebidasDM = new ListDataModel<Bebida>(
 					produtoRN.listarBebida(empresa.getIdEmpresa()));
+			this.itemMenu = 3;
 			return "/paginas/categoria/escolhaProduto/SelecionaProdutoBebida?faces-redirect=true";
 		}
 		return null;
@@ -516,6 +530,7 @@ public class PedidoBean implements Serializable {
 			this.lanches = produtoRN.listarLanche(empresa.getIdEmpresa());
 			this.lanchesDM = new ListDataModel<Lanche>(
 					produtoRN.listarLanche(empresa.getIdEmpresa()));
+			this.itemMenu = 0;
 			return "/paginas/categoria/escolhaProduto/SelecionaProdutoLanche?faces-redirect=true";
 		}
 		return null;
@@ -526,6 +541,7 @@ public class PedidoBean implements Serializable {
 			ProdutoRN produtoRN = new ProdutoRN();
 			this.listPizzaDM = new ListDataModel<Pizza>(
 					produtoRN.listarPizza(empresa.getIdEmpresa()));
+			this.itemMenu = 1;
 			return "/paginas/categoria/escolhaProduto/SelecionaProdutoPizza?faces-redirect=true";
 		}
 		return null;
@@ -536,6 +552,7 @@ public class PedidoBean implements Serializable {
 			ProdutoRN produtoRN = new ProdutoRN();
 			this.listAguaDM = new ListDataModel<Agua>(
 					produtoRN.listarAgua(empresa.getIdEmpresa()));
+			this.itemMenu = 4;
 			return "/paginas/categoria/escolhaProduto/SelecionaProdutoAgua?faces-redirect=true";
 		}
 		return null;
@@ -546,6 +563,7 @@ public class PedidoBean implements Serializable {
 			ProdutoRN produtoRN = new ProdutoRN();
 			this.listGasDM = new ListDataModel<Gas>(produtoRN.listarGas(empresa
 					.getIdEmpresa()));
+			this.itemMenu = 5;
 			return "/paginas/categoria/escolhaProduto/SelecionaProdutoGas?faces-redirect=true";
 		}
 		return null;
@@ -891,7 +909,7 @@ public class PedidoBean implements Serializable {
 	public void detalhesProdutoMarmitex() {
 		marmitex = (Marmitex) (marmitexsDM.getRowData());
 	}
-	
+
 	public void detalhesProdutoLanche() {
 		lanche = (Lanche) (lanchesDM.getRowData());
 	}
