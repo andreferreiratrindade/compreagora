@@ -1,6 +1,5 @@
 package br.Pedido;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -115,7 +114,12 @@ public class PedidoRN {
 		this.pedidoDAO.update(pedido);
 	}
 
+	public List<Pedido> buscaPorPaginacao(int startingAt, int maxPerPage){
+		return this.pedidoDAO.buscaPorPaginacao(startingAt, maxPerPage);
+	}
+	
 	public List<Pedido> relatorioDeFaturamento(int idEmpresa, Date dataInicio,
+
 			Date dataFim) {
 
 		List<Pedido> pedidos = this.pedidoDAO.relatorioDeFaturamento(idEmpresa,

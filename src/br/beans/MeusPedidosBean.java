@@ -55,7 +55,7 @@ public class MeusPedidosBean implements Serializable {
 		}
 
 		Collections.sort(pedidos);
-
+		
 		pedidoDataModel = new PedidoDataModel(pedidos);
 	}
 

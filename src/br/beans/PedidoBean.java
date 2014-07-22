@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -54,6 +55,8 @@ public class PedidoBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private static final int TOTAL_PRODUTO = 13;
+	
+
 	private Cliente cliente = null;
 	private Empresa empresa = null;
 	private int itemMenu;

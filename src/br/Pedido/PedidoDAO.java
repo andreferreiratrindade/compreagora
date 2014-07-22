@@ -66,10 +66,10 @@ public class PedidoDAO implements Dao<Pedido> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Pedido> findPedidos(int startingAt, int maxPerPage) {
+	public List<Pedido> buscaPorPaginacao(int startingAt, int maxPerPage) {
 				
 		// regular query that will search for players in the db
-		Query query = session.createQuery("select p from Pedido p");
+		Query query = session.createQuery("select p from pedido p");
 		query.setFirstResult(startingAt);
 		query.setMaxResults(maxPerPage);
 
