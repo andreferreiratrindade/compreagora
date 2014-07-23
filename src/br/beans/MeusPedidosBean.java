@@ -46,7 +46,7 @@ public class MeusPedidosBean implements Serializable {
 
 	public LazyDataModel<Pedido> getPedidosLazy() {
 		if (pedidosLazy == null) {
-			pedidosLazy = new MeusPedidoLazy();
+			pedidosLazy = new MeusPedidoLazy(cliente.getIdCliente());
 		}
 		return pedidosLazy;
 	}

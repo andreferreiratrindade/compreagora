@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import br.Pedido.Pedido;
 import br.dao.Dao;
 
 import com.uaihebert.factory.EasyCriteriaFactory;
@@ -121,5 +122,17 @@ public class ProdutoDAO implements Dao<Produto> {
 		easyCriteria.innerJoinFetch("empresa").andEquals("empresa.idEmpresa",
 				idEmpresa);
 		return (List<Marmitex>) easyCriteria.getResultList();
+	}
+
+	public List<Lanche> buscaPorPaginacaoLanche(int startingAt, int maxPerPage,
+			int idEmpresa) {
+		EasyCriteria<Lanche> easyCriteria = EasyCriteriaFactory
+				.createQueryCriteria(em, Lanche.class);
+		easyCriteria.innerJoinFetch("empresa").andEquals("empresa.idEmpresa",
+				idEmpresa);
+		easyCriteria.setFirstResult(startingAt);
+		easyCriteria.setMaxResults(maxPerPage);
+
+		return (List<Lanche>) easyCriteria.getResultList();
 	}
 }

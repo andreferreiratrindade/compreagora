@@ -114,8 +114,8 @@ public class PedidoRN {
 		this.pedidoDAO.update(pedido);
 	}
 
-	public List<Pedido> buscaPorPaginacao(int startingAt, int maxPerPage){
-		return this.pedidoDAO.buscaPorPaginacao(startingAt, maxPerPage);
+	public List<Pedido> buscaPorPaginacao(int startingAt, int maxPerPage, int idCliente){
+		return this.pedidoDAO.buscaPorPaginacao(startingAt, maxPerPage, idCliente);
 	}
 	
 	public List<Pedido> relatorioDeFaturamento(int idEmpresa, Date dataInicio,
@@ -132,4 +132,9 @@ public class PedidoRN {
 
 		return pedidos;
 	}
+	public int countPedido(int idCliente){
+		return this.pedidoDAO.countPedido(idCliente);
+	}
+	
+	
 }

@@ -17,12 +17,22 @@ public class MeusPedidoLazy extends LazyDataModel<Pedido> {
 	private static final long serialVersionUID = 1L;
 
 	private List<Pedido> pedidos;
+	private int idCliente;
+
+	public MeusPedidoLazy(int idCliente) {
+		this.idCliente = idCliente;
+	}
 
 	@Override
 	public List<Pedido> load(int startingAt, int maxPerPage, String sortField,
 			SortOrder sortOrder, Map<String, String> filters) {
 		PedidoRN pedidoRN = new PedidoRN();
-		pedidos = pedidoRN.buscaPorPaginacao(startingAt, maxPerPage);
+		pedidos = pedidoRN.buscaPorPaginacao(startingAt, maxPerPage, idCliente);
+
+		if (getRowCount() <= 0) {
+			setRowCount(pedidoRN.countPedido(idCliente));
+		}
+		setPageSize(maxPerPage);
 		return pedidos;
 	}
 

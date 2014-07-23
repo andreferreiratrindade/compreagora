@@ -146,12 +146,10 @@ public class PedidoRNTest {
 		produtoRN.salve(lanche);
 	}
 
-	
 	public static void initCliente() {
 		ClienteBuilder clienteBuilder = new ClienteBuilder();
 		clienteBuilder.criar();
 	}
-
 
 	@Test
 	public void deveTestarProduto() {
@@ -245,6 +243,19 @@ public class PedidoRNTest {
 		List<Pedido> pedidos = pedidoRN.relatorioDeFaturamento(idEmpresa,
 				dataInicio, dataFim);
 
+		assertEquals(1, pedidos.size());
+	}
+
+	@Test
+	public void deveRetornarListaDePedidosPeloCliente() {
+
+		PedidoRN pedidoRN = new PedidoRN();
+		int posicaoInicial = 0;
+		int posicaoFinal = 10;
+		int idCliente = 1;
+
+		List<Pedido> pedidos = pedidoRN.buscaPorPaginacao(posicaoInicial,
+				posicaoFinal, idCliente);
 		assertEquals(1, pedidos.size());
 	}
 

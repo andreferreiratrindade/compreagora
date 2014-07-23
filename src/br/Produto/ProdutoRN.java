@@ -66,4 +66,11 @@ public class ProdutoRN {
 		return this.produtoDAO.listaMarmitex(idEmpresa);
 	}
 
+	public List<Lanche> buscaPorPaginacaoLanche(int startingAt, int maxPerPage,
+			int idEmpresa) {
+		
+		return this.produtoDAO.buscaPorPaginacaoLanche(startingAt, maxPerPage,
+				idEmpresa);
+	}
+
 }

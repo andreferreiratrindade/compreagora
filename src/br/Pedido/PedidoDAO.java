@@ -16,20 +16,6 @@ public class PedidoDAO implements Dao<Pedido> {
 
 	private EntityManager session;
 
-	/*
-	 * @SuppressWarnings("unchecked") public List<Pedido> listar() {
-	 * 
-	 * return this.session.createCriteria(Pedido.class)
-	 * .addOrder(Order.asc("status")).list(); }
-	 * 
-	 * 
-	 * public Integer ultimoElementoAdicionado(int idCliente) { String hql =
-	 * "select max(idPedido) from pedido"; Query consulta =
-	 * this.session.createQuery(hql); return (Integer) consulta.uniqueResult();
-	 * 
-	 * }
-	 */
-
 	public EntityManager getSession() {
 		return session;
 	}
@@ -66,25 +52,43 @@ public class PedidoDAO implements Dao<Pedido> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Pedido> buscaPorPaginacao(int startingAt, int maxPerPage) {
-				
-		// regular query that will search for players in the db
-		Query query = session.createQuery("select p from pedido p");
-		query.setFirstResult(startingAt);
-		query.setMaxResults(maxPerPage);
+	public List<Pedido> buscaPorPaginacao(int startingAt, int maxPerPage,
+			int idCliente) {
 
-		return query.getResultList();
+		EasyCriteria<Pedido> easyCriteria = EasyCriteriaFactory
+				.createQueryCriteria(session, Pedido.class);
+		easyCriteria.innerJoin("enderecoCliente")
+				.innerJoin("enderecoCliente.cliente")
+				.andEquals("enderecoCliente.cliente.idCliente", idCliente);
+		easyCriteria.setFirstResult(startingAt);
+		easyCriteria.setMaxResults(maxPerPage);
+
+		return easyCriteria.getResultList();
 	}
-	
+
+	public int countPedido(int idCliente) {
+		EasyCriteria<Pedido> easyCriteria = EasyCriteriaFactory
+				.createQueryCriteria(session, Pedido.class);
+		easyCriteria.innerJoin("enderecoCliente")
+				.innerJoin("enderecoCliente.cliente")
+				.andEquals("enderecoCliente.cliente.idCliente", idCliente);
+
+		List<Pedido> pedidos = easyCriteria.getResultList();
+		if (pedidos == null) {
+			return 0;
+		}
+		return pedidos.size();
+	}
+
 	public int countPedidosTotal() {
-	
+
 		Query query = session.createQuery("select COUNT(p) from Pedido p");
 
 		Number result = (Number) query.getSingleResult();
-		
+
 		return result.intValue();
-	}	
-	
+	}
+
 	public List<Pedido> pedidosPeloStatus(int idEmpresa) {
 
 		EasyCriteria<Pedido> easyCriteria = EasyCriteriaFactory
