@@ -7,20 +7,21 @@
 
 	<http auto-config="true">
 		<intercept-url pattern="/paginas/admin/**" access="ROLE_SUP" />
-		
+
 		<intercept-url pattern="/paginas/restrito/**" access="ROLE_ADM" />
-		
+
 		<intercept-url pattern="/paginas/publico/alterarCliente**"
 			access="ROLE_CLI" />
 
 		<intercept-url pattern="/paginas/categoria/escolhaProduto/**"
 			access="ROLE_CLI" />
-
+		<intercept-url pattern="/paginas/publico/meusPedidos**"
+			access="ROLE_CLI" />
 
 		<form-login login-page="/paginas/publico/login.jsf"
 			always-use-default-target="false" default-target-url="/principal.jsf"
 			authentication-failure-url="/paginas/publico/login.jsf?login_error=1" />
-		
+
 		<logout />
 		<remember-me />
 	</http>

@@ -87,7 +87,7 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-logging.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/saaj.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/wsdl4j.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/primefaces-4.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/primefaces-4.0.jar" sourcepath="WebContent/WEB-INF/lib/primefaces-4.0.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/custom-theme.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/bootstrap-1.0.10.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javax.xml.bind.jar"/>

@@ -24,10 +24,11 @@
 
 				<h:form id="formMeusPedidos">
 
-					<p:dataTable value="#{meusPedidosBean.pedidoDataModel}"
+					<p:dataTable value="#{meusPedidosBean.pedidosLazy}"
 						var="pedido" emptyMessage="Nenhum produto encontrado."
 						paginator="true" rows="10" selection="#{meusPedidosBean.pedido}"
-						rowKey="#{pedido.idPedido}" selectionMode="single">
+						rowKey="#{pedido.idPedido}" selectionMode="single" lazy="true"  >
+						
 						<p:ajax event="rowSelect" update=":pedidoInfo :localEntregaInfo"
 							listener="#{meusPedidosBean.atualizaPedidoProdutos}" />
 

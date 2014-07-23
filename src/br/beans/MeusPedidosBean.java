@@ -13,6 +13,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
+import org.primefaces.model.LazyDataModel;
+
 import br.Cliente.Cliente;
 import br.Cliente.ClienteRN;
 import br.EnderecoCliente.EnderecoCliente;
@@ -22,6 +24,7 @@ import br.PedidoProduto.PedidoProduto;
 import br.Produto.ProdutoAvulso.ProdutoAvulso;
 import br.Produto.ProdutoAvulso.ProdutoAvulsoDAO;
 import br.ProdutoAvulso.Avulso;
+import br.dataTableLazy.MeusPedidoLazy;
 import br.util.DAOFactoy;
 
 @ManagedBean
@@ -39,24 +42,32 @@ public class MeusPedidosBean implements Serializable {
 	private List<Pedido> pedidos;
 	private PedidoProduto pedidoProduto;
 	private List<Avulso> avulsos;
+	private LazyDataModel<Pedido> pedidosLazy;
 
-	
+	public LazyDataModel<Pedido> getPedidosLazy() {
+		if (pedidosLazy == null) {
+			pedidosLazy = new MeusPedidoLazy();
+		}
+		return pedidosLazy;
+	}
+
 	@PostConstruct
 	public void construct() {
-		getCliente();
-		pedido = new Pedido();
-		pedidos = new ArrayList<Pedido>();
+		if (getCliente() != null) {
+			pedido = new Pedido();
+			pedidos = new ArrayList<Pedido>();
 
-		for (EnderecoCliente x : cliente.getEnderecoCliente()) {
-			for (Pedido y : x.getPedidos()) {
-				y.getPedidoProdutos().size();
-				pedidos.add(y);
+			for (EnderecoCliente x : cliente.getEnderecoCliente()) {
+				for (Pedido y : x.getPedidos()) {
+					y.getPedidoProdutos().size();
+					pedidos.add(y);
+				}
 			}
-		}
 
-		Collections.sort(pedidos);
-		
-		pedidoDataModel = new PedidoDataModel(pedidos);
+			Collections.sort(pedidos);
+
+			pedidoDataModel = new PedidoDataModel(pedidos);
+		}
 	}
 
 	public PedidoProduto getPedidoProduto() {
@@ -131,8 +142,10 @@ public class MeusPedidosBean implements Serializable {
 				ClienteRN usuarioRN = new ClienteRN();
 				this.cliente = usuarioRN.buscarPorEmail(login);
 			}
+			return cliente;
 		}
-		return cliente;
+
+		return null;
 	}
 
 	public void setCliente(Cliente cliente) {
