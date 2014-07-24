@@ -49,6 +49,7 @@ public class DAOFactoy {
 	public static ProdutoDAO criarProduto() {
 		ProdutoDAO dao = new ProdutoDAO();
 		dao.setEm(JpaUtil.getEntityManager());
+		
 		return dao;
 	}
 

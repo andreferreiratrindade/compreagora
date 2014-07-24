@@ -11,6 +11,7 @@ import org.junit.Test;
 import br.Empresa.Empresa;
 import br.Empresa.EmpresaDAO;
 import br.Empresa.EmpresaRN;
+import br.Produto.Filtro.WithStatusIndisponivel;
 import br.util.DAOFactoy;
 import br.util.JpaUtil;
 
@@ -98,6 +99,16 @@ public class ProdutoRNTest {
 		int valor = produtoDao.ultimoElementoAdicionado();
 
 		assertEquals(1, valor);
+	}
+
+	@Test
+	public void deveRetornarListaDeLanchesComFiltro() {
+
+		ProdutoRN produtoRN = new ProdutoRN();
+		produtoRN.alterarFiltro(new WithStatusIndisponivel());
+		List<Lanche> produtos = produtoRN.listarLanche(1);
+
+		assertEquals(1, produtos.size());
 	}
 
 }

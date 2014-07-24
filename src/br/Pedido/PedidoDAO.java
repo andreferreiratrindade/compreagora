@@ -51,7 +51,6 @@ public class PedidoDAO implements Dao<Pedido> {
 		return this.session.find(Pedido.class, id);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Pedido> buscaPorPaginacao(int startingAt, int maxPerPage,
 			int idCliente) {
 

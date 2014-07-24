@@ -2,6 +2,8 @@ package br.Produto;
 
 import java.util.List;
 
+import br.Produto.Filtro.IFiltroProduto;
+import br.Produto.Filtro.WithStatusIndisponivel;
 import br.util.DAOFactoy;
 
 public class ProdutoRN {
@@ -15,14 +17,12 @@ public class ProdutoRN {
 		return this.produtoDAO.getUnico(id);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Lanche> listarLanche(int idEmpresa) {
 
 		return this.produtoDAO.listaLanche(idEmpresa);
 
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Bebida> listarBebida(int idEmpresa) {
 
 		List<Bebida> bebidas = this.produtoDAO.listaBebida(idEmpresa);
@@ -68,9 +68,14 @@ public class ProdutoRN {
 
 	public List<Lanche> buscaPorPaginacaoLanche(int startingAt, int maxPerPage,
 			int idEmpresa) {
-		
+
 		return this.produtoDAO.buscaPorPaginacaoLanche(startingAt, maxPerPage,
 				idEmpresa);
+	}
+
+	public void alterarFiltro(IFiltroProduto filtro) {
+		this.produtoDAO.alteraFiltro(filtro);
+
 	}
 
 }

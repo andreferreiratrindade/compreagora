@@ -42,6 +42,7 @@ import br.Produto.Marmitex;
 import br.Produto.Pizza;
 import br.Produto.Produto;
 import br.Produto.ProdutoRN;
+import br.Produto.Filtro.WithStatusIndisponivel;
 import br.Produto.Implementacao.BebidaImplementacao;
 import br.Produto.Implementacao.IProduto;
 import br.Produto.Implementacao.LancheImplementacao;
@@ -55,7 +56,6 @@ public class PedidoBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private static final int TOTAL_PRODUTO = 13;
-	
 
 	private Cliente cliente = null;
 	private Empresa empresa = null;
@@ -100,7 +100,6 @@ public class PedidoBean implements Serializable {
 	private ListDataModel<Gas> listGasDM;
 	private float avulsoValorTotal;
 
-	
 	public int getItemMenu() {
 		return itemMenu;
 	}
@@ -489,8 +488,7 @@ public class PedidoBean implements Serializable {
 	public String adicionaEmpresa() {
 
 		novo();
-		
-		
+
 		Map<Integer, String> mapTipoEnum = new HashMap<Integer, String>();
 		mapTipoEnum.put(CategoriaENUM.Lanche.ordinal(), mudaTelaLanche());
 		mapTipoEnum.put(CategoriaENUM.Pizza.ordinal(), mudaTelaPizza());
@@ -507,6 +505,7 @@ public class PedidoBean implements Serializable {
 
 		if (tiposProdutos.contains((long) CategoriaENUM.Marmitex.ordinal())) {
 			ProdutoRN produtoRN = new ProdutoRN();
+			produtoRN.alterarFiltro(new WithStatusIndisponivel());
 			this.marmitexsDM = new ListDataModel<Marmitex>(
 					produtoRN.listarMarmitex(empresa.getIdEmpresa()));
 			this.itemMenu = 2;
@@ -519,6 +518,7 @@ public class PedidoBean implements Serializable {
 
 		if (tiposProdutos.contains((long) CategoriaENUM.Bebida.ordinal())) {
 			ProdutoRN produtoRN = new ProdutoRN();
+			produtoRN.alterarFiltro(new WithStatusIndisponivel());
 			this.bebidasDM = new ListDataModel<Bebida>(
 					produtoRN.listarBebida(empresa.getIdEmpresa()));
 			this.itemMenu = 3;
@@ -530,6 +530,7 @@ public class PedidoBean implements Serializable {
 	public String mudaTelaLanche() {
 		if (tiposProdutos.contains((long) CategoriaENUM.Lanche.ordinal())) {
 			ProdutoRN produtoRN = new ProdutoRN();
+			produtoRN.alterarFiltro(new WithStatusIndisponivel());
 			this.lanches = produtoRN.listarLanche(empresa.getIdEmpresa());
 			this.lanchesDM = new ListDataModel<Lanche>(
 					produtoRN.listarLanche(empresa.getIdEmpresa()));
@@ -542,6 +543,7 @@ public class PedidoBean implements Serializable {
 	public String mudaTelaPizza() {
 		if (tiposProdutos.contains((long) CategoriaENUM.Pizza.ordinal())) {
 			ProdutoRN produtoRN = new ProdutoRN();
+			produtoRN.alterarFiltro(new WithStatusIndisponivel());
 			this.listPizzaDM = new ListDataModel<Pizza>(
 					produtoRN.listarPizza(empresa.getIdEmpresa()));
 			this.itemMenu = 1;
@@ -553,6 +555,7 @@ public class PedidoBean implements Serializable {
 	public String mudaTelaAgua() {
 		if (tiposProdutos.contains((long) CategoriaENUM.Agua.ordinal())) {
 			ProdutoRN produtoRN = new ProdutoRN();
+			produtoRN.alterarFiltro(new WithStatusIndisponivel());
 			this.listAguaDM = new ListDataModel<Agua>(
 					produtoRN.listarAgua(empresa.getIdEmpresa()));
 			this.itemMenu = 4;
@@ -564,6 +567,7 @@ public class PedidoBean implements Serializable {
 	public String mudaTelaGas() {
 		if (tiposProdutos.contains((long) CategoriaENUM.Gas.ordinal())) {
 			ProdutoRN produtoRN = new ProdutoRN();
+			produtoRN.alterarFiltro(new WithStatusIndisponivel());
 			this.listGasDM = new ListDataModel<Gas>(produtoRN.listarGas(empresa
 					.getIdEmpresa()));
 			this.itemMenu = 5;

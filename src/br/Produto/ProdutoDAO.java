@@ -5,7 +5,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import br.Pedido.Pedido;
+import br.Produto.Filtro.IFiltroProduto;
+import br.Produto.Filtro.PadraoProduto;
 import br.dao.Dao;
 
 import com.uaihebert.factory.EasyCriteriaFactory;
@@ -14,6 +15,11 @@ import com.uaihebert.model.EasyCriteria;
 public class ProdutoDAO implements Dao<Produto> {
 
 	private EntityManager em;
+	private IFiltroProduto filtro;
+
+	public ProdutoDAO() {
+		this.filtro = new PadraoProduto();
+	}
 
 	public EntityManager getEm() {
 		return em;
@@ -36,6 +42,7 @@ public class ProdutoDAO implements Dao<Produto> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Produto> lista() {
+
 		Query query = em
 				.createQuery(" SELECT e FROM produto e where idEmpresa = 25");
 		return (List<Produto>) query.getResultList();
@@ -44,21 +51,14 @@ public class ProdutoDAO implements Dao<Produto> {
 	@SuppressWarnings("unchecked")
 	public List<Lanche> listaLanche(int idEmpresa) {
 
-		EasyCriteria<Lanche> easyCriteria = EasyCriteriaFactory
-				.createQueryCriteria(em, Lanche.class);
-		easyCriteria.innerJoinFetch("empresa").andEquals("empresa.idEmpresa",
-				idEmpresa);
-		return (List<Lanche>) easyCriteria.getResultList();
+		return filtro.listarLanche(idEmpresa, em);
+
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Bebida> listaBebida(int idEmpresa) {
 
-		EasyCriteria<Bebida> easyCriteria = EasyCriteriaFactory
-				.createQueryCriteria(em, Bebida.class);
-		easyCriteria.innerJoinFetch("empresa").andEquals("empresa.idEmpresa",
-				idEmpresa);
-		return (List<Bebida>) easyCriteria.getResultList();
+		return filtro.listarBebida(idEmpresa, em);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -93,35 +93,19 @@ public class ProdutoDAO implements Dao<Produto> {
 	}
 
 	public List<Pizza> listaPizza(int idEmpresa) {
-		EasyCriteria<Pizza> easyCriteria = EasyCriteriaFactory
-				.createQueryCriteria(em, Pizza.class);
-		easyCriteria.innerJoinFetch("empresa").andEquals("empresa.idEmpresa",
-				idEmpresa);
-		return (List<Pizza>) easyCriteria.getResultList();
+		return filtro.listarPizza(idEmpresa, em);
 	}
 
 	public List<Gas> listaGas(int idEmpresa) {
-		EasyCriteria<Gas> easyCriteria = EasyCriteriaFactory
-				.createQueryCriteria(em, Gas.class);
-		easyCriteria.innerJoinFetch("empresa").andEquals("empresa.idEmpresa",
-				idEmpresa);
-		return (List<Gas>) easyCriteria.getResultList();
+		return filtro.listarGas(idEmpresa, em);
 	}
 
 	public List<Agua> listaAgua(int idEmpresa) {
-		EasyCriteria<Agua> easyCriteria = EasyCriteriaFactory
-				.createQueryCriteria(em, Agua.class);
-		easyCriteria.innerJoinFetch("empresa").andEquals("empresa.idEmpresa",
-				idEmpresa);
-		return (List<Agua>) easyCriteria.getResultList();
+		return filtro.listarAgua(idEmpresa, em);
 	}
 
 	public List<Marmitex> listaMarmitex(int idEmpresa) {
-		EasyCriteria<Marmitex> easyCriteria = EasyCriteriaFactory
-				.createQueryCriteria(em, Marmitex.class);
-		easyCriteria.innerJoinFetch("empresa").andEquals("empresa.idEmpresa",
-				idEmpresa);
-		return (List<Marmitex>) easyCriteria.getResultList();
+		return filtro.listarMarmitex(idEmpresa, em);
 	}
 
 	public List<Lanche> buscaPorPaginacaoLanche(int startingAt, int maxPerPage,
@@ -134,5 +118,9 @@ public class ProdutoDAO implements Dao<Produto> {
 		easyCriteria.setMaxResults(maxPerPage);
 
 		return (List<Lanche>) easyCriteria.getResultList();
+	}
+
+	public void alteraFiltro(IFiltroProduto filtro) {
+		this.filtro = filtro;
 	}
 }
