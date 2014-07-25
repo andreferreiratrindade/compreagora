@@ -5,10 +5,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import org.hibernate.Session;
-
-import br.Cliente.Cliente;
-import br.Endereco.Endereco;
 import br.dao.Dao;
 
 public class EnderecoClienteDAO implements Dao<EnderecoCliente> {

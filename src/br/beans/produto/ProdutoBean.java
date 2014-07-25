@@ -2,19 +2,22 @@ package br.beans.produto;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+
 import org.primefaces.event.FileUploadEvent;
+
 import br.Cliente.Cliente;
 import br.Cliente.ClienteRN;
-import br.Empresa.EmpresaRN;
 import br.Empresa.Empresa;
-import br.Produto.Lanche;
+import br.Empresa.EmpresaRN;
 import br.Produto.Bebida;
+import br.Produto.Lanche;
 import br.Produto.ProdutoRN;
 import br.util.FileUpload;
 

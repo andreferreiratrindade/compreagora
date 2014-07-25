@@ -1,18 +1,12 @@
 package br.Empresa;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import br.AtendimentoLugares.EmpresaAtendimentoRNTest;
 import br.Cliente.Cliente;
 import br.Cliente.ClienteRN;
 import br.Empresa.Categoria.Categoria;
 import br.Empresa.Categoria.CategoriaENUM;
-import br.Empresa.Categoria.CategoriaEmpresa;
-import br.Empresa.Categoria.CategoriaEmpresaDao;
-import br.Endereco.Endereco;
-import br.Endereco.EnderecoDAO;
 import br.util.DAOFactoy;
 
 public class EmpresaRN {

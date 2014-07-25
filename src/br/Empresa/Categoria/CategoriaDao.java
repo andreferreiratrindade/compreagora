@@ -5,12 +5,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import br.dao.Dao;
+
 import com.uaihebert.factory.EasyCriteriaFactory;
 import com.uaihebert.model.EasyCriteria;
-
-import br.Cliente.Cliente;
-import br.Empresa.Empresa;
-import br.dao.Dao;
 
 public class CategoriaDao implements Dao<Categoria> {
 

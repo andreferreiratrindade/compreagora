@@ -9,9 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.sun.xml.bind.CycleRecoverable;
-
 import br.AtendimentoLugares.Bairro;
+
+import com.sun.xml.bind.CycleRecoverable;
 
 @Entity(name = "endereco")
 public class Endereco implements Serializable, CycleRecoverable {

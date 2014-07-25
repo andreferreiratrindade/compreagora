@@ -1,5 +1,8 @@
 package br.webservice;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import java.util.List;
 
 import org.junit.AfterClass;
@@ -12,7 +15,6 @@ import br.Cliente.ClienteDAO;
 import br.Cliente.ClienteRN;
 import br.util.DAOFactoy;
 import br.util.JpaUtil;
-import static org.junit.Assert.*;
 
 public class ClienteWSTest {
 

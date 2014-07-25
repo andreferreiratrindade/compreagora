@@ -11,12 +11,12 @@ import javax.persistence.ManyToOne;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
-import com.sun.xml.bind.CycleRecoverable;
-
 import br.Pedido.Pedido;
 import br.Produto.Produto;
 import br.Produto.ProdutoAvulso.ProdutoAvulso;
 import br.ProdutoAvulso.Avulso;
+
+import com.sun.xml.bind.CycleRecoverable;
 
 @Entity(name = "pedidoproduto")
 public class PedidoProduto implements Serializable, CycleRecoverable {

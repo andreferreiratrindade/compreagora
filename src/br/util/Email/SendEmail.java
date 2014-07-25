@@ -1,15 +1,22 @@
 package br.util.Email;
 
+import java.io.UnsupportedEncodingException;
+import java.util.Map;
+import java.util.Properties;
+
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
-import javax.mail.*;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import java.io.UnsupportedEncodingException;
-import java.util.Map;
-import java.util.Properties;
 
 /**
  * Created by IntelliJ IDEA. User: Marcio Ballem Date: 15/02/2011 Time: 10:32:17

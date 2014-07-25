@@ -2,14 +2,10 @@ package br.AtendimentoLugares;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.Restrictions;
+import br.util.DAOFactoy;
 
 import com.uaihebert.factory.EasyCriteriaFactory;
 import com.uaihebert.model.EasyCriteria;
-
-import br.util.DAOFactoy;
 
 public class CidadeRN {
 	private CidadeDAO cidadeDAO;

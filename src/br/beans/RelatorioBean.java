@@ -93,7 +93,7 @@ public class RelatorioBean {
 	}
 
 	public void allProdutos() {
-		Map parametros = new HashMap();
+		Map<String, String> parametros = new HashMap();
 
 		parametros.put("empresa", empresa.getRazaoSocial());
 
@@ -109,13 +109,12 @@ public class RelatorioBean {
 	public void faturamento() {
 
 		SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
-
 		String rDataInicio = new SimpleDateFormat("dd/MM/yyyy")
 				.format(dataInicio);
 
 		String rDataFim = new SimpleDateFormat("dd/MM/yyyy").format(dataFim);
 
-		Map parametros = new HashMap();
+		Map<String, String> parametros = new HashMap<String, String>();
 		parametros.put("razaoSocial", empresa.getRazaoSocial());
 		parametros.put("dataIn", rDataInicio);
 		parametros.put("dataFim", rDataFim);

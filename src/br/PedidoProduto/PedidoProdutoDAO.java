@@ -4,9 +4,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.hibernate.Session;
-
-import br.Pedido.Pedido;
 import br.dao.Dao;
 
 public class PedidoProdutoDAO implements Dao<PedidoProduto> {

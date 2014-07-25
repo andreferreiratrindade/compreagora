@@ -1,18 +1,8 @@
 package br.ProdutoAvulso;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
-
 import br.Empresa.Categoria.CategoriaENUM;
-import br.Produto.Lanche;
 import br.util.DAOFactoy;
 
 public class AvulsoRN {

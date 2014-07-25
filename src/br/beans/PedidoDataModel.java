@@ -2,8 +2,11 @@ package br.beans;
 
 
 import java.util.List;
+
 import javax.faces.model.ListDataModel;
+
 import org.primefaces.model.SelectableDataModel;
+
 import br.Pedido.Pedido;
 
 public class PedidoDataModel extends ListDataModel<Pedido> implements SelectableDataModel<Pedido>{

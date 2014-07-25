@@ -1,7 +1,7 @@
 package br.beans.produto;
 
 import java.io.Serializable;
-import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -9,14 +9,14 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+
 import br.Cliente.Cliente;
 import br.Cliente.ClienteRN;
-import br.Empresa.EmpresaRN;
-import br.Produto.ProdutoDAO;
 import br.Empresa.Empresa;
+import br.Empresa.EmpresaRN;
+import br.Produto.Bebida;
 import br.Produto.Lanche;
 import br.Produto.Produto;
-import br.Produto.Bebida;
 import br.Produto.ProdutoRN;
 
 @ManagedBean
@@ -27,7 +27,6 @@ public class ProdutoEmpresaManutencaoBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Empresa empresa;
-	private DataModel<Produto> listaProduto;
 	private DataModel<Lanche> lanchesDM;
 	private DataModel<Bebida> bebidasDM;
 	private Lanche lanche = new Lanche();
@@ -55,10 +54,6 @@ public class ProdutoEmpresaManutencaoBean implements Serializable {
 
 	public void setBebidasDM(DataModel<Bebida> bebidasDM) {
 		this.bebidasDM = bebidasDM;
-	}
-
-	public void setListaProduto(DataModel<Produto> listaProduto) {
-		this.listaProduto = listaProduto;
 	}
 
 	public void setEmpresa(Empresa empresa) {

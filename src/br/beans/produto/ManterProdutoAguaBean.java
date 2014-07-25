@@ -12,7 +12,6 @@ import org.primefaces.event.FileUploadEvent;
 
 import br.Empresa.Empresa;
 import br.Produto.Agua;
-import br.Produto.Lanche;
 import br.Produto.ProdutoRN;
 import br.beans.empresa.EmpresaBean;
 import br.util.FileUpload;

@@ -18,8 +18,6 @@ import javax.persistence.OneToMany;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
-import com.sun.xml.bind.CycleRecoverable;
-
 import br.Empresa.Empresa;
 import br.Empresa.FormaDePagamento.FormaDePagamento;
 import br.EnderecoCliente.EnderecoCliente;
@@ -29,6 +27,8 @@ import br.statusPedido.Concluido;
 import br.statusPedido.Enviado;
 import br.statusPedido.Processando;
 import br.statusPedido.StatusInterface;
+
+import com.sun.xml.bind.CycleRecoverable;
 
 @Entity(name = "pedido")
 public class Pedido implements Serializable, Comparable<Pedido>,

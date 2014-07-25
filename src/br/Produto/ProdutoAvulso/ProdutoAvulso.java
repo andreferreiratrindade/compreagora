@@ -11,10 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-import com.sun.xml.bind.CycleRecoverable;
-
 import br.Produto.Produto;
 import br.ProdutoAvulso.Avulso;
+
+import com.sun.xml.bind.CycleRecoverable;
 
 @Entity(name = "produtoavulso")
 public class ProdutoAvulso implements Serializable, CycleRecoverable {

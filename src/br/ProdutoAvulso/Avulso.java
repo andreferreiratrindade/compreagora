@@ -12,10 +12,10 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.sun.xml.bind.CycleRecoverable;
-
 import br.Empresa.Empresa;
 import br.Empresa.Categoria.CategoriaENUM;
+
+import com.sun.xml.bind.CycleRecoverable;
 
 @Entity(name = "avulso")
 @Inheritance(strategy = InheritanceType.JOINED)

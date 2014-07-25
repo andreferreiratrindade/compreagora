@@ -11,7 +11,6 @@ import javax.faces.bean.RequestScoped;
 import org.primefaces.event.FileUploadEvent;
 
 import br.Cliente.Cliente;
-
 import br.Cliente.ClienteRN;
 import br.util.FileUpload;
 import br.util.Email.Email;

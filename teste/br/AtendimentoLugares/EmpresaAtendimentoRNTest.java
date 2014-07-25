@@ -1,6 +1,6 @@
 package br.AtendimentoLugares;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
@@ -11,11 +11,6 @@ import org.junit.Test;
 import br.Cliente.Cliente;
 import br.Empresa.Empresa;
 import br.Empresa.EmpresaRN;
-import br.Empresa.Categoria.Categoria;
-import br.Empresa.Categoria.CategoriaDao;
-import br.Empresa.Categoria.CategoriaENUM;
-import br.Empresa.FormaDePagamento.FormaDePagamento;
-import br.Empresa.FormaDePagamento.FormaDePagamentoRN;
 import br.Endereco.Endereco;
 import br.Permissao.Permissao;
 import br.Permissao.PermissaoDAO;

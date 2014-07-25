@@ -14,8 +14,6 @@ import org.junit.Test;
 
 import br.AtendimentoLugares.Bairro;
 import br.AtendimentoLugares.BairroDAO;
-import br.AtendimentoLugares.Cidade;
-import br.AtendimentoLugares.CidadeDAO;
 import br.AtendimentoLugares.EmpresaAtendimento;
 import br.AtendimentoLugares.EmpresaAtendimentoDAO;
 import br.Cliente.Cliente;

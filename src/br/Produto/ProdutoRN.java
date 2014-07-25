@@ -3,7 +3,6 @@ package br.Produto;
 import java.util.List;
 
 import br.Produto.Filtro.IFiltroProduto;
-import br.Produto.Filtro.WithStatusIndisponivel;
 import br.util.DAOFactoy;
 
 public class ProdutoRN {

@@ -31,8 +31,8 @@ import br.ProdutoAvulso.Avulso;
 import br.statusPedido.Aguardando;
 import br.statusPedido.Concluido;
 import br.statusPedido.Enviado;
-import br.statusPedido.StatusInterface;
 import br.statusPedido.Processando;
+import br.statusPedido.StatusInterface;
 import br.util.DAOFactoy;
 
 @ManagedBean

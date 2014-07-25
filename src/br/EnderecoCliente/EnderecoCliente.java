@@ -15,11 +15,11 @@ import javax.persistence.OneToMany;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
-import com.sun.xml.bind.CycleRecoverable;
-
 import br.Cliente.Cliente;
 import br.Endereco.Endereco;
 import br.Pedido.Pedido;
+
+import com.sun.xml.bind.CycleRecoverable;
 
 @Entity(name = "enderecocliente")
 public class EnderecoCliente implements Serializable, CycleRecoverable {

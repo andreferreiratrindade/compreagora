@@ -8,7 +8,6 @@ import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -905,11 +904,9 @@ public class PedidoBean implements Serializable {
 					.getList().add(x.getProdutoAvulso().getProduto());
 		}
 
-		List<Bebida> bebidas = new ArrayList<Bebida>();
+		//List<Bebida> bebidas = new ArrayList<Bebida>();
 
-		for (Produto x : mapProduto.get(EnumProduto.bebida).getList()) {
-
-		}
+		
 
 	}
 

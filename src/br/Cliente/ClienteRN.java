@@ -8,11 +8,9 @@ import br.Endereco.EnderecoDAO;
 import br.EnderecoCliente.EnderecoCliente;
 import br.EnderecoCliente.EnderecoClienteDAO;
 import br.Permissao.Permissao;
-import br.Permissao.PermissaoDAO;
 import br.Permissao.PermissaoEnum;
 import br.Permissao.PermissaoRN;
 import br.util.DAOFactoy;
-import br.util.JpaUtil;
 
 public class ClienteRN {
 	private ClienteDAO clienteDAO;

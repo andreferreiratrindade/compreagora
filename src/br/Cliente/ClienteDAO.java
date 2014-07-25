@@ -5,11 +5,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import br.dao.Dao;
+
 import com.uaihebert.factory.EasyCriteriaFactory;
 import com.uaihebert.model.EasyCriteria;
-
-import br.dao.Dao;
-import br.util.JpaUtil;
 
 public class ClienteDAO implements Dao<Cliente> {
 	private EntityManager session;
@@ -38,7 +37,7 @@ public class ClienteDAO implements Dao<Cliente> {
 		
 		easyCriteria.andEquals("email", email);
 
-		@SuppressWarnings("unused")
+		
 		List<Cliente> clientes = easyCriteria.getResultList();
 
 		if (clientes.isEmpty()) {
@@ -65,6 +64,7 @@ public class ClienteDAO implements Dao<Cliente> {
 
 	public Cliente buscarPorLogin(String login) { // TODO Auto-generated
 		String hql = "select u from cliente u where u.login = :login";
+		@SuppressWarnings("unused")
 		Query consulta = this.session.createQuery(hql);
 		// consulta.setString("login", login);
 		return null;// (Cliente) consulta.uniqueResult();

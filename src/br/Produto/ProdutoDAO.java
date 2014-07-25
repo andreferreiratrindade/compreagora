@@ -48,20 +48,20 @@ public class ProdutoDAO implements Dao<Produto> {
 		return (List<Produto>) query.getResultList();
 	}
 
-	@SuppressWarnings("unchecked")
+	
 	public List<Lanche> listaLanche(int idEmpresa) {
 
 		return filtro.listarLanche(idEmpresa, em);
 
 	}
 
-	@SuppressWarnings("unchecked")
+	
 	public List<Bebida> listaBebida(int idEmpresa) {
 
 		return filtro.listarBebida(idEmpresa, em);
 	}
 
-	@SuppressWarnings("unchecked")
+	
 	public List<Produto> listaProduto(int idEmpresa) {
 
 		EasyCriteria<Produto> easyCriteria = EasyCriteriaFactory

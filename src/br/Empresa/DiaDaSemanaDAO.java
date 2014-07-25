@@ -5,10 +5,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import org.hibernate.Session;
-
-import br.Permissao.Permissao;
-
 public class DiaDaSemanaDAO {
 	private EntityManager session;
 

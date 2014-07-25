@@ -4,15 +4,15 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import com.uaihebert.factory.EasyCriteriaFactory;
-import com.uaihebert.model.EasyCriteria;
-
 import br.Produto.Agua;
 import br.Produto.Bebida;
 import br.Produto.Gas;
 import br.Produto.Lanche;
 import br.Produto.Marmitex;
 import br.Produto.Pizza;
+
+import com.uaihebert.factory.EasyCriteriaFactory;
+import com.uaihebert.model.EasyCriteria;
 
 public class WithStatusIndisponivel implements IFiltroProduto{
 

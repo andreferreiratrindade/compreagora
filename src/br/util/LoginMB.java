@@ -2,6 +2,7 @@ package br.util;
 
 import javax.faces.context.FacesContext;
 import javax.servlet.RequestDispatcher;
+
 import org.springframework.stereotype.Controller;
 
 @Controller("loginMB")

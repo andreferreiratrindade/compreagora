@@ -5,11 +5,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import br.dao.Dao;
+
 import com.uaihebert.factory.EasyCriteriaFactory;
 import com.uaihebert.model.EasyCriteria;
-
-import br.Empresa.Categoria.Categoria;
-import br.dao.Dao;
 
 public class FormaDePagamentoDao implements Dao<FormaDePagamento> {
 	private EntityManager session;

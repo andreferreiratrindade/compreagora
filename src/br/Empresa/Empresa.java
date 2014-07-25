@@ -1,12 +1,8 @@
 package br.Empresa;
 
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -19,13 +15,13 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import com.sun.xml.bind.CycleRecoverable;
-
 import br.AtendimentoLugares.EmpresaAtendimento;
 import br.Empresa.Categoria.Categoria;
 import br.Empresa.FormaDePagamento.FormaDePagamento;
 import br.Endereco.Endereco;
 import br.Pedido.Pedido;
+
+import com.sun.xml.bind.CycleRecoverable;
 
 @Entity(name = "empresa")
 public class Empresa implements Serializable, IEmpresaDiaDaSemana,

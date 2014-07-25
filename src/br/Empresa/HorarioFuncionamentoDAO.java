@@ -5,9 +5,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import org.hibernate.Session;
-
-import br.EnderecoCliente.EnderecoCliente;
 import br.dao.Dao;
 
 public class HorarioFuncionamentoDAO implements Dao<HorarioFuncionamento> {

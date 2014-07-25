@@ -4,9 +4,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.hibernate.Session;
-
-import br.Produto.Produto;
 import br.dao.Dao;
 
 public class ProdutoAvulsoDAO implements Dao<ProdutoAvulso> {

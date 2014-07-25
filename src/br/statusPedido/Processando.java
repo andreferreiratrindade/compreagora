@@ -6,7 +6,6 @@ import br.Pedido.Pedido;
 import br.Pedido.PedidoRN;
 import br.relatorio.impressora.ImpressoraEntrega;
 import br.relatorio.impressora.ImpressoraNaoFiscal;
-import br.relatorio.impressora.ImpressoraPreparo;
 
 public class Processando implements StatusInterface {
 

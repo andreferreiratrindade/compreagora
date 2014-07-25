@@ -3,16 +3,12 @@ package br.ProdutoAvulso;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
-import org.hibernate.Session;
+import br.Empresa.Categoria.CategoriaENUM;
+import br.dao.Dao;
 
 import com.uaihebert.factory.EasyCriteriaFactory;
 import com.uaihebert.model.EasyCriteria;
-
-import br.AtendimentoLugares.Bairro;
-import br.Empresa.Categoria.CategoriaENUM;
-import br.dao.Dao;
 
 public class AvulsoDAO implements Dao<Avulso> {
 
