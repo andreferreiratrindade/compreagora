@@ -17,8 +17,8 @@
 }
 
 @media screen and (max-width: 480px) {
-	.ui-state-disabled,.ui-widget-content .ui-state-disabled,.ui-widget-header .ui-state-disabled
-		{
+	.ui-state-disabled, .ui-widget-content .ui-state-disabled,
+		.ui-widget-header .ui-state-disabled {
 		background-color: rgba(255, 0, 0, 1) !important;
 		color: white;
 	}
@@ -28,7 +28,7 @@
 	.ui-fieldset-toggleable .ui-fieldset-legend {
 		border-radius: 10px;
 	}
-	.ui-datagrid .ui-datagrid-header,.ui-datagrid .ui-datagrid-footer {
+	.ui-datagrid .ui-datagrid-header, .ui-datagrid .ui-datagrid-footer {
 		font-size: 18px !important;
 		color: white;
 	}
@@ -71,7 +71,7 @@
 	}
 
 	/* Isto é necessário para não haver rolagens horizontais quando movermos os elementos */
-	html,body {
+	html, body {
 		overflow-x: hidden;
 	}
 	body {
@@ -81,6 +81,7 @@
 		background: #ec4b1b
 			url("../resources/imagens/ImagensForm/head_bg_mobile.png") center
 			no-repeat;
+		background-attachment: fixed;
 		-webkit-background-size: cover;
 		-moz-background-size: cover;
 		-o-background-size: cover;
@@ -206,7 +207,7 @@
 	/*
 	Essa é a posição original do HEADER e do MAIN
 */
-	header,.main {
+	header, .main {
 		-webkit-transform: translateX(0);
 		-moz-transform: translateX(0);
 		-ms-transform: translateX(0);
@@ -226,7 +227,7 @@
 		-ms-transform: translateX(0);
 		transform: translateX(0);
 	}
-	.menu-active header,.menu-active .main {
+	.menu-active header, .menu-active .main {
 		-webkit-transform: translateX(192px);
 		-moz-transform: translateX(192px);
 		-ms-transform: translateX(192px);
@@ -492,10 +493,9 @@
 	body {
 		background: none;
 		font-size: 12px;
-		width: 100%;
-		height: 100%;
 		background: #ec4b1b url("../resources/imagens/ImagensForm/head_bg.png")
 			center no-repeat;
+		background-attachment: fixed;
 		-webkit-background-size: cover;
 		-moz-background-size: cover;
 		-o-background-size: cover;
@@ -503,6 +503,8 @@
 		-moz-background-size: cover;
 		-o-background-size: cover;
 		background-size: cover;
+		-webkit-background-size: cover;
+		-webkit-background-size: cover;
 	}
 	#corpo {
 		margin-top: 0px;
@@ -521,7 +523,7 @@
 	#rodape2 {
 		background: none;
 		font-size: 12px;
-		clear:both;
+		clear: both;
 	}
 	.barraTransparente {
 		background-color: rgba(255, 255, 255, 0.4);
@@ -773,8 +775,8 @@ a.linkmenup {
 	border-right: 1px solid #FF0000;
 }
 
-.ui-state-disabled,.ui-widget-content .ui-state-disabled,.ui-widget-header .ui-state-disabled
-	{
+.ui-state-disabled, .ui-widget-content .ui-state-disabled,
+	.ui-widget-header .ui-state-disabled {
 	background-color: rgba(230, 230, 230, 0);
 }
 
@@ -789,7 +791,7 @@ pre {
 }
 
 /* image replacement */
-.graphic,#prevBtn,#nextBtn,#slider1prev,#slider1next {
+.graphic, #prevBtn, #nextBtn, #slider1prev, #slider1next {
 	margin: 0;
 	padding: 0;
 	display: block;
@@ -799,7 +801,7 @@ pre {
 }
 
 /* Easy Slider */
-#slider ul,#slider li,#slider2 ul,#slider2 li {
+#slider ul, #slider li, #slider2 ul, #slider2 li {
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -809,13 +811,13 @@ pre {
 	margin-top: 1em;
 }
 
-#slider li,#slider2 li {
+#slider li, #slider2 li {
 	width: 696px;
 	height: 241px;
 	overflow: hidden;
 }
 
-#prevBtn,#nextBtn,#slider1next,#slider1prev {
+#prevBtn, #nextBtn, #slider1next, #slider1prev {
 	display: block;
 	width: 38px;
 	height: 77px;
@@ -825,23 +827,23 @@ pre {
 	z-index: 1000;
 }
 
-#nextBtn,#slider1next {
+#nextBtn, #slider1next {
 	margin-left: 851px;
 }
 
-#prevBtn a,#nextBtn a,#slider1next a,#slider1prev a {
+#prevBtn a, #nextBtn a, #slider1next a, #slider1prev a {
 	display: block;
 	position: relative;
 	width: 38px;
 	height: 77px;
 }
 
-#nextBtn a,#slider1next a {
+#nextBtn a, #slider1next a {
 	background: url(../resources/imagens/icones/slide/btn_next.png)
 		no-repeat 0 0;
 }
 
-#prevBtn a,#slider1prev a {
+#prevBtn a, #slider1prev a {
 	background: url(../resources/imagens/icones/slide/btn_prev.png)
 		no-repeat 0 0;
 }
@@ -878,6 +880,6 @@ ol#controls li.current a {
 	color: #fff;
 }
 
-ol#controls li a:focus,#prevBtn a:focus,#nextBtn a:focus {
+ol#controls li a:focus, #prevBtn a:focus, #nextBtn a:focus {
 	outline: none;
 }

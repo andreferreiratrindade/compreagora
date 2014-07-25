@@ -6,16 +6,15 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core">
 <ui:composition>
-	<div id="desktop" style="width: 960px; height: 320px; margin: auto">
+	<div id="desktop"
+		style="width: 960px; height: 320px; margin: auto; margin-top: 60px;">
 
 		<h:outputText style="font-size:20px"
 			value="Design Responsivo é uma técnica de estruturação HTML e CSS, em que o
 		site se adapta ao browser do usuário sem precisar definir diversas
 		folhas de estilos para cada resolução.">
 		</h:outputText>
-		<br />
-		<br />
-		<br />
+		<br /> <br /> <br />
 		<center>
 			<div style="float: left; width: 33%">
 				<h:graphicImage library="imagens/ImagensForm" name="Desktop.png"
@@ -39,11 +38,37 @@
 
 	</div>
 
-	<div id="celular">
-		<h:form style="font-family: cursive;margin-top: 37px;">
+	<div id="celular" style="height: 500px; margin-top: 60px;">
 
-		</h:form>
+		<h:outputText style="font-size:20px"
+			value="Design Responsivo é uma técnica de estruturação HTML e CSS, em que o
+		site se adapta ao browser do usuário sem precisar definir diversas
+		folhas de estilos para cada resolução.">
+		</h:outputText>
+		<br /> <br /> <br />
+
+
+		<div>
+			<h:graphicImage library="imagens/ImagensForm" name="Desktop.png"
+				style="width: 110px" />
+			DeskTop
+		</div>
+		<div>
+			<h:graphicImage library="imagens/ImagensForm" name="Tablet.png"
+				style="width: 110px" />
+			Tablet
+		</div>
+
+		<div>
+			<h:graphicImage library="imagens/ImagensForm" name="Celular.png"
+				style="width: 110px" />
+			Celular
+		</div>
+
+
+
 
 	</div>
+
 </ui:composition>
 </html>
