@@ -49,12 +49,12 @@
 				</div>
 			</div>
 			<!-- Concluir  -->
-			<p:dialog id="dialogConcluir" header="Concluir"
+				<p:dialog id="dialogConcluir" header="Concluir"
 				widgetVar="dlgConcluir" modal="true" showEffect="slide"
-				style="margin:auto;" dynamic="true" resizable="false">
+				style="margin:auto;" dynamic="true" resizable="false"
+				closable="false">
 				<h:form id="idConcluir">
-					<p:messages id="messages" showDetail="true" autoUpdate="true"
-						closable="true" />
+
 					<p:tabView orientation="left" style="height: 331px;width: 800px;">
 						<p:tab title="Produtos">
 							<p:dataTable var="meuPedidoProduto"
@@ -190,7 +190,7 @@
 			<!-- Alterar Endereço -->
 			<p:dialog id="dialogEndereco" header="Novo Endereço"
 				widgetVar="dlgEndereco" modal="true" showEffect="slide"
-				dynamic="true" resizable="false">
+				dynamic="true" resizable="false" closable="false">
 
 				<h:form id="formOutroEndereco">
 					<h:panelGrid columns="3">
@@ -226,22 +226,21 @@
 						</h:column>
 						<p:inputText
 							value="#{pedidoBean.enderecoCliente.endereco.logradouro}"
-							size="30" id="logradouro" />
+							size="30" id="logradouro" required="true" />
 						<p:message for="logradouro" display="icon" />
 						<h:column>
 							<h:outputText value="*" style="color: #F00;float:right" />
 							<h:outputText value="Numero" style="float:right" />
 						</h:column>
 						<p:inputText value="#{pedidoBean.enderecoCliente.endereco.numero}"
-							id="numero" />
+							id="numero" required="true" />
 						<p:message for="numero" display="icon" />
 						<h:column>
-							<h:outputText value="*" style="color: #F00;float:right" />
+
 							<h:outputText value="CEP" style="float:right" />
 						</h:column>
 						<p:inputMask value="#{pedidoBean.enderecoCliente.endereco.cep}"
-							id="cep" required="true" mask="99999-999" label="CEP"
-							converter="converterCEP" />
+							id="cep" mask="99999-999" label="CEP" converter="converterCEP" />
 						<p:message for="cep" display="icon" />
 						<h:outputText value="Complemento:" style="float:right" />
 						<p:inputTextarea
@@ -254,9 +253,10 @@
 					<h:panelGrid columns="2" style="float:right">
 						<p:commandLink actionListener="#{pedidoBean.salvarNovoEndereco}"
 							value="Salvar" oncomplete="dlgEndereco.hide()"
-							update=":idConcluir" styleClass="buttonAdd" />
-
-
+							update=":idConcluir :formOutroEndereco" styleClass="buttonAdd"
+							validateClient="true" />
+						<p:commandLink value="Cancelar" oncomplete="dlgEndereco.hide()"
+							styleClass="buttonCancelar" />
 					</h:panelGrid>
 				</h:form>
 			</p:dialog>

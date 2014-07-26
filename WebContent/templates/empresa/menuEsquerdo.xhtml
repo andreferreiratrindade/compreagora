@@ -12,14 +12,18 @@
 			<div style="float: left;">
 
 				<h:form id="formPainel">
-					<p:menu style="margin:auto;width: 179px;background-color:#FFF">
-						<p:submenu>
-							<p:menuitem
-								value="#{ empresaBean.empresa.aberto ? 'Fechar' : 'Abrir' }" update="formPainel" 
-								actionListener="#{empresaBean.abrirOufecharEmpresa}">
-							</p:menuitem>
+					<center>
+						<p:commandLink update="formPainel"
+							actionListener="#{empresaBean.abrirOufecharEmpresa}"
+							style="margin:auto">
 
-						</p:submenu>
+							<h:graphicImage library="imagens/empresa" width="125px"
+								style="margin-bottom: 40px;"
+								name="#{empresaBean.empresa.aberto}.png" />
+						</p:commandLink>
+					</center>
+					<p:menu style="margin:auto;width: 179px;background-color:#FFF">
+
 
 						<p:submenu>
 							<p:menuitem value="Pedidos"

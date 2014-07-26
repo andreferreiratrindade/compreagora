@@ -14,14 +14,15 @@ import br.Produto.Pizza;
 import com.uaihebert.factory.EasyCriteriaFactory;
 import com.uaihebert.model.EasyCriteria;
 
-public class WithStatusIndisponivel implements IFiltroProduto{
+public class WithStatusIndisponivel implements IFiltroProduto {
 
 	@Override
 	public List<Lanche> listarLanche(int idEmpresa, EntityManager em) {
 		EasyCriteria<Lanche> easyCriteria = EasyCriteriaFactory
 				.createQueryCriteria(em, Lanche.class);
-		easyCriteria.innerJoinFetch("empresa").andEquals("empresa.idEmpresa",
-				idEmpresa).andEquals("ativo", true);
+		easyCriteria.innerJoinFetch("empresa")
+				.andEquals("empresa.idEmpresa", idEmpresa)
+				.andEquals("ativo", true);
 		return (List<Lanche>) easyCriteria.getResultList();
 	}
 
@@ -29,8 +30,9 @@ public class WithStatusIndisponivel implements IFiltroProduto{
 	public List<Bebida> listarBebida(int idEmpresa, EntityManager em) {
 		EasyCriteria<Bebida> easyCriteria = EasyCriteriaFactory
 				.createQueryCriteria(em, Bebida.class);
-		easyCriteria.innerJoinFetch("empresa").andEquals("empresa.idEmpresa",
-				idEmpresa);
+		easyCriteria.innerJoinFetch("empresa")
+				.andEquals("empresa.idEmpresa", idEmpresa)
+				.andEquals("ativo", true);
 		return (List<Bebida>) easyCriteria.getResultList();
 	}
 
@@ -38,8 +40,9 @@ public class WithStatusIndisponivel implements IFiltroProduto{
 	public List<Marmitex> listarMarmitex(int idEmpresa, EntityManager em) {
 		EasyCriteria<Marmitex> easyCriteria = EasyCriteriaFactory
 				.createQueryCriteria(em, Marmitex.class);
-		easyCriteria.innerJoinFetch("empresa").andEquals("empresa.idEmpresa",
-				idEmpresa);
+		easyCriteria.innerJoinFetch("empresa")
+				.andEquals("empresa.idEmpresa", idEmpresa)
+				.andEquals("ativo", true);
 		return (List<Marmitex>) easyCriteria.getResultList();
 	}
 
@@ -47,8 +50,9 @@ public class WithStatusIndisponivel implements IFiltroProduto{
 	public List<Pizza> listarPizza(int idEmpresa, EntityManager em) {
 		EasyCriteria<Pizza> easyCriteria = EasyCriteriaFactory
 				.createQueryCriteria(em, Pizza.class);
-		easyCriteria.innerJoinFetch("empresa").andEquals("empresa.idEmpresa",
-				idEmpresa);
+		easyCriteria.innerJoinFetch("empresa")
+				.andEquals("empresa.idEmpresa", idEmpresa)
+				.andEquals("ativo", true);
 		return (List<Pizza>) easyCriteria.getResultList();
 	}
 
@@ -56,8 +60,9 @@ public class WithStatusIndisponivel implements IFiltroProduto{
 	public List<Agua> listarAgua(int idEmpresa, EntityManager em) {
 		EasyCriteria<Agua> easyCriteria = EasyCriteriaFactory
 				.createQueryCriteria(em, Agua.class);
-		easyCriteria.innerJoinFetch("empresa").andEquals("empresa.idEmpresa",
-				idEmpresa);
+		easyCriteria.innerJoinFetch("empresa")
+				.andEquals("empresa.idEmpresa", idEmpresa)
+				.andEquals("ativo", true);
 		return (List<Agua>) easyCriteria.getResultList();
 	}
 
@@ -65,11 +70,10 @@ public class WithStatusIndisponivel implements IFiltroProduto{
 	public List<Gas> listarGas(int idEmpresa, EntityManager em) {
 		EasyCriteria<Gas> easyCriteria = EasyCriteriaFactory
 				.createQueryCriteria(em, Gas.class);
-		easyCriteria.innerJoinFetch("empresa").andEquals("empresa.idEmpresa",
-				idEmpresa);
+		easyCriteria.innerJoinFetch("empresa")
+				.andEquals("empresa.idEmpresa", idEmpresa)
+				.andEquals("ativo", true);
 		return (List<Gas>) easyCriteria.getResultList();
 	}
-
-
 
 }

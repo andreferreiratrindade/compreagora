@@ -18,8 +18,7 @@ public class ConverterTelefone implements Converter,Serializable{
     public Object getAsObject(FacesContext arg0, UIComponent arg1, String valor) {  
         if(valor != null || valor != "") { 
         	valor = valor.toString().replaceAll("[- ()()]", "");
-            valor = valor.toString().replaceAll("[- ()]", "");  
-            
+            valor = valor.toString().replaceAll("[- ()]", "");            
         }  
         return valor;  
     }  

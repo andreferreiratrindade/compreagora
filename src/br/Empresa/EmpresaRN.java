@@ -46,24 +46,6 @@ public class EmpresaRN {
 		return this.empresaDAO.lista();
 	}
 
-	// public List<Empresa> getEmpresaAtendiemento(String bairro) {
-	//
-	// List<Empresa> empresas = listar();
-	//
-	// List<Empresa> temp = new ArrayList<Empresa>();
-	// for (Empresa x : empresas) {
-	// for (EmpresaAtendimento y : x.getEmpresaAtendimentos()) {
-	// if ((y.getBairro().getDescBairro().equals(bairro))
-	// && (y.isAtivo())) {
-	// temp.add(x);
-	//
-	// }
-	// }
-	// }
-	//
-	// return temp;
-	// }
-
 	public Integer ultimoElementoAdicionado() {
 		return this.empresaDAO.ultimoElementoAdicionado();
 	}
@@ -80,22 +62,9 @@ public class EmpresaRN {
 		return this.empresaDAO.listaEmpresaPeloBairroAtendimento(idBairro);
 	}
 
-
 	public List<Empresa> listaEmpresasPeloBairroECategoria(int idBairro,
 			CategoriaENUM cat) {
+		return this.empresaDAO.listaEmpresasPeloBairroECategoria(idBairro, cat);
 
-		List<Empresa> tempEmpresas = new ArrayList<Empresa>();
-		List<Empresa> empresas = listaEmpresasPeloBairro(idBairro);
-
-		for (Empresa e : empresas) {
-			for (Categoria c : e.getCategorias()) {
-				if (c.getTipoCategoria() == cat) {
-					tempEmpresas.add(e);
-					break;
-				}
-			}
-		}
-
-		return tempEmpresas;
 	}
 }

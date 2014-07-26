@@ -37,7 +37,6 @@ public class AutoCompleteController implements Serializable {
 	private List<Empresa> empresas;
 	@ManagedProperty(value = "#{contextUtil}")
 	private ContextUtil contextUtil;
-	private int dia;
 	private Empresa empresa;
 
 	public Empresa getEmpresa() {
@@ -54,22 +53,6 @@ public class AutoCompleteController implements Serializable {
 		cidades = new ArrayList<Cidade>();
 		bairros = new ArrayList<Bairro>();
 		empresas = new ArrayList<Empresa>();
-
-	}
-
-	public void setDia(int dia) {
-		this.dia = dia;
-	}
-
-	public int getDia() {
-
-		return dia;
-	}
-
-	public void semanaToInt() {
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(new Date());
-		dia = cal.get(Calendar.DAY_OF_WEEK);
 
 	}
 
@@ -117,23 +100,22 @@ public class AutoCompleteController implements Serializable {
 		return sugestoes;
 	}
 
-	public void atualizaSelecaoEmpresa(SelectEvent event) {
+	public void handleSelectBairro(SelectEvent event) {
+		bairro = (Bairro) event.getObject();
+	}
+
+	public void atualizaSelecaoEmpresa() {
 
 		empresas = new ArrayList<Empresa>();
-		bairro = (Bairro) event.getObject();
-
-		semanaToInt();
-		List<Empresa> tempEmpresa = new ArrayList<Empresa>();
 
 		EmpresaRN empresaRN = new EmpresaRN();
 
-		tempEmpresa = empresaRN.listaEmpresasPeloBairroECategoria(
+		empresas = empresaRN.listaEmpresasPeloBairroECategoria(
 				bairro.getIdBairro(),
 				CategoriaENUM.values()[contextUtil.getCategoriaEmpresa()]);
 
-		for (Empresa x : tempEmpresa) {
+		for (Empresa x : empresas) {
 			x.getHorarioFuncionamento().size();
-			empresas.add(x);
 		}
 
 	}
@@ -146,17 +128,12 @@ public class AutoCompleteController implements Serializable {
 
 	public void handleSelect(SelectEvent event) {
 
-		Cidade cidade = (Cidade) event.getObject();
-		this.cidade = cidade;
+		this.cidade = (Cidade) event.getObject();
+		
 
 	}
 
-	public void handleSelectBairro(SelectEvent event) {
 
-		Bairro bairro = (Bairro) event.getObject();
-		this.bairro = bairro;
-
-	}
 
 	public List<Cidade> completaCidade(String query) {
 		CidadeRN cidadeRN = new CidadeRN();

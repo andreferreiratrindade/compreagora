@@ -38,6 +38,9 @@ public class AvulsoBean {
 	}
 
 	public Avulso getAvulsoAtualiza() {
+		if(avulsoAtualiza == null){
+			avulsoAtualiza = new Avulso();
+		}
 		return avulsoAtualiza;
 	}
 

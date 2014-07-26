@@ -24,9 +24,9 @@ public class CidadeConverter implements Converter, Serializable {
 
 		CidadeRN cidadeRN = new CidadeRN();
 		Cidade cidade = cidadeRN.buscarPorDescricao(string);
-		for (@SuppressWarnings("unused") Bairro x : cidade.getBairros()) {
 
-		}
+		cidade.getBairros().size(); //Faz a chamada dos elementos da lista.
+
 		return cidade;
 	}
 

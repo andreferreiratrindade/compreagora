@@ -157,6 +157,9 @@ public class EmpresaBean implements Serializable {
 	}
 
 	public Empresa getEmpresa() {
+		if (empresa == null) {
+			empresa = getEmpresaLogado();
+		}
 		return empresa;
 	}
 

@@ -17,13 +17,13 @@
 }
 
 @media screen and (max-width: 480px) {
+	.ui-accordion .ui-accordion-header.ui-state-default {
+		border: 0px
+	}
 	.ui-state-disabled, .ui-widget-content .ui-state-disabled,
 		.ui-widget-header .ui-state-disabled {
 		background-color: rgba(255, 0, 0, 1) !important;
 		color: white;
-	}
-	.ui-widget-content {
-		background: rgba(255, 255, 255, 0.44);
 	}
 	.ui-fieldset-toggleable .ui-fieldset-legend {
 		border-radius: 10px;
@@ -37,6 +37,7 @@
 		color: #354866;
 		text-decoration: none;
 		border-radius: 10px;
+		height: 30px;
 	}
 	#desktop {
 		display: none;
@@ -385,7 +386,7 @@
 		border-radius: 5px;
 		color: #F9FAFA;
 		display: inline-block;
-		font-family: CorpidHeavy;
+		font-family: Estrangelo Edessa;
 		font-size: 20px;
 		padding: 0.65em 1em 0.55em;
 		text-decoration: none;
@@ -607,7 +608,7 @@
 		border-radius: 5px;
 		color: #F9FAFA;
 		display: inline-block;
-		font-family: CorpidHeavy;
+		font-family: Estrangelo Edessa;
 		font-size: 20px;
 		padding: 0.65em 1em 0.55em;
 		text-decoration: none;

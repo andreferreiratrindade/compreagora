@@ -6,7 +6,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="keywords"
 		content="lanchonete, restaurante, compre agora, delivery" />
@@ -15,7 +15,7 @@
 	<h:outputStylesheet library="/css" name="estilo.css" />
 	<h:outputScript name="easySlider1.7.js" library="scripts" />
 	<h:outputScript name="jquery.js" library="scripts/lib" />
-	
+
 
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -50,14 +50,22 @@
 
 			<ui:insert name="corpo" />
 		</div>
-		
-		<div id="rodape"  style="background: white;">
+
+		<div id="rodape" style="background: white;">
 			<ui:insert name="rodape">
 				<ui:include src="rodape.xhtml" />
 			</ui:insert>
 		</div>
 
-		<div id="rodape2" style="background: rgb(52, 2, 56)">
+
+
+		<div id="rodape3" style="background: #242448;">
+			<ui:insert name="rodape3">
+				<ui:include src="rodape3.xhtml" />
+			</ui:insert>
+		</div>
+
+		<div id="rodape2" style="background: #1d1d3a">
 			<ui:insert name="rodape2">
 				<ui:include src="rodape2.xhtml" />
 			</ui:insert>

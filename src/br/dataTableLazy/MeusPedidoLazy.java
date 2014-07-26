@@ -26,6 +26,15 @@ public class MeusPedidoLazy extends LazyDataModel<Pedido> {
 	@Override
 	public List<Pedido> load(int startingAt, int maxPerPage, String sortField,
 			SortOrder sortOrder, Map<String, String> filters) {
+		
+		String ordenacao = sortOrder.toString();
+		
+		if(SortOrder.UNSORTED.equals(sortOrder)){
+			ordenacao = SortOrder.ASCENDING.toString();
+		}
+		
+		
+		
 		PedidoRN pedidoRN = new PedidoRN();
 		pedidos = pedidoRN.buscaPorPaginacao(startingAt, maxPerPage, idCliente);
 

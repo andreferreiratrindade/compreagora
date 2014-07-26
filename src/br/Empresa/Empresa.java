@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -63,6 +64,10 @@ public class Empresa implements Serializable, IEmpresaDiaDaSemana,
 	@ManyToMany
 	@JoinTable(name = "empresa_categoria", joinColumns = { @JoinColumn(name = "idEmpresa") }, inverseJoinColumns = { @JoinColumn(name = "idCategoria") })
 	private List<Categoria> categorias = new ArrayList<Categoria>();
+
+	public Empresa() {
+		this.ativo = true;
+	}
 
 	public void addFormaDePagamento(FormaDePagamento obj) {
 
@@ -170,7 +175,7 @@ public class Empresa implements Serializable, IEmpresaDiaDaSemana,
 	}
 
 	public boolean isAberto() {
-		return aberto ;
+		return aberto;
 	}
 
 	public void setAberto(boolean aberto) {

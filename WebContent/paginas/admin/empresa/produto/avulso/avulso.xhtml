@@ -47,7 +47,7 @@
 								<p:commandButton value="Atualizar"
 									oncomplete="dlgAtualizar.show()" update=":formDlgAtualizar"
 									style="background-color: cornflowerblue;color: #000;">
-									<f:setPropertyActionListener target="#{avulsoBean.avulso}"
+									<f:setPropertyActionListener target="#{avulsoBean.avulsoAtualiza}"
 										value="#{avulso}" />
 								</p:commandButton>
 
@@ -106,7 +106,6 @@
 		<h:form id="formDlgAtualizar">
 			<p:dialog id="dlgAtualizar" header="Atualizar "
 				widgetVar="dlgAtualizar" modal="true" showEffect="slide">
-
 
 				<h:panelGrid>
 					<h:outputText value="Descrição" />

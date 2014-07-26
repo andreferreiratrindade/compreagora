@@ -463,8 +463,9 @@ public class PedidoBean implements Serializable {
 		formasDePagamentoDM = empresaTemp.getFormasDePagamento();
 		for (FormaDePagamento x : formasDePagamentoDM) {
 			formasDePagamento.add(x.getTipo());
-			formaDePagamento = "Dinheiro";
+
 		}
+		formaDePagamento = "Dinheiro";
 		pedido = new Pedido();
 		pedidoProdutos = new ArrayList<PedidoProduto>();
 		pedidoProduto = new PedidoProduto();
@@ -750,6 +751,9 @@ public class PedidoBean implements Serializable {
 	}
 
 	public PedidoProduto getPedidoProduto() {
+		if (pedidoProduto == null) {
+			pedidoProduto = new PedidoProduto();
+		}
 		return pedidoProduto;
 	}
 
@@ -781,7 +785,6 @@ public class PedidoBean implements Serializable {
 		pedidoLanches = new ArrayList<Lanche>();
 		pedidoBebidas = new ArrayList<Bebida>();
 		pedidoProdutos = new ArrayList<PedidoProduto>();
-		lanches = new ArrayList<Lanche>();
 		pedido = new Pedido();
 		empresa = new Empresa();
 		empresaAtendeBairro = false;
@@ -852,7 +855,6 @@ public class PedidoBean implements Serializable {
 					new FacesMessage(FacesMessage.SEVERITY_ERROR,
 							"Empresa não atende a essa localidade", " "));
 			empresaAtendeBairro = false;
-
 		}
 
 	}
@@ -904,9 +906,7 @@ public class PedidoBean implements Serializable {
 					.getList().add(x.getProdutoAvulso().getProduto());
 		}
 
-		//List<Bebida> bebidas = new ArrayList<Bebida>();
-
-		
+		// List<Bebida> bebidas = new ArrayList<Bebida>();
 
 	}
 

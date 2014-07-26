@@ -63,7 +63,7 @@ public class AvulsoDAO implements Dao<Avulso> {
 				.createQueryCriteria(session, Avulso.class);
 		easyCriteria.innerJoinFetch("empresa")
 				.andEquals("empresa.idEmpresa", idEmpresa)
-				.andEquals("tipoAvulso", tipoAvulso);
+				.andEquals("tipoAvulso", tipoAvulso).andEquals("ativo", true);
 
 		return easyCriteria.getResultList();
 

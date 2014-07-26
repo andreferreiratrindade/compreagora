@@ -61,13 +61,13 @@
 							style="margin-left: 33px; position: relative;margin-top: 34px;"
 							label="Bairro" requiredMessage="Informe seu bairro">
 							<p:ajax event="itemSelect"
-								listener="#{autoCompleteController.atualizaSelecaoEmpresa}" />
+								listener="#{autoCompleteController.handleSelectBairro}" />
 						</p:autoComplete>
 
 						<p:commandLink update=":dataGridEmpresas" id="buscar"
 							value="Buscar" styleClass="buttonPesquisa"
 							style="position: relative; margin-right: 10%; float: right; margin-top: -7px;"
-							actionListener="#{autoCompleteController.semanaToInt}"
+							actionListener="#{autoCompleteController.atualizaSelecaoEmpresa()}"
 							onclick="window.scrollTo(0, 200);" onstart="dlgLoading.show()"
 							onsuccess="dlgLoading.hide()">
 
@@ -179,7 +179,7 @@
 						dropdown="true" scrollHeight="200" style="margin-top: 34px;"
 						label="Bairro" requiredMessage="Informe seu bairro">
 						<p:ajax event="itemSelect"
-							listener="#{autoCompleteController.atualizaSelecaoEmpresa}" />
+							listener="#{autoCompleteController.handleSelectBairro}" />
 					</p:autoComplete>
 
 				</h:panelGrid>
@@ -188,7 +188,7 @@
 				<p:commandLink update=":dataGridEmpresasMobile" value="Buscar"
 					styleClass="buttonPesquisa"
 					style="position: relative;margin-top: 35px;"
-					actionListener="#{autoCompleteController.semanaToInt}"
+					actionListener="#{autoCompleteController.atualizaSelecaoEmpresa}"
 					onstart="dlgLoading.show()" onsuccess="dlgLoading.hide()" />
 			</center>
 
@@ -224,7 +224,7 @@
 	Display para Tablet
  -->
 		<div id="tablet"></div>
-		
+
 	</ui:define>
 </ui:composition>
 </html>

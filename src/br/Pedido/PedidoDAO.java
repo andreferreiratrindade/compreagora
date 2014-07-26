@@ -57,7 +57,7 @@ public class PedidoDAO implements Dao<Pedido> {
 				.createQueryCriteria(session, Pedido.class);
 		easyCriteria.innerJoin("enderecoCliente")
 				.innerJoin("enderecoCliente.cliente")
-				.andEquals("enderecoCliente.cliente.idCliente", idCliente);
+				.andEquals("enderecoCliente.cliente.idCliente", idCliente).orderByAsc("statusPedido");
 		easyCriteria.setFirstResult(startingAt);
 		easyCriteria.setMaxResults(maxPerPage);
 
