@@ -39,20 +39,22 @@
 											</h:outputText>
 										</h:panelGrid>
 
+										<p:commandLink value="Personalizar"
+											actionListener="#{pedidoBean.personalizaLanche()}"
+											disabled="#{!lanche.ativo}" styleClass="buttonPersonalizar"
+											oncomplete="dlgEditarProduto.show()" update=":idEditar"
+											style="margin-right: 43px;width: 80px;">
+										</p:commandLink>
+
 										<p:commandLink
 											value="#{lanche.ativo ? 'Adicionar' : 'Indisponivel'}"
 											actionListener="#{pedidoBean.adicionaLanche()}"
 											disabled="#{!lanche.ativo}" update=":formPainel"
 											id="buttonAdd" styleClass="buttonAdd"
-											style="margin-right: 43px;width: 84px;">
-										</p:commandLink>
-
-										<p:commandLink value="Personalizar"
-											actionListener="#{pedidoBean.personalizaLanche()}"
-											disabled="#{!lanche.ativo}" styleClass="buttonPersonalizar"
-											oncomplete="dlgEditarProduto.show()" update=":idEditar"
 											style="margin-right: 43px">
 										</p:commandLink>
+
+
 
 									</h:panelGrid>
 								</h:column>
@@ -406,7 +408,7 @@
 
 
 		<div id="celular">
-			
+
 			<p:dataGrid value="#{pedidoBean.lanchesDM}" var="lanche"
 				paginator="true" columns="1" rows="6" style="margin-top:5px">
 				<f:facet name="header">
@@ -499,9 +501,8 @@
 			</h:form>
 			<!-- Finalizar Pedido -->
 			<p:dialog id="dialogConcluirCelular" header="Concluir"
-				widgetVar="dialogConcluirCelular" modal="true"
-				style="margin:auto;" dynamic="true" resizable="false" width="300"
-				closable="false">
+				widgetVar="dialogConcluirCelular" modal="true" style="margin:auto;"
+				dynamic="true" resizable="false" width="300" closable="false">
 				<h:form id="idConcluirCelular">
 
 					<p:accordionPanel>
@@ -589,7 +590,7 @@
 								</div>
 								<h:panelGrid columns="2" style="margin-top:10px">
 									<p:commandLink value="Comprar" id="btComprar"
-										styleClass="buttonPesquisa"
+										styleClass="buttonPesquisa" style="width: 90px !important"
 										action="#{pedidoBean.salvarPedido}"
 										disabled="#{!pedidoBean.habilitarBotaoSalvar()}"
 										oncomplete="dialogConcluirCelular.hide()">
@@ -610,8 +611,8 @@
 			</p:dialog>
 			<!-- Alterar Endereço -->
 			<p:dialog id="dialogEnderecoCelular" header="Novo Endereço"
-				widgetVar="dialogEnderecoCelular" modal="true" 
-				dynamic="true" resizable="false" closable="false">
+				widgetVar="dialogEnderecoCelular" modal="true" dynamic="true"
+				resizable="false" closable="false">
 
 				<h:form id="formOutroEnderecoCelular">
 

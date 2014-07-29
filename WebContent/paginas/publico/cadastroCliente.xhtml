@@ -222,91 +222,70 @@
 		<div id="celular">
 			<h:form id="formCelularCadastro">
 				<center>
-					<h:outputText value="Cadastro" style="font-size: 25px;font-family: Estrangelo Edessa;color:#354866" />
+					<h:outputText value="Cadastro"
+						style="font-size: 25px;font-family: Estrangelo Edessa;color:#354866" />
 				</center>
 				<h:panelGrid columns="1" id="CelularGridDadosPessoais"
-					style="font-size:15px;margin:auto;background-color: rgba(255, 255, 255, 0.4);border-radius: 10px; color: #354866;" cellpadding="10" >
+					style="font-size:15px;margin:auto;background-color: rgba(255, 255, 255, 0.4);border-radius: 10px; color: #354866;"
+					cellpadding="10">
 
-					<h:column>
-						<h:outputText value="*" style="color: #F00;" />
-						<h:outputText value="Nome" />
-					</h:column>
 					<p:inputText value="#{clienteBean.cliente.nome}" size="30"
 						id="Celularnome" required="true" label="Nome"
 						requiredMessage="Informe seu nome completo" />
+					<p:watermark for="Celularnome" value="Nome *" />
 					<p:message for="Celularnome" />
 
-					<h:column>
-						<h:outputText value="*" style="color: #F00;" />
-						<h:outputText value="E-mail" />
-					</h:column>
 					<p:inputText value="#{clienteBean.cliente.email}" size="30"
 						id="Celularemail" required="true"
 						validatorMessage="E-mail inválido" label="E-mail"
 						requiredMessage="Informe seu e-mail">
 						<f:validateLength minimum="5" />
 					</p:inputText>
+					<p:watermark for="Celularemail" value="Nome *" />
 					<p:message for="Celularemail" />
 
-					<h:column>
-						<h:outputText value="*" style="color: #F00;" />
-						<h:outputText value="Confirma E-mail" />
-					</h:column>
 					<p:inputText value="#{clienteBean.confEmail}" size="30"
 						id="CelularconfEmail" required="true" label="Confirma E-mail"
 						requiredMessage="Informe seu e-mail">
 						<f:validateLength minimum="2" />
 					</p:inputText>
+					<p:watermark for="CelularconfEmail" value="Confirma E-mail *" />
 					<p:message for="CelularconfEmail" />
-
-					<h:column>
-						<h:outputText value="*" style="color: #F00;" />
-						<h:outputText value="Senha" />
-					</h:column>
+>
 					<p:password value="#{clienteBean.cliente.senha}" id="Celularsenha"
 						required="true" feedback="true" promptLabel="Imforme uma Senha"
 						weakLabel="Fraca" goodLabel="Boa" strongLabel="Forte"
 						match="confSenha" label="Senha"
 						requiredMessage="Informe uma senha" />
-
+					<p:watermark for="Celularsenha" value="Senha *" />
 					<p:message for="Celularsenha" />
 
-					<h:column>
-						<h:outputText value="*" style="color: #F00" />
-						<h:outputText value="Confirma Senha" />
-					</h:column>
 					<p:password value="#{clienteBean.cliente.senha}"
 						id="CelularconfSenha" required="true"
 						requiredMessage="Informe uma senha" />
-
+					<p:watermark for="CelularconfSenha" value="confirma senha*" />
 					<p:message for="CelularconfSenha" />
 
 					<h:outputText value="Telefone fixo:" />
 					<p:inputMask value="#{clienteBean.cliente.telefone}"
 						id="Celulartelefone" mask="(99) 9999-9999"
 						converter="converterTelefone" />
-
+					<p:watermark for="Celulartelefone" value="Telefone fixo" />
 
 					<h:outputText value="Celular:" />
 					<p:inputMask value="#{clienteBean.cliente.celular}"
 						id="Celularcelular" mask="(99) 9999-9999"
 						converter="converterTelefone" />
+					<p:watermark for="Celularcelular" value="Celular" />
 
-					<h:column>
-						<h:outputText value="*" style="color: #F00;" />
-						<h:outputText value="Descrição do Endereço" />
-					</h:column>
 					<p:inputText value="#{clienteBean.enderecoCliente.descEndereco}"
 						id="CelulardescEndereco" required="true" size="30"
 						label="Descrição do Endereço"
 						requiredMessage="Informe uma descrição para o Endereço" />
-
+					<p:watermark for="CelulardescEndereco"
+						value="descrição do endereço *" />
 					<p:message for="CelulardescEndereco" />
 
-					<h:column>
-						<h:outputText value="*" style="color: #F00" />
-						<h:outputText value="Cidade" />
-					</h:column>
 					<p:autoComplete id="Celularcidade" forceSelection="true"
 						var="cidade" itemLabel="#{cidade.descCidade}"
 						itemValue="#{cidade}"
@@ -316,14 +295,11 @@
 						<p:ajax event="itemSelect"
 							listener="#{autoCompleteController.handleSelect}"
 							update="Celularbairro" />
-					</p:autoComplete>
 
+					</p:autoComplete>
+					<p:watermark for="Celularcidade" value="Cidade *" />
 					<p:message for="Celularcidade" />
 
-					<h:column>
-						<h:outputText value="*" style="color: #F00" />
-						<h:outputText value="Bairro" />
-					</h:column>
 					<p:autoComplete id="Celularbairro"
 						value="#{clienteBean.endereco.bairroCidade}" forceSelection="true"
 						completeMethod="#{autoCompleteController.completaBairro}"
@@ -331,54 +307,41 @@
 						required="true" converter="converterBairro" dropdown="true"
 						scrollHeight="200" requiredMessage="Informe seu bairro">
 					</p:autoComplete>
-
+					<p:watermark for="Celularbairro" value="Bairro *" />
 					<p:message for="Celularbairro" />
-
-					<h:column>
-						<h:outputText value="*" style="color: #F00" />
-						<h:outputText value="Rua/Av./Log." />
-					</h:column>
 
 					<p:inputText value="#{clienteBean.endereco.logradouro}" size="30"
 						id="Celularlogradouro" required="true" label="Logradouro"
 						requiredMessage="Informe sua rua" />
-
+					<p:watermark for="Celularlogradouro" value="Rua/Av./Log. *" />
 					<p:message for="Celularlogradouro" />
 
-					<h:column>
-						<h:outputText value="*" style="color: #F00" />
-						<h:outputText value="Número" />
-					</h:column>
 					<p:inputText value="#{clienteBean.endereco.numero}"
 						id="Celularnumero" required="true" label="Numero"
 						requiredMessage="Informe o número de sua casa" />
-
+					<p:watermark for="Celularnumero" value="Número *" />
 					<p:message for="Celularnumero" />
 
-					<h:column>
-						<h:outputText value="*" style="color: #F00" />
-						<h:outputText value="CEP" />
-					</h:column>
 					<p:inputMask value="#{clienteBean.endereco.cep}" id="Celularcep"
-						required="true" mask="99999-999" label="CEP"
-						converter="converterCEP"
-						requiredMessage="Informe o CEP de sua casa" />
+						mask="99999-999" label="CEP" converter="converterCEP" />
+					<p:watermark for="Celularcep" value="CEP" />
 
-					<p:message for="Celularcep" />
 
 					<h:outputText value="Complemento" />
 					<p:inputTextarea value="#{clienteBean.endereco.complemento}"
-						maxlength="100" counterTemplate="{0} Caracteres" cols="32" />
+						id="CelularComplemento" maxlength="100"
+						counterTemplate="{0} Caracteres" cols="32" />
 					<h:outputText />
-					
+					<p:watermark for="CelularComplemento" value="Complemento" />
 				</h:panelGrid>
-		
+
 				<h:panelGrid columns="2" style="margin:auto;margin-top:10px">
 					<p:commandLink action="#{clienteBean.salvar}" value="Salvar"
 						id="CelularBtSalvar" update=":formCelularCadastro"
 						styleClass="buttonAdd" />
-					<p:commandLink value="Cancelar" ajax="false" style="margin-left:10px"
-						styleClass="buttonCancelar" action="principal.jsf" />
+					<p:commandLink value="Cancelar" ajax="false"
+						style="margin-left:10px" styleClass="buttonCancelar"
+						action="principal.jsf" />
 				</h:panelGrid>
 			</h:form>
 		</div>

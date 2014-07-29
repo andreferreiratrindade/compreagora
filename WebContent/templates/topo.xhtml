@@ -10,7 +10,7 @@
 	<!-- Display DeskTop -->
 	<div id="desktop">
 		<span
-			style="background: rgb(40, 51, 109);; height: 90px; position: absolute; width: 100%; top: 0" />
+			style="background:#242448; height: 90px; position: absolute; width: 100%; top: 0" />
 
 		<h:form style="margin-top:-8px !important;width: 960px;margin: auto;">
 
@@ -127,8 +127,7 @@
 
 					<sec:isAnonymous>
 						<h:panelGrid columns="2" style="width: 95%;margin-top:10px">
-							<p:commandButton value="Cadastre-se"
-								action="#{clienteBean.novo}"
+							<p:commandButton value="Cadastre-se" action="#{clienteBean.novo}"
 								style="background: #FEFFFC;float:left" />
 
 							<p:commandButton value="Entrar"
@@ -140,7 +139,7 @@
 
 					<sec:ifAnyGranted roles="ROLE_CLI">
 						<div style="width: 90%">
-							
+
 							<p:commandButton id="dynaButton" value="Minha Conta"
 								type="button" styleClass="ui-priority-primary"
 								style="float:right;margin-top:10px" />
@@ -177,10 +176,7 @@
 			</center>
 		</h:form>
 	</div>
-	
-	<div id="tablet">
-	
-	
-	 </div>
+
+	<div id="tablet"></div>
 </ui:composition>
 </html>

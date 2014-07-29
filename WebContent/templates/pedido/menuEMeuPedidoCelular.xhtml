@@ -76,40 +76,39 @@
 					<p:commandLink
 						styleClass="#{pedidoBean.itemMenu == 0 ? 'menuLinkSelecionado' : 'menuLink' }"
 						value="Lanches"
-						style="display: #{pedidoBean.verificaTiposProdutos(0)};"
+						style="display: #{pedidoBean.verificaTiposProdutos(0) ? 'block' : 'none' };"
 						action="#{pedidoBean.mudaTelaLanche()}">
 					</p:commandLink>
 
 					<p:commandLink
-						styleClass="#{pedidoBean.itemMenu == 1
-							? 'menuLinkSelecionado' : 'menuLink' }"
+						styleClass="#{pedidoBean.itemMenu == 1 ? 'menuLinkSelecionado' : 'menuLink' }"
 						value="Pizza"
-						style="display: #{pedidoBean.verificaTiposProdutos(1)};margin-top:5px"
+						style="display: #{pedidoBean.verificaTiposProdutos(1)? 'block' : 'none'};margin-top:5px"
 						action="#{pedidoBean.mudaTelaPizza()}">
 					</p:commandLink>
 
 					<p:commandLink
 						styleClass="#{pedidoBean.itemMenu == 2 ? 'menuLinkSelecionado' : 'menuLink' }"
 						value="Marmitex"
-						style="display: #{pedidoBean.verificaTiposProdutos(2)};margin-top:5px"
+						style="display: #{pedidoBean.verificaTiposProdutos(2)? 'block' : 'none'};margin-top:5px"
 						action="#{pedidoBean.mudaTelaMarmitex()}">
 					</p:commandLink>
 					<p:commandLink
 						styleClass="#{pedidoBean.itemMenu == 3 ? 'menuLinkSelecionado' : 'menuLink' }"
 						value="Bebida"
-						style="display: #{pedidoBean.verificaTiposProdutos(3)};margin-top:5px"
+						style="display: #{pedidoBean.verificaTiposProdutos(3)? 'block' : 'none'};margin-top:5px"
 						action="#{pedidoBean.mudaTelaBebida()}">
 					</p:commandLink>
 					<p:commandLink
 						styleClass="#{pedidoBean.itemMenu == 4 ? 'menuLinkSelecionado' : 'menuLink' }"
 						value="Água"
-						style="display: #{pedidoBean.verificaTiposProdutos(4)};margin-top:5px"
+						style="display: #{pedidoBean.verificaTiposProdutos(4)? 'block' : 'none'};margin-top:5px"
 						action="#{pedidoBean.mudaTelaAgua()}">
 					</p:commandLink>
 					<p:commandLink
 						styleClass="#{pedidoBean.itemMenu == 5 ? 'menuLinkSelecionado' : 'menuLink' }"
 						value="Gás"
-						style="display: #{pedidoBean.verificaTiposProdutos(5)};margin-top:5px"
+						style="display: #{pedidoBean.verificaTiposProdutos(5)? 'block' : 'none'};margin-top:5px"
 						action="#{pedidoBean.mudaTelaGas()}">
 					</p:commandLink>
 				</p:tab>

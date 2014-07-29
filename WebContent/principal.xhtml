@@ -29,10 +29,10 @@
 			</div>
 			<h:form id="formCorpo" style="margin: auto;min-height: 350px;">
 				<center>
-					
+
 					<h:graphicImage library="imagens/ImagensForm"
 						name="comoRealizarCompra.png"
-						style="position:relative;margin-top: 60px;" />
+						style="position:relative;margin-top: 80px;" />
 				</center>
 			</h:form>
 		</div>
@@ -50,42 +50,43 @@
 				<div style="width: 90%; margin: auto; margin-top: 16px;">
 
 
-					<p:commandLink styleClass="menuLink" value="Lanchonete" style="background-color:yellow; color:#354866 !important"
+					<p:commandLink styleClass="menuLink" value="Lanchonete"
+						style="background-color:yellow; color:#354866 !important"
 						action="/paginas/categoria/endereco/selecionaEndereco.jsf?faces-redirect=true">
 						<f:setPropertyActionListener
 							target="#{contextUtil.categoriaEmpresa}" value="#{0}" />
 					</p:commandLink>
 
 					<p:commandLink styleClass="menuLink" value="Pizzaria"
-						style="margin-top:5px; background-color:yellow; color:#354866 !important"
+						style="margin-top:10px; background-color:yellow; color:#354866 !important"
 						action="/paginas/categoria/endereco/selecionaEndereco.jsf?faces-redirect=true">
 						<f:setPropertyActionListener
 							target="#{contextUtil.categoriaEmpresa}" value="#{1}" />
 					</p:commandLink>
 
 					<p:commandLink styleClass="menuLink" value="Restaurante"
-						style="margin-top:5px; background-color:yellow; color:#354866 !important"
+						style="margin-top:10px; background-color:yellow; color:#354866 !important"
 						action="/paginas/categoria/endereco/selecionaEndereco.jsf?faces-redirect=true">
 						<f:setPropertyActionListener
 							target="#{contextUtil.categoriaEmpresa}" value="#{2}" />
 					</p:commandLink>
 
 					<p:commandLink styleClass="menuLink" value="Bebida"
-						style="margin-top:5px; background-color:yellow; color:#354866 !important"
+						style="margin-top:10px; background-color:yellow; color:#354866 !important"
 						action="/paginas/categoria/endereco/selecionaEndereco.jsf?faces-redirect=true">
 						<f:setPropertyActionListener
 							target="#{contextUtil.categoriaEmpresa}" value="#{3}" />
 					</p:commandLink>
 
 					<p:commandLink styleClass="menuLink" value="Agua"
-						style="margin-top:5px; background-color:yellow; color:#354866 !important"
+						style="margin-top:10px; background-color:yellow; color:#354866 !important"
 						action="/paginas/categoria/endereco/selecionaEndereco.jsf?faces-redirect=true">
 						<f:setPropertyActionListener
 							target="#{contextUtil.categoriaEmpresa}" value="#{4}" />
 					</p:commandLink>
 
 					<p:commandLink styleClass="menuLink" value="Gas"
-						style="margin-top:5px; background-color:yellow; color:#354866 !important"
+						style="margin-top:10px; background-color:yellow; color:#354866 !important"
 						action="/paginas/categoria/endereco/selecionaEndereco.jsf?faces-redirect=true">
 						<f:setPropertyActionListener
 							target="#{contextUtil.categoriaEmpresa}" value="#{5}" />
@@ -93,13 +94,10 @@
 				</div>
 			</h:form>
 		</div>
-<!-- 
+		<!-- 
 	Display para Tablet
  -->
-<div id="tablet">
-	
-	
-	 </div>
+		<div id="tablet"></div>
 	</ui:define>
 </ui:composition>
 </html>

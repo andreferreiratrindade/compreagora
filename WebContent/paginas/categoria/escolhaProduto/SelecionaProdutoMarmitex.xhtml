@@ -38,18 +38,21 @@
 												<f:convertNumber pattern="#,###,##0.00" />
 											</h:outputText>
 										</h:panelGrid>
-										<p:commandLink
-											value="#{marmitex.ativo ? 'Adicionar' : 'Indisponivel'}"
-											actionListener="#{pedidoBean.adicionaMarmitex}"
-											styleClass="buttonAdd" disabled="#{!marmitex.ativo}"
-											update=":formPainel" style="margin-right: 43px;width: 84px;">
-										</p:commandLink>
 
 										<p:commandLink value="Personalizar"
-											actionListener="#{pedidoBean.personalizaMarmitex}"
+											actionListener="#{pedidoBean.personalizaMarmitex()}"
 											disabled="#{!marmitex.ativo}" styleClass="buttonPersonalizar"
 											oncomplete="dlgEditarProduto.show()" update=":idEditar"
-											style="margin-right: 43px;"/>
+											style="margin-right: 43px;width: 80px;">
+										</p:commandLink>
+
+										<p:commandLink value="Adicionar"
+											actionListener="#{pedidoBean.adicionaMarmitex()}"
+											disabled="#{!marmitex.ativo}" update=":formPainel"
+											id="buttonAdd" styleClass="buttonAdd"
+											style="margin-right: 43px">
+										</p:commandLink>
+
 									</h:panelGrid>
 								</h:column>
 							</h:panelGrid>
@@ -59,7 +62,7 @@
 				</div>
 			</div>
 			<!-- Concluir  -->
-				<p:dialog id="dialogConcluir" header="Concluir"
+			<p:dialog id="dialogConcluir" header="Concluir"
 				widgetVar="dlgConcluir" modal="true" showEffect="slide"
 				style="margin:auto;" dynamic="true" resizable="false"
 				closable="false">
@@ -398,103 +401,8 @@
 				</p:dialog>
 			</h:form>
 		</div>
-
-
 		<div id="celular">
-			<h:form id="formPedidoCelular">
 
-
-				<p:accordionPanel style="bacground-color:#354866">
-					<p:tab title="Produtos">
-
-						<p:commandLink styleClass="menuLink" value="Marmitexs"
-							style="display: #{pedidoBean.verificaTiposProdutos(0)};"
-							action="#{pedidoBean.mudaTelaMarmitex()}">
-						</p:commandLink>
-
-						<p:commandLink styleClass="menuLink" value="Pizza"
-							style="display: #{pedidoBean.verificaTiposProdutos(1)};margin-top:5px"
-							action="#{pedidoBean.mudaTelaPizza()}">
-						</p:commandLink>
-
-						<p:commandLink styleClass="menuLink" value="Marmitex"
-							style="display: #{pedidoBean.verificaTiposProdutos(2)};margin-top:5px"
-							action="#{pedidoBean.mudaTelaMarmitex()}">
-						</p:commandLink>
-						<p:commandLink styleClass="menuLink" value="Bebida"
-							style="display: #{pedidoBean.verificaTiposProdutos(3)};margin-top:5px"
-							action="#{pedidoBean.mudaTelaBebida()}">
-						</p:commandLink>
-						<p:commandLink styleClass="menuLink" value="Água"
-							style="display: #{pedidoBean.verificaTiposProdutos(4)};margin-top:5px"
-							action="#{pedidoBean.mudaTelaAgua()}">
-						</p:commandLink>
-						<p:commandLink styleClass="menuLink" value="Gás"
-							style="display: #{pedidoBean.verificaTiposProdutos(5)};margin-top:5px"
-							action="#{pedidoBean.mudaTelaGas()}">
-						</p:commandLink>
-					</p:tab>
-					<p:tab title="Meu Pedido">
-
-						<h:dataTable var="pedidoProduto"
-							style="margin-top:15px; width:100%"
-							value="#{pedidoBean.pedido.pedidoProdutos}">
-							<h:column>
-
-								<h:outputText id="textoDescricao"
-									value="#{pedidoProduto.produtoAvulso.produto.descricao}" />
-
-								<h:outputText value="R$" style="margin-left:10px" />
-								<h:outputText
-									value="#{pedidoProduto.produtoAvulso.produto.valor}">
-									<f:convertNumber pattern="#,###,##0.00" />
-								</h:outputText>
-							</h:column>
-
-
-							<h:column>
-								<p:commandLink value="Deletar" styleClass="buttonCancelar"
-									update=":formCelularDeletar" style="float:right;"
-									oncomplete="dialogDeletarProdutoCelular.show()">
-
-									<f:setPropertyActionListener value="#{pedidoProduto}"
-										target="#{pedidoBean.pedidoProduto}" />
-								</p:commandLink>
-							</h:column>
-						</h:dataTable>
-
-						<div style="margin-top: 17px">
-
-							<h:panelGrid columns="1" style="margin:auto">
-
-
-								<h:panelGrid columns="3"
-									style="float:right;font-size: 18px;width: 212px;">
-									<h:outputText value="Valor Total" />
-									<h:outputText value="R$ " style="float:right" />
-									<h:outputText value="#{pedidoBean.pedido.valorTotal}">
-										<f:convertNumber pattern="#,###,##0.00" />
-									</h:outputText>
-								</h:panelGrid>
-								<center>
-									<p:commandLink value="Comprar"
-										oncomplete="dialogConcluirCelular.show()"
-										styleClass="buttonPesquisa"
-										style="margin:auto;font-size: 17px;"
-										actionListener="#{pedidoBean.atualizaTaxaEntregaFirst}"
-										update=":idConcluir"
-										disabled="#{!pedidoBean.verificaValorMin()}" />
-								</center>
-							</h:panelGrid>
-							<div style="margin-top: 24px;">
-								<h:outputText value="Valor minimo R$ 6,00"
-									style="margin-left:5px" />
-							</div>
-						</div>
-					</p:tab>
-				</p:accordionPanel>
-
-			</h:form>
 			<p:dataGrid value="#{pedidoBean.marmitexsDM}" var="marmitex"
 				paginator="true" columns="1" rows="6" style="margin-top:5px">
 				<f:facet name="header">
@@ -513,7 +421,7 @@
 				</center>
 				<h:panelGrid columns="2" style="margin:auto;width:90%">
 					<p:commandLink
-						value="#{marmitex.ativo ? 'Adicionar' : 'Indisponivel'}"
+						value="Adicionar"
 						actionListener="#{pedidoBean.adicionaMarmitex}"
 						disabled="#{!marmitex.ativo}" styleClass="buttonAdd"
 						update=":formPedidoCelular" style="float:left" />
@@ -587,9 +495,8 @@
 			</h:form>
 			<!-- Finalizar Pedido -->
 			<p:dialog id="dialogConcluirCelular" header="Concluir"
-				widgetVar="dialogConcluirCelular" modal="true" showEffect="slide"
-				style="margin:auto;" dynamic="true" resizable="false" width="300"
-				closable="false">
+				widgetVar="dialogConcluirCelular" modal="true" style="margin:auto;"
+				dynamic="true" resizable="false" width="300" closable="false">
 				<h:form id="idConcluirCelular">
 
 					<p:accordionPanel>
@@ -677,7 +584,7 @@
 								</div>
 								<h:panelGrid columns="2" style="margin-top:10px">
 									<p:commandLink value="Comprar" id="btComprar"
-										styleClass="buttonPesquisa"
+										styleClass="buttonPesquisa" style="width: 90px !important"
 										action="#{pedidoBean.salvarPedido}"
 										disabled="#{!pedidoBean.habilitarBotaoSalvar()}"
 										oncomplete="dialogConcluirCelular.hide()">
@@ -698,65 +605,72 @@
 			</p:dialog>
 			<!-- Alterar Endereço -->
 			<p:dialog id="dialogEnderecoCelular" header="Novo Endereço"
-				widgetVar="dialogEnderecoCelular" modal="true" showEffect="slide"
-				dynamic="true" resizable="false" closable="false">
+				widgetVar="dialogEnderecoCelular" modal="true" dynamic="true"
+				resizable="false" closable="false">
 
 				<h:form id="formOutroEnderecoCelular">
-					<p:messages />
+
 					<h:panelGrid columns="1">
 						<h:column>
 							<h:outputText value="Cidade" />
 							<h:outputText value="*" style="color: #F00;" />
 						</h:column>
-						<p:autoComplete id="cidade" forceSelection="true" var="cidade"
-							itemLabel="#{cidade.descCidade}" itemValue="#{cidade}"
-							value="#{pedidoBean.enderecoCliente.endereco.bairroCidade.cidade}"
-							completeMethod="#{autoCompleteController.completaCidade}"
-							dropdown="true" required="true" converter="converterCidade">
-							<p:ajax event="itemSelect"
-								listener="#{autoCompleteController.handleSelect}"
-								update="bairro" />
+						<h:column>
+							<p:autoComplete id="cidade" forceSelection="true" var="cidade"
+								itemLabel="#{cidade.descCidade}" itemValue="#{cidade}"
+								value="#{pedidoBean.enderecoCliente.endereco.bairroCidade.cidade}"
+								completeMethod="#{autoCompleteController.completaCidade}"
+								dropdown="true" required="true" converter="converterCidade">
+								<p:ajax event="itemSelect"
+									listener="#{autoCompleteController.handleSelect}"
+									update="bairro" />
 
-							<f:validateRequired />
-							<p:clientValidator />
-						</p:autoComplete>
-						<p:message for="cidade" display="icon" />
+								<f:validateRequired />
+								<p:clientValidator />
+							</p:autoComplete>
+							<p:message for="cidade" display="icon" />
+						</h:column>
 						<h:column>
 							<h:outputText value="Bairro" />
 							<h:outputText value="*" style="color: #F00" />
 						</h:column>
-						<p:autoComplete id="bairro"
-							value="#{pedidoBean.enderecoCliente.endereco.bairroCidade}"
-							forceSelection="true" dropdown="true" scrollHeight="200"
-							completeMethod="#{autoCompleteController.completaBairro}"
-							var="bairro" itemLabel="#{bairro.descBairro}"
-							itemValue="#{bairro}" required="true" converter="converterBairro">
-						</p:autoComplete>
-						<p:message for="bairro" display="icon" />
+						<h:column>
+							<p:autoComplete id="bairro"
+								value="#{pedidoBean.enderecoCliente.endereco.bairroCidade}"
+								forceSelection="true" dropdown="true" scrollHeight="200"
+								completeMethod="#{autoCompleteController.completaBairro}"
+								var="bairro" itemLabel="#{bairro.descBairro}"
+								itemValue="#{bairro}" required="true"
+								converter="converterBairro">
+							</p:autoComplete>
+							<p:message for="bairro" display="icon" />
+						</h:column>
 						<h:column>
 							<h:outputText value="Logradouro" />
 							<h:outputText value="*" style="color: #F00;" />
 						</h:column>
-						<p:inputText
-							value="#{pedidoBean.enderecoCliente.endereco.logradouro}"
-							size="30" id="logradouro" />
-						<p:message for="logradouro" display="icon" />
+						<h:column>
+							<p:inputText
+								value="#{pedidoBean.enderecoCliente.endereco.logradouro}"
+								size="30" id="logradouro" required="true" />
+							<p:message for="logradouro" display="icon" />
+						</h:column>
 						<h:column>
 							<h:outputText value="Numero" />
 							<h:outputText value="*" style="color: #F00;" />
 						</h:column>
-						<p:inputText value="#{pedidoBean.enderecoCliente.endereco.numero}"
-							id="numero" />
-						<p:message for="numero" display="icon" />
 						<h:column>
-
+							<p:inputText
+								value="#{pedidoBean.enderecoCliente.endereco.numero}"
+								id="numero" required="true" />
+							<p:message for="numero" display="icon" />
+						</h:column>
+						<h:column>
 							<h:outputText value="CEP" />
-							<h:outputText value="*" style="color: #F00;" />
 						</h:column>
 						<p:inputMask value="#{pedidoBean.enderecoCliente.endereco.cep}"
-							id="cep" required="true" mask="99999-999" label="CEP"
-							converter="converterCEP" />
-						<p:message for="cep" display="icon" />
+							id="cep" mask="99999-999" label="CEP" converter="converterCEP" />
+
 						<h:outputText value="Complemento:" />
 						<p:inputTextarea
 							value="#{pedidoBean.enderecoCliente.endereco.complemento}"
@@ -766,16 +680,16 @@
 
 					</h:panelGrid>
 					<h:panelGrid columns="2">
-						<p:commandButton actionListener="#{pedidoBean.salvarNovoEndereco}"
-							value="Salvar" update=":idConcluirCelular" styleClass="buttonAdd"
-							validateClient="true" />
+						<p:commandLink actionListener="#{pedidoBean.salvarNovoEndereco}"
+							value="Salvar"
+							update=":idConcluirCelular formOutroEnderecoCelular"
+							styleClass="buttonAdd" validateClient="true" />
 						<p:commandLink styleClass="buttonCancelar" value="Cancelar"
 							oncomplete="dialogEnderecoCelular.hide()" />
 					</h:panelGrid>
 				</h:form>
 			</p:dialog>
 		</div>
-
 		<!-- 
 	Display para Tablet
  -->

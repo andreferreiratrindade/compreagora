@@ -3,9 +3,11 @@ package br.beans;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -26,7 +28,7 @@ import br.util.Email.Email;
 import br.util.Email.EmailDestino;
 
 @ManagedBean(name = "clienteBean")
-@SessionScoped
+@ViewScoped
 public class ClienteBean implements Serializable {
 	/**
 	 * 
@@ -52,6 +54,9 @@ public class ClienteBean implements Serializable {
 	}
 
 	public Cliente getCliente() {
+		if (cliente == null) {
+			cliente = new Cliente();
+		}
 		return cliente;
 	}
 
@@ -89,10 +94,7 @@ public class ClienteBean implements Serializable {
 	}
 
 	public String novo() {
-		cliente = new Cliente();
-		endereco = new Endereco();
-		enderecoCliente = new EnderecoCliente();
-		enderecoCliente.setDescEndereco("Minha Casa");
+
 		return "/paginas/publico/cadastroCliente.jsf?faces-redirect=true";
 	}
 
@@ -105,6 +107,10 @@ public class ClienteBean implements Serializable {
 	}
 
 	public EnderecoCliente getEnderecoCliente() {
+		if (enderecoCliente == null) {
+			enderecoCliente = new EnderecoCliente();
+			enderecoCliente.setDescEndereco("Minha Casa");
+		}
 		return enderecoCliente;
 	}
 
@@ -157,6 +163,9 @@ public class ClienteBean implements Serializable {
 	}
 
 	public Endereco getEndereco() {
+		if (endereco == null) {
+			endereco = new Endereco();
+		}
 		return endereco;
 	}
 

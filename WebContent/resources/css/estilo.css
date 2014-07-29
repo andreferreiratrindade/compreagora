@@ -77,12 +77,11 @@
 	}
 	body {
 		background: none;
-		font-size: 16px;
+		font-size: 80%;
 		width: 100%;
 		background: #ec4b1b
 			url("../resources/imagens/ImagensForm/head_bg_mobile.png") center
 			no-repeat;
-		background-attachment: fixed;
 		-webkit-background-size: cover;
 		-moz-background-size: cover;
 		-o-background-size: cover;
@@ -294,7 +293,7 @@
 		background-color: red;
 		color: #FFFCFC !important;
 		display: inline-block;
-		font-family: Estrangelo Edessa;
+		font-family: inherit;
 		padding: 0.65em 1em 0.55em;
 		text-decoration: none;
 		transition-duration: 1.2s;
@@ -302,6 +301,8 @@
 		height: 25px;
 		min-width: 80px;
 		-webkit-appearance: none;
+		font-size: 15px !important;
+		text-align: center;
 	}
 	.buttonCancelar:hover {
 		background-color: rgb(190, 6, 6);
@@ -314,7 +315,7 @@
 		background-color: cornflowerblue;
 		color: #FFFCFC !important;
 		display: inline-block;
-		font-family: Estrangelo Edessa;
+		font-family: inherit;
 		padding: 0.65em 1em 0.55em;
 		text-decoration: none;
 		transition-duration: 1.2s;
@@ -322,6 +323,8 @@
 		height: 25px;
 		min-width: 80px;
 		-webkit-appearance: none;
+		font-size: 15px !important;
+		text-align: center;
 	}
 	.buttonAddEmpresa:hover {
 		background-color: rgb(62, 85, 126);
@@ -355,18 +358,20 @@
 		transition-duration: 1.2s;
 		transition-property: background-color;
 		height: 25px;
-		min-width: 85px;
+		width: 160px;
 		-webkit-appearance: none;
+		text-align: center;
+		font-size: 20px !important;
 	}
 	.buttonDetalhes:hover {
 		background-color: rgb(113, 122, 5);;
 	}
 	.buttonDetalhes {
 		border-radius: 5px;
-		background-color: rgb(235, 235, 30);
+		background-color: rgb(210, 30, 235);
 		color: #FFFCFC !important;
 		display: inline-block;
-		font-family: Estrangelo Edessa;
+		font-family: inherit;
 		padding: 0.65em 1em 0.55em;
 		text-decoration: none;
 		transition-duration: 1.2s;
@@ -374,6 +379,9 @@
 		height: 25px;
 		min-width: 80px;
 		-webkit-appearance: none;
+		font-size: 15px !important;
+		text-align: center;
+		color: #FFFCFC !important
 	}
 }
 
@@ -548,6 +556,7 @@
 		height: 16px;
 		min-width: 80px;
 		-webkit-appearance: none;
+		text-align: center;
 	}
 	.buttonCancelar:hover {
 		background-color: rgb(190, 6, 6);
@@ -566,13 +575,14 @@
 		height: 16px;
 		min-width: 80px;
 		-webkit-appearance: none;
+		text-align: center;
 	}
 	.buttonPersonalizar:hover {
-		background-color: rgb(113, 122, 5);;
+		background-color: rgb(158, 20, 177);
 	}
 	.buttonPersonalizar {
 		border-radius: 5px;
-		background-color: rgb(235, 235, 30);
+		background-color: rgb(210, 30, 235);
 		color: #FFFCFC !important;
 		display: inline-block;
 		font-family: Estrangelo Edessa;
@@ -584,6 +594,7 @@
 		height: 16px;
 		min-width: 80px;
 		-webkit-appearance: none;
+		text-align: center;
 	}
 	.buttonAdd:hover {
 		background-color: rgb(62, 85, 126);
