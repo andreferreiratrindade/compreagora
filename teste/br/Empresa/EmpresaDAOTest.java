@@ -33,6 +33,6 @@ public class EmpresaDAOTest {
 		EmpresaDAO empresaDAO = DAOFactoy.criarEmpresa();
 		Empresa empresa = empresaDAO.getUnico(3);
 
-		assertEquals("Empresa 1", empresa.getRazaoSocial());
+		assertEquals("Empresa 3", empresa.getRazaoSocial());
 	}
 }
