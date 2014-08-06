@@ -39,8 +39,9 @@
 								</h:column>
 								<h:column>
 									<p:inputText value="#{clienteBean.cliente.email}" size="30"
-										id="email" required="true" validatorMessage="E-mail inválido"
-										label="E-mail" requiredMessage="Informe seu e-mail">
+										id="email" required="true"
+										validatorMessage="E-mail confirmado errado" label="E-mail"
+										requiredMessage="Informe seu e-mail" match="confEmail">
 										<f:validateLength minimum="5" />
 									</p:inputText>
 
@@ -53,9 +54,8 @@
 									<h:outputText value="Confirma E-mail" style="float:right" />
 								</h:column>
 								<h:column>
-									<p:inputText value="#{clienteBean.confEmail}" size="30"
-										id="confEmail" required="true" label="Confirma E-mail"
-										requiredMessage="Informe seu e-mail">
+									<p:inputText size="30" id="confEmail" required="true"
+										label="Confirma E-mail" requiredMessage="Informe seu e-mail">
 										<f:validateLength minimum="2" />
 									</p:inputText>
 
@@ -72,8 +72,8 @@
 										required="true" feedback="true"
 										promptLabel="Imforme uma Senha" weakLabel="Fraca"
 										goodLabel="Boa" strongLabel="Forte" match="confSenha"
-										label="Senha" requiredMessage="Informe uma senha" />
-
+										label="Senha" requiredMessage="Informe uma senha"
+										validatorMessage="Senha confirmada errada." />
 								</h:column>
 								<h:column>
 									<p:message for="senha" />

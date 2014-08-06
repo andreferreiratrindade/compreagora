@@ -26,6 +26,6 @@ public class ConverterCEP implements Converter,Serializable{
   
     @Override  
     public String getAsString(FacesContext arg0, UIComponent arg1, Object valor) {  
-        return valor.toString();  
+    	 return InputMask.stringToMask(InputMask.CEP, valor.toString());    
     }  
 }  

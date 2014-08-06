@@ -1,5 +1,5 @@
 package br.AtendimentoLugares;
-Apenas um teste de Commit
+
 import static org.junit.Assert.assertEquals;
 
 import java.util.List;

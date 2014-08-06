@@ -613,6 +613,7 @@
 		height: 16px;
 		min-width: 80px;
 		-webkit-appearance: none;
+		text-align: center;
 	}
 	.menuLink {
 		background-color: #81C02F;

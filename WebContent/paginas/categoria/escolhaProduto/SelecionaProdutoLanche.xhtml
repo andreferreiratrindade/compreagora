@@ -9,6 +9,7 @@
 <ui:composition template="/templates/pedido/principalCompra.xhtml">
 
 	<ui:define name="corpo">
+
 		<div id="desktop" style="margin-top: 10px;">
 			<div
 				style="width: 960px; margin: auto; height: 907px; margin-top: 10px">
@@ -68,8 +69,7 @@
 			<!-- Concluir  -->
 			<p:dialog id="dialogConcluir" header="Concluir"
 				widgetVar="dlgConcluir" modal="true" showEffect="slide"
-				style="margin:auto;" dynamic="true" resizable="false"
-				closable="false">
+				style="margin:auto;" dynamic="true" resizable="false">
 				<h:form id="idConcluir">
 
 					<p:tabView orientation="left" style="height: 331px;width: 800px;">
@@ -176,6 +176,7 @@
 										<p:inputText value="#{pedidoBean.pedido.troco}" size="5"
 											disabled="#{pedidoBean.formaDePagamento == 'Dinheiro' ? false : true}">
 											<f:convertNumber pattern="#,###,##0.00" />
+
 											<p:ajax event="keyup" update="btComprar" />
 										</p:inputText>
 										<br /> <span> <h:outputText value="*"

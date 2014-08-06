@@ -18,19 +18,24 @@
 				<div style="float: right; width: 760px">
 
 					<h:panelGrid style="margin:auto;">
-						<h:form style="float:right; ">
+						<h:form style="float:right;">
 							<p:clock mode="server" pattern="HH:mm:ss dd/MM/yyyy" />
 						</h:form>
 						<h:form style="float:left;margin-top: -28px;">
-							<p:commandButton value="Legenda" oncomplete="dlgLegenda.show()"
-								style="background-color: cornflowerblue;color: #000;float:left" />
+							<p:commandLink value="Legenda" oncomplete="dlgLegenda.show()"
+								style="float:left" styleClass="buttonAdd" />
 						</h:form>
+						<h:form>
+							<p:poll interval="10" update=":formTablePedidos :formInfoPedido"
+								listener="#{pedidosClientesBean.atualizaProdutos}" />
+						</h:form>
+
 						<h:form id="formTablePedidos">
-							<p:dataTable value="#{pedidosClientesBean.pedidoDataModel}"
+							<p:dataTable value="#{pedidosClientesBean.pedidosLazy}"
 								var="pedido" id="listaPedidos" paginator="true" rows="10"
 								rowKey="#{pedido.idPedido}"
 								selection="#{pedidosClientesBean.pedido}" selectionMode="single"
-								emptyMessage="Nenhum produto encontrado.">
+								emptyMessage="Nenhum produto encontrado." lazy="true">
 								<p:ajax event="rowSelect"
 									update=":formInfoPedido :formEnderecoCliente"
 									listener="#{pedidosClientesBean.atualizaProdutos}" />
@@ -96,11 +101,11 @@
 										name="Status#{pedidosClientesBean.pedido.statusPedido}.png"
 										style="width:500px; heigth:100px" />
 								</center>
-								<p:commandButton value="Prosseguir"
+								<p:commandLink value="Prosseguir"
 									actionListener="#{pedidosClientesBean.atualizaStatus}"
 									disabled="#{pedidosClientesBean.pedido.statusPedido>=4?true:false}"
 									oncomplete="imprimePedido.show()" update=":formImprimePedido"
-									style="margin-left: 606px;background-color: #1FFF00;color: #0F0101;" />
+									style="margin-left: 606px" styleClass="buttonPesquisa" />
 
 								<p:dataTable value="#{pedidosClientesBean.pedidoProdutos}"
 									var="pedidoProduto" id="infoDataTableProdutos"
@@ -318,33 +323,33 @@
 							<br />
 							<br />
 							<br />
-							<p:commandButton
+							<p:commandLink
 								actionListener="#{pedidosClientesBean.imprimirPedido()}"
-								value="Imprimir"
+								value="Imprimir" styleClass="buttonAdd"
 								disabled="#{pedidosClientesBean.pedido.statusPedido>=4?true:false}"
 								onclick="PrimeFaces.monitorDownload(start, stop);" ajax="false">
 								<p:fileDownload value="#{pedidosClientesBean.file}" />
-							</p:commandButton>
+							</p:commandLink>
 
-							<p:commandButton value="Não Imprimir"
+							<p:commandLink value="Sair" styleClass="buttonCancelar"
 								action="PedidosDeClientes.jsf" oncomplete="imprimePedido.hide()"
 								ajax="false">
-							</p:commandButton>
+							</p:commandLink>
 						</h:form>
 					</p:dialog>
 				</div>
 			</div>
 		</div>
 		<script type="text/javascript">
-function start() {
-   
-}
- 
-function stop() {
-    PF('imprimePedido').hide();
-    window.location.reload();
-}
-</script>
+			function start() {
+
+			}
+
+			function stop() {
+				PF('imprimePedido').hide();
+				window.location.reload();
+			}
+		</script>
 	</ui:define>
 </ui:composition>
 </html>

@@ -6,6 +6,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.primefaces.model.SortOrder;
+
+import br.Pedido.Filtro.IFiltroPedido;
+import br.Pedido.Filtro.PedidoWithFilterByClient;
 import br.dao.Dao;
 
 import com.uaihebert.factory.EasyCriteriaFactory;
@@ -14,9 +18,18 @@ import com.uaihebert.model.EasyCriteria;
 public class PedidoDAO implements Dao<Pedido> {
 
 	private EntityManager session;
+	private IFiltroPedido filtro;
+
+	public PedidoDAO() {
+		alterarFiltro(new PedidoWithFilterByClient());
+	}
 
 	public EntityManager getSession() {
 		return session;
+	}
+
+	public void alterarFiltro(IFiltroPedido filtro) {
+		this.filtro = filtro;
 	}
 
 	public void setSession(EntityManager session) {
@@ -51,31 +64,13 @@ public class PedidoDAO implements Dao<Pedido> {
 	}
 
 	public List<Pedido> buscaPorPaginacao(int startingAt, int maxPerPage,
-			int idCliente) {
-
-		EasyCriteria<Pedido> easyCriteria = EasyCriteriaFactory
-				.createQueryCriteria(session, Pedido.class);
-		easyCriteria.innerJoin("enderecoCliente")
-				.innerJoin("enderecoCliente.cliente")
-				.andEquals("enderecoCliente.cliente.idCliente", idCliente).orderByAsc("statusPedido");
-		easyCriteria.setFirstResult(startingAt);
-		easyCriteria.setMaxResults(maxPerPage);
-
-		return easyCriteria.getResultList();
+			int id, String sortFiel, SortOrder sortOrder) {
+		return filtro.buscaPorPaginacao(session, startingAt, maxPerPage, id,
+				sortFiel, sortOrder);
 	}
 
-	public int countPedido(int idCliente) {
-		EasyCriteria<Pedido> easyCriteria = EasyCriteriaFactory
-				.createQueryCriteria(session, Pedido.class);
-		easyCriteria.innerJoin("enderecoCliente")
-				.innerJoin("enderecoCliente.cliente")
-				.andEquals("enderecoCliente.cliente.idCliente", idCliente);
-
-		List<Pedido> pedidos = easyCriteria.getResultList();
-		if (pedidos == null) {
-			return 0;
-		}
-		return pedidos.size();
+	public int countPedido(int id) {
+		return filtro.countPedido(session, id);
 	}
 
 	public int countPedidosTotal() {

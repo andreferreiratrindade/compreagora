@@ -2,6 +2,7 @@ package br.beans;
 
 import java.io.InputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 
 import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.StreamedContent;
 
 import br.Cliente.Cliente;
@@ -28,6 +30,7 @@ import br.Produto.Produto;
 import br.Produto.ProdutoAvulso.ProdutoAvulso;
 import br.Produto.ProdutoAvulso.ProdutoAvulsoDAO;
 import br.ProdutoAvulso.Avulso;
+import br.dataTableLazy.PedidosClientesLazy;
 import br.statusPedido.Aguardando;
 import br.statusPedido.Concluido;
 import br.statusPedido.Enviado;
@@ -54,6 +57,15 @@ public class PedidosClientesBean implements Serializable {
 	private List<Avulso> avulsos;
 	private StreamedContent file;
 	private StatusInterface stPedido;
+	private LazyDataModel<Pedido> pedidosLazy;
+	private int idPedidoTemp;
+
+	public LazyDataModel<Pedido> getPedidosLazy() {
+		if (pedidosLazy == null) {
+			pedidosLazy = new PedidosClientesLazy(empresa.getIdEmpresa());
+		}
+		return pedidosLazy;
+	}
 
 	public StreamedContent getFile() {
 		return file;
@@ -107,6 +119,9 @@ public class PedidosClientesBean implements Serializable {
 	}
 
 	public List<PedidoProduto> getPedidoProdutos() {
+		if (pedidoProdutos == null) {
+			pedidoProdutos = new ArrayList<PedidoProduto>();
+		}
 		return pedidoProdutos;
 	}
 
@@ -198,10 +213,20 @@ public class PedidosClientesBean implements Serializable {
 	}
 
 	public void atualizaProdutos() {
+		if (pedido.getIdPedido() != 0) {
+			PedidoRN pedidoRN = new PedidoRN();
+			pedido = pedidoRN.getPedido(pedido.getIdPedido());
+			pedido.getPedidoProdutos().size();
+			idPedidoTemp = pedido.getIdPedido();
+			pedidoProdutos = pedido.getPedidoProdutos();
+		} else if (idPedidoTemp != 0) {
+			PedidoRN pedidoRN = new PedidoRN();
 
-		PedidoRN pedidoRN = new PedidoRN();
-		pedido = pedidoRN.getPedido(pedido.getIdPedido());
-		pedidoProdutos = pedido.getPedidoProdutos();
+			pedido = pedidoRN.getPedido(idPedidoTemp);
+			pedido.getPedidoProdutos().size();
+
+			pedidoProdutos = pedido.getPedidoProdutos();
+		}
 	}
 
 	public void setEmpresa(Empresa empresa) {

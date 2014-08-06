@@ -56,6 +56,7 @@ public class PedidoBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final int TOTAL_PRODUTO = 13;
 
+	private DualListModel<Avulso> avulsoDual;
 	private Cliente cliente = null;
 	private Empresa empresa = null;
 	private int itemMenu;
@@ -114,8 +115,6 @@ public class PedidoBean implements Serializable {
 	public void setAvulsoValorTotal(float avulsoValorTotal) {
 		this.avulsoValorTotal = avulsoValorTotal;
 	}
-
-	private DualListModel<Avulso> avulsoDual;
 
 	public void atualizaAvulsoTotal() {
 
@@ -668,8 +667,10 @@ public class PedidoBean implements Serializable {
 			lanche = (Lanche) (lanchesDM.getRowData());
 			pedidoProduto = new PedidoProduto();
 			pedidoProduto.addProduto(lanche);
+
 			atualizaAvulsoTotal();
 			atualizaAvulsos();
+
 		}
 	}
 

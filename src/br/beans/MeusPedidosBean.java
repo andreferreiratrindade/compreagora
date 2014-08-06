@@ -2,9 +2,7 @@ package br.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -12,12 +10,9 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
-
 import org.primefaces.model.LazyDataModel;
-
 import br.Cliente.Cliente;
 import br.Cliente.ClienteRN;
-import br.EnderecoCliente.EnderecoCliente;
 import br.Pedido.Pedido;
 import br.Pedido.PedidoRN;
 import br.PedidoProduto.PedidoProduto;
@@ -27,19 +22,19 @@ import br.ProdutoAvulso.Avulso;
 import br.dataTableLazy.MeusPedidoLazy;
 import br.util.DAOFactoy;
 
-@ManagedBean
+@ManagedBean(name = "meusPedidosBean")
 @ViewScoped
 public class MeusPedidosBean implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	private int idPedidoTemp;
 	private Cliente cliente = null;
 	private Pedido pedido = null;
 	private DataModel<PedidoProduto> produtosDM;
 	private List<PedidoProduto> pedidoProdutos;
-	private PedidoDataModel pedidoDataModel;
-	private List<Pedido> pedidos;
 	private PedidoProduto pedidoProduto;
 	private List<Avulso> avulsos;
 	private LazyDataModel<Pedido> pedidosLazy;
@@ -51,23 +46,16 @@ public class MeusPedidosBean implements Serializable {
 		return pedidosLazy;
 	}
 
+	public String paginaMeusPedidos() {
+		return "/paginas/publico/meusPedidos.jsf?faces-redirect=true";
+	}
+
 	@PostConstruct
 	public void construct() {
 		if (getCliente() != null) {
-			pedido = new Pedido();
-			pedidos = new ArrayList<Pedido>();
 
-			for (EnderecoCliente x : cliente.getEnderecoCliente()) {
-				for (Pedido y : x.getPedidos()) {
-					y.getPedidoProdutos().size();
-					pedidos.add(y);
-				}
-			}
-
-			Collections.sort(pedidos);
-
-			pedidoDataModel = new PedidoDataModel(pedidos);
 		}
+
 	}
 
 	public PedidoProduto getPedidoProduto() {
@@ -84,29 +72,18 @@ public class MeusPedidosBean implements Serializable {
 
 	public List<PedidoProduto> getPedidoProdutos() {
 
-		return pedido != null ? pedido.getPedidoProdutos() : pedidoProdutos;
+		if (pedidoProdutos == null) {
+
+			pedidoProdutos = new ArrayList<PedidoProduto>();
+		}
+
+		return pedidoProdutos;
 	}
 
 	public void setPedidoProdutos(List<PedidoProduto> pedidoProdutos) {
 		this.pedidoProdutos = pedidoProdutos;
 	}
 
-	public PedidoDataModel getPedidoDataModel() {
-
-		return pedidoDataModel;
-	}
-
-	public void setPedidoDataModel(PedidoDataModel pedidoDataModel) {
-		this.pedidoDataModel = pedidoDataModel;
-	}
-
-	public List<Pedido> getPedidos() {
-		return pedidos;
-	}
-
-	public void setPedidos(List<Pedido> pedidos) {
-		this.pedidos = pedidos;
-	}
 
 	public DataModel<PedidoProduto> getProdutosDM() {
 		if (pedido != null) {
@@ -122,7 +99,9 @@ public class MeusPedidosBean implements Serializable {
 	}
 
 	public Pedido getPedido() {
-
+		if (pedido == null) {
+			pedido = new Pedido();
+		}
 		return pedido;
 	}
 
@@ -154,11 +133,21 @@ public class MeusPedidosBean implements Serializable {
 
 	public void atualizaPedidoProdutos() {
 
-		PedidoRN pedidoRN = new PedidoRN();
+		if ((pedido.getIdPedido() != 0)) {
+			PedidoRN pedidoRN = new PedidoRN();
 
-		pedido = pedidoRN.getPedido(pedido.getIdPedido());
+			pedido = pedidoRN.getPedido(pedido.getIdPedido());
+			pedido.getPedidoProdutos().size();
+			idPedidoTemp = pedido.getIdPedido();
+			pedidoProdutos = pedido.getPedidoProdutos();
+		} else if (idPedidoTemp != 0) {
+			PedidoRN pedidoRN = new PedidoRN();
 
-		pedidoProdutos = pedido.getPedidoProdutos();
+			pedido = pedidoRN.getPedido(idPedidoTemp);
+			pedido.getPedidoProdutos().size();
+
+			pedidoProdutos = pedido.getPedidoProdutos();
+		}
 
 	}
 
@@ -175,6 +164,9 @@ public class MeusPedidosBean implements Serializable {
 	}
 
 	public List<Avulso> getAvulsos() {
+		if (avulsos == null) {
+			avulsos = new ArrayList<Avulso>();
+		}
 		return avulsos;
 	}
 

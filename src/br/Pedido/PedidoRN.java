@@ -5,11 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.primefaces.model.SortOrder;
+
 import br.AtendimentoLugares.EmpresaAtendimento;
 import br.AtendimentoLugares.EmpresaAtendimentoRN;
 import br.Empresa.Empresa;
 import br.Empresa.Categoria.CategoriaENUM;
 import br.EnderecoCliente.EnderecoCliente;
+import br.Pedido.Filtro.IFiltroPedido;
 import br.PedidoProduto.PedidoProduto;
 import br.PedidoProduto.PedidoProdutoDAO;
 import br.Produto.Implementacao.AguaImplementacao;
@@ -114,13 +117,15 @@ public class PedidoRN {
 		this.pedidoDAO.update(pedido);
 	}
 
-	public List<Pedido> buscaPorPaginacao(int startingAt, int maxPerPage, int idCliente){
-		return this.pedidoDAO.buscaPorPaginacao(startingAt, maxPerPage, idCliente);
+	public List<Pedido> buscaPorPaginacao(int startingAt, int maxPerPage,
+			int idCliente, String sortFiel, SortOrder sortOrder) {
+		return this.pedidoDAO.buscaPorPaginacao(startingAt, maxPerPage,
+				idCliente, sortFiel, sortOrder);
 	}
-	
+
 	public List<Pedido> relatorioDeFaturamento(int idEmpresa, Date dataInicio,
 
-			Date dataFim) {
+	Date dataFim) {
 
 		List<Pedido> pedidos = this.pedidoDAO.relatorioDeFaturamento(idEmpresa,
 				dataInicio, dataFim);
@@ -132,9 +137,13 @@ public class PedidoRN {
 
 		return pedidos;
 	}
-	public int countPedido(int idCliente){
+
+	public int countPedido(int idCliente) {
 		return this.pedidoDAO.countPedido(idCliente);
 	}
-	
-	
+
+	public void alterarFiltro(IFiltroPedido filtro) {
+		this.pedidoDAO.alterarFiltro(filtro);
+	}
+
 }
