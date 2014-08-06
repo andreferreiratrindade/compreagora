@@ -1,8 +1,6 @@
 package br.Empresa;
 
-import static org.junit.Assert.*;
-
-import java.util.List;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
 import org.junit.Before;

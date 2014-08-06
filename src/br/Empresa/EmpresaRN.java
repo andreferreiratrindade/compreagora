@@ -1,11 +1,9 @@
 package br.Empresa;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import br.Cliente.Cliente;
 import br.Cliente.ClienteRN;
-import br.Empresa.Categoria.Categoria;
 import br.Empresa.Categoria.CategoriaENUM;
 import br.util.DAOFactoy;
 

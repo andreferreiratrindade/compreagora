@@ -3,12 +3,10 @@ package br.dataTableLazy;
 import java.util.List;
 import java.util.Map;
 
-import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
 import br.Pedido.Pedido;
 import br.Pedido.PedidoRN;
-import br.Produto.Produto;
 
 public class MeusPedidoLazy extends PedidoLazy {
 

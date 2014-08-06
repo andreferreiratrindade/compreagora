@@ -5,30 +5,17 @@ import static org.junit.Assert.assertEquals;
 import java.util.List;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-import br.AtendimentoLugares.Bairro;
-import br.AtendimentoLugares.BairroDAO;
-import br.AtendimentoLugares.Cidade;
-import br.AtendimentoLugares.CidadeDAO;
-import br.AtendimentoLugares.EmpresaAtendimento;
-import br.AtendimentoLugares.EmpresaAtendimentoDAO;
-import br.Cliente.Cliente;
 import br.Empresa.Categoria.Categoria;
 import br.Empresa.Categoria.CategoriaDao;
 import br.Empresa.Categoria.CategoriaENUM;
 import br.Empresa.FormaDePagamento.FormaDePagamento;
 import br.Empresa.FormaDePagamento.FormaDePagamentoRN;
 import br.Endereco.Endereco;
-import br.Permissao.Permissao;
-import br.Permissao.PermissaoDAO;
-import br.Permissao.PermissaoEnum;
 import br.ProdutoAvulso.Avulso;
 import br.ProdutoAvulso.AvulsoRN;
-import br.builders.EmpresaBuilder;
 import br.util.DAOFactoy;
 import br.util.JpaUtil;
 

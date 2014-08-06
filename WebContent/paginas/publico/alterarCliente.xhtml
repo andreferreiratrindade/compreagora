@@ -4,8 +4,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:t="http://rodrigouchoa.com/jsf">
+	xmlns:p="http://primefaces.org/ui">
 <ui:composition template="/templates/principal.xhtml">
 	<ui:define name="corpo">
 		<h:form id="atualizarCadastro" style="margin-top: 66px;">
@@ -40,7 +39,7 @@
 							<h:column>
 								<p:inputText value="#{clienteBean.cliente.email}" size="30"
 									id="email" required="true" validatorMessage="E-mail inválido"
-									label="E-mail" requiredMessage="Informe seu e-mail">
+									label="E-mail" requiredMessage="Informe seu e-mail" >
 									<f:validateLength minimum="5" />
 								</p:inputText>
 

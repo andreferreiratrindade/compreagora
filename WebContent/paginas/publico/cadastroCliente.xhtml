@@ -236,7 +236,7 @@
 					<p:message for="Celularnome" />
 
 					<p:inputText value="#{clienteBean.cliente.email}" size="30"
-						id="Celularemail" required="true"
+						id="Celularemail" required="true" match="CelularconfEmail"
 						validatorMessage="E-mail inválido" label="E-mail"
 						requiredMessage="Informe seu e-mail">
 						<f:validateLength minimum="5" />
@@ -251,7 +251,6 @@
 					</p:inputText>
 					<p:watermark for="CelularconfEmail" value="Confirma E-mail *" />
 					<p:message for="CelularconfEmail" />
->
 					<p:password value="#{clienteBean.cliente.senha}" id="Celularsenha"
 						required="true" feedback="true" promptLabel="Imforme uma Senha"
 						weakLabel="Fraca" goodLabel="Boa" strongLabel="Forte"

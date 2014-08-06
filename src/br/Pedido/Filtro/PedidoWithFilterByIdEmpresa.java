@@ -6,10 +6,10 @@ import javax.persistence.EntityManager;
 
 import org.primefaces.model.SortOrder;
 
+import br.Pedido.Pedido;
+
 import com.uaihebert.factory.EasyCriteriaFactory;
 import com.uaihebert.model.EasyCriteria;
-
-import br.Pedido.Pedido;
 
 public class PedidoWithFilterByIdEmpresa implements IFiltroPedido {
 
