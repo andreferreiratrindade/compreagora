@@ -52,8 +52,6 @@ public class PedidosClientesBean implements Serializable {
 	private PedidoProduto pedidoProduto;
 	private List<PedidoProduto> pedidoProdutos;
 	private EnderecoCliente enderecoCliente = null;
-	private PedidoDataModel pedidoDataModel = null;
-	private List<Pedido> pedidos = null;
 	private List<Avulso> avulsos;
 	private StreamedContent file;
 	private StatusInterface stPedido;
@@ -85,17 +83,13 @@ public class PedidosClientesBean implements Serializable {
 	@PostConstruct
 	public void construct() {
 		getEmpresa();
-		pedidos = empresa.getPedidos();
-		pedidoDataModel = new PedidoDataModel(pedidos);
-		if (pedido != null) {
-			PedidoRN pedidoRN = new PedidoRN();
-			pedido = pedidoRN.getPedido(pedido.getIdPedido());
-			pedidoProdutos = pedido.getPedidoProdutos();
-		}
 		pedido = new Pedido();
 	}
 
 	public List<Avulso> getAvulsos() {
+		if (avulsos == null) {
+			avulsos = new ArrayList<Avulso>();
+		}
 		return avulsos;
 	}
 
@@ -127,15 +121,6 @@ public class PedidosClientesBean implements Serializable {
 
 	public void setPedidoProdutos(List<PedidoProduto> pedidoProdutos) {
 		this.pedidoProdutos = pedidoProdutos;
-	}
-
-	public PedidoDataModel getPedidoDataModel() {
-
-		return pedidoDataModel;
-	}
-
-	public void setPedidoDataModel(PedidoDataModel pedidoDataModel) {
-		this.pedidoDataModel = pedidoDataModel;
 	}
 
 	public EnderecoCliente getEnderecoCliente() {
@@ -185,14 +170,6 @@ public class PedidosClientesBean implements Serializable {
 
 	}
 
-	public List<Pedido> getPedidos() {
-		return pedidos;
-	}
-
-	public void setPedidos(List<Pedido> pedidos) {
-		this.pedidos = pedidos;
-	}
-
 	public Empresa getEmpresa() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		ExternalContext external = context.getExternalContext();
@@ -213,19 +190,21 @@ public class PedidosClientesBean implements Serializable {
 	}
 
 	public void atualizaProdutos() {
-		if (pedido.getIdPedido() != 0) {
-			PedidoRN pedidoRN = new PedidoRN();
-			pedido = pedidoRN.getPedido(pedido.getIdPedido());
-			pedido.getPedidoProdutos().size();
-			idPedidoTemp = pedido.getIdPedido();
-			pedidoProdutos = pedido.getPedidoProdutos();
-		} else if (idPedidoTemp != 0) {
-			PedidoRN pedidoRN = new PedidoRN();
+		if (pedido != null) {
+			if (pedido.getIdPedido() != 0) {
+				PedidoRN pedidoRN = new PedidoRN();
+				pedido = pedidoRN.getPedido(pedido.getIdPedido());
+				pedido.getPedidoProdutos().size();
+				idPedidoTemp = pedido.getIdPedido();
+				pedidoProdutos = pedido.getPedidoProdutos();
+			} else if (idPedidoTemp != 0) {
+				PedidoRN pedidoRN = new PedidoRN();
 
-			pedido = pedidoRN.getPedido(idPedidoTemp);
-			pedido.getPedidoProdutos().size();
+				pedido = pedidoRN.getPedido(idPedidoTemp);
+				pedido.getPedidoProdutos().size();
 
-			pedidoProdutos = pedido.getPedidoProdutos();
+				pedidoProdutos = pedido.getPedidoProdutos();
+			}
 		}
 	}
 
@@ -234,6 +213,9 @@ public class PedidosClientesBean implements Serializable {
 	}
 
 	public Pedido getPedido() {
+		if (pedido == null) {
+			pedido = new Pedido();
+		}
 		return pedido;
 	}
 

@@ -79,7 +79,8 @@
 								</p:column>
 							</p:dataTable>
 						</h:form>
-						<h:form id="formInfoPedido">
+						<h:form id="formInfoPedido"
+							style="display: #{pedidosClientesBean.pedido.idPedido == 0 ? 'none' : 'block'}; margin-top:10px">
 							<p:fieldset legend="Pedido">
 								<h:panelGrid columns="2" style="width: 501px;margin: auto;">
 									<h:outputText
@@ -180,7 +181,8 @@
 
 							</p:fieldset>
 						</h:form>
-						<h:form id="formEnderecoCliente">
+						<h:form id="formEnderecoCliente"
+							style="display: #{pedidosClientesBean.pedido.idPedido == 0 ? 'none' : 'block'}; margin-top:10px">
 							<p:fieldset legend="Cliente">
 								<h:panelGrid columns="2">
 									<h:panelGrid columns="1">

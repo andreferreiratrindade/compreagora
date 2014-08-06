@@ -55,7 +55,7 @@ public class MeusPedidosBean implements Serializable {
 		if (getCliente() != null) {
 
 		}
-
+		pedido = new Pedido();
 	}
 
 	public PedidoProduto getPedidoProduto() {
@@ -83,7 +83,6 @@ public class MeusPedidosBean implements Serializable {
 	public void setPedidoProdutos(List<PedidoProduto> pedidoProdutos) {
 		this.pedidoProdutos = pedidoProdutos;
 	}
-
 
 	public DataModel<PedidoProduto> getProdutosDM() {
 		if (pedido != null) {
@@ -133,20 +132,23 @@ public class MeusPedidosBean implements Serializable {
 
 	public void atualizaPedidoProdutos() {
 
-		if ((pedido.getIdPedido() != 0)) {
-			PedidoRN pedidoRN = new PedidoRN();
+		if (pedido != null) {
 
-			pedido = pedidoRN.getPedido(pedido.getIdPedido());
-			pedido.getPedidoProdutos().size();
-			idPedidoTemp = pedido.getIdPedido();
-			pedidoProdutos = pedido.getPedidoProdutos();
-		} else if (idPedidoTemp != 0) {
-			PedidoRN pedidoRN = new PedidoRN();
+			if ((pedido.getIdPedido() != 0)) {
+				PedidoRN pedidoRN = new PedidoRN();
 
-			pedido = pedidoRN.getPedido(idPedidoTemp);
-			pedido.getPedidoProdutos().size();
+				pedido = pedidoRN.getPedido(pedido.getIdPedido());
+				pedido.getPedidoProdutos().size();
+				idPedidoTemp = pedido.getIdPedido();
+				pedidoProdutos = pedido.getPedidoProdutos();
+			} else if (idPedidoTemp != 0) {
+				PedidoRN pedidoRN = new PedidoRN();
 
-			pedidoProdutos = pedido.getPedidoProdutos();
+				pedido = pedidoRN.getPedido(idPedidoTemp);
+				pedido.getPedidoProdutos().size();
+
+				pedidoProdutos = pedido.getPedidoProdutos();
+			}
 		}
 
 	}

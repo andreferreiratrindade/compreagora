@@ -11,6 +11,7 @@ import java.util.List;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.primefaces.model.SortOrder;
 
 import br.AtendimentoLugares.Bairro;
 import br.AtendimentoLugares.BairroDAO;
@@ -253,7 +254,7 @@ public class PedidoRNTest {
 		int idCliente = 1;
 
 		List<Pedido> pedidos = pedidoRN.buscaPorPaginacao(posicaoInicial,
-				posicaoFinal, idCliente);
+				posicaoFinal, idCliente, null, SortOrder.ASCENDING);
 		assertEquals(1, pedidos.size());
 	}
 
