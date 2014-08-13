@@ -91,11 +91,6 @@ public class ClienteBean implements Serializable {
 		this.listaCliente = listaCliente;
 	}
 
-	public String novo() {
-
-		return "/paginas/publico/cadastroCliente.jsf?faces-redirect=true";
-	}
-
 	public String cancelar() {
 		cliente = new Cliente();
 		endereco = new Endereco();
@@ -191,6 +186,7 @@ public class ClienteBean implements Serializable {
 			}
 		}
 		confEmail = null;
+		
 		return "/paginas/publico/alterarCliente.jsf?faces-redirect=true";
 	}
 

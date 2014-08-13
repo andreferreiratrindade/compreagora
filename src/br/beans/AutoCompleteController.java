@@ -20,6 +20,7 @@ import br.AtendimentoLugares.CidadeRN;
 import br.Empresa.Empresa;
 import br.Empresa.EmpresaRN;
 import br.Empresa.Categoria.CategoriaENUM;
+import br.beans.util.ContextUtil;
 
 @ManagedBean
 @ViewScoped

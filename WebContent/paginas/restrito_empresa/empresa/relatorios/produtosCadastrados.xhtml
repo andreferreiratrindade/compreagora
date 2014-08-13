@@ -17,11 +17,9 @@
 				<div style="float: right; width: 730px">
 					<h:outputText value="Relatório de todos os produtos cadastrados"
 						style="font-size : 20px" />
-					<h:form>
-						<p:commandButton actionListener="#{relatorioBean.allProdutos()}"
-							value="Gerar Relatório" ajax="false" />
-					</h:form>
-
+					
+				<p:commandButton value="Gerar  Relatório" ajax="false"
+							actionListener="#{relatorioBean.allProdutos()}" />
 					
 				</div>
 			</div>

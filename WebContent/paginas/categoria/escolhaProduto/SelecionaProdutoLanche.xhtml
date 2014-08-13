@@ -130,7 +130,7 @@
 										value="#{pedidoBean.enderecoCliente.endereco.bairroCidade.cidade}" />
 
 									<h:outputText
-										value="CEP: #{pedidoBean.enderecoCliente.endereco.cep}" />
+										value="#{pedidoBean.enderecoCliente.endereco.cep}" converter="converterCEP"/>
 
 									<h:outputText
 										value="#{pedidoBean.enderecoCliente.endereco.complemento}" />
@@ -531,7 +531,7 @@
 										value="#{pedidoBean.enderecoCliente.endereco.bairroCidade.cidade}" />
 
 									<h:outputText
-										value="CEP: #{pedidoBean.enderecoCliente.endereco.cep}" />
+										value="#{pedidoBean.enderecoCliente.endereco.cep}" converter="converterCEP"/>
 
 									<h:outputText
 										value="#{pedidoBean.enderecoCliente.endereco.complemento}" />

@@ -14,7 +14,7 @@
 				<h:form id="formPainel">
 					<p:menu style="margin:auto;width: 179px;background-color:#FFF">
 						<p:submenu label="Configurações">
-							<p:menuitem value="Sobre a Empresa" 
+							<p:menuitem value="Sobre a Empresa"
 								action="manterEmpresa.jsf?faces-redirect=true">
 							</p:menuitem>
 
@@ -25,38 +25,31 @@
 								action="#{empresaBean.atualizarLocalAtendimento}" />
 
 							<p:menuitem value="Formas De Pagamento"
-								action="/paginas/admin/empresa/configuracoes/empresaFormaDePagamento.jsf?faces-redirect=true" />
+								action="#{pagPath.empresaformaDePagamento}" />
 
 							<p:menuitem value="Categoria"
-								action="/paginas/admin/empresa/configuracoes/manterCategoriaEmpresa.jsf?faces-redirect=true" />
+								action="#{pagPath.manterCategoriaEmpresa}" />
 						</p:submenu>
 						<p:submenu label="Produtos">
-							<p:menuitem value="Lanches"
-								action="/paginas/admin/empresa/produto/produtoLanche.jsf?faces-redirect=true">
+							<p:menuitem value="Lanches" action="#{pagPath.produtoLanche}">
 							</p:menuitem>
 
-							<p:menuitem value="Bebidas"
-								action="/paginas/admin/empresa/produto/produtoBebida.jsf?faces-redirect=true">
+							<p:menuitem value="Bebidas" action="#{pagPath.produtoBebida}">
 							</p:menuitem>
 
-							<p:menuitem value="Pizza"
-								action="/paginas/admin/empresa/produto/produtoPizza.jsf?faces-redirect=true">
+							<p:menuitem value="Pizza" action="#{pagPath.produtoPizza}">
 							</p:menuitem>
 
-							<p:menuitem value="Marmitex"
-								action="/paginas/admin/empresa/produto/produtoMarmitex.jsf?faces-redirect=true">
+							<p:menuitem value="Marmitex" action="#{pagPath.produtoMarmitex}">
 							</p:menuitem>
 
-							<p:menuitem value="Água"
-								action="/paginas/admin/empresa/produto/produtoAgua.jsf?faces-redirect=true">
+							<p:menuitem value="Água" action="#{pagPath.produtoAgua}">
 							</p:menuitem>
-							<p:menuitem value="Gás"
-								action="/paginas/admin/empresa/produto/produtoGas.jsf?faces-redirect=true">
+							<p:menuitem value="Gás" action="#{pagPath.produtoGas}">
 							</p:menuitem>
 						</p:submenu>
 						<p:submenu>
-							<p:menuitem value="Avulso"
-								action="/paginas/admin/empresa/produto/avulso/avulso.jsf?faces-redirect=true">
+							<p:menuitem value="Avulso" action="#{pagPath.avulsos}">
 							</p:menuitem>
 						</p:submenu>
 					</p:menu>

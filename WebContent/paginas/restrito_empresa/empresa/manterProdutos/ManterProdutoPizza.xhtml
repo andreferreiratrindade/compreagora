@@ -19,36 +19,36 @@
 
 					<h:form id="form">
 
-						<p:dataGrid value="#{produtoEmpresaManutencaoBean.lanchesDM}"
-							var="lanche" paginator="true" columns="1" rows="6" id="lanches">
+						<p:dataGrid value="#{empresaManterProdutoPizzaBean.pizzasDM}"
+							var="pizza" paginator="true" columns="1" rows="6" id="pizzas">
 							<h:panelGrid style="width:715px">
 								<h:column>
-									<h:graphicImage library="imagens/produto/lanche"
-										name="#{lanche.idProduto}.gif" width="100" height="100"
+									<h:graphicImage library="imagens/produto/pizza"
+										name="#{pizza.idProduto}.gif" width="100" height="100"
 										style="float:left" />
-									<h:outputText title="Descrição" value="#{lanche.descricao}"
+									<h:outputText title="Descrição" value="#{pizza.descricao}"
 										style="font-size: 20px;" />
 									<br />
-									<h:outputText value="#{lanche.ingredientes}"
+									<h:outputText value="#{pizza.ingredientes}"
 										title="Ingredientes" />
 									<h:panelGrid
 										style="margin-top: -16px;float: right;margin-right: 60px;font-size: 20px;"
 										columns="2">
 										<h:outputText value="R$" />
-										<h:outputText value="#{lanche.valor}">
+										<h:outputText value="#{pizza.valor}">
 											<f:convertNumber pattern="#,###,##0.00" />
 										</h:outputText>
 									</h:panelGrid>
 									<br />
 									<h:outputText
-										value="#{lanche.ativo?'Disponivel':'Indisponivel'}"
+										value="#{pizza.ativo?'Disponivel':'Indisponivel'}"
 										style="font-size:15px" /> &nbsp;
 								<h:graphicImage library="imagens/icones"
-										name="#{lanche.ativo}.gif" width="13px" />
-									<p:commandButton value="Alterar Status"
-										actionListener="#{produtoEmpresaManutencaoBean.atualizaStatusLanche}"
-										update=":form:lanches"
-										style="float:right;margin-right:49px;background-color: cornflowerblue;color: #000;" />
+										name="#{pizza.ativo}.gif" width="13px" />
+									<p:commandLink value="Alterar Status"
+										actionListener="#{empresaManterProdutoPizzaBean.atualizaStatus}"
+										update=":form:pizzas"
+										style="float:right;margin-right:49px;" styleClass="buttonAdd" />
 								</h:column>
 							</h:panelGrid>
 						</p:dataGrid>

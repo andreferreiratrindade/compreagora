@@ -1,4 +1,4 @@
-package br.beans;
+package br.beans.util;
 
 import java.io.Serializable;
 import java.util.ArrayList;

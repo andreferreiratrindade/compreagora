@@ -21,7 +21,7 @@
 				style="position: inherit; margin-top: 43px; margin-right: 10px; font-size: 11px;">
 				<sec:isAnonymous>
 					<p:commandButton value="Quero me cadastrar"
-						action="#{clienteBean.novo}" style="background: #FEFFFC">
+						action="#{pagPath.novoCadastroDeUsuario}" style="background: #FEFFFC">
 						<f:setPropertyActionListener
 							target="#{contextUtil.categoriaEmpresa}" value="#{-1}" />
 					</p:commandButton>&nbsp;  &nbsp;
@@ -40,10 +40,10 @@
 
 						<p:commandButton value="Clientes"
 							action="/paginas/admin/cliente/clientesCadastrados.jsf?faces-redirect=true"
-							style="background-color: #FEFFFC;top: -11px;margin-right: 15px;" />
+							style="top: -11px;margin-right: 15px;background: #FEFFFC" />
 						<p:commandButton value="Empresa"
 							action="/paginas/admin/empresa/areaAdministrativa.jsf?faces-redirect=true"
-							style="background-color: #FEFFFC;top: -11px;margin-right: 2px;" />
+							style="background: #FEFFFC;top: -11px;margin-right: 2px;" />
 						&nbsp;&nbsp; <span> <a title="Sair"
 							style="position: relative;"
 							href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
@@ -59,8 +59,8 @@
 							style="color: #FFF;font-size: x-large;margin-right: 12px;font-family: sans-serif;position: relative;" />
 
 						<p:commandButton value="Administrativo"
-							style="background-color: #FEFFFC;top: -11px;margin-right: 2px;"
-							action="/paginas/restrito_empresa/empresa/PedidosDeClientes.jsf?faces-redirect=true" />
+							style="background: #FEFFFC;top: -11px;margin-right: 2px;"
+							action="#{pagPath.administrativo}" />
 						<span> <a title="Sair" style="position: relative;"
 							href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
 								<h:graphicImage library="imagens/icones" name="sair.png"
@@ -131,7 +131,7 @@
 								style="background: #FEFFFC;float:left" />
 
 							<p:commandButton value="Entrar"
-								action="/paginas/publico/login.jsf?faces-redirect=true"
+								action="#{pagPath.login}"
 								styleClass="ui-priority-primary" style="width: 86px;float:right" />
 
 						</h:panelGrid>
@@ -147,7 +147,7 @@
 								at="left bottom">
 
 								<p:menuitem value="Meus Pedidos"
-									action="/paginas/publico/meusPedidos.jsf?faces-redirect=true"
+									action="#{pagPath.meusPedidos}"
 									style="font-size: 23px; height:25px">
 									<f:setPropertyActionListener
 										target="#{contextUtil.categoriaEmpresa}" value="#{-1}" />

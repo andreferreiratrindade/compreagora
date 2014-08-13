@@ -143,4 +143,8 @@ public abstract class Produto implements Serializable, CycleRecoverable {
 		return true;
 	}
 
+	public void alteraStatus() {
+		ativo = !ativo;
+	}
+
 }

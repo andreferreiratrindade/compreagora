@@ -14,51 +14,50 @@
 			<div
 				style="width: 960px; margin: auto; height: 750px; margin-top: 10px">
 
-				<div style="float: right; width: 730px">
+				<div style="float: right; width: 735px">
+
 
 					<h:form id="form">
 
-						<p:dataGrid value="#{produtoEmpresaManutencaoBean.bebidasDM}"
-							var="bebida" paginator="true" columns="1" id="bebidas">
-							<h:panelGrid style="width:730px">
-								<p:column>
-									<h:graphicImage library="imagens/produto/bebida"
-										name="#{bebida.idProduto}.gif" width="100" height="100"
+						<p:dataGrid value="#{empresaManterProdutoMarmitexBean.marmitexsDM}"
+							var="marmitex" paginator="true" columns="1" rows="6"
+							id="marmitexs">
+							<h:panelGrid style="width:715px">
+								<h:column>
+									<h:graphicImage library="imagens/produto/marmitex"
+										name="#{marmitex.idProduto}.gif" width="100" height="100"
 										style="float:left" />
-									<h:outputText value="#{bebida.descricao}"
+									<h:outputText title="Descrição" value="#{marmitex.descricao}"
 										style="font-size: 20px;" />
 									<br />
-									<span style="margin-top: 10px" />
+									<h:outputText value="#{marmitex.ingredientes}"
+										title="Ingredientes" />
 									<h:panelGrid
-										style="float: right;margin-right: 60px;font-size: 20px;margin-top: -16px;"
+										style="margin-top: -16px;float: right;margin-right: 60px;font-size: 20px;"
 										columns="2">
 										<h:outputText value="R$" />
-										<h:outputText value="#{bebida.valor}">
+										<h:outputText value="#{marmitex.valor}">
 											<f:convertNumber pattern="#,###,##0.00" />
 										</h:outputText>
 									</h:panelGrid>
-									<h:outputText value="Estoque: " />
-									<p:spinner value="#{bebida.estoque}" min="0" max="500" size="2" />
 									<br />
 									<h:outputText
-										value="#{bebida.ativo?'Disponivel':'Indisponivel'}"
+										value="#{marmitex.ativo?'Disponivel':'Indisponivel'}"
 										style="font-size:15px" /> &nbsp;
 								<h:graphicImage library="imagens/icones"
-										name="#{bebida.ativo}.gif" width="13px" />
-									<p:commandButton value="Alterar Status"
-										actionListener="#{produtoEmpresaManutencaoBean.atualizaStatusBebida}"
-										update=":form:bebidas" ajax="false"
-										style="float:right;margin-right:49px;background-color: cornflowerblue;color: #000;" />
-								</p:column>
+										name="#{marmitex.ativo}.gif" width="13px" />
+									<p:commandLink value="Alterar Status"
+										actionListener="#{empresaManterProdutoMarmitexBean.atualizaStatus}"
+										update=":form:marmitexs"
+										style="float:right;margin-right:49px;"  styleClass="buttonAdd"/>
+								</h:column>
 							</h:panelGrid>
 						</p:dataGrid>
-
 
 					</h:form>
 				</div>
 			</div>
 		</div>
-
 	</ui:define>
 </ui:composition>
 </html>

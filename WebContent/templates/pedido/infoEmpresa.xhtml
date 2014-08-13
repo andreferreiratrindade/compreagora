@@ -6,7 +6,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core">
 <ui:composition>
-	<div id="desktop" style="margin-top: 10px;border-radius: 10px;">
+	<div id="desktop" style="margin-top: 10px; border-radius: 10px;">
 
 		<h:panelGrid columns="3"
 			style="width: 960px; height: 157px;font-family: sans-serif;margin:auto;background-color: rgba(255, 255, 255, 0.4);border-radius: 10px;">
@@ -18,10 +18,10 @@
 				<h:panelGrid columns="1">
 					<h:outputText value="#{pedidoBean.empresa.razaoSocial}"
 						style="color: #FFF;font-size: 24px;" />
-					<span class="phone_with_ddd"> <h:outputText
+					 <h:outputText
 							value="#{pedidoBean.empresa.telefone}"
-							style="color: #FFF;font-size: 15px;" />
-					</span>
+							style="color: #FFF;font-size: 15px;" converter="converterTelefone"/>
+					
 					<p:dataGrid value="#{pedidoBean.formasDePagamentoDM}" var="fdp">
 
 						<h:graphicImage library="imagens/icones/formaDePagamento"
@@ -44,8 +44,8 @@
 					style="color: #FFF;" />
 				<h:outputText />
 				<h:outputText />
-				<h:outputText value="CEP: #{pedidoBean.empresa.endereco.cep}"
-					style="color: #FFF;" />
+				<h:outputText value="#{pedidoBean.empresa.endereco.cep}"
+					style="color: #FFF;" converter="converterCEP" />
 			</h:panelGrid>
 			<h:panelGrid columns="2"
 				style="float:right;color: #FFF;margin-right:20px">
