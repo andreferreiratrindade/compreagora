@@ -8,110 +8,149 @@
 	xmlns:sec="http://www.springframework.org/security/facelets/tags">
 <ui:composition>
 	<!-- Display DeskTop -->
-	<div id="desktop">
-		<span
-			style="background:#242448; height: 90px; position: absolute; width: 100%; top: 0" />
+	<div id="desktop" class="container-fluid">
+		<h:form>
+			<div class="row">
+				<h:graphicImage library="imagens/ImagensForm" name="topoFigura.png"
+					width="100%" style="position: absolute;height: 113px;"
+					styleClass="img-responsive" />
 
-		<h:form style="margin-top:-8px !important;width: 960px;margin: auto;">
+			</div>
 
-			<h:graphicImage library="imagens/icones" name="logo.png"
-				style="position: absolute; width: 283px; top: 10px;" />
-
-			<div align="right"
-				style="position: inherit; margin-top: 43px; margin-right: 10px; font-size: 11px;">
-				<sec:isAnonymous>
-					<p:commandButton value="Quero me cadastrar"
-						action="#{pagPath.novoCadastroDeUsuario}" style="background: #FEFFFC">
-						<f:setPropertyActionListener
-							target="#{contextUtil.categoriaEmpresa}" value="#{-1}" />
-					</p:commandButton>&nbsp;  &nbsp;
-				<p:commandButton value="Entrar"
-						action="/paginas/publico/login.jsf?faces-redirect=true"
-						styleClass="ui-priority-primary">
-						<f:setPropertyActionListener
-							target="#{contextUtil.categoriaEmpresa}" value="#{-1}" />
-					</p:commandButton>
-				</sec:isAnonymous>
-				<sec:ifAnyGranted roles="ROLE_SUP">
-					<div style="margin-top: -23px;">
-						<h:outputText value="#{contextUtil.clienteLogado.nome}"
-							style="color: #FFF;font-size: x-large;margin-right: 12px;font-family: sans-serif;position: relative;" />
+			<div class="row">
 
 
-						<p:commandButton value="Clientes"
-							action="/paginas/admin/cliente/clientesCadastrados.jsf?faces-redirect=true"
-							style="top: -11px;margin-right: 15px;background: #FEFFFC" />
-						<p:commandButton value="Empresa"
-							action="/paginas/admin/empresa/areaAdministrativa.jsf?faces-redirect=true"
-							style="background: #FEFFFC;top: -11px;margin-right: 2px;" />
-						&nbsp;&nbsp; <span> <a title="Sair"
-							style="position: relative;"
-							href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
-								<h:graphicImage library="imagens/icones" name="sair.png"
-									width="80px" />
-						</a>
-						</span>
+
+				<div class="col-md-4 col-sm-4 col-xs-5 col-lg-3">
+					<h:graphicImage library="imagens/icones" name="logo.png"
+						style="position: absolutex" styleClass="img-responsive" />
+				</div>
+				<div class="col-md-8 col-sm-8 col-xs-7 col-lg-3 col-lg-push-6">
+					<div class="pull-right">
+						<sec:isAnonymous>
+							<h:commandButton value="Quero me cadastrar"
+								action="#{pagPath.novoCadastroDeUsuario}"
+								styleClass="btn btn-default">
+
+							</h:commandButton>
+							&nbsp;&nbsp;
+							<h:commandButton value="Entrar"
+								action="/paginas/publico/login.jsf?faces-redirect=true"
+								styleClass="btn btn-primary">
+
+							</h:commandButton>
+						</sec:isAnonymous>
 					</div>
-				</sec:ifAnyGranted>
-				<sec:ifAnyGranted roles="ROLE_ADM">
-					<div style="margin-top: -23px;">
-						<h:outputText value="#{contextUtil.clienteLogado.nome}"
-							style="color: #FFF;font-size: x-large;margin-right: 12px;font-family: sans-serif;position: relative;" />
 
-						<p:commandButton value="Administrativo"
-							style="background: #FEFFFC;top: -11px;margin-right: 2px;"
-							action="#{pagPath.administrativo}" />
-						<span> <a title="Sair" style="position: relative;"
-							href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
-								<h:graphicImage library="imagens/icones" name="sair.png"
-									width="88px;" />
-						</a>
-						</span>
-					</div>
-				</sec:ifAnyGranted>
-				<sec:ifAnyGranted roles="ROLE_CLI">
+					<div class="pull-right">
+						<sec:ifAnyGranted roles="ROLE_SUP">
+							<div>
+								<h:outputText value="#{contextUtil.clienteLogado.nome}"
+									style="color: #FFF;font-size: x-large;margin-right: 12px;font-family: sans-serif;position: relative;" />
 
 
-					<div style="margin-top: -24px;">
-
-						<h:outputText value="#{contextUtil.clienteLogado.nome}"
-							style="color: #FFF;font-size: x-large;font-family: sans-serif;position: relative;" />
-					</div>
-					<p:commandButton id="dynaButton" value="Minha Conta" type="button"
-						style="float:right" styleClass="ui-priority-primary" />
-
-
-					<p:menu overlay="true" trigger="dynaButton" my="left top"
-						at="left bottom">
-						<p:submenu>
-							<p:menuitem value="Meus Pedidos"
-								action="/paginas/publico/meusPedidos.jsf?faces-redirect=true">
-								<f:setPropertyActionListener
-									target="#{contextUtil.categoriaEmpresa}" value="#{-1}" />
-							</p:menuitem>
-							<p:separator />
-							<p:menuitem value="Editar Conta"
-								action="#{clienteBean.alterarCliente}">
-								<f:setPropertyActionListener
-									target="#{contextUtil.categoriaEmpresa}" value="#{-1}" />
-							</p:menuitem>
-							<p:separator />
-							<p:menuitem value="Sair">
-								<center>
-									<a title="Sair"
-										href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
+								<h:commandLink value="Clientes"
+									action="/paginas/admin/cliente/clientesCadastrados.jsf?faces-redirect=true" />
+								<p:commandLink value="Empresa"
+									action="/paginas/admin/empresa/areaAdministrativa.jsf?faces-redirect=true"
+									style="background: #FEFFFC;" />
+								&nbsp;&nbsp; <span> <a title="Sair"
+									style="position: relative;"
+									href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
 										<h:graphicImage library="imagens/icones" name="sair.png"
-											width="88px" />
-									</a>
-								</center>
-							</p:menuitem>
-						</p:submenu>
-					</p:menu>
+											width="80px" />
+								</a>
+								</span>
+							</div>
+						</sec:ifAnyGranted>
 
-					<div style="margin-top: 43px;"></div>
-				</sec:ifAnyGranted>
+						<div>
+							<sec:ifAnyGranted roles="ROLE_ADM">
+								<div>
+									<h:outputText value="#{contextUtil.clienteLogado.nome}"
+										style="color: #FFF;font-size: x-large;margin-right: 12px;font-family: sans-serif;position: relative;" />
+
+									<h:commandLink value="Administrativo"
+										styleClass="btn btn-default"
+										action="#{pagPath.administrativo}" />
+									<span> <a title="Sair" style="position: relative;"
+										href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
+											<span class="glyphicon glyphicon-off"></span>
+
+									</a>
+									</span>
+								</div>
+							</sec:ifAnyGranted>
+						</div>
+
+						<sec:ifAnyGranted roles="ROLE_CLI">
+
+							<ul class="nav nav-pills">
+
+								<li class="dropdown"><a class="dropdown-toggle"
+									data-toggle="dropdown" href="#">#{contextUtil.clienteLogado.nome}
+										<span class="caret"></span>
+								</a>
+									<ul class="dropdown-menu" role="menu">
+										<li><h:commandLink value="Meus Pedidos"
+												action="/paginas/publico/meusPedidos.jsf?faces-redirect=true">
+
+											</h:commandLink></li>
+										<li><h:commandLink value="Editar Conta"
+												action="#{clienteBean.alterarCliente}">
+
+											</h:commandLink></li>
+										<li><a
+											href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
+												Sair</a></li>
+									</ul></li>
+							</ul>
+
+						</sec:ifAnyGranted>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-6 col-lg-6 col-xs-6 col-lg-pull-2"
+					style="margin-top: 10px">
+
+					<div
+						class="col-md-12 col-sm-12 col-lg-12 col-xs-12 col-xs-offset-2 col-lg-offset-0 col-md-offset-4">
+						<div>
+							<div class="col-md-4 col-sm-4 col-xs-4 col-lg-4">
+								<h:commandLink action="/principal.jsf?faces-redirect=true"
+									id="home">
+									<h:graphicImage library="imagens/ImagensForm"
+										name="homeCirculo.png" style="position: absolute;width: 55px;" />
+
+								</h:commandLink>
+							</div>
+							<div class="col-md-4 col-sm-4 col-xs-4 col-lg-4">
+								<h:commandLink oncomplete="dlgAjuda.show()" id="lnkAjuda">
+									<h:graphicImage library="imagens/ImagensForm"
+										name="homeCirculo.png" style="position: absolute;width: 55px;" />
+								</h:commandLink>
+
+							</div>
+							<div class="col-md-4 col-sm-1 col-xs-1 col-lg-4">
+								<h:commandLink id="faleConosco"
+									action="/paginas/publico/clienteEmailContato.jsf?faces-redirect=true">
+									<h:graphicImage library="imagens/ImagensForm"
+										name="homeCirculo.png" style="position: absolute;width: 55px;" />
+
+								</h:commandLink>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
 			</div>
 		</h:form>
+		<p:dialog id="dlgAjuda" header="Ajuda - Como realizar um pedido"
+			widgetVar="dlgAjuda" modal="true" showEffect="slide"
+			style="background-color: #F74646;">
+			<h:graphicImage library="imagens/ImagensForm" name="passo2.png" />
+		</p:dialog>
 	</div>
 
 	<!-- Display Mobile -->
@@ -130,8 +169,7 @@
 							<p:commandButton value="Cadastre-se" action="#{clienteBean.novo}"
 								style="background: #FEFFFC;float:left" />
 
-							<p:commandButton value="Entrar"
-								action="#{pagPath.login}"
+							<p:commandButton value="Entrar" action="#{pagPath.login}"
 								styleClass="ui-priority-primary" style="width: 86px;float:right" />
 
 						</h:panelGrid>
@@ -146,8 +184,7 @@
 							<p:menu overlay="true" trigger="dynaButton" my="left top"
 								at="left bottom">
 
-								<p:menuitem value="Meus Pedidos"
-									action="#{pagPath.meusPedidos}"
+								<p:menuitem value="Meus Pedidos" action="#{pagPath.meusPedidos}"
 									style="font-size: 23px; height:25px">
 									<f:setPropertyActionListener
 										target="#{contextUtil.categoriaEmpresa}" value="#{-1}" />

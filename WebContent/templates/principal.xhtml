@@ -13,8 +13,15 @@
 	<title>Compre Agora</title>
 	<link rel="shortcut icon" href="#{resource['imagens/icones:logo.gif']}" />
 	<h:outputStylesheet library="/css" name="estilo.css" />
+	<h:outputStylesheet library="/bootstrap/css" name="bootstrap-theme.css" />
+	<h:outputStylesheet library="/bootstrap/css" name="bootstrap.css" />
+
+	<h:outputStylesheet library="/bootstrap/fonts"
+		name="glyphicons-halflings-regular.svg" />
+
 	<h:outputScript name="easySlider1.7.js" library="scripts" />
 	<h:outputScript name="jquery.js" library="scripts/lib" />
+	<h:outputScript name="bootstrap.js" library="/bootstrap/js" />
 
 
 	<script type="text/javascript">
@@ -29,6 +36,7 @@
 </h:head>
 <h:body>
 	<div id="container" style="max-width: 100%;">
+
 		<div id="topo">
 			<ui:insert name="topo">
 				<ui:include src="topo.xhtml" />
@@ -56,8 +64,6 @@
 				<ui:include src="rodape.xhtml" />
 			</ui:insert>
 		</div>
-
-
 
 		<div id="rodape3" style="background: #242448;">
 			<ui:insert name="rodape3">

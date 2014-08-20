@@ -6,72 +6,42 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core">
 <ui:composition>
-	<div id="desktop"
-		style="width: 960px; height: 355px; margin: auto; margin-top: 60px; font-family: 'Source Sans Pro', sans-serif">
-		<div>
-			<br /> <br /> <br />
-			<center>
-				<div style="float: left; width: 50%;">
-					<h:graphicImage library="imagens/ImagensForm" name="cardapio.jpg"
-						style="width: 235px" />
-					<center>
-						<h1>Opções</h1>
-						<br />
-						<h2 style="color: #4c4c4c">
-							A maior lista de restaurantes<br /> com os mais variados
-							cardapios.
-						</h2>
-					</center>
-				</div>
-				<div style="float: left; width: 50%; margin: auto">
-					<h:graphicImage library="imagens/ImagensForm" name="device.png"
-						style="width: 280px" />
-					<center>
-						<h1>Design ajustavel</h1>
-						<br />
-						<h2 style="color: #4c4c4c">
-							O site se adapta perfeitamente<br /> no tamanho da sua tela.
-						</h2>
-					</center>
-				</div>
+	<div 
+		style="margin: auto; margin-top: 60px; margin-bottom: 20px; font-family: 'Source Sans Pro', sans-serif"
+		class="container-fluid">
 
-			</center>
+		<div class="row">
+
+			<div class="col-md-6 col-lg-6 col-sm-6 ">
+				<center>
+					<div>
+						<h:graphicImage library="imagens/ImagensForm" name="cardapio.jpg"
+							styleClass="img-responsive" style="width: 260px;" />
+						<div class="col-lg-12">
+							<h1>Opções</h1>
+							<br /> A maior lista de restaurantes<br /> com os mais variados
+							cardapios.
+						</div>
+					</div>
+				</center>
+			</div>
+
+			<div class="col-md-6 col-lg-6 col-sm-6">
+				<center>
+					<div>
+						<h:graphicImage library="imagens/ImagensForm" name="device.png"
+							styleClass="img-responsive" style="width: 315px;" />
+						<div class="col-lg-12">
+							<h1>Design ajustavel</h1>
+							<br /> O site se adapta perfeitamente<br /> no tamanho da sua
+							tela.
+						</div>
+					</div>
+				</center>
+			</div>
 
 		</div>
-	</div>
-
-	<div id="celular"
-		style="height: 540px; margin-top: 60px; font-family: 'Source Sans Pro', sans-serif">
-		<br /> <br />
-		<center>
-			<div>
-				<h:graphicImage library="imagens/ImagensForm" name="cardapio.jpg"
-					style="width: 170px" />
-				<center>
-					<h1>Opções</h1>
-					<br />
-					<h2 style="color: #4c4c4c">
-						A maior lista de restaurantes<br /> com os mais variados
-						cardapios.
-					</h2>
-				</center>
-			</div>
-			<br /> <br />
-			<div>
-				<h:graphicImage library="imagens/ImagensForm" name="device.png"
-					style="width: 200px" />
-				<center>
-					<h1>Design ajustavel</h1>
-					<br />
-					<h2 style="color: #4c4c4c">
-						O site se adapta perfeitamente<br /> no tamanho da sua tela.
-					</h2>
-				</center>
-			</div>
-
-		</center>
 
 	</div>
-
 </ui:composition>
 </html>

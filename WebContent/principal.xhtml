@@ -5,99 +5,201 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:sec="http://www.springframework.org/security/facelets/tags"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets" lang="br">
 
 <ui:composition template="/templates/principal.xhtml">
 	<ui:define name="corpo">
 		<!-- 
 	Display para DeskTop
  -->
+		<div id="desktop" style="margin-top: 40px" class="container-fluid">
+			<div class="row">
+				<div class="col-lg-12 text-center" style="margin-bottom: 30px">
+					<h3>Selecione seu endereço</h3>
+				</div>
+
+				<h:form style="margin-bottom: 110px">
+
+					<div
+						class="col-lg-offset-3 col-md-offset-2  col-sm-offset-1 col-lg-9 col-md-10 col-sm-11 col-xs-offset-2 col-xs-10">
+
+						<div class="col-md-4  col-lg-4 col-sm-5 col-xs-12">
+							<p:autoComplete id="autoCompleteCidade" forceSelection="true"
+								value="#{autoCompleteController.cidade}" var="cidade"
+								itemLabel="#{cidade.descCidade}" itemValue="#{cidade}"
+								completeMethod="#{autoCompleteController.completaCidade}"
+								dropdown="true" required="true" converter="converterCidade"
+								label="Cidade"
+								requiredMessage="Informe sua cidade e depois seu bairro">
+								<p:ajax event="itemSelect"
+									listener="#{autoCompleteController.handleSelect}"
+									update="autoCompleteBairro" />
+
+							</p:autoComplete>
+							<p:watermark value="Cidade" for="autoCompleteCidade"></p:watermark>
+						</div>
+						<div class="visible-xs-block">
+							<span class="col-xs-12"> <br></br></span>
+
+						</div>
+						<div class="col-md-4 col-lg-4 col-sm-5 col-xs-12">
+							<p:autoComplete id="autoCompleteBairro"
+								value="#{autoCompleteController.bairro}" forceSelection="true"
+								completeMethod="#{autoCompleteController.completaBairro}"
+								var="bairro" itemLabel="#{bairro.descBairro}"
+								itemValue="#{bairro}" required="true"
+								converter="converterBairro" dropdown="true" scrollHeight="200"
+								label="Bairro" requiredMessage="Informe seu bairro">
+								<p:ajax event="itemSelect"
+									listener="#{autoCompleteController.handleSelectBairro}" />
+							</p:autoComplete>
+							<p:watermark value="Bairro" for="autoCompleteBairro"></p:watermark>
+
+						</div>
+						<div class="visible-xs-block">
+							<span class="col-xs-12"> <br></br></span>
+
+						</div>
+						<div class=" col-md-2 col-lg-2 col-sm-2 col-xs-6">
+							<p:commandLink update=":dataGridEmpresas" id="buscar"
+								value="Buscar" styleClass="btn btn-success btn-block"
+								actionListener="#{autoCompleteController.atualizaSelecaoEmpresa()}"
+								onclick="window.scrollTo(0, 200);" onstart="dlgLoading.show()"
+								onsuccess="dlgLoading.hide()">
+
+							</p:commandLink>
+						</div>
+
+					</div>
+
+					<div class="visible-xs-block">
+						<span class="col-xs-12"> <br></br></span>
+
+					</div>
+					<div class="visible-lg-block">
+						<span class="col-lg-12"> <br></br></span>
+
+					</div>
+				</h:form>
+
+				<h:form id="dataGridEmpresas"
+					style="margin:0 auto;display:#{autoCompleteController.cidade.descCidade != null ? 'block' : 'none'}"
+					styleClass="container">
+					<div class="row">
+
+						<p:dataGrid value="#{autoCompleteController.empresas}"
+							var="empresa" paginator="true" columns="4" ajax="false"
+							emptyMessage="Nunhuma empresa atende a esse local"
+							styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<p:column>
+								<h:panelGrid style="position: absolute;">
+									<h:graphicImage library="imagens/empresa"
+										name="#{empresa.aberto}.gif" />
+								</h:panelGrid>
+								<p:commandLink action="#{pedidoBean.adicionaEmpresa}"
+									disabled="#{!empresa.aberto}" id="lnk">
+									<h:graphicImage width="150" height="100"
+										library="imagens/empresa"
+										name="Empresa#{empresa.idEmpresa}.jpg" />
+									<f:setPropertyActionListener target="#{pedidoBean.empresa}"
+										value="#{empresa}" />
+									<f:setPropertyActionListener
+										target="#{pedidoBean.categoriaEmpresa}"
+										value="#{contextUtil.categoriaEmpresa}" />
+								</p:commandLink>
+								<p:tooltip for="lnk">
+									<h:panelGrid>
+										<center>
+											<h:outputText value="#{empresa.nomeFant}"
+												style="font-size:16px" />
+											<h:outputText value="#{empresa.telefone}"
+												converter="converterTelefone" />
+										</center>
+										<h:panelGrid columns="2">
+											<h:outputText value="Domingo" />
+											<h:outputText value="#{empresa.domingo()}" escape="false" />
+											<h:outputText value="Segunda" />
+											<h:outputText value="#{empresa.segunda()}" escape="false" />
+											<h:outputText value="Terça" />
+											<h:outputText value="#{empresa.terca()}" escape="false" />
+											<h:outputText value="Quarta" />
+											<h:outputText value="#{empresa.quarta()}" escape="false" />
+											<h:outputText value="Quinta" />
+											<h:outputText value="#{empresa.quinta()}" escape="false" />
+											<h:outputText value="Sexta" />
+											<h:outputText value="#{empresa.sexta()}" escape="false" />
+											<h:outputText value="Sábado" />
+											<h:outputText value="#{empresa.sabado()}" escape="false" />
+										</h:panelGrid>
+									</h:panelGrid>
+								</p:tooltip>
+							</p:column>
+						</p:dataGrid>
+					</div>
+				</h:form>
 
 
-		<div id="desktop"
-			style="width: 960px; margin: auto; margin-top: 123px;">
-
-			<div id="slider" style="margin: auto; width: 960px">
-				<ul>
-					<li><h:graphicImage name="promocao.png"
-							library="imagens/destaque" /></li>
-					<li><h:graphicImage name="promocao2.png"
-							library="imagens/destaque" /></li>
-					<li><h:graphicImage name="promocao3.png"
-							library="imagens/destaque" /></li>
-				</ul>
+				<p:dialog id="dlgLoading" closable="false" draggable="false"
+					widgetVar="dlgLoading" modal="true">
+					<h:graphicImage library="imagens/icones" name="carregando.gif" />
+				</p:dialog>
 			</div>
-			<h:form id="formCorpo" style="margin: auto;min-height: 350px;">
-				<center>
 
-					<h:graphicImage library="imagens/ImagensForm"
-						name="comoRealizarCompra.png"
-						style="position:relative;margin-top: 80px;" />
-				</center>
-			</h:form>
 		</div>
-
 
 		<!-- 
 	Display para Mobile
  -->
-		<div id="celular" style="height: 380px;">
+		<div id="celular" class="container-fluid">
 			<h:form>
 				<center>
 					<h:outputText value="Selecione uma categoria"
 						style="font-size: 25px;margin-top:10px;color:#354866;font-family: Estrangelo Edessa;" />
 				</center>
-				<div style="width: 90%; margin: auto; margin-top: 16px;">
+				<ul class="nav nav-pills nav-stacked">
+					<li class="active"><h:commandLink 
+							value="Lanchonete"
+							style="background-color:yellow; color:#354866 !important"
+							action="#{pagPath.selecionaEnderecoFiltro}">
+							<f:setPropertyActionListener
+								target="#{contextUtil.categoriaEmpresa}" value="#{0}" />
+						</h:commandLink></li>
+					<li><h:commandLink  value="Pizzaria"
+							style="margin-top:10px; background-color:yellow; color:#354866 !important"
+							action="#{pagPath.selecionaEnderecoFiltro}">
+							<f:setPropertyActionListener
+								target="#{contextUtil.categoriaEmpresa}" value="#{1}" />
+						</h:commandLink></li>
+					<li><h:commandLink  value="Restaurante"
+							style="margin-top:10px; background-color:yellow; color:#354866 !important"
+							action="#{pagPath.selecionaEnderecoFiltro}">
+							<f:setPropertyActionListener
+								target="#{contextUtil.categoriaEmpresa}" value="#{2}" />
+						</h:commandLink></li>
+					<li><h:commandLink  value="Bebida"
+							style="margin-top:10px; background-color:yellow; color:#354866 !important"
+							action="#{pagPath.selecionaEnderecoFiltro}">
+							<f:setPropertyActionListener
+								target="#{contextUtil.categoriaEmpresa}" value="#{3}" />
+						</h:commandLink></li>
+					<li><h:commandLink  value="Agua"
+							style="margin-top:10px; background-color:yellow; color:#354866 !important"
+							action="#{pagPath.selecionaEnderecoFiltro}">
+							<f:setPropertyActionListener
+								target="#{contextUtil.categoriaEmpresa}" value="#{4}" />
+						</h:commandLink></li>
+					<li><h:commandLink  value="Gas"
+							style="margin-top:10px; background-color:yellow; color:#354866 !important"
+							action="#{pagPath.selecionaEnderecoFiltro}">
+							<f:setPropertyActionListener
+								target="#{contextUtil.categoriaEmpresa}" value="#{5}" />
+						</h:commandLink></li>
+				</ul>
 
 
-					<p:commandLink styleClass="menuLink" value="Lanchonete"
-						style="background-color:yellow; color:#354866 !important"
-						action="#{pagPath.selecionaEnderecoFiltro}">
-						<f:setPropertyActionListener
-							target="#{contextUtil.categoriaEmpresa}" value="#{0}" />
-					</p:commandLink>
-
-					<p:commandLink styleClass="menuLink" value="Pizzaria"
-						style="margin-top:10px; background-color:yellow; color:#354866 !important"
-						action="#{pagPath.selecionaEnderecoFiltro}">
-						<f:setPropertyActionListener
-							target="#{contextUtil.categoriaEmpresa}" value="#{1}" />
-					</p:commandLink>
-
-					<p:commandLink styleClass="menuLink" value="Restaurante"
-						style="margin-top:10px; background-color:yellow; color:#354866 !important"
-						action="#{pagPath.selecionaEnderecoFiltro}">
-						<f:setPropertyActionListener
-							target="#{contextUtil.categoriaEmpresa}" value="#{2}" />
-					</p:commandLink>
-
-					<p:commandLink styleClass="menuLink" value="Bebida"
-						style="margin-top:10px; background-color:yellow; color:#354866 !important"
-						action="#{pagPath.selecionaEnderecoFiltro}">
-						<f:setPropertyActionListener
-							target="#{contextUtil.categoriaEmpresa}" value="#{3}" />
-					</p:commandLink>
-
-					<p:commandLink styleClass="menuLink" value="Agua"
-						style="margin-top:10px; background-color:yellow; color:#354866 !important"
-						action="#{pagPath.selecionaEnderecoFiltro}">
-						<f:setPropertyActionListener
-							target="#{contextUtil.categoriaEmpresa}" value="#{4}" />
-					</p:commandLink>
-
-					<p:commandLink styleClass="menuLink" value="Gas"
-						style="margin-top:10px; background-color:yellow; color:#354866 !important"
-						action="#{pagPath.selecionaEnderecoFiltro}">
-						<f:setPropertyActionListener
-							target="#{contextUtil.categoriaEmpresa}" value="#{5}" />
-					</p:commandLink>
-				</div>
 			</h:form>
 		</div>
-		<!-- 
-	Display para Tablet
- -->
-		<div id="tablet"></div>
+		
 	</ui:define>
 </ui:composition>
 </html>

@@ -25,7 +25,7 @@ public class ContextUtil implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Cliente clienteLogado = null;
-	private int categoriaEmpresa = -1;
+	private int categoriaEmpresa;
 	private String categoriaEmpresaStr;
 
 	private Map<Integer, String> mapCategoriaEmp;

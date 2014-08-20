@@ -8,41 +8,57 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <ui:composition template="/templates/principal.xhtml">
 	<ui:define name="corpo">
-		<h:panelGrid columns="2"
-				style="border-radius: 11px; margin:0 auto; margin-top: 90px;">
-				<p:panel>
-					<h:panelGrid rendered="#{!empty param.login_error}">
+		<div class="container-fluid" style="margin-top: 10px">
 
-						<span style="background-color: #F70;"> Erro ao efetuar o
-							login. Tente novamente</span>
-					</h:panelGrid>
+			<div class="row">
 
-					<form id="login" method="post" style="border-radius: 11px;"
-						action="#{request.contextPath}/j_spring_security_check">
-						<h:panelGrid>
-							<h:outputText value="E-mail" />
-							<p:inputText type="text" id="j_username" size="33"
-								required="true" />
-							<h:outputText value="Senha" />
-							<p:password id="j_password" size="33" required="true" />
-						</h:panelGrid>
-						<h:form>
-							<p:commandButton type="submit" value="Entrar" ajax="false"
-								styleClass="ui-priority-primary"
-								style="margin-left: 174px; margin-top: 6px;" />
-						</h:form>
-						<p:selectBooleanCheckbox id="_spring_security_remember_me" />
-						Entrar automaticamente	
-					</form>
+				<div
+					class="col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-0 col-md-5 col-lg-4 col-sm-6 col-xs-12">
 
-					<h:form>
-						<p:commandLink value="Esqueci minha Senha"
-							oncomplete="dlgEsqueciSenha.show()" />
+					<div class=" panel panel-info">
+						<div class="panel-heading">Login</div>
+						<div class="panel-body">
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-					</h:form>
-				</p:panel>
-			</h:panelGrid>
+								<h:panelGrid rendered="#{!empty param.login_error}"
+									styleClass="col-md-12 col-lg-12 col-sm-12 col-xs-12">
 
+									<span style="background-color: #F70;"> Erro ao efetuar o
+										login. Tente novamente</span>
+								</h:panelGrid>
+								<form id="login" method="post" style="border-radius: 11px;"
+									action="#{request.contextPath}/j_spring_security_check">
+
+									<p:inputText type="text" id="j_username" required="true"
+										styleClass="col-md-12 col-lg-12 col-sm-12 col-xs-12"
+										style="margin-top:10px" />
+									<p:watermark value="E-mail*" for="j_username"></p:watermark>
+									<p:password id="j_password" required="true"
+										style="margin-top:10px"
+										styleClass="col-md-12 col-lg-12 col-sm-12 col-xs-12" />
+									<p:watermark value="Senha*" for="j_password"></p:watermark>
+									<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+										<p:selectBooleanCheckbox id="_spring_security_remember_me"
+											style="margin-top:10px" />
+										Entrar automaticamente
+									</div>
+									<h:form styleClass="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+										<p:commandButton type="submit" value="Entrar" ajax="false"
+											style="margin-top:10px"
+											styleClass="btn btn-primary pull-right" />
+									</h:form>
+
+								</form>
+
+								<h:form styleClass="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+									<p:commandLink value="Esqueci minha Senha"
+										oncomplete="dlgEsqueciSenha.show()" />
+								</h:form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 			<p:dialog id="dlgEsqueciSenha" header="Esqueci Minha Senha"
 				widgetVar="dlgEsqueciSenha" modal="true" showEffect="slide"
 				dynamic="true" width="307px">
@@ -63,8 +79,8 @@
 
 						<p:commandLink onstart="dlgLoading.show()"
 							onsuccess="dlgLoading.hide()" value="Enviar"
-							actionListener="#{clienteBean.esqueciMinhaSenha}" styleClass="buttonAdd"
-							style="float:right;margin-top:10px"
+							actionListener="#{clienteBean.esqueciMinhaSenha}"
+							styleClass="buttonAdd" style="float:right;margin-top:10px"
 							update=":formDlgEsqueciSenha" />
 					</h:panelGrid>
 				</h:form>
@@ -73,8 +89,8 @@
 				widgetVar="dlgLoading" modal="true">
 				<h:graphicImage library="imagens/icones" name="carregando.gif" />
 			</p:dialog>
-	
-		
+
+		</div>
 	</ui:define>
 </ui:composition>
 </html>

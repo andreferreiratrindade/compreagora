@@ -127,8 +127,7 @@ public class AutoCompleteController implements Serializable {
 
 	public void handleSelect(SelectEvent event) {
 
-		this.cidade = (Cidade) event.getObject();
-		
+		this.cidade = (Cidade) event.getObject();	
 
 	}
 

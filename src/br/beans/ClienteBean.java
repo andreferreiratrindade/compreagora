@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -26,7 +27,7 @@ import br.util.Email.Email;
 import br.util.Email.EmailDestino;
 
 @ManagedBean(name = "clienteBean")
-@ViewScoped
+@SessionScoped
 public class ClienteBean implements Serializable {
 	/**
 	 * 
@@ -166,10 +167,6 @@ public class ClienteBean implements Serializable {
 		this.endereco = endereco;
 	}
 
-	public String altCliente() {
-		return "paginas/publico/altCliente/alterarCliente";
-	}
-
 	public String alterarCliente() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		ExternalContext external = context.getExternalContext();
@@ -182,12 +179,13 @@ public class ClienteBean implements Serializable {
 				this.cliente = usuarioRN.buscarPorEmail(login);
 				enderecoCliente = cliente.getEnderecoCliente().get(0);
 				endereco = cliente.getEnderecoCliente().get(0).getEndereco();
-
+				confEmail = null;
+				return "/paginas/publico/alterarCliente.jsf?faces-redirect=true";
 			}
 		}
-		confEmail = null;
 		
-		return "/paginas/publico/alterarCliente.jsf?faces-redirect=true";
+		
+		return "login.jsf?faces-redirect=true";
 	}
 
 	public String atualizarSalvarCliente() {

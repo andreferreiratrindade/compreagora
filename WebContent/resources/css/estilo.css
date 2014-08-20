@@ -7,14 +7,6 @@
 	padding: 0;
 }
 
-@media screen and (min-width: 481px) and (max-width: 959px) {
-	#desktop {
-		display: none;
-	}
-	#celular {
-		display: none;
-	}
-}
 
 @media screen and (max-width: 480px) {
 	.ui-accordion .ui-accordion-header.ui-state-default {
@@ -385,7 +377,10 @@
 	}
 }
 
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 481px) {
+	.ui-autocomplete-panel .ui-autocomplete-list-item {
+		font-size: 16px;
+	}
 	#tablet {
 		display: none;
 	}
@@ -502,7 +497,7 @@
 	body {
 		background: none;
 		font-size: 12px;
-		background: #ec4b1b url("../resources/imagens/ImagensForm/head_bg.png")
+	/*	background: #ec4b1b url("../resources/imagens/ImagensForm/head_bg.png")
 			center no-repeat;
 		background-attachment: fixed;
 		-webkit-background-size: cover;
@@ -514,15 +509,13 @@
 		background-size: cover;
 		-webkit-background-size: cover;
 		-webkit-background-size: cover;
+		*/
 	}
 	#corpo {
-		margin-top: 0px;
-		margin-bottom: 10px;
-		min-height: 300px;
+		
 	}
 	#topo {
-		margin-top: -8px;
-		margin: auto;
+		
 	}
 	#menuSelecionaEmpresa {
 		background: yellow;
@@ -835,7 +828,7 @@ pre {
 	width: 38px;
 	height: 77px;
 	position: absolute;
-	margin-top: 250px;
+	margin-top: 520px;
 	top: 71px;
 	z-index: 1000;
 }

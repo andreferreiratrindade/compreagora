@@ -7,78 +7,57 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 <ui:composition>
 
-	<div id="desktop" style="margin-top: 30px;">
+	<div id="desktop" style="margin-top: 96px" class="container-fluid">
+		<div class="row">
+			<div
+				class="col-md-9 col-md-push-3 col-lg-7 col-sm-9  col-sm-push-2 col-xs-12 col-lg-pull-1 col-lg-push-3">
 
-		<h:form
-			style="height:20px;margin:auto; width:960px;position: relative;">
+				<h:form styleClass="col-md-10 col-lg-10">
 
-			<br />
-			<nav id="menu" style="margin-top: -4px;">
-			<ul>
-				<li><p:commandLink value="Lanchonete"
-						action="/paginas/categoria/endereco/selecionaEndereco.jsf?faces-redirect=true"
-						onclick="window.scrollTo(0,0);"
-						styleClass=" #{contextUtil.categoriaEmpresa == 0 ? 'empresaSelecinada' : 'selecionaEmpresa'}">
+					<ul class="nav nav-pills navbar-center">
+						<li class="#{contextUtil.categoriaEmpresa == 0 ? 'active': '' }">
 
-						<f:setPropertyActionListener
-							target="#{contextUtil.categoriaEmpresa}" value="#{0}" />
-					</p:commandLink></li>
-				<li><p:commandLink value="Pizzaria"
-						action="/paginas/categoria/endereco/selecionaEndereco.jsf?faces-redirect=true"
-						styleClass=" #{contextUtil.categoriaEmpresa == 1 ? 'empresaSelecinada' : 'selecionaEmpresa'}">
+							<h:commandLink value="Lanchonete"
+								action="/principal.jsf?faces-redirect=true"
+								onclick="window.scrollTo(0,0);">
 
+								<f:setPropertyActionListener
+									target="#{contextUtil.categoriaEmpresa}" value="#{0}" />
+							</h:commandLink>
+						</li>
+						<li class="#{contextUtil.categoriaEmpresa == 1 ? 'active': '' }"><p:commandLink
+								value="Pizzaria" action="/principal.jsf?faces-redirect=true">
 
-						<f:setPropertyActionListener
-							target="#{contextUtil.categoriaEmpresa}" value="#{1}" />
-					</p:commandLink></li>
-				<li><p:commandLink value="Restaurante"
-						action="/paginas/categoria/endereco/selecionaEndereco.jsf?faces-redirect=true"
-						styleClass=" #{contextUtil.categoriaEmpresa == 2 ? 'empresaSelecinada' : 'selecionaEmpresa'}">
-						<f:setPropertyActionListener
-							target="#{contextUtil.categoriaEmpresa}" value="#{2}" />
-					</p:commandLink></li>
-				<li><p:commandLink value="Bebida"
-						action="/paginas/categoria/endereco/selecionaEndereco.jsf?faces-redirect=true"
-						styleClass=" #{contextUtil.categoriaEmpresa == 3 ? 'empresaSelecinada' : 'selecionaEmpresa'}">
-						<f:setPropertyActionListener
-							target="#{contextUtil.categoriaEmpresa}" value="#{3}" />
-					</p:commandLink></li>
-				<li><p:commandLink value="Água"
-						action="/paginas/categoria/endereco/selecionaEndereco.jsf?faces-redirect=true"
-						styleClass=" #{contextUtil.categoriaEmpresa == 4 ? 'empresaSelecinada' : 'selecionaEmpresa'}">
-						<f:setPropertyActionListener
-							target="#{contextUtil.categoriaEmpresa}" value="#{4}" />
-					</p:commandLink></li>
-				<li><p:commandLink value="Gás"
-						action="/paginas/categoria/endereco/selecionaEndereco.jsf?faces-redirect=true"
-						styleClass=" #{contextUtil.categoriaEmpresa == 5 ? 'empresaSelecinada' : 'selecionaEmpresa'}">
-						<f:setPropertyActionListener
-							target="#{contextUtil.categoriaEmpresa}" value="#{5}" />
-					</p:commandLink></li>
-			</ul>
-			</nav>
+								<f:setPropertyActionListener
+									target="#{contextUtil.categoriaEmpresa}" value="#{1}" />
+							</p:commandLink></li>
+						<li class="#{contextUtil.categoriaEmpresa == 2 ? 'active': '' }"><p:commandLink
+								value="Restaurante" action="/principal.jsf?faces-redirect=true">
+								<f:setPropertyActionListener
+									target="#{contextUtil.categoriaEmpresa}" value="#{2}" />
+							</p:commandLink></li>
+						<li class="#{contextUtil.categoriaEmpresa == 3 ? 'active': '' }"><p:commandLink
+								value="Bebida" action="/principal.jsf?faces-redirect=true">
+								<f:setPropertyActionListener
+									target="#{contextUtil.categoriaEmpresa}" value="#{3}" />
+							</p:commandLink></li>
+						<li class="#{contextUtil.categoriaEmpresa == 4 ? 'active': '' }"><p:commandLink
+								value="Água" action="/principal.jsf?faces-redirect=true">
+								<f:setPropertyActionListener
+									target="#{contextUtil.categoriaEmpresa}" value="#{4}" />
+							</p:commandLink></li>
+						<li class="#{contextUtil.categoriaEmpresa == 5 ? 'active': '' }"><h:commandLink
+								value="Gás" action="/principal.jsf?faces-redirect=true">
+								<f:setPropertyActionListener
+									target="#{contextUtil.categoriaEmpresa}" value="#{5}" />
+							</h:commandLink></li>
+					</ul>
 
-
-
-			<p:dialog header="Quem Somos" widgetVar="dialogQuemSomos"
-				resizable="false" rendered="true" modal="true" showEffect="slide"
-				width="500">
-				<h:form prependId="false">
-					<h:panelGrid columns="1" style="margin-bottom:10px">
-
-						<h:outputLabel value="Lancho Net" />
-						<h:outputLabel
-							value="Empresa de produtos alimenticios na Internet" />
-						<h:outputLabel value="Desenvolvedores:" />
-						<h:outputLabel value="Andre Ferreira Trindade" />
-						<h:outputLabel value="Frank Almeida da Silva" />
-					</h:panelGrid>
 				</h:form>
-			</p:dialog>
-		</h:form>
-		<br /> <br />
+			</div>
+		</div>
 	</div>
 
-	<div id="celular"></div>
+	
 </ui:composition>
 </html>
