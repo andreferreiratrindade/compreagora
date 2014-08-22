@@ -1,0 +1,140 @@
+package br.beans.Avulso;
+
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
+
+import org.primefaces.event.FileUploadEvent;
+
+import br.Empresa.Empresa;
+import br.Empresa.Categoria.Categoria;
+import br.Empresa.Categoria.CategoriaENUM;
+import br.Empresa.Categoria.CategoriaRN;
+import br.Produto.Lanche;
+import br.Produto.ProdutoRN;
+import br.ProdutoAvulso.Avulso;
+import br.ProdutoAvulso.AvulsoLanche;
+import br.ProdutoAvulso.AvulsoRN;
+import br.beans.empresa.EmpresaBean;
+import br.util.FileUpload;
+
+@ManagedBean
+@ViewScoped
+public class AvulsoBean {
+
+	@ManagedProperty(value = "#{empresaBean}")
+	private EmpresaBean empresaBean;
+
+	private Empresa empresa;
+	private Avulso avulso;
+	private Avulso avulsoAtualiza;
+	private List<Avulso> avulsos;
+	private FileUpload arquivo;
+	private List<Categoria> tiposCategoria;
+	private String tipoAvulsoStr;
+
+	public List<Categoria> getTiposCategoria() {
+		return tiposCategoria;
+	}
+
+	public Avulso getAvulsoAtualiza() {
+		return avulsoAtualiza;
+	}
+
+	public void setAvulsoAtualiza(Avulso avulsoAtualiza) {
+		this.avulsoAtualiza = avulsoAtualiza;
+	}
+
+	public void setTiposCategoria(List<Categoria> tiposCategoria) {
+		this.tiposCategoria = tiposCategoria;
+	}
+
+	public Avulso getAvulso() {
+		return avulso;
+	}
+
+	public void setAvulso(Avulso avulso) {
+		this.avulso = avulso;
+	}
+
+	public String getTipoAvulsoStr() {
+		return tipoAvulsoStr;
+	}
+
+	public void setTipoAvulsoStr(String tipoAvulsoStr) {
+		this.tipoAvulsoStr = tipoAvulsoStr;
+	}
+
+	public void novoAvulso() {
+		avulso = new Avulso();
+		arquivo = new FileUpload();
+	}
+
+	@PostConstruct
+	public void construct() {
+		empresa = empresaBean.getEmpresa();
+		novoAvulso();
+		AvulsoRN avulsoRN = new AvulsoRN();
+		CategoriaRN categoriaRN = new CategoriaRN();
+		tiposCategoria = categoriaRN.listar();
+		avulsos = avulsoRN.listarTodos(empresa.getIdEmpresa());
+	}
+
+	public void salvar() {
+		if (!avulso.getDescricao().isEmpty()) {
+			AvulsoRN avulsoRN = new AvulsoRN();
+
+			avulso.setEmpresa(empresa);
+			avulso.setAtivo(true);
+			avulso.setTipoAvulso(CategoriaENUM.valueOf(tipoAvulsoStr));
+			avulsoRN.salvarAvulso(avulso);
+
+			construct();
+		}
+	}
+
+	public void atualizar() {
+		AvulsoRN avulsoRN = new AvulsoRN();
+		avulsoRN.atualizarAvulso(avulsoAtualiza);
+		construct();
+	}
+
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+
+	public EmpresaBean getEmpresaBean() {
+		return empresaBean;
+	}
+
+	public void setEmpresaBean(EmpresaBean empresaBean) {
+		this.empresaBean = empresaBean;
+	}
+
+	public List<Avulso> getAvulsos() {
+		return avulsos;
+	}
+
+	public void setAvulsos(List<Avulso> avulsos) {
+		this.avulsos = avulsos;
+	}
+
+	public FileUpload getArquivo() {
+		return arquivo;
+	}
+
+	public void setArquivo(FileUpload arquivo) {
+		this.arquivo = arquivo;
+	}
+
+	public void uploadAction(FileUploadEvent event) {
+		this.arquivo.fileUpload(event);
+	}
+}

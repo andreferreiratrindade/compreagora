@@ -15,7 +15,11 @@
 	<h:outputStylesheet library="/css" name="estilo.css" />
 	<h:outputStylesheet library="/bootstrap/css" name="bootstrap-theme.css" />
 	<h:outputStylesheet library="/bootstrap/css" name="bootstrap.css" />
-
+<h:outputStylesheet
+		library="/template/AdminLTE/css/bootstrap-wysihtml5"
+		name="bootstrap3-wysihtml5.min.css" />
+	<h:outputStylesheet library="/template/AdminLTE/css"
+		name="AdminLTE.css" />
 	<h:outputStylesheet library="/bootstrap/fonts"
 		name="glyphicons-halflings-regular.svg" />
 
@@ -32,6 +36,8 @@
 			});
 		});
 	</script>
+
+
 
 </h:head>
 <h:body>
@@ -54,24 +60,12 @@
 			<ui:include src="informacoes.xhtml" />
 		</div>
 
-		<div id="corpo" style="margin-top: 0px;">
+		<div id="corpo" style="margin-top: 0px;margin-bottom: 20px;">
 
 			<ui:insert name="corpo" />
 		</div>
 
-		<div id="rodape" style="background: white;">
-			<ui:insert name="rodape">
-				<ui:include src="rodape.xhtml" />
-			</ui:insert>
-		</div>
-
-		<div id="rodape3" style="background: #242448;">
-			<ui:insert name="rodape3">
-				<ui:include src="rodape3.xhtml" />
-			</ui:insert>
-		</div>
-
-		<div id="rodape2" style="background: #1d1d3a">
+		<div id="rodape2" style="background: #1d1d3a" >
 			<ui:insert name="rodape2">
 				<ui:include src="rodape2.xhtml" />
 			</ui:insert>

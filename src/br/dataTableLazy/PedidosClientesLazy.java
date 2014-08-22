@@ -23,7 +23,7 @@ public class PedidosClientesLazy extends PedidoLazy {
 	@Override
 	public List<Pedido> load(int startingAt, int maxPerPage, String sortField,
 			SortOrder sortOrder, Map<String, String> filters) {
-		
+
 		if (sortField == null) {
 			sortField = "statusPedido";
 		}

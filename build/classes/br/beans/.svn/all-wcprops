@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/compreagora/!svn/ver/3/tcc/src/br/beans
+END
+ClienteBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/compreagora/!svn/ver/18/tcc/src/br/beans/ClienteBean.java
+END
+PedidoDataModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/compreagora/!svn/ver/3/tcc/src/br/beans/PedidoDataModel.java
+END
+FormaDePagamentoBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/compreagora/!svn/ver/6/tcc/src/br/beans/FormaDePagamentoBean.java
+END
+MeusPedidosBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/compreagora/!svn/ver/12/tcc/src/br/beans/MeusPedidosBean.java
+END
+PedidosClientesBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/compreagora/!svn/ver/24/tcc/src/br/beans/PedidosClientesBean.java
+END
+ClientesAdminBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/compreagora/!svn/ver/3/tcc/src/br/beans/ClientesAdminBean.java
+END
+PedidoBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/compreagora/!svn/ver/27/tcc/src/br/beans/PedidoBean.java
+END
+RelatorioBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/compreagora/!svn/ver/24/tcc/src/br/beans/RelatorioBean.java
+END
+AutoCompleteController.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/compreagora/!svn/ver/22/tcc/src/br/beans/AutoCompleteController.java
+END
+EmailFaleConosco.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/compreagora/!svn/ver/3/tcc/src/br/beans/EmailFaleConosco.java
+END
+ContextUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/compreagora/!svn/ver/20/tcc/src/br/beans/ContextUtil.java
+END

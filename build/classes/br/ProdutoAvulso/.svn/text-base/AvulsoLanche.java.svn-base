@@ -1,0 +1,15 @@
+package br.ProdutoAvulso;
+
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+
+@Entity(name = "avulsolanche")
+@PrimaryKeyJoinColumn(name = "idAvulso")
+public class AvulsoLanche extends Avulso {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+}

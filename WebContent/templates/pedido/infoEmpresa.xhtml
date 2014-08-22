@@ -6,67 +6,96 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core">
 <ui:composition>
-	<div id="desktop" style="margin-top: 60px; border-radius: 10px;">
+	<div id="desktop">
+		<center>
+			<h:panelGrid>
+				<h:column>
+					<div>
+						<div style="width: 500px">
+							<div style="width: 150px">
+								<h:graphicImage width="150" height="100"
+									library="imagens/empresa"
+									name="Empresa#{pedidoBean.empresa.idEmpresa}.jpg" />
+							</div>
+							<div style="margin-top: -90px; margin-left: 190px;">
+								<h:outputText value="#{pedidoBean.empresa.razaoSocial}" />
+								<br />
+								<h:outputText value="#{pedidoBean.empresa.telefone}"
+									converter="converterTelefone" />
+								<div style="float: right">
+									<p:commandLink id="lnk" styleClass="btn btn-default ">Detalhes</p:commandLink>
+								</div>
+								<br />
+								<div>
+									<div>
+										<p:dataGrid value="#{pedidoBean.formasDePagamentoDM}"
+											var="fdp">
 
-		<h:panelGrid columns="3"
-			style="width: 960px; height: 157px;font-family: sans-serif;margin:auto;background-color: rgba(255, 255, 255, 0.4);border-radius: 10px;">
+											<h:graphicImage library="imagens/icones/formaDePagamento"
+												name="#{fdp.idFormaDePagamento}.png" style="width: 37px;" />
 
-			<h:panelGrid columns="2">
-				<h:graphicImage width="150" height="100" library="imagens/empresa"
-					name="Empresa#{pedidoBean.empresa.idEmpresa}.jpg"
-					style="float:left;margin-left: 20px;" />
-				<h:panelGrid columns="1">
-					<h:outputText value="#{pedidoBean.empresa.razaoSocial}"
-						style="color: #FFF;font-size: 24px;" />
-					 <h:outputText
-							value="#{pedidoBean.empresa.telefone}"
-							style="color: #FFF;font-size: 15px;" converter="converterTelefone"/>
-					
-					<p:dataGrid value="#{pedidoBean.formasDePagamentoDM}" var="fdp">
+										</p:dataGrid>
+									</div>
 
-						<h:graphicImage library="imagens/icones/formaDePagamento"
-							name="#{fdp.idFormaDePagamento}.png" style="width: 37px;" />
+								</div>
+								<p:tooltip for="lnk">
+									<h:panelGrid columns="2">
 
-					</p:dataGrid>
-				</h:panelGrid>
+										<h:outputText value="Domingo" />
 
+										<h:outputText value="#{pedidoBean.empresa.domingo()}"
+											escape="false" />
+
+										<h:outputText value="Segunda" />
+
+										<h:outputText value="#{pedidoBean.empresa.segunda()}"
+											escape="false" />
+
+										<h:outputText value="Terça" />
+
+										<h:outputText value="#{pedidoBean.empresa.terca()}"
+											escape="false" />
+
+										<h:outputText value="Quarta" />
+
+										<h:outputText value="#{pedidoBean.empresa.quarta()}"
+											escape="false" />
+
+										<h:outputText value="Quinta" />
+
+										<h:outputText value="#{pedidoBean.empresa.quinta()}"
+											escape="false" />
+
+										<h:outputText value="Sexta" />
+
+										<h:outputText value="#{pedidoBean.empresa.sexta()}"
+											escape="false" />
+
+										<h:outputText value="Sábado" />
+
+										<h:outputText value="#{pedidoBean.empresa.sabado()}"
+											escape="false" styleClass="form-control-static" />
+									</h:panelGrid>
+								</p:tooltip>
+							</div>
+						</div>
+						<div>
+							<h:outputText value="#{pedidoBean.empresa.endereco.logradouro}, " />
+							<h:outputText value="#{pedidoBean.empresa.endereco.numero} - " />
+							<h:outputText
+								value="Bairro #{pedidoBean.empresa.endereco.bairroCidade}" />
+							<h:outputText
+								value=" - #{pedidoBean.empresa.endereco.bairroCidade.cidade} - " />
+
+							<h:outputText value="#{pedidoBean.empresa.endereco.cep}"
+								converter="converterCEP" />
+						</div>
+
+
+					</div>
+				</h:column>
 			</h:panelGrid>
-			<h:panelGrid columns="3">
-				<h:outputText value="#{pedidoBean.empresa.endereco.logradouro}, "
-					style="color: #FFF;" />
-				<h:outputText value="#{pedidoBean.empresa.endereco.numero} - "
-					style="color: #FFF;" />
-				<h:outputText
-					value="Bairro #{pedidoBean.empresa.endereco.bairroCidade}"
-					style="color: #FFF;" />
-				<h:outputText
-					value="#{pedidoBean.empresa.endereco.bairroCidade.cidade}"
-					style="color: #FFF;" />
-				<h:outputText />
-				<h:outputText />
-				<h:outputText value="#{pedidoBean.empresa.endereco.cep}"
-					style="color: #FFF;" converter="converterCEP" />
-			</h:panelGrid>
-			<h:panelGrid columns="2"
-				style="float:right;color: #FFF;margin-right:20px">
-				<h:outputText value="Domingo" />
-				<h:outputText value="#{pedidoBean.empresa.domingo()}" escape="false" />
-				<h:outputText value="Segunda" />
-				<h:outputText value="#{pedidoBean.empresa.segunda()}" escape="false" />
-				<h:outputText value="Terça" />
-				<h:outputText value="#{pedidoBean.empresa.terca()}" escape="false" />
-				<h:outputText value="Quarta" />
-				<h:outputText value="#{pedidoBean.empresa.quarta()}" escape="false" />
-				<h:outputText value="Quinta" />
-				<h:outputText value="#{pedidoBean.empresa.quinta()}" escape="false" />
-				<h:outputText value="Sexta" />
-				<h:outputText value="#{pedidoBean.empresa.sexta()}" escape="false" />
-				<h:outputText value="Sábado" />
-				<h:outputText value="#{pedidoBean.empresa.sabado()}" escape="false" />
-			</h:panelGrid>
-
-		</h:panelGrid>
-
+		</center>
 	</div>
 </ui:composition>
 </html>

@@ -15,71 +15,53 @@
 	<h:outputStylesheet library="/css" name="estilo.css" />
 	<h:outputStylesheet library="/bootstrap/css" name="bootstrap-theme.css" />
 	<h:outputStylesheet library="/bootstrap/css" name="bootstrap.css" />
+
+	<h:outputStylesheet library="/bootstrap/fonts"
+		name="glyphicons-halflings-regular.svg" />
+
 	<h:outputScript name="easySlider1.7.js" library="scripts" />
 	<h:outputScript name="jquery.js" library="scripts/lib" />
 	<h:outputScript name="bootstrap.js" library="/bootstrap/js" />
 
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$("#slider").easySlider({
-				auto : true,
-				continuous : true
-			});
-		});
-	</script>
 
 </h:head>
 <h:body>
-	<div id="container" style="max-width: 100%;" class="container-fluid">
+	<div id="container">
 		<div id="topo">
 			<ui:insert name="topo">
 				<ui:include src="../topo.xhtml" />
 			</ui:insert>
 		</div>
-		<div id="menuSelecionaEmpresa">
-			<ui:insert name="menuSelecionaEmpresa">
-				<ui:include src="../menuSelecionaEmpresa.xhtml" />
-			</ui:insert>
-		</div>
-		<div id="informacoes" style="margin-top: 0px;">
 
-			<ui:insert name="informacoes" />
-			<ui:include src="../informacoes.xhtml" />
-		</div>
+		<div class="container-fluid">
+			<div class="row">
+				<div id="infoEmpresa" style="margin-top: 80px;">
 
-		<div id="infoEmpresa" style="margin-top: 0px;">
+					<ui:insert name="infoEmpresa" />
+					<ui:include src="infoEmpresa.xhtml" />
+				</div>
 
-			<ui:insert name="infoEmpresa" />
-			<ui:include src="infoEmpresa.xhtml" />
-		</div>
+				<div id="menuEsquerdoCompra" style="margin-top: 35px;"
+					class="col-lg-4 col-md-4 col-sm-5">
 
-		<div id="menuEsquerdoCompra" style="margin-top: 0px;">
+					<ui:insert name="menuEsquerdoCompra" />
+					<ui:include src="menuEsquerdoCompra.xhtml" />
+				</div>
 
-			<ui:insert name="menuEsquerdoCompra" />
-			<ui:include src="menuEsquerdoCompra.xhtml" />
-		</div>
+				<div id="menuEMeuPedidoCelular" style="margin-top: 10px;">
 
-		<div id="menuEMeuPedidoCelular" style="margin-top: 0px;">
+					<ui:insert name="menuEMeuPedidoCelular" />
+					<ui:include src="menuEMeuPedidoCelular.xhtml" />
+				</div>
 
-			<ui:insert name="menuEMeuPedidoCelular" />
-			<ui:include src="menuEMeuPedidoCelular.xhtml" />
-		</div>
+				<div id="corpo" class="col-lg-6 col-md-6 col-sm-6"
+					style="margin-top: 24px">
 
-		<div id="corpo" style="margin-top: 0px;">
-
-			<ui:insert name="corpo" />
-		</div>
-		<div id="rodape" style="background: white;">
-			<ui:insert name="rodape">
-				<ui:include src="../rodape.xhtml" />
-			</ui:insert>
+					<ui:insert name="corpo" />
+				</div>
+			</div>
 		</div>
 
-		<div id="rodape3" style="background: #242448;">
-			<ui:insert name="rodape3">
-				<ui:include src="../rodape3.xhtml" />
-			</ui:insert>
-		</div>
 
 		<div id="rodape2" style="background: #1d1d3a">
 			<ui:insert name="rodape2">
