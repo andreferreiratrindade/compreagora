@@ -27,6 +27,10 @@ public class BairroRN {
 		return this.bairroDAO.lista();
 	}
 
+	public List<Bairro> getByDescription(int idCidade, String term) {
+		return this.bairroDAO.getByDescription(idCidade, term);
+	}
+
 	public Bairro buscarPorDescricao(String string) {
 
 		EasyCriteria<Bairro> easyCriteria = EasyCriteriaFactory

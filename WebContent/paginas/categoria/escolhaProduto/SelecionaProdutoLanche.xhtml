@@ -12,54 +12,50 @@
 
 		<div id="desktop">
 
-			<div >
+			<div>
 				<h:form>
 					<p:dataGrid value="#{pedidoBean.lanchesDM}" var="lanche"
-						paginator="true" columns="1" rows="6">
-						<h:panelGrid columns="5" style="width: 692px;">
-							<h:column>
+						paginator="true" columns="1" rows="6" styleClass="col-lg-12">
+						<div class="col-md-12 col-lg-12 col-sm-12">
+							<div class="col-lg-3 col-md-3 col-sm-6">
 								<h:graphicImage library="imagens/produto/lanche"
-									name="#{lanche.idProduto}.gif" width="100" height="100"
-									style="float:left" />
+									name="#{lanche.idProduto}.gif" width="100" height="100" />
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-6">
 								<h:outputText title="Descrição" value="#{lanche.descricao}"
 									style="font-size: 20px;" />
-								<br />
-								<h:panelGrid style="width: 300px;">
-									<h:outputText value="#{lanche.ingredientes}"
-										title="Ingredientes" />
+							</div>
+
+							<div class="col-lg-3 col-md-3 col-sm-6">
+								<h:panelGrid columns="2" style="font-size: 20px;">
+									<h:outputText value="R$" />
+									<h:outputText value="#{lanche.valor}">
+										<f:convertNumber pattern="#,###,##0.00" />
+									</h:outputText>
 								</h:panelGrid>
-								<h:panelGrid
-									style="margin-top: -48px;float: right;margin-right: 17px;">
-									<h:panelGrid columns="2"
-										style="font-size: 20px;margin-left: 8px;">
-										<h:outputText value="R$" />
-										<h:outputText value="#{lanche.valor}">
-											<f:convertNumber pattern="#,###,##0.00" />
-										</h:outputText>
-									</h:panelGrid>
+							</div>
+							<div class="col-lg-6 col-md-9 col-sm-12">
+								<h:outputText value="#{lanche.ingredientes}"
+									title="Ingredientes" />
+							</div>
 
-									<p:commandLink value="Personalizar"
-										actionListener="#{pedidoBean.personalizaLanche()}"
-										disabled="#{!lanche.ativo}" styleClass="btn btn-warning"
-										oncomplete="dlgEditarProduto.show()" update=":idEditar"
-										style="margin-right: 43px;">
-									</p:commandLink>
+							<div
+								class="col-lg-3 col-md-9 col-md-push-2 col-lg-push-0 col-sm-12">
+								<p:commandLink value="Personalizar"
+									actionListener="#{pedidoBean.personalizaLanche()}"
+									disabled="#{!lanche.ativo}" styleClass="btn btn-warning"
+									oncomplete="dlgEditarProduto.show()" update=":idEditar">
+								</p:commandLink>
 
-									<p:commandLink
-										value="#{lanche.ativo ? 'Adicionar' : 'Indisponivel'}"
-										actionListener="#{pedidoBean.adicionaLanche()}"
-										disabled="#{!lanche.ativo}" update=":formPainel"
-										id="buttonAdd" styleClass="btn btn-info"
-										style="margin-right: 43px;width:108px;">
-									</p:commandLink>
-
-
-
-								</h:panelGrid>
-							</h:column>
-
-						</h:panelGrid>
-						<hr width="635px" />
+								<p:commandLink
+									value="#{lanche.ativo ? 'Adicionar' : 'Indisponivel'}"
+									actionListener="#{pedidoBean.adicionaLanche()}"
+									disabled="#{!lanche.ativo}" update=":formPainel" id="buttonAdd"
+									styleClass="btn btn-info" style="width:108px;">
+								</p:commandLink>
+							</div>
+						</div>
+						<p:separator></p:separator>
 					</p:dataGrid>
 				</h:form>
 			</div>
@@ -110,7 +106,7 @@
 									<p:commandLink value="Outro Endereço"
 										oncomplete="dlgEndereco.show()"
 										actionListener="#{pedidoBean.novoEndereco}"
-										style="float:right;" styleClass="buttonAdd" />
+										style="float:right;" styleClass="btn btn-info" />
 
 								</h:panelGrid>
 								<br />
@@ -137,16 +133,11 @@
 							</div>
 							<p:separator />
 							<div style="margin-top: 30px">
-								<h:panelGrid columns="2">
-									<h:outputText value="Taxa de Entrega: R$" style="float:right" />
-									<h:outputText value="#{pedidoBean.pedido.taxa}">
-										<f:convertNumber pattern="#,###,##0.00" />
-									</h:outputText>
-								</h:panelGrid>
+
 								<h:panelGrid columns="2">
 									<h:outputText value="Total à pagar R$"
 										style="float:right;font-size: 18px;font-style: oblique;" />
-									<h:outputText value="#{pedidoBean.valorTotalMaisTaxa}"
+									<h:outputText value="#{pedidoBean.pedido.valorTotal}"
 										style="font-size: 18px;font-style: oblique;">
 										<f:convertNumber pattern="#,###,##0.00" />
 									</h:outputText>
@@ -172,12 +163,16 @@
 									<div style="float: right">
 
 										<h:outputText value="Troco para: " />
-										<p:inputText value="#{pedidoBean.pedido.troco}" size="5"
+
+
+										<p:inputText value="#{pedidoBean.troco}" size="5"
 											disabled="#{pedidoBean.formaDePagamento == 'Dinheiro' ? false : true}">
-											<f:convertNumber pattern="#,###,##0.00" />
 
 											<p:ajax event="keyup" update="btComprar" />
 										</p:inputText>
+
+
+
 										<br /> <span> <h:outputText value="*"
 												style="color: #F00;" /> <h:outputText
 												value="Troco deve ser maior" />
@@ -186,19 +181,21 @@
 									</div>
 								</div>
 								<br /> <br />
-								<h:panelGrid columns="2" style="float:right">
-									<p:commandLink value="Comprar" id="btComprar"
-										styleClass="buttonPesquisa"
-										action="#{pedidoBean.salvarPedido}"
-										disabled="#{!pedidoBean.habilitarBotaoSalvar()}"
-										oncomplete="dlgConcluir.hide()">
-										<f:setPropertyActionListener
-											target="#{contextUtil.categoriaEmpresa}" value="#{-1}" />
-									</p:commandLink>
-
-									<p:commandLink value="Cancelar" oncomplete="dlgConcluir.hide()"
-										styleClass="buttonCancelar" style="float:right" />
-								</h:panelGrid>
+								<div class="col-lg-12 ">
+									<div class="pull-right">
+										<p:commandLink value="Comprar" id="btComprar"
+											styleClass="btn btn-success" style="text-decoration: none;"
+											action="#{pedidoBean.salvarPedido}"
+											disabled="#{!pedidoBean.habilitarBotaoSalvar()}"
+											oncomplete="dlgConcluir.hide()">
+											<f:setPropertyActionListener
+												target="#{contextUtil.categoriaEmpresa}" value="#{-1}" />
+										</p:commandLink>
+										&nbsp;&nbsp;
+										<p:commandLink value="Cancelar"
+											oncomplete="dlgConcluir.hide()" styleClass="btn btn-danger" />
+									</div>
+								</div>
 							</div>
 						</p:tab>
 					</p:tabView>
@@ -206,75 +203,87 @@
 			</p:dialog>
 			<!-- Alterar Endereço -->
 			<p:dialog id="dialogEndereco" header="Novo Endereço"
-				widgetVar="dlgEndereco" modal="true" showEffect="slide"
-				dynamic="true" resizable="false" closable="false">
+				widgetVar="dlgEndereco" modal="true" dynamic="true"
+				resizable="false" closable="false" width="580px">
 
 				<h:form id="formOutroEndereco">
-					<h:panelGrid columns="3">
-						<h:column>
-							<h:outputText value="*" style="color: #F00;float:right" />
-							<h:outputText value="Cidade" style="float:right" />
-						</h:column>
-						<p:autoComplete id="cidade" forceSelection="true" var="cidade"
-							itemLabel="#{cidade.descCidade}" itemValue="#{cidade}"
-							value="#{pedidoBean.enderecoCliente.endereco.bairroCidade.cidade}"
-							completeMethod="#{autoCompleteController.completaCidade}"
-							dropdown="true" required="true" converter="converterCidade">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								<p:autoComplete id="cidade" forceSelection="true" var="cidade"
+									itemLabel="#{cidade.descCidade}" itemValue="#{cidade}"
+									value="#{pedidoBean.novoEnderecoCliente.endereco.bairroCidade.cidade}"
+									completeMethod="#{autoCompleteController.completaCidade}"
+									requiredMessage="Informe sua cidade" dropdown="true"
+									required="true" converter="converterCidade"
+									styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12">>
 							<p:ajax event="itemSelect"
-								listener="#{autoCompleteController.handleSelect}"
-								update="bairro" />
-						</p:autoComplete>
-						<p:message for="cidade" display="icon" />
-						<h:column>
-							<h:outputText value="*" style="color: #F00;float:right" />
-							<h:outputText value="Bairro" style="float:right" />
-						</h:column>
-						<p:autoComplete id="bairro"
-							value="#{pedidoBean.enderecoCliente.endereco.bairroCidade}"
-							forceSelection="true" dropdown="true" scrollHeight="200"
-							completeMethod="#{autoCompleteController.completaBairro}"
-							var="bairro" itemLabel="#{bairro.descBairro}"
-							itemValue="#{bairro}" required="true" converter="converterBairro">
-						</p:autoComplete>
-						<p:message for="bairro" display="icon" />
-						<h:column>
-							<h:outputText value="*" style="color: #F00;float:right" />
-							<h:outputText value="Logradouro" style="float:right" />
-						</h:column>
-						<p:inputText
-							value="#{pedidoBean.enderecoCliente.endereco.logradouro}"
-							size="30" id="logradouro" required="true" />
-						<p:message for="logradouro" display="icon" />
-						<h:column>
-							<h:outputText value="*" style="color: #F00;float:right" />
-							<h:outputText value="Numero" style="float:right" />
-						</h:column>
-						<p:inputText value="#{pedidoBean.enderecoCliente.endereco.numero}"
-							id="numero" required="true" />
-						<p:message for="numero" display="icon" />
-						<h:column>
+										listener="#{autoCompleteController.handleSelect}"
+										update="bairro" />
+								</p:autoComplete>
+								<p:watermark for="cidade" value="Cidade *" />
+								<p:message for="cidade" />
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								<p:autoComplete id="bairro"
+									value="#{pedidoBean.novoEnderecoCliente.endereco.bairroCidade}"
+									forceSelection="true" dropdown="true" scrollHeight="200"
+									completeMethod="#{autoCompleteController.completaBairro}"
+									var="bairro" itemLabel="#{bairro.descBairro}"
+									requiredMessage="Informe seu bairro" itemValue="#{bairro}"
+									required="true" converter="converterBairro"
+									styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								</p:autoComplete>
+								<p:watermark for="bairro" value="Bairro *" />
+								<p:message for="bairro" />
+							</div>
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+								style="margin-top: 10px;">
+								<p:inputText
+									value="#{pedidoBean.novoEnderecoCliente.endereco.logradouro}"
+									size="30" id="logradouro" required="true"
+									requiredMessage="Informe sua rua"
+									styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+								<p:watermark for="logradouro" value="Rua/Av./Logradouro *" />
+								<p:message for="logradouro" />
+							</div>
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+								style="margin-top: 10px;">
+								<p:inputText
+									value="#{pedidoBean.novoEnderecoCliente.endereco.numero}"
+									id="numero" required="true"
+									requiredMessage="Informe o número de sua casa"
+									styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+								<p:message for="numero" />
+								<p:watermark for="numero" value="Número *" />
+							</div>
 
-							<h:outputText value="CEP" style="float:right" />
-						</h:column>
-						<p:inputMask value="#{pedidoBean.enderecoCliente.endereco.cep}"
-							id="cep" mask="99999-999" label="CEP" converter="converterCEP" />
-						<p:message for="cep" display="icon" />
-						<h:outputText value="Complemento:" style="float:right" />
-						<p:inputTextarea
-							value="#{pedidoBean.enderecoCliente.endereco.complemento}"
-							maxlength="100" counterTemplate="{0} Caracteres"
-							counter="contador" cols="32" />
-						<h:outputText id="contador" style="float:right" />
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+								style="margin-top: 10px;">
 
-					</h:panelGrid>
-					<h:panelGrid columns="2" style="float:right">
-						<p:commandLink actionListener="#{pedidoBean.salvarNovoEndereco}"
-							value="Salvar" oncomplete="dlgEndereco.hide()"
-							update=":idConcluir :formOutroEndereco" styleClass="buttonAdd"
-							validateClient="true" />
-						<p:commandLink value="Cancelar" oncomplete="dlgEndereco.hide()"
-							styleClass="buttonCancelar" />
-					</h:panelGrid>
+								<p:inputTextarea
+									value="#{pedidoBean.novoEnderecoCliente.endereco.complemento}"
+									maxlength="100" counterTemplate="{0} Caracteres" cols="32"
+									id="complemento"
+									styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+								<p:watermark for="complemento" value="Complemento" />
+
+							</div>
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+								style="margin-top: 10px;">
+								<div class="pull-right">
+									<p:commandLink
+										actionListener="#{pedidoBean.salvarNovoEndereco}"
+										value="Salvar" oncomplete="dlgEndereco.hide()"
+										update=":idConcluir :formOutroEndereco"
+										styleClass="btn btn-primary" validateClient="true" />
+									&nbsp; &nbsp;
+									<p:commandLink value="Cancelar" oncomplete="dlgEndereco.hide()"
+										styleClass="btn btn-danger" />
+								</div>
+							</div>
+						</div>
+					</div>
 				</h:form>
 			</p:dialog>
 			<!-- Deletar Produto  -->
@@ -283,21 +292,18 @@
 					widgetVar="dlgDeletarProduto" modal="true" showEffect="slide"
 					resizable="false" closable="false">
 
-					<h:panelGrid columns="2">
-						<h:column>
-							<h:outputText
-								value="#{pedidoBean.pedidoProduto.produtoAvulso.produto.descricao}" />
-						</h:column>
-						<h:column>
-							<h:panelGrid style="float:right" columns="2">
-								<h:outputText value="R$ " />
-								<h:outputText
-									value="#{pedidoBean.pedidoProduto.produtoAvulso.valorTotal()}">
-									<f:convertNumber pattern="#,###,##0.00" />
-								</h:outputText>
-							</h:panelGrid>
-						</h:column>
+
+					<h:outputText
+						value="#{pedidoBean.pedidoProduto.produtoAvulso.produto.descricao}" />
+
+					<h:panelGrid style="float:right" columns="2">
+						<h:outputText value="R$ " />
+						<h:outputText
+							value="#{pedidoBean.pedidoProduto.produtoAvulso.valorTotal()}">
+							<f:convertNumber pattern="#,###,##0.00" />
+						</h:outputText>
 					</h:panelGrid>
+
 					<br />
 					<br />
 					<h:form prependId="false">
@@ -305,7 +311,7 @@
 							<p:commandLink value="Deletar"
 								actionListener="#{pedidoBean.deletarProduto}"
 								oncomplete="dlgDeletarProduto.hide()" ajax="true"
-								update=":formPainel" styleClass="buttonAdd" />
+								update=":formPainel" styleClass="btn btn-info" />
 						</center>
 					</h:form>
 				</p:dialog>

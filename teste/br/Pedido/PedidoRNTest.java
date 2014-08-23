@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.primefaces.model.SortOrder;
@@ -36,8 +38,8 @@ import br.util.JpaUtil;
 
 public class PedidoRNTest {
 
-	@BeforeClass
-	public static void setUp() {
+	@Before
+	public void setUp() {
 		JpaUtil.getEntityManager().getTransaction().begin();
 		initFormaDePagamento();
 		initEmrpesa();
@@ -49,13 +51,13 @@ public class PedidoRNTest {
 		JpaUtil.getEntityManager().getTransaction().begin();
 	}
 
-	@AfterClass
-	public static void setDown() {
+	@After
+	public void setDown() {
 		JpaUtil.getEntityManager().getTransaction().commit();
 		JpaUtil.closeEntityManager();
 	}
 
-	public static void initSalvaPedido() {
+	public void initSalvaPedido() {
 
 		EmpresaRN empresaRN = new EmpresaRN();
 		Empresa empresa = empresaRN.getEmpresa(1);
@@ -80,13 +82,16 @@ public class PedidoRNTest {
 		Pedido pedido = new Pedido();
 		pedido.setPedidoProdutos(pedidosProdutos);
 		pedido.calcularTotal();
+		System.out.println(pedido.getValorTotal());
+		
 		pedido.setFormaDePagamento(formaDePagamento);
+		
 		PedidoRN pedidoRN = new PedidoRN();
 		pedidoRN.salvar(enderecoCliente, empresa, pedido);
 
 	}
 
-	public static void initFormaDePagamento() {
+	public void initFormaDePagamento() {
 
 		FormaDePagamento fDinheiro = new FormaDePagamento();
 		fDinheiro.setTipo("Dinheiro");
@@ -102,7 +107,7 @@ public class PedidoRNTest {
 
 	}
 
-	public static void initEmrpesa() {
+	public void initEmrpesa() {
 
 		FormaDePagamentoRN formaDePagamentoRN = new FormaDePagamentoRN();
 		FormaDePagamento formaDePagamento = formaDePagamentoRN
@@ -133,7 +138,7 @@ public class PedidoRNTest {
 		empresaAtendimentoDao.salve(empresaAtendimento);
 	}
 
-	public static void initProduto() {
+	public void initProduto() {
 		EmpresaDAO empresaDAO = DAOFactoy.criarEmpresa();
 		Empresa empresa = empresaDAO.getUnico(1);
 
@@ -142,6 +147,7 @@ public class PedidoRNTest {
 		Lanche lanche = new Lanche();
 		lanche.setTempoEspera(15); // tempo em minutos
 		lanche.setEmpresa(empresa);
+		lanche.setValor((float) 20.25);
 		produtoRN.salve(lanche);
 	}
 
@@ -256,6 +262,14 @@ public class PedidoRNTest {
 		List<Pedido> pedidos = pedidoRN.buscaPorPaginacao(posicaoInicial,
 				posicaoFinal, idCliente, null, SortOrder.ASCENDING);
 		assertEquals(1, pedidos.size());
+	}
+
+	@Test
+	public void deveRetornarOValorTotal() {
+		PedidoRN pedidoRN = new PedidoRN();
+		Pedido pedido = pedidoRN.getPedido(1);
+		
+		assertEquals(10, pedido.getValorTotal());
 	}
 
 }

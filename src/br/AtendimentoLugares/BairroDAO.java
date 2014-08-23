@@ -31,6 +31,14 @@ public class BairroDAO implements Dao<Bairro> {
 		this.session.remove(obj);
 	}
 
+	public List<Bairro> getByDescription(int idCidade, String term) {
+		EasyCriteria<Bairro> easyCriteria = EasyCriteriaFactory
+				.createQueryCriteria(session, Bairro.class);
+		easyCriteria.innerJoin("cidade").andEquals("cidade.idCidade", idCidade)
+				.andStringLike("descBairro", "%" + term + "%");
+		return easyCriteria.getResultList();
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Bairro> lista() {

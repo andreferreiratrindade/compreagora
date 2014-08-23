@@ -47,10 +47,10 @@ public class Pedido implements Serializable, Comparable<Pedido>,
 	private Empresa empresa;
 	private Date dataHoraIn;
 	private Date dataHoraFim;
-	private float valorTotal;
-	private float troco;
+	private BigDecimal valorTotal;
+	private BigDecimal troco;
 	private int statusPedido;
-	private float taxa;
+	private BigDecimal taxa;
 	private int tempoEspera;
 	@ManyToOne
 	@JoinColumn(name = "idFormaDePagamento")
@@ -92,34 +92,20 @@ public class Pedido implements Serializable, Comparable<Pedido>,
 	}
 
 	public void calcularTotal() {
-		valorTotal = 0;
+		valorTotal = new BigDecimal(0);
 
 		for (PedidoProduto x : pedidoProdutos) {
-			valorTotal += x.valorTotal();
-
+			valorTotal = valorTotal.add(x.valorTotal());
 		}
-
+		
+		valorTotal = valorTotal.add(taxa);
 	}
 
 	public Pedido() {
 		statusPedido = 5;
-		valorTotal = 0;
-	}
-
-	public float getTroco() {
-		return troco;
-	}
-
-	public float getTaxa() {
-		return taxa;
-	}
-
-	public void setTaxa(float taxa) {
-		this.taxa = taxa;
-	}
-
-	public void setTroco(float troco) {
-		this.troco = troco;
+		valorTotal = new BigDecimal(0);
+		taxa = new BigDecimal(0);
+		troco = new BigDecimal(0);
 	}
 
 	@JsonIgnore
@@ -131,16 +117,12 @@ public class Pedido implements Serializable, Comparable<Pedido>,
 		this.enderecoCliente = enderecoCliente;
 	}
 
-	public float getValorTotal() {
-
-		return valorTotal;
-	}
-
 	public void setValorTotal(float valorTotal) {
+
 		if (valorTotal < 0)
-			this.valorTotal = 0;
+			this.valorTotal = new BigDecimal(0);
 		else
-			this.valorTotal = valorTotal;
+			this.valorTotal = new BigDecimal(Float.toString(valorTotal));
 	}
 
 	public int getIdPedido() {
@@ -185,13 +167,33 @@ public class Pedido implements Serializable, Comparable<Pedido>,
 	}
 
 	public void adicionarValor(float valor) {
-		BigDecimal big1 = new BigDecimal(Float.toString(valor));
-		BigDecimal big2 = new BigDecimal(Float.toString(valorTotal));
-		valorTotal = big2.add(big1).floatValue();
+		BigDecimal big1 = new BigDecimal(valor);
+
+		valorTotal = valorTotal.add(big1);
 	}
 
 	public void removeValor(float valor) {
-		valorTotal -= valor;
+		valorTotal = valorTotal.subtract(new BigDecimal(Float.toString(valor)));
+	}
+
+	public BigDecimal getValorTotal() {
+		return valorTotal;
+	}
+
+	public BigDecimal getTroco() {
+		return troco;
+	}
+
+	public void setTroco(float troco) {
+		this.troco = new BigDecimal(Float.toString(troco));
+	}
+
+	public BigDecimal getTaxa() {
+		return taxa;
+	}
+
+	public void setTaxa(float taxa) {
+		this.taxa = new BigDecimal(Float.toString(taxa));
 	}
 
 	public String statusAtual() {
@@ -224,10 +226,11 @@ public class Pedido implements Serializable, Comparable<Pedido>,
 		result = prime * result
 				+ ((pedidoProdutos == null) ? 0 : pedidoProdutos.hashCode());
 		result = prime * result + statusPedido;
-		result = prime * result + Float.floatToIntBits(taxa);
+		result = prime * result + ((taxa == null) ? 0 : taxa.hashCode());
 		result = prime * result + tempoEspera;
-		result = prime * result + Float.floatToIntBits(troco);
-		result = prime * result + Float.floatToIntBits(valorTotal);
+		result = prime * result + ((troco == null) ? 0 : troco.hashCode());
+		result = prime * result
+				+ ((valorTotal == null) ? 0 : valorTotal.hashCode());
 		return result;
 	}
 
@@ -274,14 +277,22 @@ public class Pedido implements Serializable, Comparable<Pedido>,
 			return false;
 		if (statusPedido != other.statusPedido)
 			return false;
-		if (Float.floatToIntBits(taxa) != Float.floatToIntBits(other.taxa))
+		if (taxa == null) {
+			if (other.taxa != null)
+				return false;
+		} else if (!taxa.equals(other.taxa))
 			return false;
 		if (tempoEspera != other.tempoEspera)
 			return false;
-		if (Float.floatToIntBits(troco) != Float.floatToIntBits(other.troco))
+		if (troco == null) {
+			if (other.troco != null)
+				return false;
+		} else if (!troco.equals(other.troco))
 			return false;
-		if (Float.floatToIntBits(valorTotal) != Float
-				.floatToIntBits(other.valorTotal))
+		if (valorTotal == null) {
+			if (other.valorTotal != null)
+				return false;
+		} else if (!valorTotal.equals(other.valorTotal))
 			return false;
 		return true;
 	}
@@ -313,7 +324,7 @@ public class Pedido implements Serializable, Comparable<Pedido>,
 
 	public void calculoTaxaValorTotal() {
 
-		valorTotal = getTaxa() + getValorTotal();
+		valorTotal.add(taxa);
 
 	}
 
@@ -323,6 +334,13 @@ public class Pedido implements Serializable, Comparable<Pedido>,
 		Pedido p = new Pedido();
 		p.setIdPedido(this.idPedido);
 		return p;
+	}
+
+	public BigDecimal getValorTotalMaisTaxa() {
+
+		BigDecimal big = new BigDecimal(0);
+
+		return big.add(valorTotal).add(taxa);
 	}
 
 }

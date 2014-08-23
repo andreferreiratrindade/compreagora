@@ -1,6 +1,7 @@
 package br.beans;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -56,6 +58,8 @@ public class PedidoBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final int TOTAL_PRODUTO = 13;
 
+	@ManagedProperty(value = "#{autoCompleteController}")
+	private AutoCompleteController autoComplete;
 	private DualListModel<Avulso> avulsoDual;
 	private Cliente cliente = null;
 	private Empresa empresa = null;
@@ -82,7 +86,7 @@ public class PedidoBean implements Serializable {
 	private DataModel<Produto> produtosDM;
 	private String cidadeEntrega;
 	private String bairroEntrega;
-	private float valorTotalMaisTaxa;
+	private BigDecimal valorTotalMaisTaxa;
 	private List<Bebida> bebidas;
 	private List<Lanche> lanches;
 	private List<Pizza> pizzas;
@@ -98,7 +102,25 @@ public class PedidoBean implements Serializable {
 	private ListDataModel<Pizza> listPizzaDM;
 	private ListDataModel<Agua> listAguaDM;
 	private ListDataModel<Gas> listGasDM;
-	private float avulsoValorTotal;
+	private BigDecimal avulsoValorTotal;
+	private float troco;
+	private EnderecoCliente novoEnderecoCliente;
+
+	public EnderecoCliente getNovoEnderecoCliente() {
+		return novoEnderecoCliente;
+	}
+
+	public void setNovoEnderecoCliente(EnderecoCliente novoEnderecoCliente) {
+		this.novoEnderecoCliente = novoEnderecoCliente;
+	}
+
+	public AutoCompleteController getAutoComplete() {
+		return autoComplete;
+	}
+
+	public void setAutoComplete(AutoCompleteController autoComplete) {
+		this.autoComplete = autoComplete;
+	}
 
 	public int getItemMenu() {
 		return itemMenu;
@@ -108,11 +130,11 @@ public class PedidoBean implements Serializable {
 		this.itemMenu = itemMenu;
 	}
 
-	public float getAvulsoValorTotal() {
+	public BigDecimal getAvulsoValorTotal() {
 		return avulsoValorTotal;
 	}
 
-	public void setAvulsoValorTotal(float avulsoValorTotal) {
+	public void setAvulsoValorTotal(BigDecimal avulsoValorTotal) {
 		this.avulsoValorTotal = avulsoValorTotal;
 	}
 
@@ -122,7 +144,7 @@ public class PedidoBean implements Serializable {
 				.getValor();
 
 		for (Avulso x : avulsoDual.getTarget()) {
-			avulsoValorTotal += x.getValor();
+			avulsoValorTotal.add(x.getValor());
 		}
 	}
 
@@ -305,12 +327,12 @@ public class PedidoBean implements Serializable {
 		this.pedidoProdutos = pedidoProdutos;
 	}
 
-	public float getValorTotalMaisTaxa() {
-		valorTotalMaisTaxa = pedido.getTaxa() + pedido.getValorTotal();
+	public BigDecimal getValorTotalMaisTaxa() {
+		valorTotalMaisTaxa = pedido.getValorTotalMaisTaxa();
 		return valorTotalMaisTaxa;
 	}
 
-	public void setValorTotalMaisTaxa(float valorTotalMaisTaxa) {
+	public void setValorTotalMaisTaxa(BigDecimal valorTotalMaisTaxa) {
 		this.valorTotalMaisTaxa = valorTotalMaisTaxa;
 	}
 
@@ -470,7 +492,7 @@ public class PedidoBean implements Serializable {
 		pedidoProduto = new PedidoProduto();
 
 		avulsoDual = new DualListModel<Avulso>();
-
+		atualizaTaxaEntregaFirst();
 	}
 
 	public void converteTipoProduto(List<Categoria> tiposProdutos) {
@@ -579,8 +601,7 @@ public class PedidoBean implements Serializable {
 
 		PedidoRN pedidoRN = new PedidoRN();
 		pedido.setFormaDePagamento(converteFormaDePagamento());
-
-		pedido.calculoTaxaValorTotal();
+		pedido.setTroco(troco);
 
 		pedidoRN.salvar(enderecoCliente, empresa, pedido);
 		novoPedido();
@@ -597,6 +618,8 @@ public class PedidoBean implements Serializable {
 			pedidoProdutos.add(pedidoProdutoTemp);
 			pedido.setPedidoProdutos(pedidoProdutos);
 			pedido.calcularTotal();
+			System.out.println("Valor total calculado: "
+					+ pedido.getValorTotal());
 		}
 	}
 
@@ -777,6 +800,8 @@ public class PedidoBean implements Serializable {
 				ClienteRN usuarioRN = new ClienteRN();
 				this.cliente = usuarioRN.buscarPorEmail(login);
 				cliente.getEnderecoCliente().size();
+				enderecoCliente = cliente.getEnderecoCliente().get(0);
+
 			}
 		}
 	}
@@ -795,7 +820,7 @@ public class PedidoBean implements Serializable {
 	public void deletarProduto() {
 
 		if (pedidoProduto != null) {
-			pedido.removeValor(pedidoProduto.valorTotal());
+			pedido.removeValor(pedidoProduto.valorTotal().floatValue());
 			pedidoProdutos.remove(pedidoProduto);
 			pedidoProduto = null;
 		}
@@ -803,20 +828,20 @@ public class PedidoBean implements Serializable {
 	}
 
 	public void novoEndereco() {
-		// clienteLogado();
-		enderecoCliente = cliente.getEnderecoCliente().get(1);
-		enderecoCliente.getEndereco().setBairroCidade(new Bairro());
-		enderecoCliente.getEndereco().setLogradouro("");
-		enderecoCliente.getEndereco().setNumero("");
-		enderecoCliente.getEndereco().setComplemento(null);
-		enderecoCliente.getEndereco().setCep("");
+
+		novoEnderecoCliente = cliente.getEnderecoCliente().get(1);
+		novoEnderecoCliente.getEndereco().setBairroCidade(new Bairro());
+		novoEnderecoCliente.getEndereco().setLogradouro("");
+		novoEnderecoCliente.getEndereco().setNumero("");
+		novoEnderecoCliente.getEndereco().setComplemento(null);
+		novoEnderecoCliente.getEndereco().setCep("");
 	}
 
 	public void salvarNovoEndereco() {
 		try {
 			EnderecoDAO endDAO = DAOFactoy.criarEndereco();
-			endDAO.update(enderecoCliente.getEndereco());
-
+			endDAO.update(novoEnderecoCliente.getEndereco());
+			enderecoCliente = novoEnderecoCliente;
 			atualizaTaxaEntrega();
 
 		} catch (Exception e) {
@@ -824,18 +849,26 @@ public class PedidoBean implements Serializable {
 		}
 
 	}
+	
 
 	public void atualizaTaxaEntregaFirst() {
-		if (cliente == null) {
-			clienteLogado();
-		}
-		enderecoCliente = cliente.getEnderecoCliente().get(0);
+		int idEmpresa = empresa.getIdEmpresa();
+		int idBairroCliente = autoComplete.getBairro().getIdBairro();
 
-		atualizaTaxaEntrega();
+		EmpresaAtendimentoRN empresaAtendimentoRN = new EmpresaAtendimentoRN();
+
+		EmpresaAtendimento empAtend = empresaAtendimentoRN
+				.empresaAtendimentoEmpresaComBairro(idEmpresa, idBairroCliente);
+		if (empAtend != null) {
+			pedido.setTaxa(empAtend.getTaxa());
+			pedido.calcularTotal();
+		}
+
+		empresaAtendeBairro = true;
 	}
 
-	public synchronized void atualizaTaxaEntrega() {
-
+	public void atualizaTaxaEntrega() {
+		clienteLogado();
 		int idEmpresa = empresa.getIdEmpresa();
 		int idBairroCliente = enderecoCliente.getEndereco().getBairroCidade()
 				.getIdBairro();
@@ -872,7 +905,7 @@ public class PedidoBean implements Serializable {
 
 	public boolean verificaValorMin() {
 
-		return pedido.getValorTotal() > 5 ? true : false;
+		return pedido.getValorTotal().floatValue() > 6 ? true : false;
 	}
 
 	public boolean verificaEstoque() {
@@ -880,19 +913,22 @@ public class PedidoBean implements Serializable {
 		return true;
 	}
 
-	public synchronized boolean habilitarBotaoSalvar() {
-		boolean troco = false;
+	public float getTroco() {
+		return troco;
+	}
 
-		if ((pedido.getTroco() > valorTotalMaisTaxa)
-				|| (pedido.getTroco() == 0)) {
-			troco = true;
+	public void setTroco(float troco) {
+		this.troco = troco;
+	}
+
+	public boolean habilitarBotaoSalvar() {
+		boolean ii = false;
+
+		if ((troco > pedido.getValorTotal().floatValue()) || (troco == 0)) {
+			ii = true;
 		}
 
-		if (enderecoCliente.getEndereco().getBairroCidade().getCidade() == null) {
-			enderecoCliente = cliente.getEnderecoCliente().get(0);
-		}
-
-		return (troco && (empresaAtendeBairro));
+		return (ii && (empresaAtendeBairro));
 	}
 
 	public void verificaQuantidadeEstoque() {

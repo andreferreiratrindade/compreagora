@@ -34,4 +34,9 @@ public class CidadeRN {
 
 		return cidade;
 	}
+
+	public List<Cidade> getByDescription(String term) {
+
+		return this.cidadeDAO.getByDescription(term);
+	}
 }

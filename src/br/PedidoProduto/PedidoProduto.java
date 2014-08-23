@@ -1,6 +1,7 @@
 package br.PedidoProduto;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -44,7 +45,7 @@ public class PedidoProduto implements Serializable, CycleRecoverable {
 			produtoAvulso.setProduto(produto);
 	}
 
-	public float valorTotal() {
+	public BigDecimal valorTotal() {
 		return produtoAvulso.valorTotal();
 	}
 

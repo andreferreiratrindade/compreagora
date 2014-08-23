@@ -2,6 +2,55 @@
 	text-align: center;
 }
 
+.ui-widget-content a {
+	color: white;
+}
+
+.step {
+	text-align: center;
+}
+
+.step .col-md-2 {
+	background-color: #fff;
+	border: 1px solid #C0C0C0;
+	border-right: none;
+	height: 86px;
+}
+
+.step .col-md-2:last-child {
+	border: 1px solid #C0C0C0;
+}
+
+.step .col-md-2:first-child {
+	border-radius: 5px 0 0 5px;
+}
+
+.step .col-md-2:last-child {
+	border-radius: 0 5px 5px 0;
+}
+
+.step .col-md-2:hover {
+	color: #F58723;
+	cursor: pointer;
+}
+
+.step .activestep {
+	color: #F58723;
+	height: 100px;
+	margin-top: -7px;
+	padding-top: 7px;
+	border-left: 6px solid #5CB85C !important;
+	border-right: 6px solid #5CB85C !important;
+	border-top: 3px solid #5CB85C !important;
+	border-bottom: 3px solid #5CB85C !important;
+	vertical-align: central;
+}
+
+.step .fa {
+	padding-top: 15px;
+	font-size: 40px;
+}
+
 .field-validation-error {
 	color: #b94a48;
 }
@@ -30,11 +79,7 @@ input[type="checkbox"].input-validation-error {
 	.ui-accordion .ui-accordion-header.ui-state-default {
 		border: 0px
 	}
-	.ui-state-disabled, .ui-widget-content .ui-state-disabled,
-		.ui-widget-header .ui-state-disabled {
-		background-color: rgba(255, 0, 0, 1) !important;
-		color: white;
-	}
+	
 	.ui-fieldset-toggleable .ui-fieldset-legend {
 		border-radius: 10px;
 	}
@@ -536,11 +581,6 @@ input[type="checkbox"].input-validation-error {
 	#topo {
 		
 	}
-	#menuSelecionaEmpresa {
-		background: yellow;
-		margin: auto;
-		width: 100%;
-	}
 	.barraTransparente {
 		background-color: rgba(255, 255, 255, 0.4);
 		border-radius: 4px;
@@ -795,10 +835,6 @@ a.linkmenup {
 	border-right: 1px solid #FF0000;
 }
 
-.ui-state-disabled, .ui-widget-content .ui-state-disabled,
-	.ui-widget-header .ui-state-disabled {
-	background-color: rgba(230, 230, 230, 0);
-}
 
 pre {
 	display: block;

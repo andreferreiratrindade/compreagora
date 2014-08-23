@@ -1,6 +1,7 @@
 package br.Produto;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -33,11 +34,15 @@ public abstract class Produto implements Serializable, CycleRecoverable {
 	// , insertable = false, updatable = false)
 	private Empresa empresa;
 	private String descricao;
-	private float valor;
+	private BigDecimal valor;
 	protected boolean ativo;
 	private int tempoEspera;
 	@Enumerated(EnumType.STRING)
 	private CategoriaENUM qualificacao;
+
+	public Produto() {
+		valor = new BigDecimal(0);
+	}
 
 	public int getTempoEspera() {
 		return tempoEspera;
@@ -79,12 +84,13 @@ public abstract class Produto implements Serializable, CycleRecoverable {
 		this.descricao = descricao;
 	}
 
-	public float getValor() {
+	public BigDecimal getValor() {
 		return valor;
 	}
 
 	public void setValor(float valor) {
-		this.valor = valor;
+
+		this.valor = new BigDecimal(Float.toString(valor));
 	}
 
 	public Empresa getEmpresa() {
@@ -107,7 +113,7 @@ public abstract class Produto implements Serializable, CycleRecoverable {
 		result = prime * result
 				+ ((qualificacao == null) ? 0 : qualificacao.hashCode());
 		result = prime * result + tempoEspera;
-		result = prime * result + Float.floatToIntBits(valor);
+		result = prime * result + ((valor == null) ? 0 : valor.hashCode());
 		return result;
 	}
 
@@ -138,7 +144,10 @@ public abstract class Produto implements Serializable, CycleRecoverable {
 			return false;
 		if (tempoEspera != other.tempoEspera)
 			return false;
-		if (Float.floatToIntBits(valor) != Float.floatToIntBits(other.valor))
+		if (valor == null) {
+			if (other.valor != null)
+				return false;
+		} else if (!valor.equals(other.valor))
 			return false;
 		return true;
 	}

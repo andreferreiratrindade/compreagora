@@ -48,13 +48,17 @@
 
 						<div id="painelPedido"
 							style="position: relative; margin-top: 48px;">
-
+							<center>
+								<h2>Meu Pedido</h2>
+							</center>
 							<div style="min-height: 286px;">
 								<h:dataTable var="pedidoProduto"
 									style="width: 266px;margin: auto 0px;"
+									styleClass="table table-striped"
 									value="#{pedidoBean.pedido.pedidoProdutos}">
+
 									<h:column>
-										<span style="margin-left: 7px; font-size: 16px;"> <h:outputText
+										<span style="font-size: 16px;"> <h:outputText
 												id="textoDescricao"
 												value="#{pedidoProduto.produtoAvulso.produto.descricao}" />
 										</span>
@@ -64,8 +68,8 @@
 										</p:tooltip>
 									</h:column>
 									<h:column>
-										<span style="float: right;"> <h:outputText
-												value="#{pedidoProduto.valorTotal()}">
+										<span style="float: right;"> <h:outputText value="R$" />
+											<h:outputText value="#{pedidoProduto.valorTotal()}">
 												<f:convertNumber pattern="#,###,##0.00" />
 											</h:outputText> &nbsp; <p:commandLink id="lnkDeletar"
 												oncomplete="dlgDeletarProduto.show()" update=":formDeletar">
@@ -80,6 +84,15 @@
 								</h:dataTable>
 							</div>
 							<div style="margin-top: 17px">
+								<h:panelGrid columns="3"
+									style="float: left; font-size: 16px;width: 287px; margin-bottom: 25px;">
+									<h:outputText value="Taxa de entrega: " />
+									<h:outputText value="R$ " style="float:right" />
+									<h:outputText value="#{pedidoBean.pedido.taxa}">
+										<f:convertNumber pattern="#,###,##0.00" />
+									</h:outputText>
+								</h:panelGrid>
+
 
 								<h:panelGrid columns="1" style="margin:auto">
 
@@ -94,9 +107,9 @@
 									</h:panelGrid>
 									<center>
 										<p:commandLink value="Comprar" oncomplete="dlgConcluir.show()"
-											style="float:right;margin-right: 46px;width: 130px;text-decoration: none;
-									 height: 40px;border-bottom: 2px solid #EA0000;margin-top: -5px; color: blue;font-size: 45px; font-family:Vladimir Script"
-											actionListener="#{pedidoBean.atualizaTaxaEntregaFirst}"
+											styleClass="btn btn-success col-lg-12 col-md-12 col-sm-12 col-xs-12"
+											style="margin-right: 46px;text-decoration: none;"
+											actionListener="#{pedidoBean.atualizaTaxaEntrega}"
 											update=":idConcluir"
 											disabled="#{!pedidoBean.verificaValorMin()}" />
 									</center>

@@ -15,15 +15,13 @@
 	<h:outputStylesheet library="/css" name="estilo.css" />
 	<h:outputStylesheet library="/bootstrap/css" name="bootstrap-theme.css" />
 	<h:outputStylesheet library="/bootstrap/css" name="bootstrap.css" />
-
+	<h:outputStylesheet library="/theme/pastelStreme"
+		name="pastel-stream.css" />
 	<h:outputStylesheet library="/bootstrap/fonts"
 		name="glyphicons-halflings-regular.svg" />
 
-	<h:outputScript name="easySlider1.7.js" library="scripts" />
 	<h:outputScript name="jquery.js" library="scripts/lib" />
-	<h:outputScript name="bootstrap.js" library="/bootstrap/js" />
-
-
+	<h:outputScript name="bootstrap.min.js" library="/bootstrap/js" />
 </h:head>
 <h:body>
 	<div id="container">
@@ -32,17 +30,24 @@
 				<ui:include src="../topo.xhtml" />
 			</ui:insert>
 		</div>
+		<div id="menuSelecionaEmpresa" style="margin-top: 80px;">
+
+			<ui:insert name="menuSelecionaEmpresa" />
+			<ui:include src="../menuSelecionaEmpresa.xhtml" />
+		</div>
 
 		<div class="container-fluid">
 			<div class="row">
-				<div id="infoEmpresa" style="margin-top: 80px;">
+
+
+				<div id="infoEmpresa" style="margin-top: 30px;">
 
 					<ui:insert name="infoEmpresa" />
 					<ui:include src="infoEmpresa.xhtml" />
 				</div>
 
 				<div id="menuEsquerdoCompra" style="margin-top: 35px;"
-					class="col-lg-4 col-md-4 col-sm-5">
+					class="col-lg-3 col-md-4 col-sm-5">
 
 					<ui:insert name="menuEsquerdoCompra" />
 					<ui:include src="menuEsquerdoCompra.xhtml" />

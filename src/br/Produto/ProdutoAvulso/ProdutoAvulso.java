@@ -1,6 +1,7 @@
 package br.Produto.ProdutoAvulso;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,12 +53,13 @@ public class ProdutoAvulso implements Serializable, CycleRecoverable {
 		this.produto = produto;
 	}
 
-	public float valorTotal() {
+	public BigDecimal valorTotal() {
 
-		float valorTotal = produto.getValor();
+		BigDecimal valorTotal = produto.getValor();
+		
 		if (avulsos != null)
 			for (Avulso x : avulsos) {
-				valorTotal += x.getValor();
+				valorTotal=	valorTotal.add(x.getValor());
 			}
 
 		return valorTotal;

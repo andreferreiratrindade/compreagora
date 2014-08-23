@@ -2,6 +2,7 @@ package br.Produto;
 
 import static org.junit.Assert.assertEquals;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.junit.AfterClass;
@@ -46,7 +47,7 @@ public class ProdutoRNTest {
 
 		Lanche lanche = new Lanche();
 		lanche.setDescricao("Hamburguer");
-		lanche.setValor((float) 5.90);
+		lanche.setValor((float) 5.9);
 		lanche.setIngredientes("Apenas um Teste");
 		lanche.setEmpresa(empresa);
 
@@ -111,4 +112,12 @@ public class ProdutoRNTest {
 		assertEquals(1, produtos.size());
 	}
 
+	@Test
+	public void deveRetornarValorProduto() {
+		ProdutoRN produtoRN = new ProdutoRN();
+		Produto produto = produtoRN.getProduto(1);
+
+		assertEquals(5.90, produto.getValor().abs());
+
+	}
 }

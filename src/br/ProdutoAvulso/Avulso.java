@@ -1,6 +1,7 @@
 package br.ProdutoAvulso;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -28,7 +29,7 @@ public class Avulso implements Serializable, CycleRecoverable {
 	@GeneratedValue
 	private int idAvulso;
 	private String descricao;
-	private float valor;
+	private BigDecimal valor;
 	private boolean ativo;
 	private int tempoEspera;
 	@Enumerated(EnumType.STRING)
@@ -36,6 +37,10 @@ public class Avulso implements Serializable, CycleRecoverable {
 	@ManyToOne
 	@JoinColumn(name = "idEmpresa")
 	private Empresa empresa;
+
+	public Avulso() {
+		valor = new BigDecimal(0);
+	}
 
 	public CategoriaENUM getTipoAvulso() {
 		return tipoAvulso;
@@ -65,16 +70,16 @@ public class Avulso implements Serializable, CycleRecoverable {
 		this.descricao = descricao;
 	}
 
-	public void setValor(float valor) {
-		this.valor = valor;
-	}
-
 	public String getDescricao() {
 		return descricao;
 	}
 
-	public float getValor() {
+	public BigDecimal getValor() {
 		return valor;
+	}
+
+	public void setValor(float valor) {
+		this.valor = new BigDecimal(Float.toString(valor));
 	}
 
 	public Empresa getEmpresa() {
@@ -105,7 +110,7 @@ public class Avulso implements Serializable, CycleRecoverable {
 		result = prime * result + tempoEspera;
 		result = prime * result
 				+ ((tipoAvulso == null) ? 0 : tipoAvulso.hashCode());
-		result = prime * result + Float.floatToIntBits(valor);
+		result = prime * result + ((valor == null) ? 0 : valor.hashCode());
 		return result;
 	}
 
@@ -136,7 +141,10 @@ public class Avulso implements Serializable, CycleRecoverable {
 			return false;
 		if (tipoAvulso != other.tipoAvulso)
 			return false;
-		if (Float.floatToIntBits(valor) != Float.floatToIntBits(other.valor))
+		if (valor == null) {
+			if (other.valor != null)
+				return false;
+		} else if (!valor.equals(other.valor))
 			return false;
 		return true;
 	}

@@ -5,6 +5,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import com.uaihebert.factory.EasyCriteriaFactory;
+import com.uaihebert.model.EasyCriteria;
+
 import br.dao.Dao;
 
 public class CidadeDAO implements Dao<Cidade> {
@@ -35,6 +38,16 @@ public class CidadeDAO implements Dao<Cidade> {
 	public List<Cidade> lista() {
 		Query query = session.createQuery(" SELECT e FROM cidade e");
 		return (List<Cidade>) query.getResultList();
+	}
+
+	public List<Cidade> getByDescription(String term) {
+
+		EasyCriteria<Cidade> easyCriteria = EasyCriteriaFactory
+				.createQueryCriteria(session, Cidade.class);
+
+		easyCriteria.andStringLike("descCidade", "%"+term+"%");
+
+		return easyCriteria.getResultList();
 	}
 
 	@Override

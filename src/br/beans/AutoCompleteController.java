@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -15,6 +16,7 @@ import javax.faces.event.ActionEvent;
 import org.primefaces.event.SelectEvent;
 
 import br.AtendimentoLugares.Bairro;
+import br.AtendimentoLugares.BairroRN;
 import br.AtendimentoLugares.Cidade;
 import br.AtendimentoLugares.CidadeRN;
 import br.Empresa.Empresa;
@@ -22,17 +24,15 @@ import br.Empresa.EmpresaRN;
 import br.Empresa.Categoria.CategoriaENUM;
 import br.beans.util.ContextUtil;
 
-@ManagedBean
-@ViewScoped
+@ManagedBean(name="autoCompleteController")
+@SessionScoped
 public class AutoCompleteController implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private Cidade cidade;
-	private List<Cidade> cidades;
 	private Bairro bairro;
-	private List<Bairro> bairros;
 	private List<Empresa> empresas;
 	@ManagedProperty(value = "#{contextUtil}")
 	private ContextUtil contextUtil;
@@ -49,8 +49,6 @@ public class AutoCompleteController implements Serializable {
 	@PostConstruct
 	public void init() {
 
-		cidades = new ArrayList<Cidade>();
-		bairros = new ArrayList<Bairro>();
 		empresas = new ArrayList<Empresa>();
 
 	}
@@ -65,6 +63,9 @@ public class AutoCompleteController implements Serializable {
 	}
 
 	public Bairro getBairro() {
+		if (bairro == null) {
+			bairro = new Bairro();
+		}
 		return bairro;
 	}
 
@@ -72,51 +73,53 @@ public class AutoCompleteController implements Serializable {
 		this.bairro = bairro;
 	}
 
-	public List<Bairro> getBairros() {
-		return bairros;
-	}
-
-	public void setBairros(List<Bairro> bairros) {
-		this.bairros = bairros;
-	}
-
-	public void carregaBairro() {
-		this.bairros = cidade.getBairros();
-	}
-
 	public List<Bairro> completaBairro(String query) {
 
-		this.bairros = this.cidade.getBairros();
+		BairroRN bairroRN = new BairroRN();
 
-		List<Bairro> sugestoes = new ArrayList<Bairro>();
-
-		for (Bairro j : this.bairros) {
-			if (j.getDescBairro().toUpperCase().startsWith(query.toUpperCase())) {
-				sugestoes.add(j);
-			}
-		}
-
-		return sugestoes;
+		return bairroRN.getByDescription(this.cidade.getIdCidade(), query);
 	}
 
 	public void handleSelectBairro(SelectEvent event) {
 		bairro = (Bairro) event.getObject();
 	}
+	
+	public String atualizaSelecaoEmpresaReturn() {
+
+		if (bairro != null) {
+			empresas = new ArrayList<Empresa>();
+
+			EmpresaRN empresaRN = new EmpresaRN();
+
+			empresas = empresaRN.listaEmpresasPeloBairroECategoria(
+					bairro.getIdBairro(),
+					CategoriaENUM.values()[contextUtil.getCategoriaEmpresa()]);
+
+			for (Empresa x : empresas) {
+				x.getHorarioFuncionamento().size();
+			}
+		}
+		
+		return "/principal.jsf?faces-redirect=true";
+	}
 
 	public void atualizaSelecaoEmpresa() {
 
-		empresas = new ArrayList<Empresa>();
+		if (bairro != null) {
+			empresas = new ArrayList<Empresa>();
 
-		EmpresaRN empresaRN = new EmpresaRN();
+			EmpresaRN empresaRN = new EmpresaRN();
 
-		empresas = empresaRN.listaEmpresasPeloBairroECategoria(
-				bairro.getIdBairro(),
-				CategoriaENUM.values()[contextUtil.getCategoriaEmpresa()]);
+			empresas = empresaRN.listaEmpresasPeloBairroECategoria(
+					bairro.getIdBairro(),
+					CategoriaENUM.values()[contextUtil.getCategoriaEmpresa()]);
 
-		for (Empresa x : empresas) {
-			x.getHorarioFuncionamento().size();
+			for (Empresa x : empresas) {
+				x.getHorarioFuncionamento().size();
+			}
 		}
-
+		
+		System.out.println("----"+contextUtil.getCategoriaEmpresa());
 	}
 
 	public void verificaCidadeBairroMenssagem(ActionEvent actionEvent) {
@@ -127,24 +130,14 @@ public class AutoCompleteController implements Serializable {
 
 	public void handleSelect(SelectEvent event) {
 
-		this.cidade = (Cidade) event.getObject();	
+		this.cidade = (Cidade) event.getObject();
 
 	}
 
-
-
 	public List<Cidade> completaCidade(String query) {
 		CidadeRN cidadeRN = new CidadeRN();
-		this.cidades = cidadeRN.listar();
-		List<Cidade> sugestoes = new ArrayList<Cidade>();
 
-		for (Cidade j : this.cidades) {
-			if (j.getDescCidade().toUpperCase().startsWith(query.toUpperCase())) {
-				sugestoes.add(j);
-			}
-		}
-
-		return sugestoes;
+		return cidadeRN.getByDescription(query);
 	}
 
 	public Cidade getCidade() {
@@ -156,15 +149,6 @@ public class AutoCompleteController implements Serializable {
 
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
-		bairros = cidade.getBairros();
-	}
-
-	public List<Cidade> getCidades() {
-		return cidades;
-	}
-
-	public void setCidades(List<Cidade> cidades) {
-		this.cidades = cidades;
 	}
 
 	public ContextUtil getContextUtil() {
