@@ -79,7 +79,6 @@ input[type="checkbox"].input-validation-error {
 	.ui-accordion .ui-accordion-header.ui-state-default {
 		border: 0px
 	}
-	
 	.ui-fieldset-toggleable .ui-fieldset-legend {
 		border-radius: 10px;
 	}
@@ -104,7 +103,7 @@ input[type="checkbox"].input-validation-error {
 		background: #6CBAEE
 	}
 	#topo {
-		margin-top: -20px;
+		
 	}
 	#formTopoMenu {
 		position: absolute;
@@ -128,22 +127,9 @@ input[type="checkbox"].input-validation-error {
 
 	/* Isto é necessário para não haver rolagens horizontais quando movermos os elementos */
 	html, body {
-		overflow-x: hidden;
-	}
-	body {
+		height: 100%;
 		background: none;
-		font-size: 80%;
-		width: 100%;
-		background: #ec4b1b
-			url("../resources/imagens/ImagensForm/head_bg_mobile.png") center
-			no-repeat;
-		-webkit-background-size: cover;
-		-moz-background-size: cover;
-		-o-background-size: cover;
-		background-size: cover;
-		-moz-background-size: cover;
-		-o-background-size: cover;
-		background-size: cover;
+		font-size: 12px;
 	}
 	header {
 		padding: 0px;
@@ -834,7 +820,6 @@ a.linkmenup {
 .ui-tabs.ui-tabs-left .ui-tabs-nav.ui-widget-header {
 	border-right: 1px solid #FF0000;
 }
-
 
 pre {
 	display: block;

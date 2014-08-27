@@ -9,10 +9,8 @@
 
 <ui:composition template="/templates/principal.xhtml">
 	<ui:define name="corpo">
-		<!-- 
-	Display para DeskTop
- -->
-		<div id="desktop" style="margin-top: 40px" class="container-fluid">
+
+		<div style="margin-top: 40px" class="container-fluid">
 			<div class="row">
 				<div class="col-lg-12 text-center" style="margin-bottom: 30px">
 					<h3>Selecione seu endereço</h3>
@@ -38,7 +36,7 @@
 							</p:autoComplete>
 							<p:watermark value="Cidade" for="autoCompleteCidade"></p:watermark>
 						</div>
-						
+
 						<div class="col-md-4 col-lg-4 col-sm-5 col-xs-12">
 							<p:autoComplete id="autoCompleteBairro"
 								value="#{autoCompleteController.bairro}" forceSelection="true"
@@ -82,56 +80,86 @@
 				<h:form id="dataGridEmpresas"
 					style="margin:0 auto;display:#{autoCompleteController.cidade.descCidade != null ? 'block' : 'none'}"
 					styleClass="container">
+
 					<div class="row">
 
-						<p:dataGrid value="#{autoCompleteController.empresas}"
-							var="empresa" paginator="true" columns="4" ajax="false"
-							emptyMessage="Nunhuma empresa atende a esse local"
-							styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<p:column>
-								<h:panelGrid style="position: absolute;">
-									<h:graphicImage library="imagens/empresa"
-										name="#{empresa.aberto}.gif" />
-								</h:panelGrid>
-								<p:commandLink action="#{pedidoBean.adicionaEmpresa}"
-									disabled="#{!empresa.aberto}" id="lnk">
-									<h:graphicImage width="150" height="100"
-										library="imagens/empresa"
-										name="Empresa#{empresa.idEmpresa}.jpg" />
-									<f:setPropertyActionListener target="#{pedidoBean.empresa}"
-										value="#{empresa}" />
-									<f:setPropertyActionListener
-										target="#{pedidoBean.categoriaEmpresa}"
-										value="#{contextUtil.categoriaEmpresa}" />
-								</p:commandLink>
-								<p:tooltip for="lnk">
-									<h:panelGrid>
-										<center>
-											<h:outputText value="#{empresa.nomeFant}"
-												style="font-size:16px" />
-											<h:outputText value="#{empresa.telefone}"
-												converter="converterTelefone" />
-										</center>
-										<h:panelGrid columns="2">
-											<h:outputText value="Domingo" />
-											<h:outputText value="#{empresa.domingo()}" escape="false" />
-											<h:outputText value="Segunda" />
-											<h:outputText value="#{empresa.segunda()}" escape="false" />
-											<h:outputText value="Terça" />
-											<h:outputText value="#{empresa.terca()}" escape="false" />
-											<h:outputText value="Quarta" />
-											<h:outputText value="#{empresa.quarta()}" escape="false" />
-											<h:outputText value="Quinta" />
-											<h:outputText value="#{empresa.quinta()}" escape="false" />
-											<h:outputText value="Sexta" />
-											<h:outputText value="#{empresa.sexta()}" escape="false" />
-											<h:outputText value="Sábado" />
-											<h:outputText value="#{empresa.sabado()}" escape="false" />
+						<div class="visible-xs-block">
+							<p:dataGrid value="#{autoCompleteController.empresas}"
+								var="empresa" paginator="true" ajax="false" columns="1"
+								style="width:100%"
+								emptyMessage="Nunhuma empresa atende a esse local">
+								<p:column>
+
+									<p:commandLink action="#{pedidoBean.adicionaEmpresa}"
+										disabled="#{!empresa.aberto}" id="lnk"
+										styleClass="btn btn-primary col-xs-12"
+										style="text-align: left;">
+										<h:outputText value="#{empresa.razaoSocial}" />
+										<f:setPropertyActionListener target="#{pedidoBean.empresa}"
+											value="#{empresa}" />
+										<f:setPropertyActionListener
+											target="#{pedidoBean.categoriaEmpresa}"
+											value="#{contextUtil.categoriaEmpresa}" />
+
+										<h:panelGrid style="float:right">
+											<h:graphicImage library="imagens/empresa"
+												name="#{empresa.aberto}.gif" />
 										</h:panelGrid>
+									</p:commandLink>
+
+								</p:column>
+							</p:dataGrid>
+						</div>
+						<div class="hidden-xs">
+							<p:dataGrid value="#{autoCompleteController.empresas}"
+								var="empresa" paginator="true" ajax="false"
+								emptyMessage="Nunhuma empresa atende a esse local"
+								styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<p:column>
+									<h:panelGrid style="position: absolute;">
+										<h:graphicImage library="imagens/empresa"
+											name="#{empresa.aberto}.gif" />
 									</h:panelGrid>
-								</p:tooltip>
-							</p:column>
-						</p:dataGrid>
+									<p:commandLink action="#{pedidoBean.adicionaEmpresa}"
+										disabled="#{!empresa.aberto}" id="lnk">
+										<h:graphicImage width="150" height="100"
+											library="imagens/empresa"
+											name="Empresa#{empresa.idEmpresa}.jpg" />
+										<f:setPropertyActionListener target="#{pedidoBean.empresa}"
+											value="#{empresa}" />
+										<f:setPropertyActionListener
+											target="#{pedidoBean.categoriaEmpresa}"
+											value="#{contextUtil.categoriaEmpresa}" />
+									</p:commandLink>
+									<p:tooltip for="lnk">
+										<h:panelGrid>
+											<center>
+												<h:outputText value="#{empresa.nomeFant}"
+													style="font-size:16px" />
+												<h:outputText value="#{empresa.telefone}"
+													converter="converterTelefone" />
+											</center>
+											<h:panelGrid columns="2">
+												<h:outputText value="Domingo" />
+												<h:outputText value="#{empresa.domingo()}" escape="false" />
+												<h:outputText value="Segunda" />
+												<h:outputText value="#{empresa.segunda()}" escape="false" />
+												<h:outputText value="Terça" />
+												<h:outputText value="#{empresa.terca()}" escape="false" />
+												<h:outputText value="Quarta" />
+												<h:outputText value="#{empresa.quarta()}" escape="false" />
+												<h:outputText value="Quinta" />
+												<h:outputText value="#{empresa.quinta()}" escape="false" />
+												<h:outputText value="Sexta" />
+												<h:outputText value="#{empresa.sexta()}" escape="false" />
+												<h:outputText value="Sábado" />
+												<h:outputText value="#{empresa.sabado()}" escape="false" />
+											</h:panelGrid>
+										</h:panelGrid>
+									</p:tooltip>
+								</p:column>
+							</p:dataGrid>
+						</div>
 					</div>
 				</h:form>
 
@@ -144,59 +172,6 @@
 
 		</div>
 
-		<!-- 
-	Display para Mobile
- -->
-		<div id="celular" class="container-fluid">
-			<h:form>
-				<center>
-					<h:outputText value="Selecione uma categoria"
-						style="font-size: 25px;margin-top:10px;color:#354866;font-family: Estrangelo Edessa;" />
-				</center>
-				<ul class="nav nav-pills nav-stacked">
-					<li class="active"><h:commandLink 
-							value="Lanchonete"
-							style="background-color:yellow; color:#354866 !important"
-							action="#{pagPath.selecionaEnderecoFiltro}">
-							<f:setPropertyActionListener
-								target="#{contextUtil.categoriaEmpresa}" value="#{0}" />
-						</h:commandLink></li>
-					<li><h:commandLink  value="Pizzaria"
-							style="margin-top:10px; background-color:yellow; color:#354866 !important"
-							action="#{pagPath.selecionaEnderecoFiltro}">
-							<f:setPropertyActionListener
-								target="#{contextUtil.categoriaEmpresa}" value="#{1}" />
-						</h:commandLink></li>
-					<li><h:commandLink  value="Restaurante"
-							style="margin-top:10px; background-color:yellow; color:#354866 !important"
-							action="#{pagPath.selecionaEnderecoFiltro}">
-							<f:setPropertyActionListener
-								target="#{contextUtil.categoriaEmpresa}" value="#{2}" />
-						</h:commandLink></li>
-					<li><h:commandLink  value="Bebida"
-							style="margin-top:10px; background-color:yellow; color:#354866 !important"
-							action="#{pagPath.selecionaEnderecoFiltro}">
-							<f:setPropertyActionListener
-								target="#{contextUtil.categoriaEmpresa}" value="#{3}" />
-						</h:commandLink></li>
-					<li><h:commandLink  value="Agua"
-							style="margin-top:10px; background-color:yellow; color:#354866 !important"
-							action="#{pagPath.selecionaEnderecoFiltro}">
-							<f:setPropertyActionListener
-								target="#{contextUtil.categoriaEmpresa}" value="#{4}" />
-						</h:commandLink></li>
-					<li><h:commandLink  value="Gas"
-							style="margin-top:10px; background-color:yellow; color:#354866 !important"
-							action="#{pagPath.selecionaEnderecoFiltro}">
-							<f:setPropertyActionListener
-								target="#{contextUtil.categoriaEmpresa}" value="#{5}" />
-						</h:commandLink></li>
-				</ul>
-
-
-			</h:form>
-		</div>
-		
 	</ui:define>
 </ui:composition>
 </html>

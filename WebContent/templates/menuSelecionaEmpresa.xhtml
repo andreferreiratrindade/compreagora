@@ -17,11 +17,8 @@
 					onclick="window.scrollTo(0,0);" style="text-decoration: none;"
 					styleClass="#{contextUtil.categoriaEmpresa == 0 ? 'activestep': '' } col-md-2 col-sm-2 ">
 					<span class="fa fa-pencil"></span>
-
-
 					<f:setPropertyActionListener
 						target="#{contextUtil.categoriaEmpresa}" value="#{0}" />
-
 				</p:commandLink>
 
 				<p:commandLink value="Pizzaria" style="text-decoration: none;"
@@ -64,6 +61,71 @@
 				</p:commandLink>
 
 
+			</div>
+		</div>
+	</div>
+	<div id="celular">
+
+		<div class="panel-group" id="accordion">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion"
+							href="#collapseSelecioneCategoria"> Selecione uma categoria </a>
+					</h4>
+				</div>
+				<div id="collapseSelecioneCategoria" class="panel-collapse collapse">
+					<div class="panel-body">
+						<h:form>
+							<ul class="nav nav-pills nav-stacked">
+								<li class="active"><p:commandLink value="Lanchonete"
+										action="#{autoCompleteController.atualizaSelecaoEmpresaReturn}"
+										onclick="window.scrollTo(0,0);" style="text-decoration: none;"
+										styleClass="#{contextUtil.categoriaEmpresa == 0 ? 'activestep': '' } col-md-2 col-sm-2 ">
+										<span class="fa fa-pencil"></span>
+										<f:setPropertyActionListener
+											target="#{contextUtil.categoriaEmpresa}" value="#{0}" />
+									</p:commandLink></li>
+								<li><p:commandLink value="Pizzaria"
+										style="text-decoration: none;"
+										styleClass="#{contextUtil.categoriaEmpresa == 1 ? 'activestep': '' } col-md-2 col-sm-2"
+										action="#{autoCompleteController.atualizaSelecaoEmpresaReturn}">
+
+										<f:setPropertyActionListener
+											target="#{contextUtil.categoriaEmpresa}" value="#{1}" />
+									</p:commandLink></li>
+								<li><p:commandLink value="Restaurante"
+										style="text-decoration: none;"
+										action="#{autoCompleteController.atualizaSelecaoEmpresaReturn}"
+										styleClass="#{contextUtil.categoriaEmpresa == 2 ? 'activestep': '' } col-md-2 col-sm-2 ">
+										<f:setPropertyActionListener
+											target="#{contextUtil.categoriaEmpresa}" value="#{2}" />
+									</p:commandLink></li>
+								<li><p:commandLink value="Bebida"
+										style="text-decoration: none;"
+										action="#{autoCompleteController.atualizaSelecaoEmpresaReturn}"
+										styleClass="#{contextUtil.categoriaEmpresa == 3 ? 'activestep': '' } col-md-2 col-sm-2 ">
+										<f:setPropertyActionListener
+											target="#{contextUtil.categoriaEmpresa}" value="#{3}" />
+									</p:commandLink></li>
+								<li><p:commandLink value="Água"
+										style="text-decoration: none;"
+										styleClass="#{contextUtil.categoriaEmpresa == 4 ? 'activestep': '' } col-md-2 col-sm-2"
+										action="#{autoCompleteController.atualizaSelecaoEmpresaReturn}">
+										<f:setPropertyActionListener
+											target="#{contextUtil.categoriaEmpresa}" value="#{4}" />
+									</p:commandLink></li>
+								<li><p:commandLink value="Gás"
+										style="text-decoration: none;"
+										styleClass="#{contextUtil.categoriaEmpresa == 5 ? 'activestep': '' } col-md-2 col-sm-2"
+										action="#{autoCompleteController.atualizaSelecaoEmpresaReturn}">
+										<f:setPropertyActionListener
+											target="#{contextUtil.categoriaEmpresa}" value="#{5}" />
+									</p:commandLink></li>
+							</ul>
+						</h:form>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -103,7 +103,8 @@
 								<center>
 									<h:outputText value="#{empresa.nomeFant}"
 										style="font-size:16px" />
-									<h:outputText value="#{empresa.telefone}" converter="converterTelefone"/>
+									<h:outputText value="#{empresa.telefone}"
+										converter="converterTelefone" />
 								</center>
 								<h:panelGrid columns="2">
 									<h:outputText value="Domingo" />
@@ -220,11 +221,6 @@
 				</p:dataGrid>
 			</h:form>
 		</div>
-		<!-- 
-	Display para Tablet
- -->
-		<div id="tablet"></div>
-
 	</ui:define>
 </ui:composition>
 </html>

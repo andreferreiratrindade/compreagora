@@ -8,223 +8,120 @@
 	xmlns:sec="http://www.springframework.org/security/facelets/tags">
 <ui:composition>
 	<!-- Display DeskTop -->
-	<div id="desktop" class="container-fluid">
-		<h:form>
-			<div class="row">
-				<h:graphicImage library="imagens/ImagensForm" name="topoFigura.png"
-					width="100%" style="position: absolute;height: 113px;"
-					styleClass="img-responsive" />
-
+	<h:form>
+		<nav class="navbar navbar-default" role="navigation">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<h:graphicImage library="imagens/icones" name="logo.png"
+					style="width: 216px;" />
 			</div>
 
-			<div class="row">
-
-
-
-				<div class="col-md-4 col-sm-4 col-xs-6 col-lg-3">
-					<h:graphicImage library="imagens/icones" name="logo.png"
-						style="position: absolutex" styleClass="img-responsive" />
-				</div>
-				<div class="col-md-8 col-sm-8 col-xs-6 col-lg-3 col-lg-push-6">
-					<div class="pull-right">
-						<sec:isAnonymous>
-							<h:commandButton value="Quero me cadastrar"
-								action="#{pagPath.novoCadastroDeUsuario}"
-								styleClass="btn btn-default">
-
-							</h:commandButton>
-							&nbsp;&nbsp;
-							<h:commandButton value="Entrar"
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li><h:commandLink action="/principal.jsf?faces-redirect=true"
+							id="home" value="Inicio" /></li>
+					<li><h:commandLink oncomplete="dlgAjuda.show()" id="lnkAjuda" value="Ajuda"/></li>
+					<li><h:commandLink id="faleConosco" value="Fale Conosco"
+									action="/paginas/publico/clienteEmailContato.jsf?faces-redirect=true"/></li>
+				</ul>
+				<sec:isAnonymous>
+					<ul class="nav navbar-nav navbar-right">
+						<li><h:commandLink value="Quero me cadastrar"
+								action="#{pagPath.novoCadastroDeUsuario}" styleClass="btn " /></li>
+						<li><h:commandLink value="Entrar"
 								action="/paginas/publico/login.jsf?faces-redirect=true"
-								styleClass="btn btn-primary">
+								styleClass="btn btn-primary" /></li>
+					</ul>
+				</sec:isAnonymous>
+				<sec:ifAnyGranted roles="ROLE_SUP">
 
-							</h:commandButton>
-						</sec:isAnonymous>
-					</div>
+					<ul class="nav navbar-nav navbar-right">
 
-					<div class="pull-right">
-						<sec:ifAnyGranted roles="ROLE_SUP">
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#">#{contextUtil.clienteLogado.nome}
+								<span class="caret"></span>
+						</a>
+							<ul class="dropdown-menu" role="menu">
+								<li><h:commandLink value="Clientes"
+										action="/paginas/admin/cliente/clientesCadastrados.jsf?faces-redirect=true" /></li>
+								<li><h:commandLink value="Editar Conta"
+										action="#{clienteBean.alterarCliente}">
 
-							<ul class="nav nav-pills">
-
-								<li class="dropdown"><a class="dropdown-toggle"
-									data-toggle="dropdown" href="#">#{contextUtil.clienteLogado.nome}
-										<span class="caret"></span>
-								</a>
-									<ul class="dropdown-menu" role="menu">
-										<li><h:commandLink value="Clientes"
-												action="/paginas/admin/cliente/clientesCadastrados.jsf?faces-redirect=true" /></li>
-										<li><h:commandLink value="Editar Conta"
-												action="#{clienteBean.alterarCliente}">
-
-											</h:commandLink></li>
-										<li><h:commandLink value="Empresa"
-												action="/paginas/admin/empresa/areaAdministrativa.jsf?faces-redirect=true" /></li>
+									</h:commandLink></li>
+								<li><h:commandLink value="Empresa"
+										action="/paginas/admin/empresa/areaAdministrativa.jsf?faces-redirect=true" /></li>
 
 
-										<li><a
-											href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
-												Sair</a></li>
-									</ul></li>
-							</ul>
+								<li><a
+									href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
+										Sair</a></li>
+							</ul></li>
+					</ul>
 
 
 
-						</sec:ifAnyGranted>
+				</sec:ifAnyGranted>
 
-
-						<sec:ifAnyGranted roles="ROLE_ADM">
-
-							<ul class="nav nav-pills">
-
-								<li class="dropdown"><a class="dropdown-toggle"
-									data-toggle="dropdown" href="#">#{contextUtil.clienteLogado.nome}
-										<span class="caret"></span>
-								</a>
-									<ul class="dropdown-menu" role="menu">
-										<li><h:commandLink value="Administrativo"
-												action="#{pagPath.administrativo}" /></li>
-										<li><h:commandLink value="Editar Conta"
-												action="#{clienteBean.alterarCliente}">
-
-											</h:commandLink></li>
-										<li><a
-											href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
-												Sair</a></li>
-									</ul></li>
-							</ul>
-						</sec:ifAnyGranted>
-						<sec:ifAnyGranted roles="ROLE_CLI">
-
-							<ul class="nav nav-pills">
-
-								<li class="dropdown"><a class="dropdown-toggle"
-									data-toggle="dropdown" href="#">#{contextUtil.clienteLogado.nome}
-										<span class="caret"></span>
-								</a>
-									<ul class="dropdown-menu" role="menu">
-										<li><h:commandLink value="Meus Pedidos"
-												action="/paginas/publico/meusPedidos.jsf?faces-redirect=true">
-
-											</h:commandLink></li>
-										<li><h:commandLink value="Editar Conta"
-												action="#{clienteBean.alterarCliente}">
-
-											</h:commandLink></li>
-										<li><a
-											href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
-												Sair</a></li>
-									</ul></li>
-							</ul>
-
-						</sec:ifAnyGranted>
-					</div>
-				</div>
-				<div class="col-md-6 col-sm-6 col-lg-6 col-xs-6 col-lg-pull-2"
-					style="margin-top: 10px">
-
-					<div
-						class="col-md-12 col-sm-12 col-lg-12 col-xs-12 col-xs-offset-0 col-lg-offset-0 col-md-offset-4">
-						<div>
-							<div class="col-md-4 col-sm-4 col-xs-4 col-lg-4">
-								<h:commandLink action="/principal.jsf?faces-redirect=true"
-									id="home">
-									<h:graphicImage library="imagens/ImagensForm"
-										name="homeCirculo.png" style="position: absolute;width: 55px;" />
-
-								</h:commandLink>
-							</div>
-							<div class="col-md-4 col-sm-4 col-xs-4 col-lg-4">
-								<h:commandLink oncomplete="dlgAjuda.show()" id="lnkAjuda">
-									<h:graphicImage library="imagens/ImagensForm"
-										name="homeCirculo.png" style="position: absolute;width: 55px;" />
-								</h:commandLink>
-
-							</div>
-							<div class="col-md-4 col-sm-1 col-xs-1 col-lg-4">
-								<h:commandLink id="faleConosco"
-									action="/paginas/publico/clienteEmailContato.jsf?faces-redirect=true">
-									<h:graphicImage library="imagens/ImagensForm"
-										name="homeCirculo.png" style="position: absolute;width: 55px;" />
-
-								</h:commandLink>
-							</div>
-						</div>
-					</div>
-				</div>
+				<sec:ifAnyGranted roles="ROLE_ADM">
+					<ul class="nav navbar-nav navbar-right">
 
 
 
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#">#{contextUtil.clienteLogado.nome}
+								<span class="caret"></span>
+						</a>
+							<ul class="dropdown-menu" role="menu">
+								<li><h:commandLink value="Administrativo"
+										action="#{pagPath.administrativo}" /></li>
+								<li><h:commandLink value="Editar Conta"
+										action="#{clienteBean.alterarCliente}">
+
+									</h:commandLink></li>
+								<li><a
+									href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
+										Sair</a></li>
+							</ul></li>
+					</ul>
+				</sec:ifAnyGranted>
+				<sec:ifAnyGranted roles="ROLE_CLI">
+					<ul class="nav navbar-nav navbar-right">
+
+
+
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#">#{contextUtil.clienteLogado.nome}
+								<span class="caret"></span>
+						</a>
+							<ul class="dropdown-menu" role="menu">
+								<li><h:commandLink value="Meus Pedidos"
+										action="/paginas/publico/meusPedidos.jsf?faces-redirect=true">
+
+									</h:commandLink></li>
+								<li><h:commandLink value="Editar Conta"
+										action="#{clienteBean.alterarCliente}">
+
+									</h:commandLink></li>
+								<li><a
+									href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
+										Sair</a></li>
+							</ul></li>
+					</ul>
+
+				</sec:ifAnyGranted>
 			</div>
-		</h:form>
-		<p:dialog id="dlgAjuda" header="Ajuda - Como realizar um pedido"
-			widgetVar="dlgAjuda" modal="true" showEffect="slide"
-			style="background-color: #F74646;">
-			<h:graphicImage library="imagens/ImagensForm" name="passo2.png" />
-		</p:dialog>
-	</div>
-
-	<!-- Display Mobile -->
-	<div id="celular" style="height: 160px;">
-		<span
-			style="background: rgb(40, 51, 109); height: 125px; width: 100%; position: absolute; top: 0px" />
-		<h:form>
-			<center>
-				<div
-					style="min-width: 95%; margin: auto; position: absolute; margin-top: 31px">
-					<h:graphicImage library="imagens/icones" name="logo.png"
-						style="width: 270px;height: auto;margin:auto" />
-
-					<sec:isAnonymous>
-						<h:panelGrid columns="2" style="width: 95%;margin-top:10px">
-							<p:commandButton value="Cadastre-se" action="#{clienteBean.novo}"
-								style="background: #FEFFFC;float:left" />
-
-							<p:commandButton value="Entrar" action="#{pagPath.login}"
-								styleClass="ui-priority-primary" style="width: 86px;float:right" />
-
-						</h:panelGrid>
-					</sec:isAnonymous>
-
-					<sec:ifAnyGranted roles="ROLE_CLI">
-						<div style="width: 90%">
-
-							<p:commandButton id="dynaButton" value="Minha Conta"
-								type="button" styleClass="ui-priority-primary"
-								style="float:right;margin-top:10px" />
-							<p:menu overlay="true" trigger="dynaButton" my="left top"
-								at="left bottom">
-
-								<p:menuitem value="Meus Pedidos" action="#{pagPath.meusPedidos}"
-									style="font-size: 23px; height:25px">
-									<f:setPropertyActionListener
-										target="#{contextUtil.categoriaEmpresa}" value="#{-1}" />
-								</p:menuitem>
-								<p:separator />
-								<p:menuitem value="Editar Conta"
-									action="#{clienteBean.alterarCliente}"
-									style="font-size: 23px; height:25px">
-									<f:setPropertyActionListener
-										target="#{contextUtil.categoriaEmpresa}" value="#{-1}" />
-								</p:menuitem>
-								<p:separator />
-								<p:menuitem value="Sair" style="font-size: 23px; height:25px">
-									<center>
-										<a title="Sair"
-											href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
-											<h:graphicImage library="imagens/icones" name="sair.png"
-												width="88px" />
-										</a>
-									</center>
-								</p:menuitem>
-							</p:menu>
-						</div>
-					</sec:ifAnyGranted>
-				</div>
-			</center>
-		</h:form>
-	</div>
-
-	<div id="tablet"></div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid --> </nav>
+	</h:form>
 </ui:composition>
 </html>

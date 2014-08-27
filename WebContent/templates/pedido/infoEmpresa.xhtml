@@ -97,5 +97,105 @@
 			</h:panelGrid>
 		</center>
 	</div>
+	<div id="celular">
+		<div class="panel-group" id="accordion">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion"
+							href="#collapseOne">#{pedidoBean.empresa.razaoSocial}</a>
+					</h4>
+				</div>
+				<div id="collapseOne" class="panel-collapse collapse">
+					<div class="panel-body">
+
+						<div >
+							<div style="width: 150px">
+								<h:graphicImage width="150" height="100"
+									library="imagens/empresa"
+									name="Empresa#{pedidoBean.empresa.idEmpresa}.jpg" />
+							</div>
+							<div style="float: right">
+								<p:commandLink id="lnk2" styleClass="btn btn-default ">Detalhes</p:commandLink>
+							</div>
+							<h:outputText value="#{pedidoBean.empresa.razaoSocial}"
+								styleClass="col-xs-12" />
+
+							<h:outputText value="#{pedidoBean.empresa.telefone}"
+								converter="converterTelefone" />
+
+
+							<div class="col-xs-12">
+
+								<p:dataGrid value="#{pedidoBean.formasDePagamentoDM}" var="fdp">
+
+									<h:graphicImage library="imagens/icones/formaDePagamento"
+										name="#{fdp.idFormaDePagamento}.png" style="width: 37px;" />
+
+								</p:dataGrid>
+
+
+							</div>
+							<p:tooltip for="lnk2">
+								<h:panelGrid columns="2">
+
+									<h:outputText value="Domingo" />
+
+									<h:outputText value="#{pedidoBean.empresa.domingo()}"
+										escape="false" />
+
+									<h:outputText value="Segunda" />
+
+									<h:outputText value="#{pedidoBean.empresa.segunda()}"
+										escape="false" />
+
+									<h:outputText value="Terça" />
+
+									<h:outputText value="#{pedidoBean.empresa.terca()}"
+										escape="false" />
+
+									<h:outputText value="Quarta" />
+
+									<h:outputText value="#{pedidoBean.empresa.quarta()}"
+										escape="false" />
+
+									<h:outputText value="Quinta" />
+
+									<h:outputText value="#{pedidoBean.empresa.quinta()}"
+										escape="false" />
+
+									<h:outputText value="Sexta" />
+
+									<h:outputText value="#{pedidoBean.empresa.sexta()}"
+										escape="false" />
+
+									<h:outputText value="Sábado" />
+
+									<h:outputText value="#{pedidoBean.empresa.sabado()}"
+										escape="false" styleClass="form-control-static" />
+								</h:panelGrid>
+							</p:tooltip>
+						</div>
+					</div>
+					<div>
+						<h:outputText value="#{pedidoBean.empresa.endereco.logradouro}, " />
+						<h:outputText value="#{pedidoBean.empresa.endereco.numero} - " />
+						<h:outputText
+							value="Bairro #{pedidoBean.empresa.endereco.bairroCidade}" />
+						<h:outputText
+							value=" - #{pedidoBean.empresa.endereco.bairroCidade.cidade} - " />
+
+						<h:outputText value="#{pedidoBean.empresa.endereco.cep}"
+							converter="converterCEP" />
+					</div>
+
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
 </ui:composition>
 </html>

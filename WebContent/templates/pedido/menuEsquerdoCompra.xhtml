@@ -6,126 +6,121 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core">
 <ui:composition>
-	<div id="desktop">
 
-		<div class="container-fluid">
-			<div class="row">
-				<div style="width: 300px;" class="col-lg-6 ">
-					<h:form id="formPainel">
-						<ul class="nav nav-pills nav-stacked">
-							<li class="#{pedidoBean.itemMenu == 0 ? 'active' : ''}"><p:commandLink
-									value="Lanches"
-									style="display: #{pedidoBean.verificaTiposProdutos(0) ? 'block' : 'none' };"
-									action="#{pedidoBean.mudaTelaLanche()}">
-								</p:commandLink></li>
-							<li class="#{pedidoBean.itemMenu == 1 ? 'active' : '' }"><p:commandLink
-									value="Pizza"
-									style="display: #{pedidoBean.verificaTiposProdutos(1)? 'block' : 'none'};margin-top:5px"
-									action="#{pedidoBean.mudaTelaPizza()}">
-								</p:commandLink></li>
-							<li class="#{pedidoBean.itemMenu == 2 ? 'active' : '' }"><p:commandLink
-									value="Marmitex"
-									style="display: #{pedidoBean.verificaTiposProdutos(2)? 'block' : 'none'};margin-top:5px"
-									action="#{pedidoBean.mudaTelaMarmitex()}">
-								</p:commandLink></li>
-							<li class="#{pedidoBean.itemMenu == 3 ? 'active' : '' }"><p:commandLink
-									value="Bebida"
-									style="display: #{pedidoBean.verificaTiposProdutos(3)? 'block' : 'none'};margin-top:5px"
-									action="#{pedidoBean.mudaTelaBebida()}">
-								</p:commandLink></li>
-							<li class="#{pedidoBean.itemMenu == 4 ? 'active' : '' }"><p:commandLink
-									value="Água"
-									style="display: #{pedidoBean.verificaTiposProdutos(4)? 'block' : 'none'};margin-top:5px"
-									action="#{pedidoBean.mudaTelaAgua()}">
-								</p:commandLink></li>
-							<li class="#{pedidoBean.itemMenu == 5 ? 'active' : '' }"><p:commandLink
-									value="Gás"
-									style="display: #{pedidoBean.verificaTiposProdutos(5)? 'block' : 'none'};margin-top:5px"
-									action="#{pedidoBean.mudaTelaGas()}">
-								</p:commandLink></li>
-						</ul>
+	<h:form id="formPainel">
+		<ul class="nav nav-pills nav-stacked">
+			<li class="#{pedidoBean.itemMenu == 0 ? 'active' : ''}"><p:commandLink
+					value="Lanches"
+					style="display: #{pedidoBean.verificaTiposProdutos(0) ? 'block' : 'none' };"
+					action="#{pedidoBean.mudaTelaLanche()}">
+				</p:commandLink></li>
+			<li class="#{pedidoBean.itemMenu == 1 ? 'active' : '' }"><p:commandLink
+					value="Pizza"
+					style="display: #{pedidoBean.verificaTiposProdutos(1)? 'block' : 'none'};margin-top:5px"
+					action="#{pedidoBean.mudaTelaPizza()}">
+				</p:commandLink></li>
+			<li class="#{pedidoBean.itemMenu == 2 ? 'active' : '' }"><p:commandLink
+					value="Marmitex"
+					style="display: #{pedidoBean.verificaTiposProdutos(2)? 'block' : 'none'};margin-top:5px"
+					action="#{pedidoBean.mudaTelaMarmitex()}">
+				</p:commandLink></li>
+			<li class="#{pedidoBean.itemMenu == 3 ? 'active' : '' }"><p:commandLink
+					value="Bebida"
+					style="display: #{pedidoBean.verificaTiposProdutos(3)? 'block' : 'none'};margin-top:5px"
+					action="#{pedidoBean.mudaTelaBebida()}">
+				</p:commandLink></li>
+			<li class="#{pedidoBean.itemMenu == 4 ? 'active' : '' }"><p:commandLink
+					value="Água"
+					style="display: #{pedidoBean.verificaTiposProdutos(4)? 'block' : 'none'};margin-top:5px"
+					action="#{pedidoBean.mudaTelaAgua()}">
+				</p:commandLink></li>
+			<li class="#{pedidoBean.itemMenu == 5 ? 'active' : '' }"><p:commandLink
+					value="Gás"
+					style="display: #{pedidoBean.verificaTiposProdutos(5)? 'block' : 'none'};margin-top:5px"
+					action="#{pedidoBean.mudaTelaGas()}">
+				</p:commandLink></li>
+		</ul>
 
 
-						<div id="painelPedido"
-							style="position: relative; margin-top: 48px;">
-							<center>
-								<h2>Meu Pedido</h2>
-							</center>
-							<div style="min-height: 286px;">
-								<h:dataTable var="pedidoProduto"
-									style="width: 266px;margin: auto 0px;"
-									styleClass="table table-striped"
-									value="#{pedidoBean.pedido.pedidoProdutos}">
+		<div id="painelPedido" style="position: relative; margin-top: 48px;">
+			<center>
+				<h2>Meu Pedido</h2>
+			</center>
+			<div style="min-height: 286px;">
+				<h:dataTable var="pedidoProduto" style="margin: auto 0px;"
+					styleClass="table table-striped"
+					value="#{pedidoBean.pedido.pedidoProdutos}">
 
-									<h:column>
-										<span style="font-size: 16px;"> <h:outputText
-												id="textoDescricao"
-												value="#{pedidoProduto.produtoAvulso.produto.descricao}" />
-										</span>
-										<p:tooltip for="textoDescricao">
-											<h:outputText
-												value="#{pedidoProduto.produtoAvulso.produto.descricao}" />
-										</p:tooltip>
-									</h:column>
-									<h:column>
-										<span style="float: right;"> <h:outputText value="R$" />
-											<h:outputText value="#{pedidoProduto.valorTotal()}">
-												<f:convertNumber pattern="#,###,##0.00" />
-											</h:outputText> &nbsp; <p:commandLink id="lnkDeletar"
-												oncomplete="dlgDeletarProduto.show()" update=":formDeletar">
-												<h:graphicImage library="imagens/icones" name="deletar.gif" />
-												<f:setPropertyActionListener value="#{pedidoProduto}"
-													target="#{pedidoBean.pedidoProduto}" />
-											</p:commandLink> <p:tooltip for="lnkDeletar">
-												<h:outputText value="Deletar" />
-											</p:tooltip>
-										</span>
-									</h:column>
-								</h:dataTable>
-							</div>
-							<div style="margin-top: 17px">
-								<h:panelGrid columns="3"
-									style="float: left; font-size: 16px;width: 287px; margin-bottom: 25px;">
-									<h:outputText value="Taxa de entrega: " />
-									<h:outputText value="R$ " style="float:right" />
-									<h:outputText value="#{pedidoBean.pedido.taxa}">
-										<f:convertNumber pattern="#,###,##0.00" />
-									</h:outputText>
-								</h:panelGrid>
+					<h:column>
+						<span style="font-size: 16px;"> <h:outputText
+								id="textoDescricao"
+								value="#{pedidoProduto.produtoAvulso.produto.descricao}" />
+						</span>
+						<p:tooltip for="textoDescricao">
+							<h:outputText
+								value="#{pedidoProduto.produtoAvulso.produto.descricao}" />
+						</p:tooltip>
+					</h:column>
+					<h:column>
 
 
-								<h:panelGrid columns="1" style="margin:auto">
+						<span style="float: right;">
+							<div class="hidden-xs">
+								<h:outputText value="R$" />
+								<h:outputText value="#{pedidoProduto.valorTotal()}">
+									<f:convertNumber pattern="#,###,##0.00" />
+								</h:outputText>
+							</div> &nbsp; <p:commandLink id="lnkDeletar"
+								oncomplete="dlgDeletarProduto.show()" update=":formDeletar">
+								<h:graphicImage library="imagens/icones" name="deletar.gif" />
+								<f:setPropertyActionListener value="#{pedidoProduto}"
+									target="#{pedidoBean.pedidoProduto}" />
+							</p:commandLink> <p:tooltip for="lnkDeletar">
+								<h:outputText value="Deletar" />
+							</p:tooltip>
+						</span>
 
+					</h:column>
+				</h:dataTable>
+			</div>
+			<div style="margin-top: 17px; font-size: 16px; margin-bottom: 25px;">
 
-									<h:panelGrid columns="3"
-										style="float:right;font-size: 18px;width: 212px;">
-										<h:outputText value="Valor Total" />
-										<h:outputText value="R$ " style="float:right" />
-										<h:outputText value="#{pedidoBean.pedido.valorTotal}">
-											<f:convertNumber pattern="#,###,##0.00" />
-										</h:outputText>
-									</h:panelGrid>
-									<center>
-										<p:commandLink value="Comprar" oncomplete="dlgConcluir.show()"
-											styleClass="btn btn-success col-lg-12 col-md-12 col-sm-12 col-xs-12"
-											style="margin-right: 46px;text-decoration: none;"
-											actionListener="#{pedidoBean.atualizaTaxaEntrega}"
-											update=":idConcluir"
-											disabled="#{!pedidoBean.verificaValorMin()}" />
-									</center>
-								</h:panelGrid>
-								<div style="margin-top: 24px;">
-									<h:outputText value="Valor minimo R$ 6,00"
-										style="margin-left:5px" />
-								</div>
-							</div>
-						</div>
-					</h:form>
-				</div>
+				<h:outputText value="Taxa de entrega:" />
+				&nbsp;
+				<h:outputText value="R$ " />
+
+				<h:outputText value="#{pedidoBean.pedido.taxa}">
+					<f:convertNumber pattern="#,###,##0.00" />
+				</h:outputText>
+
 			</div>
 
+			<div style="font-size: 18px;">
+				<h:outputText value="Valor Total:" />
+				&nbsp;
+
+				<h:outputText value="R$ " />
+				<h:outputText value="#{pedidoBean.pedido.valorTotal}">
+					<f:convertNumber pattern="#,###,##0.00" />
+				</h:outputText>
+
+			</div>
+
+			<center>
+				<p:commandLink value="Comprar" oncomplete="dlgConcluir.show()"
+					styleClass="btn btn-success col-lg-6 col-md-6 col-sm-12 col-xs-12"
+					style="margin-right: 46px;text-decoration: none;"
+					actionListener="#{pedidoBean.atualizaTaxaEntrega}"
+					update=":idConcluir" disabled="#{!pedidoBean.verificaValorMin()}" />
+			</center>
+
+			<div style="margin-top: 24px;" class="col-md-12 col-lg-12">
+				<h:outputText value="Valor minimo R$ 6,00" style="margin-left:5px" />
+			</div>
 		</div>
-	</div>
+
+	</h:form>
+
 </ui:composition>
 </html>
 
