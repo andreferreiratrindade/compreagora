@@ -6,69 +6,60 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core">
 <ui:composition>
-	<div id="desktop" style="margin-top: 66px;">
+	<h:form id="formPainel">
+		<div class="list-group">
+			<center>
+				<p:commandLink update="formPainel"
+					actionListener="#{empresaBean.abrirOufecharEmpresa}"
+					style="margin:auto">
 
-		<div style="width: 960px; margin: auto;">
-			<div style="float: left;">
+					<h:graphicImage library="imagens/empresa" width="125px"
+						style="margin-bottom: 40px;"
+						name="#{empresaBean.empresa.aberto}.png" />
+				</p:commandLink>
+			</center>
+			<ul class="nav nav-pills nav-stacked">
 
-				<h:form id="formPainel">
-					<center>
-						<p:commandLink update="formPainel"
-							actionListener="#{empresaBean.abrirOufecharEmpresa}"
-							style="margin:auto">
+				<li><h:commandLink value="Pedidos"
+						action="#{pagPath.pedidosDeClientes}" /></li>
 
-							<h:graphicImage library="imagens/empresa" width="125px"
-								style="margin-bottom: 40px;"
-								name="#{empresaBean.empresa.aberto}.png" />
-						</p:commandLink>
-					</center>
-					<p:menu style="margin:auto;width: 179px;background-color:#FFF">
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#"> Relatórios <span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu" role="menu" style="width: 100%;">
+						<li><h:commandLink value="Produtos Cadastrados"
+								action="#{pagPath.relatorioPodutosCadastrados}" /></li>
 
-
-						<p:submenu>
-							<p:menuitem value="Pedidos"
-								action="#{pagPath.pedidosDeClientes}">
-							</p:menuitem>
-
-						</p:submenu>
-						<p:submenu label="Relatórios">
-							<p:menuitem value="Produtos Cadastrados"
-								action="#{pagPath.relatorioPodutosCadastrados}">
-							</p:menuitem>
-
-							<p:menuitem value="Faturamento"
+						<li><h:commandLink value="Faturamento"
 								action="#{pagPath.relatorioFaturamento}">
-							</p:menuitem>
-						</p:submenu>
+							</h:commandLink></li>
+					</ul>
+				</li>
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#"> Manutenção <span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu" role="menu" style="width: 100%;">
 
-						<p:submenu label="Configurações">
+						<li><h:commandLink value="Lanche"
+								action="#{pagPath.manterProdutoLanche}" /></li>
+						<li><h:commandLink value="Bebida"
+								action="#{pagPath.manterProdutoBebida}" /></li>
+						<li><h:commandLink value="Marmitex"
+								action="#{pagPath.manterProdutoMarmitex}" /></li>
+						<li><h:commandLink value="Pizza"
+								action="#{pagPath.manterProdutoPizza}" /></li>
+						<li><h:commandLink value="Gás"
+								action="#{pagPath.manterProdutoGas}" /></li>
+						<li><h:commandLink value="Água"
+								action="#{pagPath.manterProdutoAgua}" /></li>
 
-							<p:menuitem value="Manter Lanche"
-								action="#{pagPath.manterProdutoLanche}">
-							</p:menuitem>
-							<p:menuitem value="Manter Bebida"
-								action="#{pagPath.manterProdutoBebida}">
-							</p:menuitem>
-							<p:menuitem value="Manter Marmitex"
-								action="#{pagPath.manterProdutoMarmitex}">
-							</p:menuitem>
-							<p:menuitem value="Manter Pizza"
-								action="#{pagPath.manterProdutoPizza}">
-							</p:menuitem>
-							<p:menuitem value="Manter Gas"
-								action="#{pagPath.manterProdutoGas}">
-							</p:menuitem>
-							<p:menuitem value="Manter Agua"
-								action="#{pagPath.manterProdutoAgua}">
-							</p:menuitem>
-						</p:submenu>
-					</p:menu>
-				</h:form>
-			</div>
+					</ul>
+				</li>
+			</ul>
+
+
 		</div>
-	</div>
-
-
+	</h:form>
 </ui:composition>
 </html>
 

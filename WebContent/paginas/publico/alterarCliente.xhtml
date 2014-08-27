@@ -7,207 +7,166 @@
 	xmlns:p="http://primefaces.org/ui">
 <ui:composition template="/templates/principal.xhtml">
 	<ui:define name="corpo">
-		<h:form id="atualizarCadastro" style="margin-top: 66px;">
-			<p:panel style="margin:auto;width: 950px;height: 713px;"
-				header="Atualizar Cadastro" id="painel">
-				<span style="margin-left: 9px; font-size: 15px;"> <h:outputText
-						value="*" style="color: #F00;" /> <h:outputText
-						value=" Campos Obrigatórios" />
-				</span>
-				<h:panelGrid columns="1" style="margin:auto">
-					<p:fieldset legend="Dados Pessoais"
-						style="font-size: 11px; height: 278px;min-width: 360px;">
-						<h:panelGrid columns="3" id="gridDadosPessoais"
-							style="font-size: 13px;">
-							<h:column>
-								<h:outputText value="*" style="color: #F00;float:right" />
-								<h:outputText value="Nome" style="float:right" />
-							</h:column>
-							<h:column>
-								<p:inputText value="#{clienteBean.cliente.nome}" size="30"
-									id="nome" required="true" label="Nome"
-									requiredMessage="Informe seu nome completo" />
+		<div style="margin-top: 60px;">
+			<h:form id="atualizarCadastro">
+				<div class="container-fluid">
+					<div class="row">
+						<div
+							class="col-lg-9  col-lg-pull-1 col-lg-push-2 col-md-12 col-xs-12">
+							<div class=" panel panel-info">
+								<div class="panel-heading">Cadastro</div>
+								<div class="panel-body">
 
-							</h:column>
-							<h:column>
-								<p:message for="nome" />
-							</h:column>
-							<h:column>
-								<h:outputText value="*" style="color: #F00;float:right" />
-								<h:outputText value="E-mail" style="float:right" />
-							</h:column>
-							<h:column>
-								<p:inputText value="#{clienteBean.cliente.email}" size="30"
-									id="email" required="true" validatorMessage="E-mail inválido"
-									label="E-mail" requiredMessage="Informe seu e-mail" >
-									<f:validateLength minimum="5" />
-								</p:inputText>
+									<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
+										style="margin-top: 10px">
 
-							</h:column>
-							<h:column>
-								<p:message for="email" />
-							</h:column>
-							<h:column>
-								<h:outputText value="*" style="color: #F00;float:right" />
-								<h:outputText value="Confirma E-mail" style="float:right" />
-							</h:column>
-							<h:column>
-								<p:inputText value="#{clienteBean.confEmail}" size="30"
-									id="confEmail" required="true" label="Confirma E-mail"
-									requiredMessage="Informe seu e-mail">
-									<f:validateLength minimum="2" />
-								</p:inputText>
+										<p:inputText value="#{clienteBean.cliente.nome}" size="30"
+											id="nome" required="true" label="Nome"
+											requiredMessage="Informe seu nome completo"
+											styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+										<p:watermark for="nome" value="Nome *" />
+										<p:message for="nome" />
+									</div>
+									<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
+										style="margin-top: 10px">
+										<p:inputText value="#{clienteBean.cliente.email}" size="30"
+											id="email" required="true"
+											validatorMessage="E-mail confirmado errado" label="E-mail"
+											requiredMessage="Informe seu e-mail" match="confEmail"
+											styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+											<f:validateLength minimum="5" />
+										</p:inputText>
+										<p:watermark for="email" value="E-mail *" />
+										<p:message for="email" />
+									</div>
 
-							</h:column>
-							<h:column>
-								<p:message for="confEmail" />
-							</h:column>
-							<h:column>
-								<h:outputText value="*" style="color: #F00;float:right" />
-								<h:outputText value="Senha" style="float:right" />
-							</h:column>
-							<h:column>
-								<p:password value="#{clienteBean.cliente.senha}" id="senha"
-									required="true" feedback="true" promptLabel="Imforme uma Senha"
-									weakLabel="Fraca" goodLabel="Boa" strongLabel="Forte"
-									label="Senha" requiredMessage="Informe uma senha"
-									match="confSenha" />
 
-							</h:column>
-							<h:column>
-								<p:message for="senha" />
-							</h:column>
-							<h:column>
-								<h:outputText value="*" style="color: #F00;float:right" />
-								<h:outputText value="Confirma Senha" style="float:right" />
-							</h:column>
-							<h:column>
-								<p:password value="#{clienteBean.cliente.senha}" id="confSenha"
-									required="true" label="Confirmar Senha"
-									requiredMessage="Informe uma senha" />
-							</h:column>
-							<h:column>
-								<p:message for="confSenha" />
-							</h:column>
-							<h:outputText value="Telefone fixo:" style="float:right" />
-							<p:inputMask value="#{clienteBean.cliente.telefone}"
-								id="telefone" mask="(99) 9999-9999"
-								converter="converterTelefone" />
-							<h:outputText />
+									<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"
+										style="margin-top: 10px">
+										<p:password value="#{clienteBean.cliente.senha}" id="senha"
+											required="true" feedback="true"
+											promptLabel="Imforme uma Senha" weakLabel="Fraca"
+											goodLabel="Boa" strongLabel="Forte" match="confSenha"
+											label="Senha" requiredMessage="Informe uma senha"
+											validatorMessage="Senha confirmada errada."
+											styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+										<p:message for="senha" />
+										<p:watermark for="senha" value="Senha *" />
+									</div>
 
-							<h:outputText value="Celular:" style="float:right" />
-							<p:inputMask value="#{clienteBean.cliente.celular}" id="celular"
-								mask="(99) 9999-9999" converter="converterTelefone" />
-							<h:outputText />
-						</h:panelGrid>
-					</p:fieldset>
-					<p:fieldset legend="Endereço"
-						style="font-size: 11px;min-width: 360px;">
-						<h:panelGrid columns="3" style="font-size: 13px;">
-							<h:column>
-								<h:outputText value="*" style="color: #F00;float:right" />
-								<h:outputText value="Descrição do Endereço" style="float:right" />
-							</h:column>
-							<p:inputText value="#{clienteBean.enderecoCliente.descEndereco}"
-								id="descEndereco" required="true" size="30"
-								label="Descrição do Endereço"
-								requiredMessage="Informe uma descrição para o Endereço" />
-							<h:column>
-								<p:message for="descEndereco" />
-							</h:column>
-							<h:column>
-								<h:outputText value="*" style="color: #F00;float:right" />
-								<h:outputText value="Cidade" style="float:right" />
-							</h:column>
-							<p:autoComplete id="cidade" forceSelection="true" var="cidade"
-								itemLabel="#{cidade.descCidade}" itemValue="#{cidade}"
-								completeMethod="#{autoCompleteController.completaCidade}"
-								dropdown="true" required="true" converter="converterCidade"
-								requiredMessage="Informe sua cidade"
-								value="#{clienteBean.endereco.bairroCidade.cidade}">
-								<p:ajax event="itemSelect"
-									listener="#{autoCompleteController.handleSelect}"
-									update="bairro" />
-							</p:autoComplete>
-							<h:column>
-								<p:message for="cidade" />
-							</h:column>
-							<h:column>
-								<h:outputText value="*" style="color: #F00;float:right" />
-								<h:outputText value="Bairro" style="float:right" />
-							</h:column>
-							<p:autoComplete id="bairro"
-								value="#{clienteBean.endereco.bairroCidade}"
-								forceSelection="true"
-								completeMethod="#{autoCompleteController.completaBairro}"
-								var="bairro" itemLabel="#{bairro}" itemValue="#{bairro}"
-								required="true" converter="converterBairro" dropdown="true"
-								scrollHeight="200" requiredMessage="Informe seu bairro">
-							</p:autoComplete>
-							<h:column>
-								<p:message for="bairro" />
-							</h:column>
-							<h:column>
-								<h:outputText value="*" style="color: #F00;float:right" />
-								<h:outputText value="Rua/Av./Log." style="float:right" />
-							</h:column>
+									<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"
+										style="margin-top: 10px">
+										<p:password value="#{clienteBean.cliente.senha}"
+											id="confSenha" required="true"
+											requiredMessage="Informe uma senha"
+											styleClass="col-lg-12 col-md-12 col-sm-6 col-xs-12" />
+										<p:watermark for="confSenha" value="Repete a senha *" />
+										<p:message for="confSenha" />
+									</div>
+									<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"
+										style="margin-top: 10px">
+										<p:inputMask value="#{clienteBean.cliente.telefone}"
+											id="telefone" mask="(99) 9999-9999"
+											converter="converterTelefone"
+											styleClass="col-lg-12 col-md-12 col-sm-6 col-xs-12" />
+										<p:watermark for="telefone" value="Telefone Fixo" />
+									</div>
+									<div class="col-lg-3 col-md-3 col-sm-9 col-xs-12"
+										style="margin-top: 10px">
+										<p:inputMask value="#{clienteBean.cliente.celular}"
+											id="celular" mask="(99) 9999-9999"
+											converter="converterTelefone"
+											styleClass="col-lg-12 col-md-12 col-sm-6 col-xs-12" />
+										<p:watermark for="celular" value="Celular" />
+									</div>
 
-							<p:inputText value="#{clienteBean.endereco.logradouro}" size="30"
-								id="logradouro" required="true" label="Logradouro"
-								requiredMessage="Informe sua rua" />
-							<h:column>
-								<p:message for="logradouro" />
-							</h:column>
-							<h:column>
-								<h:outputText value="*" style="color: #F00;float:right" />
-								<h:outputText value="Número" style="float:right" />
-							</h:column>
-							<p:inputText value="#{clienteBean.endereco.numero}" id="numero"
-								required="true" label="Numero"
-								requiredMessage="Informe o número de sua casa" />
-							<h:column>
-								<p:message for="numero" />
-							</h:column>
-							<h:column>
-								<h:outputText value="*" style="color: #F00;float:right" />
-								<h:outputText value="CEP" style="float:right" />
-							</h:column>
-							<p:inputMask value="#{clienteBean.endereco.cep}" id="cep"
-								required="true" mask="99999-999" label="CEP"
-								converter="converterCEP"
-								requiredMessage="Informe o CEP de sua casa" />
-							<h:column>
-								<p:message for="cep" />
-							</h:column>
-							<h:outputText value="Complemento:" style="float:right" />
-							<p:inputTextarea value="#{clienteBean.endereco.complemento}"
-								maxlength="100" counterTemplate="{0} Caracteres"
-								counter="contador" cols="32" />
+									<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
+										style="margin-top: 10px">
+										<p:autoComplete id="cidade" value="#{clienteBean.endereco.bairroCidade.cidade}" forceSelection="true" var="cidade"
+											itemLabel="#{cidade.descCidade}" itemValue="#{cidade}"
+											completeMethod="#{autoCompleteController.completaCidade}"
+											dropdown="true" required="true" converter="converterCidade"
+											requiredMessage="Informe sua cidade"
+											styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+											<p:ajax event="itemSelect"
+												listener="#{autoCompleteController.handleSelect}"
+												update="bairro" />
+										</p:autoComplete>
+										<p:watermark for="cidade" value="Cidade *" />
+										<p:message for="cidade" />
+									</div>
+									<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
+										style="margin-top: 10px">
+										<p:autoComplete id="bairro"
+											value="#{clienteBean.endereco.bairroCidade}"
+											forceSelection="true"
+											completeMethod="#{autoCompleteController.completaBairro}"
+											var="bairro" itemLabel="#{bairro}" itemValue="#{bairro}"
+											required="true" converter="converterBairro" dropdown="true"
+											scrollHeight="200" requiredMessage="Informe seu bairro"
+											styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										</p:autoComplete>
+										<p:watermark for="bairro" value="Bairro *" />
+										<p:message for="bairro" />
+									</div>
+									<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
+										style="margin-top: 10px">
+										<p:inputText value="#{clienteBean.endereco.numero}"
+											id="numero" required="true" label="Numero"
+											requiredMessage="Informe o número de sua casa"
+											styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+										<p:message for="numero" display="tooltip" />
+										<p:watermark for="numero" value="Número *" />
+									</div>
+									<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12"
+										style="margin-top: 10px">
 
-							<h:outputText />
-						</h:panelGrid>
-						<h:outputText id="contador"
-							style="float:right;margin-right: 109px;" />
-					</p:fieldset>
+										<p:inputText value="#{clienteBean.endereco.logradouro}"
+											size="30" id="logradouro" required="true" label="Logradouro"
+											requiredMessage="Informe sua rua"
+											styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+										<p:watermark for="logradouro" value="Rua/Av./Logradouro *" />
+										<p:message for="logradouro" />
+									</div>
 
-				</h:panelGrid>
 
-				<h:panelGrid style="float:right;margin-right: 257px;">
-					<p:commandLink action="#{clienteBean.atualizarSalvarCliente}"
-						value="Salvar" id="btSalvar" onclick="blokpendencia.show()"
-						update=":atualizarCadastro"
-						styleClass="buttonAdd">
-						<a
-							href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout" />
-					</p:commandLink>
-				</h:panelGrid>
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+										style="margin-top: 10px">
+
+										<p:inputText value="#{clienteBean.endereco.complemento}"
+											maxlength="100" counterTemplate="{0} Caracteres"
+											counter="contador" cols="32" id="complemento"
+											style="margin-top: 10px"
+											styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+										<h:outputText id="contador" style="float:right;" />
+										<p:watermark for="complemento" value="Complemento" />
+									</div>
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 "
+										style="margin-top: 10px">
+										<div class="pull-right">
+											<p:commandLink action="#{clienteBean.atualizarSalvarCliente}"
+												value="Salvar" id="btSalvar" onclick="blokpendencia.show()"
+												update=":atualizarCadastro" styleClass="btn btn-primary "
+												ajax="false">
+												<a
+													href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout" />
+											</p:commandLink>
+											&nbsp;&nbsp;
+											<p:commandLink value="Cancelar" styleClass="btn btn-danger" />
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 				<p:blockUI widgetVar="blokpendencia" block=":atualizarCadastro">
 					<h:graphicImage library="imagens/icones"
 						name="atualizandoCadastro.gif" />
 				</p:blockUI>
-			</p:panel>
-		</h:form>
-
+			</h:form>
+		</div>
 	</ui:define>
 
 </ui:composition>

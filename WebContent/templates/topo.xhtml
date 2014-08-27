@@ -21,11 +21,11 @@
 
 
 
-				<div class="col-md-4 col-sm-4 col-xs-5 col-lg-3">
+				<div class="col-md-4 col-sm-4 col-xs-6 col-lg-3">
 					<h:graphicImage library="imagens/icones" name="logo.png"
 						style="position: absolutex" styleClass="img-responsive" />
 				</div>
-				<div class="col-md-8 col-sm-8 col-xs-7 col-lg-3 col-lg-push-6">
+				<div class="col-md-8 col-sm-8 col-xs-6 col-lg-3 col-lg-push-6">
 					<div class="pull-right">
 						<sec:isAnonymous>
 							<h:commandButton value="Quero me cadastrar"
@@ -44,45 +44,56 @@
 
 					<div class="pull-right">
 						<sec:ifAnyGranted roles="ROLE_SUP">
-							<div>
-								<h:outputText value="#{contextUtil.clienteLogado.nome}"
-									style="color: #FFF;font-size: x-large;margin-right: 12px;font-family: sans-serif;position: relative;" />
 
+							<ul class="nav nav-pills">
 
-								<h:commandLink value="Clientes"
-									action="/paginas/admin/cliente/clientesCadastrados.jsf?faces-redirect=true" />
-								<p:commandLink value="Empresa"
-									action="/paginas/admin/empresa/areaAdministrativa.jsf?faces-redirect=true"
-									style="background: #FEFFFC;" />
-								&nbsp;&nbsp; <span> <a title="Sair"
-									style="position: relative;"
-									href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
-										<h:graphicImage library="imagens/icones" name="sair.png"
-											width="80px" />
+								<li class="dropdown"><a class="dropdown-toggle"
+									data-toggle="dropdown" href="#">#{contextUtil.clienteLogado.nome}
+										<span class="caret"></span>
 								</a>
-								</span>
-							</div>
+									<ul class="dropdown-menu" role="menu">
+										<li><h:commandLink value="Clientes"
+												action="/paginas/admin/cliente/clientesCadastrados.jsf?faces-redirect=true" /></li>
+										<li><h:commandLink value="Editar Conta"
+												action="#{clienteBean.alterarCliente}">
+
+											</h:commandLink></li>
+										<li><h:commandLink value="Empresa"
+												action="/paginas/admin/empresa/areaAdministrativa.jsf?faces-redirect=true" /></li>
+
+
+										<li><a
+											href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
+												Sair</a></li>
+									</ul></li>
+							</ul>
+
+
+
 						</sec:ifAnyGranted>
 
-						<div>
-							<sec:ifAnyGranted roles="ROLE_ADM">
-								<div>
-									<h:outputText value="#{contextUtil.clienteLogado.nome}"
-										style="color: #FFF;font-size: x-large;margin-right: 12px;font-family: sans-serif;position: relative;" />
 
-									<h:commandLink value="Administrativo"
-										styleClass="btn btn-default"
-										action="#{pagPath.administrativo}" />
-									<span> <a title="Sair" style="position: relative;"
-										href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
-											<span class="glyphicon glyphicon-off"></span>
+						<sec:ifAnyGranted roles="ROLE_ADM">
 
-									</a>
-									</span>
-								</div>
-							</sec:ifAnyGranted>
-						</div>
+							<ul class="nav nav-pills">
 
+								<li class="dropdown"><a class="dropdown-toggle"
+									data-toggle="dropdown" href="#">#{contextUtil.clienteLogado.nome}
+										<span class="caret"></span>
+								</a>
+									<ul class="dropdown-menu" role="menu">
+										<li><h:commandLink value="Administrativo"
+												action="#{pagPath.administrativo}" /></li>
+										<li><h:commandLink value="Editar Conta"
+												action="#{clienteBean.alterarCliente}">
+
+											</h:commandLink></li>
+										<li><a
+											href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
+												Sair</a></li>
+									</ul></li>
+							</ul>
+						</sec:ifAnyGranted>
 						<sec:ifAnyGranted roles="ROLE_CLI">
 
 							<ul class="nav nav-pills">
@@ -113,7 +124,7 @@
 					style="margin-top: 10px">
 
 					<div
-						class="col-md-12 col-sm-12 col-lg-12 col-xs-12 col-xs-offset-2 col-lg-offset-0 col-md-offset-4">
+						class="col-md-12 col-sm-12 col-lg-12 col-xs-12 col-xs-offset-0 col-lg-offset-0 col-md-offset-4">
 						<div>
 							<div class="col-md-4 col-sm-4 col-xs-4 col-lg-4">
 								<h:commandLink action="/principal.jsf?faces-redirect=true"

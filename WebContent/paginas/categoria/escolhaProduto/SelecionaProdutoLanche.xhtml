@@ -46,7 +46,11 @@
 									disabled="#{!lanche.ativo}" styleClass="btn btn-warning"
 									oncomplete="dlgEditarProduto.show()" update=":idEditar">
 								</p:commandLink>
+								<div class="visible-lg-block visible-md-block">
+									<span class="col-lg-12 col-md-12"></span>
 
+								</div>
+								
 								<p:commandLink
 									value="#{lanche.ativo ? 'Adicionar' : 'Indisponivel'}"
 									actionListener="#{pedidoBean.adicionaLanche()}"
@@ -187,7 +191,7 @@
 											styleClass="btn btn-success" style="text-decoration: none;"
 											action="#{pedidoBean.salvarPedido}"
 											disabled="#{!pedidoBean.habilitarBotaoSalvar()}"
-											oncomplete="dlgConcluir.hide()">
+											oncomplete="dlgConcluir.hide()" >
 											<f:setPropertyActionListener
 												target="#{contextUtil.categoriaEmpresa}" value="#{-1}" />
 										</p:commandLink>
@@ -372,11 +376,11 @@
 						<h:panelGrid columns="3"
 							style="margin:auto;font-size:15px; margin-top: 10px;">
 
-							<p:commandLink value="Adicionar" styleClass="buttonAdd"
+							<p:commandLink value="Adicionar" styleClass="btn btn-info"
 								actionListener="#{pedidoBean.salvaProdutoPersonalizado}"
 								oncomplete="dlgEditarProduto.hide()" update=":formPainel" />
-
-							<p:commandLink value="Cancelar" styleClass="buttonCancelar"
+&nbsp;&nbsp;
+							<p:commandLink value="Cancelar" styleClass="btn btn-danger"
 								oncomplete="dlgEditarProduto.hide()" />
 						</h:panelGrid>
 					</h:panelGrid>

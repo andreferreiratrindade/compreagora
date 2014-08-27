@@ -6,19 +6,24 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="keywords"
 		content="lanchonete, restaurante, compre agora, delivery" />
 	<title>Compre Agora</title>
 	<link rel="shortcut icon" href="#{resource['imagens/icones:logo.gif']}" />
 	<h:outputStylesheet library="/css" name="estilo.css" />
-	<script type="text/javascript"
-		src="resources/scripts/altera_display.js"></script>
+
+	<h:outputStylesheet library="/bootstrap/css" name="bootstrap.css" />
+	<h:outputStylesheet library="/theme/pastelStreme"
+		name="pastel-stream.css" />
+	<h:outputStylesheet library="/bootstrap/fonts"
+		name="glyphicons-halflings-regular.svg" />
+
+	<h:outputScript name="jquery.js" library="scripts/lib" />
+	<h:outputScript name="bootstrap.min.js" library="/bootstrap/js" />
 
 
-	<style type="text/css">
-</style>
 </h:head>
 <h:body>
 	<div id="container" style="max-width: 100%;">
@@ -28,7 +33,7 @@
 			</ui:insert>
 		</div>
 
-	
+
 		<div id="menuEsquerdo" style="margin-top: 0px;">
 
 			<ui:insert name="menuEsquerdo" />
