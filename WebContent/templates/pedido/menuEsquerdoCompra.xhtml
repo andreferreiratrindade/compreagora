@@ -107,11 +107,15 @@
 			</div>
 
 			<center>
-				<p:commandLink value="Comprar" oncomplete="dlgConcluir.show()"
-					styleClass="btn btn-success col-lg-6 col-md-6 col-sm-12 col-xs-12"
-					style="margin-right: 46px;text-decoration: none;"
-					actionListener="#{pedidoBean.atualizaTaxaEntrega}"
-					update=":idConcluir" disabled="#{!pedidoBean.verificaValorMin()}" />
+
+				<span data-toggle="modal" href="#modalConcluirPedido" >
+					<p:commandLink value="Comprar"
+						styleClass="btn btn-success col-lg-6 col-md-6 col-sm-12 col-xs-12"
+						style="margin-right: 46px;text-decoration: none;"
+						actionListener="#{pedidoBean.atualizaTaxaEntrega}"
+						update=":idConcluir" disabled="#{!pedidoBean.verificaValorMin()}">
+					</p:commandLink>
+				</span>
 			</center>
 
 			<div style="margin-top: 24px;" class="col-md-12 col-lg-12">

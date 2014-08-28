@@ -30,6 +30,7 @@ import br.Empresa.Categoria.Categoria;
 import br.Empresa.Categoria.CategoriaENUM;
 import br.Empresa.FormaDePagamento.FormaDePagamento;
 import br.Empresa.FormaDePagamento.FormaDePagamentoRN;
+import br.Endereco.Endereco;
 import br.Endereco.EnderecoDAO;
 import br.EnderecoCliente.EnderecoCliente;
 import br.Pedido.Pedido;
@@ -107,6 +108,10 @@ public class PedidoBean implements Serializable {
 	private EnderecoCliente novoEnderecoCliente;
 
 	public EnderecoCliente getNovoEnderecoCliente() {
+		if (novoEnderecoCliente == null) {
+			novoEnderecoCliente = new EnderecoCliente();
+			novoEnderecoCliente.setEndereco(new Endereco());
+		}
 		return novoEnderecoCliente;
 	}
 
@@ -801,7 +806,7 @@ public class PedidoBean implements Serializable {
 				this.cliente = usuarioRN.buscarPorEmail(login);
 				cliente.getEnderecoCliente().size();
 				enderecoCliente = cliente.getEnderecoCliente().get(0);
-
+				novoEndereco();
 			}
 		}
 	}
@@ -849,7 +854,6 @@ public class PedidoBean implements Serializable {
 		}
 
 	}
-	
 
 	public void atualizaTaxaEntregaFirst() {
 		int idEmpresa = empresa.getIdEmpresa();
