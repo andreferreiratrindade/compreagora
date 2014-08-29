@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets" lang="br">
 
-<ui:composition template="/templates/principal.xhtml">
+<ui:composition template="/templates/templatePrincipal.xhtml">
 	<ui:define name="corpo">
 
 		<div style="margin-top: 40px" class="container-fluid">
@@ -99,8 +99,10 @@
 											value="#{empresa}" />
 										<f:setPropertyActionListener
 											target="#{pedidoBean.categoriaEmpresa}"
-											value="#{contextUtil.categoriaEmpresa}" />
-
+											value="#{autoCompleteController.categoriaEmpresa}" />
+										<f:setPropertyActionListener
+											target="#{pedidoBean.idBairro}"
+											value="#{autoCompleteController.idBairro}" />
 										<h:panelGrid style="float:right">
 											<h:graphicImage library="imagens/empresa"
 												name="#{empresa.aberto}.gif" />
@@ -129,7 +131,10 @@
 											value="#{empresa}" />
 										<f:setPropertyActionListener
 											target="#{pedidoBean.categoriaEmpresa}"
-											value="#{contextUtil.categoriaEmpresa}" />
+											value="#{autoCompleteController.categoriaEmpresa}" />
+										<f:setPropertyActionListener
+											target="#{pedidoBean.idBairro}"
+											value="#{autoCompleteController.idBairro}" />
 									</p:commandLink>
 									<p:tooltip for="lnk">
 										<h:panelGrid>

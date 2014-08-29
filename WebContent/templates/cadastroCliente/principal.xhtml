@@ -12,66 +12,45 @@
 		content="lanchonete, restaurante, compre agora, delivery" />
 	<title>Compre Agora</title>
 	<link rel="shortcut icon" href="#{resource['imagens/icones:logo.gif']}" />
-
 	<h:outputStylesheet library="/css" name="estilo.css" />
+
 	<h:outputStylesheet library="/bootstrap/css" name="bootstrap.css" />
 	<h:outputStylesheet library="/theme/pastelStreme"
 		name="pastel-stream.css" />
-	<h:outputStylesheet library="/theme/pastelStreme" name="offcanvas.css" />
 	<h:outputStylesheet library="/bootstrap/fonts"
 		name="glyphicons-halflings-regular.svg" />
 
 	<h:outputScript name="jquery.js" library="scripts/lib" />
 	<h:outputScript name="bootstrap.min.js" library="/bootstrap/js" />
-	<h:outputScript name="offcanvas.js" library="/theme/pastelStreme" />
+
 
 </h:head>
 <h:body>
-	<div id="container">
+	<div id="container" style="max-width: 100%;">
+
 		<div id="topo">
 			<ui:insert name="topo">
 				<ui:include src="../topo.xhtml" />
 			</ui:insert>
 		</div>
 
-		<div id="infoEmpresa" style="margin-top: 30px;">
 
-			<ui:insert name="infoEmpresa" />
-			<ui:include src="infoEmpresa.xhtml" />
+		<div id="corpo" style="margin-top: 0px; margin-bottom: 20px;">
+
+			<ui:insert name="corpo" />
+		</div>
+
+		<div id="propaganda" style="background: #1d1d3a">
+			<ui:insert name="propaganda">
+				<ui:include src="../propaganda.xhtml" />
+			</ui:insert>
+		</div>
+
+		<div id="rodape2" style="background: #1d1d3a; margin-top: 30px;">
+			<ui:insert name="rodape2">
+				<ui:include src="../rodape2.xhtml" />
+			</ui:insert>
 		</div>
 	</div>
-	<div class="container-fluid" style="margin-top: 100px;">
-		<div class="row row-offcanvas row-offcanvas-left">
-			<p class="pull-left visible-xs">
-				<button type="button" class="btn btn-primary btn-sm"
-					data-toggle="offcanvas">Meu Pedido</button>
-			</p>
-
-			<div
-				class="col-xs-6 col-sm-4 left-side sidebar-offcanvas col-lg-4 col-md-4"
-				id="sidebar" role="navigation">
-				<div id="menuEsquerdo" style="margin-top: 0px;">
-					<ui:insert name="menuEsquerdoCompra" />
-					<ui:include src="menuEsquerdoCompra.xhtml" />
-				</div>
-			</div>
-
-			<div class="col-xs-12 col-sm-8 col-lg-8 col-md-8">
-				<div id="corpo" style="margin-top: 0px">
-
-					<ui:insert name="corpo" />
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-
-	<div id="rodape2" style="background: #1d1d3a; margin-top: 30px;">
-		<ui:insert name="rodape2">
-			<ui:include src="../rodape2.xhtml" />
-		</ui:insert>
-	</div>
-
 </h:body>
 </html>

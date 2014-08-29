@@ -113,7 +113,7 @@
 						styleClass="btn btn-success col-lg-6 col-md-6 col-sm-12 col-xs-12"
 						style="margin-right: 46px;text-decoration: none;"
 						actionListener="#{pedidoBean.atualizaTaxaEntrega}"
-						update=":idConcluir" disabled="#{!pedidoBean.verificaValorMin()}">
+						update=":formCompraValorTotal :formOutroEndereco :idConcluirProduto" disabled="#{!pedidoBean.verificaValorMin()}">
 					</p:commandLink>
 				</span>
 			</center>

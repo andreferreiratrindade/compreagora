@@ -2,7 +2,9 @@ package br.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -12,6 +14,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.faces.model.ListDataModel;
 
 import org.primefaces.event.SelectEvent;
 
@@ -22,10 +25,18 @@ import br.AtendimentoLugares.CidadeRN;
 import br.Empresa.Empresa;
 import br.Empresa.EmpresaRN;
 import br.Empresa.Categoria.CategoriaENUM;
+import br.Produto.Agua;
+import br.Produto.Bebida;
+import br.Produto.Gas;
+import br.Produto.Lanche;
+import br.Produto.Marmitex;
+import br.Produto.Pizza;
+import br.Produto.ProdutoRN;
+import br.Produto.Filtro.WithStatusIndisponivel;
 import br.beans.util.ContextUtil;
 
-@ManagedBean(name="autoCompleteController")
-@SessionScoped
+@ManagedBean(name = "autoCompleteController")
+@ViewScoped
 public class AutoCompleteController implements Serializable {
 	/**
 	 * 
@@ -33,9 +44,39 @@ public class AutoCompleteController implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Cidade cidade;
 	private Bairro bairro;
+	private int idBairro;
 	private List<Empresa> empresas;
-	@ManagedProperty(value = "#{contextUtil}")
-	private ContextUtil contextUtil;
+	private int categoriaEmpresa;
+	private String urlPedido;
+
+	public String getUrlPedido() {
+		return urlPedido;
+	}
+
+	public void setUrlPedido(String urlPedido) {
+		this.urlPedido = urlPedido;
+	}
+
+	public int getIdBairro() {
+		return idBairro;
+	}
+
+	public void setIdBairro(int idBairro) {
+		this.idBairro = idBairro;
+	}
+
+	public int getCategoriaEmpresa() {
+		return categoriaEmpresa;
+	}
+
+	public void setCategoriaEmpresa(int categoriaEmpresa) {
+		this.categoriaEmpresa = categoriaEmpresa;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	private Empresa empresa;
 
 	public Empresa getEmpresa() {
@@ -46,15 +87,10 @@ public class AutoCompleteController implements Serializable {
 		this.empresa = empresa;
 	}
 
-	@PostConstruct
-	public void init() {
-
-		empresas = new ArrayList<Empresa>();
-
-	}
-
 	public List<Empresa> getEmpresas() {
-
+		if (empresas == null) {
+			empresas = new ArrayList<Empresa>();
+		}
 		return empresas;
 	}
 
@@ -83,25 +119,6 @@ public class AutoCompleteController implements Serializable {
 	public void handleSelectBairro(SelectEvent event) {
 		bairro = (Bairro) event.getObject();
 	}
-	
-	public String atualizaSelecaoEmpresaReturn() {
-
-		if (bairro != null) {
-			empresas = new ArrayList<Empresa>();
-
-			EmpresaRN empresaRN = new EmpresaRN();
-
-			empresas = empresaRN.listaEmpresasPeloBairroECategoria(
-					bairro.getIdBairro(),
-					CategoriaENUM.values()[contextUtil.getCategoriaEmpresa()]);
-
-			for (Empresa x : empresas) {
-				x.getHorarioFuncionamento().size();
-			}
-		}
-		
-		return "/principal.jsf?faces-redirect=true";
-	}
 
 	public void atualizaSelecaoEmpresa() {
 
@@ -112,14 +129,62 @@ public class AutoCompleteController implements Serializable {
 
 			empresas = empresaRN.listaEmpresasPeloBairroECategoria(
 					bairro.getIdBairro(),
-					CategoriaENUM.values()[contextUtil.getCategoriaEmpresa()]);
+					CategoriaENUM.values()[categoriaEmpresa]);
 
 			for (Empresa x : empresas) {
 				x.getHorarioFuncionamento().size();
 			}
+			idBairro = bairro.getIdBairro();
 		}
-		
-		System.out.println("----"+contextUtil.getCategoriaEmpresa());
+
+	}
+
+	public String adicionaEmpresa() {
+
+		Map<Integer, String> mapTipoEnum = new HashMap<Integer, String>();
+		mapTipoEnum.put(CategoriaENUM.Lanche.ordinal(), mudaTelaLanche());
+		mapTipoEnum.put(CategoriaENUM.Pizza.ordinal(), mudaTelaPizza());
+		mapTipoEnum.put(CategoriaENUM.Gas.ordinal(), mudaTelaGas());
+		mapTipoEnum.put(CategoriaENUM.Bebida.ordinal(), mudaTelaBebida());
+		mapTipoEnum.put(CategoriaENUM.Agua.ordinal(), mudaTelaAgua());
+		mapTipoEnum.put(CategoriaENUM.Marmitex.ordinal(), mudaTelaMarmitex());
+
+		return mapTipoEnum.get(categoriaEmpresa);
+	}
+
+	public String mudaTelaMarmitex() {
+
+		return "/paginas/categoria/escolhaProduto/SelecionaProdutoMarmitex?faces-redirect=true";
+
+	}
+
+	public String mudaTelaBebida() {
+
+		return "/paginas/categoria/escolhaProduto/SelecionaProdutoBebida?faces-redirect=true";
+
+	}
+
+	public String mudaTelaLanche() {
+
+		return "/paginas/categoria/escolhaProduto/SelecionaProdutoLanche";
+
+	}
+
+	public String mudaTelaPizza() {
+
+		return "/paginas/categoria/escolhaProduto/SelecionaProdutoPizza?faces-redirect=true";
+	}
+
+	public String mudaTelaAgua() {
+
+		return "/paginas/categoria/escolhaProduto/SelecionaProdutoAgua?faces-redirect=true";
+
+	}
+
+	public String mudaTelaGas() {
+
+		return "/paginas/categoria/escolhaProduto/SelecionaProdutoGas?faces-redirect=true";
+
 	}
 
 	public void verificaCidadeBairroMenssagem(ActionEvent actionEvent) {
@@ -151,12 +216,34 @@ public class AutoCompleteController implements Serializable {
 		this.cidade = cidade;
 	}
 
-	public ContextUtil getContextUtil() {
-		return contextUtil;
+	public void menuSelecionaLanche() {
+		categoriaEmpresa = CategoriaENUM.Lanche.ordinal();
+		atualizaSelecaoEmpresa();
 	}
 
-	public void setContextUtil(ContextUtil contextUtil) {
-		this.contextUtil = contextUtil;
+	public void menuSelecionaBebida() {
+		categoriaEmpresa = CategoriaENUM.Bebida.ordinal();
+		atualizaSelecaoEmpresa();
+	}
+
+	public void menuSelecionaRestaurante() {
+		categoriaEmpresa = CategoriaENUM.Marmitex.ordinal();
+		atualizaSelecaoEmpresa();
+	}
+
+	public void menuSelecionaPizzaria() {
+		categoriaEmpresa = CategoriaENUM.Pizza.ordinal();
+		atualizaSelecaoEmpresa();
+	}
+
+	public void menuSelecionaGas() {
+		categoriaEmpresa = CategoriaENUM.Gas.ordinal();
+		atualizaSelecaoEmpresa();
+	}
+
+	public void menuSelecionaAgua() {
+		categoriaEmpresa = CategoriaENUM.Agua.ordinal();
+		atualizaSelecaoEmpresa();
 	}
 
 }

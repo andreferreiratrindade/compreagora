@@ -1,4 +1,4 @@
-﻿/* Light Way Admin Bootstrap Theme by PrepBootstrap - http://www.prepbootstrap.com */
+/* Light Way Admin Bootstrap Theme by PrepBootstrap - http://www.prepbootstrap.com */
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -3637,7 +3637,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 @media (min-width: 768px) {
   .navbar {
-    border-radius: 4px;
+    border-radius: 0px;
   }
 }
 @media (min-width: 768px) {

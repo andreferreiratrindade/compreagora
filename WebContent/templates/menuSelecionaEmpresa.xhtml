@@ -9,59 +9,61 @@
 
 	<div id="desktop" style="margin-top: 96px" class="container">
 		<div class="row">
+			<h:form id="formSelecioneCategoria">
+				<div class="row step">
 
-			<div class="row step">
-
-				<p:commandLink value="Lanchonete"
-					action="#{autoCompleteController.atualizaSelecaoEmpresaReturn}"
-					onclick="window.scrollTo(0,0);" style="text-decoration: none;"
-					styleClass="#{contextUtil.categoriaEmpresa == 0 ? 'activestep': '' } col-md-2 col-sm-2 ">
-					<span class="fa fa-pencil"></span>
-					<f:setPropertyActionListener
-						target="#{contextUtil.categoriaEmpresa}" value="#{0}" />
-				</p:commandLink>
-
-				<p:commandLink value="Pizzaria" style="text-decoration: none;"
-					styleClass="#{contextUtil.categoriaEmpresa == 1 ? 'activestep': '' } col-md-2 col-sm-2"
-					action="#{autoCompleteController.atualizaSelecaoEmpresaReturn}">
-
-					<f:setPropertyActionListener
-						target="#{contextUtil.categoriaEmpresa}" value="#{1}" />
-				</p:commandLink>
-
-				<p:commandLink value="Restaurante" style="text-decoration: none;"
-					action="#{autoCompleteController.atualizaSelecaoEmpresaReturn}"
-					styleClass="#{contextUtil.categoriaEmpresa == 2 ? 'activestep': '' } col-md-2 col-sm-2 ">
-					<f:setPropertyActionListener
-						target="#{contextUtil.categoriaEmpresa}" value="#{2}" />
-				</p:commandLink>
-
-				<p:commandLink value="Bebida" style="text-decoration: none;"
-					action="#{autoCompleteController.atualizaSelecaoEmpresaReturn}"
-					styleClass="#{contextUtil.categoriaEmpresa == 3 ? 'activestep': '' } col-md-2 col-sm-2 ">
-					<f:setPropertyActionListener
-						target="#{contextUtil.categoriaEmpresa}" value="#{3}" />
-				</p:commandLink>
+					<p:commandLink value="Lanchonete"
+						actionListener="#{autoCompleteController.menuSelecionaLanche}"
+						update="formSelecioneCategoria :dataGridEmpresas"
+						onclick="window.scrollTo(0,0);" style="text-decoration: none;"
+						styleClass="#{autoCompleteController.categoriaEmpresa == 0 ? 'activestep': '' } col-md-2 col-sm-2 ">
+						<span class="fa fa-pencil"></span>
 
 
-				<p:commandLink value="Água" style="text-decoration: none;"
-					styleClass="#{contextUtil.categoriaEmpresa == 4 ? 'activestep': '' } col-md-2 col-sm-2"
-					action="#{autoCompleteController.atualizaSelecaoEmpresaReturn}">
-					<f:setPropertyActionListener
-						target="#{contextUtil.categoriaEmpresa}" value="#{4}" />
-				</p:commandLink>
+					</p:commandLink>
+
+					<p:commandLink value="Pizzaria" style="text-decoration: none;"
+						actionListener="#{autoCompleteController.menuSelecionaPizzaria}"
+						update="formSelecioneCategoria :dataGridEmpresas"
+						styleClass="#{autoCompleteController.categoriaEmpresa == 1 ? 'activestep': '' } col-md-2 col-sm-2">
+
+
+					</p:commandLink>
+
+					<p:commandLink value="Restaurante" style="text-decoration: none;"
+						actionListener="#{autoCompleteController.menuSelecionaRestaurante}"
+						update="formSelecioneCategoria :dataGridEmpresas"
+						styleClass="#{autoCompleteController.categoriaEmpresa == 2 ? 'activestep': '' } col-md-2 col-sm-2 ">
+
+					</p:commandLink>
+
+					<p:commandLink value="Bebida" style="text-decoration: none;"
+						actionListener="#{autoCompleteController.menuSelecionaBebida}"
+						update="formSelecioneCategoria :dataGridEmpresas"
+						styleClass="#{autoCompleteController.categoriaEmpresa == 3 ? 'activestep': '' } col-md-2 col-sm-2 ">
+
+					</p:commandLink>
+
+
+					<p:commandLink value="Água" style="text-decoration: none;"
+						actionListener="#{autoCompleteController.menuSelecionaAgua}"
+						update="formSelecioneCategoria :dataGridEmpresas"
+						styleClass="#{autoCompleteController.categoriaEmpresa == 4 ? 'activestep': '' } col-md-2 col-sm-2">
+
+					</p:commandLink>
 
 
 
-				<p:commandLink value="Gás" style="text-decoration: none;"
-					styleClass="#{contextUtil.categoriaEmpresa == 5 ? 'activestep': '' } col-md-2 col-sm-2"
-					action="#{autoCompleteController.atualizaSelecaoEmpresaReturn}">
-					<f:setPropertyActionListener
-						target="#{contextUtil.categoriaEmpresa}" value="#{5}" />
-				</p:commandLink>
+					<p:commandLink value="Gás" style="text-decoration: none;"
+						styleClass="#{autoCompleteController.categoriaEmpresa == 5 ? 'activestep': '' } col-md-2 col-sm-2"
+						actionListener="#{autoCompleteController.menuSelecionaGas}"
+						update="formSelecioneCategoria :dataGridEmpresas">
+
+					</p:commandLink>
 
 
-			</div>
+				</div>
+			</h:form>
 		</div>
 	</div>
 	<div id="celular">
@@ -76,51 +78,51 @@
 				</div>
 				<div id="collapseSelecioneCategoria" class="panel-collapse collapse">
 					<div class="panel-body">
-						<h:form>
+						<h:form id="formSelecioneCategoriaCelular">
 							<ul class="nav nav-pills nav-stacked">
 								<li class="active"><p:commandLink value="Lanchonete"
-										action="#{autoCompleteController.atualizaSelecaoEmpresaReturn}"
-										onclick="window.scrollTo(0,0);" style="text-decoration: none;"
-										styleClass="#{contextUtil.categoriaEmpresa == 0 ? 'activestep': '' } col-md-2 col-sm-2 ">
+										actionListener="#{autoCompleteController.menuSelecionaLanche}"
+										update="formSelecioneCategoriaCelular :dataGridEmpresas"
+										
+										style="text-decoration: none;"
+										styleClass="#{autoCompleteController.categoriaEmpresa == 0 ? 'activestep': '' } col-md-2 col-sm-2 ">
 										<span class="fa fa-pencil"></span>
-										<f:setPropertyActionListener
-											target="#{contextUtil.categoriaEmpresa}" value="#{0}" />
+
 									</p:commandLink></li>
 								<li><p:commandLink value="Pizzaria"
 										style="text-decoration: none;"
-										styleClass="#{contextUtil.categoriaEmpresa == 1 ? 'activestep': '' } col-md-2 col-sm-2"
-										action="#{autoCompleteController.atualizaSelecaoEmpresaReturn}">
+										styleClass="#{autoCompleteController.categoriaEmpresa == 1 ? 'activestep': '' } col-md-2 col-sm-2"
+										actionListener="#{autoCompleteController.menuSelecionaPizzaria}"
+										update="formSelecioneCategoriaCelular :dataGridEmpresas">
 
-										<f:setPropertyActionListener
-											target="#{contextUtil.categoriaEmpresa}" value="#{1}" />
+
 									</p:commandLink></li>
 								<li><p:commandLink value="Restaurante"
 										style="text-decoration: none;"
-										action="#{autoCompleteController.atualizaSelecaoEmpresaReturn}"
-										styleClass="#{contextUtil.categoriaEmpresa == 2 ? 'activestep': '' } col-md-2 col-sm-2 ">
-										<f:setPropertyActionListener
-											target="#{contextUtil.categoriaEmpresa}" value="#{2}" />
+										actionListener="#{autoCompleteController.menuSelecionaRestaurante}"
+										update="formSelecioneCategoriaCelular :dataGridEmpresas"
+										styleClass="#{autoCompleteController.categoriaEmpresa == 2 ? 'activestep': '' } col-md-2 col-sm-2 ">
+
 									</p:commandLink></li>
 								<li><p:commandLink value="Bebida"
 										style="text-decoration: none;"
-										action="#{autoCompleteController.atualizaSelecaoEmpresaReturn}"
-										styleClass="#{contextUtil.categoriaEmpresa == 3 ? 'activestep': '' } col-md-2 col-sm-2 ">
-										<f:setPropertyActionListener
-											target="#{contextUtil.categoriaEmpresa}" value="#{3}" />
+										actionListener="#{autoCompleteController.menuSelecionaBebida}"
+										update="formSelecioneCategoriaCelular :dataGridEmpresas"
+										styleClass="#{autoCompleteController.categoriaEmpresa == 3 ? 'activestep': '' } col-md-2 col-sm-2 ">
+
 									</p:commandLink></li>
 								<li><p:commandLink value="Água"
 										style="text-decoration: none;"
-										styleClass="#{contextUtil.categoriaEmpresa == 4 ? 'activestep': '' } col-md-2 col-sm-2"
-										action="#{autoCompleteController.atualizaSelecaoEmpresaReturn}">
-										<f:setPropertyActionListener
-											target="#{contextUtil.categoriaEmpresa}" value="#{4}" />
+										styleClass="#{autoCompleteController.categoriaEmpresa == 4 ? 'activestep': '' } col-md-2 col-sm-2"
+										actionListener="#{autoCompleteController.menuSelecionaAgua}"
+										update="formSelecioneCategoriaCelular :dataGridEmpresas">
+
 									</p:commandLink></li>
 								<li><p:commandLink value="Gás"
 										style="text-decoration: none;"
-										styleClass="#{contextUtil.categoriaEmpresa == 5 ? 'activestep': '' } col-md-2 col-sm-2"
-										action="#{autoCompleteController.atualizaSelecaoEmpresaReturn}">
-										<f:setPropertyActionListener
-											target="#{contextUtil.categoriaEmpresa}" value="#{5}" />
+										styleClass="#{autoCompleteController.categoriaEmpresa == 5 ? 'activestep': '' } col-md-2 col-sm-2"
+										actionListener="#{autoCompleteController.menuSelecionaGas}"
+										update="formSelecioneCategoriaCelular :dataGridEmpresas">
 									</p:commandLink></li>
 							</ul>
 						</h:form>

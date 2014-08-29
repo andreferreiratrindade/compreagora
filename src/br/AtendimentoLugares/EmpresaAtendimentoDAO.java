@@ -64,7 +64,9 @@ public class EmpresaAtendimentoDAO implements Dao<EmpresaAtendimento> {
 
 	public EmpresaAtendimento empresaAtendimentoEmpresaComBairro(int idEmpresa,
 			int idBairro) {
+
 		try {
+			
 			EasyCriteria<EmpresaAtendimento> easyCriteria = EasyCriteriaFactory
 					.createQueryCriteria(session, EmpresaAtendimento.class);
 
@@ -72,10 +74,11 @@ public class EmpresaAtendimentoDAO implements Dao<EmpresaAtendimento> {
 					.andEquals("empresa.idEmpresa", idEmpresa)
 					.innerJoin("bairro").andEquals("bairro.idBairro", idBairro);
 
-			List<EmpresaAtendimento> empAtendimentos = easyCriteria.getResultList();
-			
+			List<EmpresaAtendimento> empAtendimentos = easyCriteria
+					.getResultList();
+
 			return empAtendimentos.isEmpty() ? null : empAtendimentos.get(0);
-			
+
 		} catch (Exception e) {
 			System.out.println("Erro ao buscar Bairro na Empresa: "
 					+ e.toString());

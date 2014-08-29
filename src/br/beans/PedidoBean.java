@@ -1,5 +1,6 @@
 package br.beans;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -7,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -59,8 +61,6 @@ public class PedidoBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final int TOTAL_PRODUTO = 13;
 
-	@ManagedProperty(value = "#{autoCompleteController}")
-	private AutoCompleteController autoComplete;
 	private DualListModel<Avulso> avulsoDual;
 	private Cliente cliente = null;
 	private Empresa empresa = null;
@@ -105,26 +105,31 @@ public class PedidoBean implements Serializable {
 	private ListDataModel<Gas> listGasDM;
 	private BigDecimal avulsoValorTotal;
 	private float troco;
-	private EnderecoCliente novoEnderecoCliente;
+	private Endereco novoEnderecoCliente;
+	private int idBairro;
 
-	public EnderecoCliente getNovoEnderecoCliente() {
+	public void setCategoriaEmpresa(Integer categoriaEmpresa) {
+		this.categoriaEmpresa = categoriaEmpresa;
+	}
+
+	public int getIdBairro() {
+		return idBairro;
+	}
+
+	public void setIdBairro(int idBairro) {
+		this.idBairro = idBairro;
+	}
+
+	public Endereco getNovoEnderecoCliente() {
 		if (novoEnderecoCliente == null) {
-			novoEnderecoCliente = new EnderecoCliente();
-			novoEnderecoCliente.setEndereco(new Endereco());
+			novoEnderecoCliente = new Endereco();
+			novoEnderecoCliente.setBairroCidade(new Bairro());
 		}
 		return novoEnderecoCliente;
 	}
 
-	public void setNovoEnderecoCliente(EnderecoCliente novoEnderecoCliente) {
+	public void setNovoEnderecoCliente(Endereco novoEnderecoCliente) {
 		this.novoEnderecoCliente = novoEnderecoCliente;
-	}
-
-	public AutoCompleteController getAutoComplete() {
-		return autoComplete;
-	}
-
-	public void setAutoComplete(AutoCompleteController autoComplete) {
-		this.autoComplete = autoComplete;
 	}
 
 	public int getItemMenu() {
@@ -511,20 +516,36 @@ public class PedidoBean implements Serializable {
 		return tiposProdutos.contains(tipoProduto) ? true : false;
 	}
 
+	
 	public String adicionaEmpresa() {
+		String url = ("../principal.jsf");
+		FacesContext fc = FacesContext.getCurrentInstance();
+		ExternalContext ec = fc.getExternalContext();
+		try {
 
-		novo();
+			novo();
 
-		Map<Integer, String> mapTipoEnum = new HashMap<Integer, String>();
-		mapTipoEnum.put(CategoriaENUM.Lanche.ordinal(), mudaTelaLanche());
-		mapTipoEnum.put(CategoriaENUM.Pizza.ordinal(), mudaTelaPizza());
-		mapTipoEnum.put(CategoriaENUM.Gas.ordinal(), mudaTelaGas());
-		mapTipoEnum.put(CategoriaENUM.Bebida.ordinal(), mudaTelaBebida());
-		mapTipoEnum.put(CategoriaENUM.Agua.ordinal(), mudaTelaAgua());
-		mapTipoEnum.put(CategoriaENUM.Marmitex.ordinal(), mudaTelaMarmitex());
+			Map<Integer, String> mapTipoEnum = new HashMap<Integer, String>();
+			mapTipoEnum.put(CategoriaENUM.Lanche.ordinal(), mudaTelaLanche());
+			mapTipoEnum.put(CategoriaENUM.Pizza.ordinal(), mudaTelaPizza());
+			mapTipoEnum.put(CategoriaENUM.Gas.ordinal(), mudaTelaGas());
+			mapTipoEnum.put(CategoriaENUM.Bebida.ordinal(), mudaTelaBebida());
+			mapTipoEnum.put(CategoriaENUM.Agua.ordinal(), mudaTelaAgua());
+			mapTipoEnum.put(CategoriaENUM.Marmitex.ordinal(),
+					mudaTelaMarmitex());
 
-		itemMenu = categoriaEmpresa;
-		return mapTipoEnum.get(categoriaEmpresa);
+			itemMenu = categoriaEmpresa;
+			return mapTipoEnum.get(categoriaEmpresa);
+
+		} catch (Exception e) {
+			try {
+				ec.redirect(url);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		return null;
 	}
 
 	public String mudaTelaMarmitex() {
@@ -834,19 +855,25 @@ public class PedidoBean implements Serializable {
 
 	public void novoEndereco() {
 
-		novoEnderecoCliente = cliente.getEnderecoCliente().get(1);
-		novoEnderecoCliente.getEndereco().setBairroCidade(new Bairro());
-		novoEnderecoCliente.getEndereco().setLogradouro("");
-		novoEnderecoCliente.getEndereco().setNumero("");
-		novoEnderecoCliente.getEndereco().setComplemento(null);
-		novoEnderecoCliente.getEndereco().setCep("");
+		// novoEnderecoCliente = new Endereco();
+		// novoEnderecoCliente.setBairroCidade(new Bairro());
+		// novoEnderecoCliente =
+		// cliente.getEnderecoCliente().get(1).getEndereco();
+
+		// novoEnderecoCliente.setBairroCidade(new Bairro());
+		// novoEnderecoCliente.getEndereco().setBairroCidade(new Bairro());
+		// novoEnderecoCliente.getEndereco().setLogradouro("");
+		// novoEnderecoCliente.getEndereco().setNumero("");
+		// novoEnderecoCliente.getEndereco().setComplemento(null);
+		// novoEnderecoCliente.getEndereco().setCep("");
 	}
 
 	public void salvarNovoEndereco() {
 		try {
 			EnderecoDAO endDAO = DAOFactoy.criarEndereco();
-			endDAO.update(novoEnderecoCliente.getEndereco());
-			enderecoCliente = novoEnderecoCliente;
+
+			endDAO.update(novoEnderecoCliente);
+			enderecoCliente.setEndereco(novoEnderecoCliente);
 			atualizaTaxaEntrega();
 
 		} catch (Exception e) {
@@ -857,13 +884,14 @@ public class PedidoBean implements Serializable {
 
 	public void atualizaTaxaEntregaFirst() {
 		int idEmpresa = empresa.getIdEmpresa();
-		int idBairroCliente = autoComplete.getBairro().getIdBairro();
 
 		EmpresaAtendimentoRN empresaAtendimentoRN = new EmpresaAtendimentoRN();
+		EmpresaAtendimento empAtend = new EmpresaAtendimento();
+		empAtend = empresaAtendimentoRN.empresaAtendimentoEmpresaComBairro(
+				idEmpresa, idBairro);
 
-		EmpresaAtendimento empAtend = empresaAtendimentoRN
-				.empresaAtendimentoEmpresaComBairro(idEmpresa, idBairroCliente);
 		if (empAtend != null) {
+
 			pedido.setTaxa(empAtend.getTaxa());
 			pedido.calcularTotal();
 		}
@@ -879,8 +907,9 @@ public class PedidoBean implements Serializable {
 
 		EmpresaAtendimentoRN empresaAtendimentoRN = new EmpresaAtendimentoRN();
 
-		EmpresaAtendimento empAtend = empresaAtendimentoRN
-				.empresaAtendimentoEmpresaComBairro(idEmpresa, idBairroCliente);
+		EmpresaAtendimento empAtend = new EmpresaAtendimento();
+		empAtend = empresaAtendimentoRN.empresaAtendimentoEmpresaComBairro(
+				idEmpresa, idBairroCliente);
 
 		if ((empAtend != null)
 				&& (enderecoCliente.getEndereco().getLogradouro() != null)) {
