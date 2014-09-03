@@ -69,6 +69,9 @@ public class EnderecoCliente implements Serializable, CycleRecoverable {
 	}
 
 	public Endereco getEndereco() {
+		if (endereco == null) {
+			endereco = new Endereco();
+		}
 		return endereco;
 	}
 

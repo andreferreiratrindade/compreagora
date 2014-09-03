@@ -18,53 +18,52 @@
 
 				<h:form style="margin-bottom: 110px">
 
-					<div
-						class="col-lg-offset-3 col-md-offset-2  col-sm-offset-1 col-lg-9 col-md-10 col-sm-11 col-xs-offset-2 col-xs-10">
+					<div class="text-center col-lg-push-2 col-lg-10 col-md-12 col-sm-12 col-xs-12">
+						<div class="text-center">
+							<div class="col-md-4  col-lg-3 col-sm-5 col-xs-12">
+								<p:autoComplete id="autoCompleteCidade" forceSelection="true"
+									value="#{autoCompleteController.cidade}" var="cidade"
+									itemLabel="#{cidade.descCidade}" itemValue="#{cidade}"
+									completeMethod="#{autoCompleteController.completaCidade}"
+									dropdown="true" required="true" converter="converterCidade"
+									label="Cidade"
+									requiredMessage="Informe sua cidade e depois seu bairro">
+									<p:ajax event="itemSelect"
+										listener="#{autoCompleteController.handleSelect}"
+										update="autoCompleteBairro" />
 
-						<div class="col-md-4  col-lg-4 col-sm-5 col-xs-12">
-							<p:autoComplete id="autoCompleteCidade" forceSelection="true"
-								value="#{autoCompleteController.cidade}" var="cidade"
-								itemLabel="#{cidade.descCidade}" itemValue="#{cidade}"
-								completeMethod="#{autoCompleteController.completaCidade}"
-								dropdown="true" required="true" converter="converterCidade"
-								label="Cidade"
-								requiredMessage="Informe sua cidade e depois seu bairro">
-								<p:ajax event="itemSelect"
-									listener="#{autoCompleteController.handleSelect}"
-									update="autoCompleteBairro" />
+								</p:autoComplete>
+								<p:watermark value="Cidade" for="autoCompleteCidade"></p:watermark>
+							</div>
 
-							</p:autoComplete>
-							<p:watermark value="Cidade" for="autoCompleteCidade"></p:watermark>
+							<div class="col-md-4 col-lg-3 col-sm-5 col-xs-12">
+								<p:autoComplete id="autoCompleteBairro"
+									value="#{autoCompleteController.bairro}" forceSelection="true"
+									completeMethod="#{autoCompleteController.completaBairro}"
+									var="bairro" itemLabel="#{bairro.descBairro}"
+									itemValue="#{bairro}" required="true"
+									converter="converterBairro" dropdown="true" scrollHeight="200"
+									label="Bairro" requiredMessage="Informe seu bairro">
+									<p:ajax event="itemSelect"
+										listener="#{autoCompleteController.handleSelectBairro}" />
+								</p:autoComplete>
+								<p:watermark value="Bairro" for="autoCompleteBairro"></p:watermark>
+
+							</div>
+							<div class="visible-xs-block">
+								<span class="col-xs-12"> <br></br></span>
+
+							</div>
+							<div class=" col-md-2 col-lg-3 col-sm-2 col-xs-6">
+								<p:commandLink update=":dataGridEmpresas" id="buscar"
+									value="Buscar" styleClass="btn btn-success btn-block"
+									actionListener="#{autoCompleteController.atualizaSelecaoEmpresa()}"
+									onclick="window.scrollTo(0, 200);" onstart="dlgLoading.show()"
+									onsuccess="dlgLoading.hide()">
+
+								</p:commandLink>
+							</div>
 						</div>
-
-						<div class="col-md-4 col-lg-4 col-sm-5 col-xs-12">
-							<p:autoComplete id="autoCompleteBairro"
-								value="#{autoCompleteController.bairro}" forceSelection="true"
-								completeMethod="#{autoCompleteController.completaBairro}"
-								var="bairro" itemLabel="#{bairro.descBairro}"
-								itemValue="#{bairro}" required="true"
-								converter="converterBairro" dropdown="true" scrollHeight="200"
-								label="Bairro" requiredMessage="Informe seu bairro">
-								<p:ajax event="itemSelect"
-									listener="#{autoCompleteController.handleSelectBairro}" />
-							</p:autoComplete>
-							<p:watermark value="Bairro" for="autoCompleteBairro"></p:watermark>
-
-						</div>
-						<div class="visible-xs-block">
-							<span class="col-xs-12"> <br></br></span>
-
-						</div>
-						<div class=" col-md-2 col-lg-2 col-sm-2 col-xs-6">
-							<p:commandLink update=":dataGridEmpresas" id="buscar"
-								value="Buscar" styleClass="btn btn-success btn-block"
-								actionListener="#{autoCompleteController.atualizaSelecaoEmpresa()}"
-								onclick="window.scrollTo(0, 200);" onstart="dlgLoading.show()"
-								onsuccess="dlgLoading.hide()">
-
-							</p:commandLink>
-						</div>
-
 					</div>
 
 					<div class="visible-xs-block">
@@ -100,8 +99,7 @@
 										<f:setPropertyActionListener
 											target="#{pedidoBean.categoriaEmpresa}"
 											value="#{autoCompleteController.categoriaEmpresa}" />
-										<f:setPropertyActionListener
-											target="#{pedidoBean.idBairro}"
+										<f:setPropertyActionListener target="#{pedidoBean.idBairro}"
 											value="#{autoCompleteController.idBairro}" />
 										<h:panelGrid style="float:right">
 											<h:graphicImage library="imagens/empresa"
@@ -132,8 +130,7 @@
 										<f:setPropertyActionListener
 											target="#{pedidoBean.categoriaEmpresa}"
 											value="#{autoCompleteController.categoriaEmpresa}" />
-										<f:setPropertyActionListener
-											target="#{pedidoBean.idBairro}"
+										<f:setPropertyActionListener target="#{pedidoBean.idBairro}"
 											value="#{autoCompleteController.idBairro}" />
 									</p:commandLink>
 									<p:tooltip for="lnk">

@@ -31,7 +31,7 @@ public class EmpresaManterProdutoAguaBean implements Serializable {
 	private Agua agua;
 	private Empresa empresa;
 	private Cliente cliente;
-
+	
 	@PostConstruct
 	public void construct() {
 		if (empresaLogado()) {

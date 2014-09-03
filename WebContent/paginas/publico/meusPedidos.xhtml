@@ -22,7 +22,8 @@
 							style="float:left" styleClass="btn btn-info" />
 					</h:form>
 					<h:form>
-
+						<p:poll interval="10" update=":formMeusPedidos :pedidoInfo"
+							listener="#{meusPedidosBean.atualizaPedidoProdutos}" />
 					</h:form>
 					<h:form id="formMeusPedidos"
 						styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -69,14 +70,16 @@
 									</p:tooltip>
 								</center>
 							</p:column>
-							<p:column headerText="Inicio" sortBy="#{pedido.dataHoraIn}" style="text-align: center;">
+							<p:column headerText="Inicio" sortBy="#{pedido.dataHoraIn}"
+								style="text-align: center;">
 								<h:outputText value="#{pedido.dataHoraIn}">
 									<f:convertDateTime type="date" pattern="dd/MM/yyyy HH:mm"
 										timeZone="America/Sao_Paulo" />
 								</h:outputText>
 							</p:column>
-							<p:column headerText="Chegada Prevista" style="text-align: center;"
-								sortBy="#{pedido.dataHoraFim}" styleClass="hidden-sm hidden-xs">
+							<p:column headerText="Chegada Prevista"
+								style="text-align: center;" sortBy="#{pedido.dataHoraFim}"
+								styleClass="hidden-sm hidden-xs">
 								<h:outputText value="#{pedido.dataHoraFim}" style="margin:auto">
 									<f:convertDateTime type="date" pattern="dd/MM/yyyy HH:mm"
 										timeZone="America/Sao_Paulo" />
@@ -365,7 +368,7 @@
 						<h:column>
 
 							<p:commandLink value="Detalhes" style="right: -30px;"
-								styleClass="buttonDetalhes" update=":CelularInfoPedido"
+								styleClass="btn btn-info" update=":CelularInfoPedido"
 								oncomplete="celularInfoDialogPedido.show()">
 								<f:setPropertyActionListener target="#{meusPedidosBean.pedido}"
 									value="#{pedido}" />
@@ -382,7 +385,7 @@
 			<h:form id="CelularInfoPedido">
 				<p:dialog id="celularInfoDialogPedido" header="Pedido"
 					widgetVar="celularInfoDialogPedido" resizable="false" modal="true"
-					style="margin:auto;width:100%" closable="false" width="100%">
+					style="margin:auto;width:100%"  width="100%">
 					<h:panelGrid columns="2">
 						<h:outputText value="Inicio" style="font-size:20px" />
 						<h:outputText value="#{meusPedidosBean.pedido.dataHoraIn}">

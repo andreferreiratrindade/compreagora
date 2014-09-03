@@ -37,6 +37,9 @@ public class Endereco implements Serializable, CycleRecoverable {
 	}
 
 	public Bairro getBairroCidade() {
+		if (bairroCidade == null) {
+			bairroCidade = new Bairro();
+		}
 		return bairroCidade;
 	}
 
@@ -141,7 +144,7 @@ public class Endereco implements Serializable, CycleRecoverable {
 
 	@Override
 	public Object onCycleDetected(Context arg0) {
-	
+
 		Endereco e = new Endereco();
 		e.setIdEndereco(this.idEndereco);
 

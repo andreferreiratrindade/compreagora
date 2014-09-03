@@ -6,25 +6,18 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core">
 <ui:composition>
-	<div id="desktop" style="margin-top: 66px;">
 
-		<div style="width: 960px; margin: auto;">
-			<div style="float: left; width: 190px;">
 
-				<h:form id="formPainel">
-					<p:menu style="margin:auto;width: 179px;background-color:#FFF">
-						<p:submenu label="Criar">
-							<p:menuitem value="Empresa" action="#{empresaBean.novo}">
-							</p:menuitem>
-							<p:menuitem value="Forma De Pagamento"
-								action="/paginas/admin/empresa/configuracoes/manterFormaDePagamento.jsf?faces-redirect=true">
-							</p:menuitem>
-						</p:submenu>
-					</p:menu>
-				</h:form>
-			</div>
-		</div>
-	</div>
+	<h:form id="formPainel">
+		<ul class="nav nav-pills nav-stacked">
+
+			<li><p:commandLink value="Empresa" action="#{empresaBean.novo}" />
+			</li>
+			<li><p:commandLink value="Forma De Pagamento"
+					action="/paginas/admin/empresa/configuracoes/manterFormaDePagamento.jsf?faces-redirect=true" />
+			</li>
+		</ul>
+	</h:form>
 
 
 </ui:composition>

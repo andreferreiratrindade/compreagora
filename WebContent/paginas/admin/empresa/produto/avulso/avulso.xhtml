@@ -10,96 +10,93 @@
 	template="/templates/manterEmpresa/principalManterEmpresa.xhtml">
 
 	<ui:define name="corpo">
-		<div id="desktop" style="margin-top: 10px;">
-			<div
-				style="width: 960px; margin: auto; height: 750px; margin-top: 10px">
-				<div style="float: right; width: 651px">
-					<h:form id="form">
 
-						<p:dataTable value="#{avulsoBean.avulsos}" var="avulso"
-							paginator="true" rows="6"
-							emptyMessage="Nenhum produto encontrado." id="avulsos">
+		<h:form id="form">
 
-							<p:column headerText="Descrição">
-								<h:outputText value="#{avulso.descricao}" title="Descrição"
-									id="descricao" />
-							</p:column>
+			<p:dataTable value="#{avulsoBean.avulsos}" var="avulso"
+				paginator="true" rows="6" emptyMessage="Nenhum produto encontrado."
+				id="avulsos">
 
-							<p:column headerText="Tipo">
-								<h:outputText value="#{avulso.tipoAvulso}" title="Tipo Avulso"
-									id="tipo" />
-							</p:column>
-							<p:column headerText="Valor">
-								<h:outputText value="R$ " />
-								<h:outputText value="#{avulso.valor}" title="Valor" size="3"
-									id="valor">
-									<f:convertNumber pattern="#,###,##0.00" />
-								</h:outputText>
-							</p:column>
-							<p:column headerText="Ativo">
-								<center>
-									<h:graphicImage library="imagens/icones"
-										name="#{avulso.ativo}.gif" width="13px" />
-								</center>
-							</p:column>
-							<p:column headerText="Atuzalizar">
+				<p:column headerText="Descrição">
+					<h:outputText value="#{avulso.descricao}" title="Descrição"
+						id="descricao" />
+				</p:column>
 
-								<p:commandButton value="Atualizar"
-									oncomplete="dlgAtualizar.show()" update=":formDlgAtualizar"
-									style="background-color: cornflowerblue;color: #000;">
-									<f:setPropertyActionListener target="#{avulsoBean.avulsoAtualiza}"
-										value="#{avulso}" />
-								</p:commandButton>
+				<p:column headerText="Tipo">
+					<h:outputText value="#{avulso.tipoAvulso}" title="Tipo Avulso"
+						id="tipo" />
+				</p:column>
+				<p:column headerText="Valor">
+					<h:outputText value="R$ " />
+					<h:outputText value="#{avulso.valor}" title="Valor" size="3"
+						id="valor">
+						<f:convertNumber pattern="#,###,##0.00" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Ativo">
+					<center>
+						<h:graphicImage library="imagens/icones"
+							name="#{avulso.ativo}.gif" width="13px" />
+					</center>
+				</p:column>
+				<p:column headerText="Atuzalizar">
 
-							</p:column>
-						</p:dataTable>
-					</h:form>
+					<p:commandLink value="Atualizar" oncomplete="dlgAtualizar.show()"
+						update=":formDlgAtualizar" styleClass="btn btn-info">
 
-					<p:fieldset legend="Novo Avulso" style="margin-top: 10px;">
-						<h:form id="formNovo">
+						<f:setPropertyActionListener target="#{avulsoBean.avulsoAtualiza}"
+							value="#{avulso}" />
+					</p:commandLink>
+				</p:column>
+			</p:dataTable>
+		</h:form>
 
-							<h:panelGrid columns="3" style="margin:auto">
-								<h:column>
-									<h:outputText value="*" style="color: #F00;float:right" />
-									<h:outputText value="Descrição" style="float:right" />
-								</h:column>
-								<p:inputText value="#{avulsoBean.avulso.descricao}"
-									requiredMessage="Campo obrigatório" id="descricao"
-									required="true" />
-								<h:column>
-									<p:message for="descricao" />
-								</h:column>
+		<div class="panel panel-primary" style="margin-top: 10px">
+			<div class="panel-heading">
+				<h3 class="panel-title">Novo Cadadstro - Avulso</h3>
+			</div>
+			<div class="panel-body">
+				<h:form id="formNovo">
+
+					<h:panelGrid columns="3" style="margin:auto">
+						<h:column>
+							<h:outputText value="*" style="color: #F00;float:right" />
+							<h:outputText value="Descrição" style="float:right" />
+						</h:column>
+						<p:inputText value="#{avulsoBean.avulso.descricao}"
+							requiredMessage="Campo obrigatório" id="descricao"
+							required="true" />
+						<h:column>
+							<p:message for="descricao" />
+						</h:column>
 								Categoria
 								<h:column>
-									<h:selectOneMenu value="#{avulsoBean.tipoAvulsoStr}"
-										var="avulso">
-										<f:selectItems value="#{avulsoBean.tiposCategoria}"
-											var="theme" itemLabel="#{theme.tipoCategoria}"
-											itemValue="#{theme.tipoCategoria}" />
-									</h:selectOneMenu>
-								</h:column>
-								<h:outputText />
-								<h:column>
-									<h:outputText value="*" style="color: #F00;float:right" />
-									<h:outputText value="Valor" style="float:right" />
-								</h:column>
-								<p:inputText value="#{avulsoBean.avulso.valor}"
-									requiredMessage="Campo Obrigatório" id="valor" required="true">
-									<f:convertNumber pattern="#,###,##0.00" />
-								</p:inputText>
-								<h:column>
-									<p:message for="valor" />
-								</h:column>
-							</h:panelGrid>
+							<h:selectOneMenu value="#{avulsoBean.tipoAvulsoStr}" var="avulso">
+								<f:selectItems value="#{avulsoBean.tiposCategoria}" var="theme"
+									itemLabel="#{theme.tipoCategoria}"
+									itemValue="#{theme.tipoCategoria}" />
+							</h:selectOneMenu>
+						</h:column>
+						<h:outputText />
+						<h:column>
+							<h:outputText value="*" style="color: #F00;float:right" />
+							<h:outputText value="Valor" style="float:right" />
+						</h:column>
+						<p:inputText value="#{avulsoBean.avulso.valor}"
+							requiredMessage="Campo Obrigatório" id="valor" required="true">
+							<f:convertNumber pattern="#,###,##0.00" />
+						</p:inputText>
+						<h:column>
+							<p:message for="valor" />
+						</h:column>
+					</h:panelGrid>
 
-							<br />
-							<p:commandButton value="Adicionar "
-								actionListener="#{avulsoBean.salvar}"
-								update=":form:avulsos :formNovo" ajax="false"
-								style="right: -400px;background-color: cornflowerblue;color: #000;" />
-						</h:form>
-					</p:fieldset>
-				</div>
+					<br />
+					<p:commandLink value="Salvar"
+						actionListener="#{avulsoBean.salvar}"
+						update=":form:avulsos :formNovo" ajax="false"
+						styleClass="btn btn-success" />
+				</h:form>
 			</div>
 		</div>
 

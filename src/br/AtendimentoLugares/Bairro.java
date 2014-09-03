@@ -38,6 +38,9 @@ public class Bairro implements Serializable, CycleRecoverable {
 	}
 
 	public Cidade getCidade() {
+		if (cidade == null) {
+			cidade = new Cidade();
+		}
 		return cidade;
 	}
 
@@ -95,7 +98,6 @@ public class Bairro implements Serializable, CycleRecoverable {
 	@Override
 	public Object onCycleDetected(Context arg0) {
 
-	
 		Bairro b = new Bairro();
 		b.setIdBairro(this.idBairro);
 

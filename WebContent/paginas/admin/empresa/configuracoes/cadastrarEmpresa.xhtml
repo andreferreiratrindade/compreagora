@@ -11,174 +11,175 @@
 
 	<ui:define name="corpo">
 
-		<div id="desktop" style="margin-top: 10px;">
-			<div
-				style="width: 775px; margin: auto; height: 900px; margin-top: 10px">
-				<div style="float: right; width: 651px">
-					<h:form id="cadastroEmpresa">
-						<p:panel style="margin:auto;height: 870px;"
-							header="Cadastro Empresa" id="painel">
-							<span style="margin-left: 9px; font-size: 15px;"> <h:outputText
-									value="*" style="color: #F00;" /> <h:outputText
-									value=" Campos Obrigatórios" />
-							</span>
-							<h:panelGrid columns="1" style="margin:auto">
-								<p:fieldset legend="Dados Pessoais"
-									style="font-size: 11px; height: 278px;min-width: 360px;">
-									<h:panelGrid columns="3" style="font-size: 13px;">
-										<h:column>
-											<h:outputText value="*" style="color: #F00;float:right" />
-											<h:outputText value="Razão Social" style="float:right" />
-										</h:column>
-										<p:inputText value="#{empresaBean.empresa.razaoSocial}"
-											id="razaoSocial" size="40" required="true" />
-										<p:message for="razaoSocial" display="icon" />
 
-										<h:column>
-											<h:outputText value="*" style="color: #F00;float:right" />
-											<h:outputText value="Nome Fantasia" style="float:right" />
-										</h:column>
-										<p:inputText value="#{empresaBean.empresa.nomeFant}"
-											id="nomeFant" size="40" required="true" />
-										<p:message for="nomeFant" display="icon" />
+		<h:form id="cadastroEmpresa">
 
-										<h:column>
-											<h:outputText value="*" style="color: #F00;float:right" />
-											<h:outputText value="CNPJ" style="float:right" />
-										</h:column>
+			<span style="margin-left: 9px; font-size: 15px;"> <h:outputText
+					value="*" style="color: #F00;" /> <h:outputText
+					value=" Campos Obrigatórios" />
+			</span>
+			<div class="panel panel-primary" style="margin-top: 10px">
+				<div class="panel-heading">
+					<h3 class="panel-title">Novo Cadadstro - Água</h3>
+				</div>
+				<div class="panel-body">
+					<h:panelGrid columns="3" style="font-size: 13px;">
+						<h:column>
+							<h:outputText value="*" style="color: #F00;float:right" />
 
-										<p:inputMask value="#{empresaBean.empresa.CNPJ}" id="cnpj"
-											mask="999.999.999-99" converter="converterCNPJ"
-											required="true" />
-										<p:message for="cnpj" display="icon" />
-										<h:outputText value="Telefone" style="float:right" />
-										<p:inputMask value="#{empresaBean.empresa.telefone}"
-											id="telefone" mask="(99) 9999-9999"
-											converter="converterTelefone" />
-										<h:outputText />
-									</h:panelGrid>
-									<p:fileUpload label="Procurar imagem" id="fileImage"
-										fileUploadListener="#{empresaBean.uploadAction}"
-										style="width: 512px;;margin: auto;margin-top:10px"
-										required="true" />
+						</h:column>
+						<p:inputText value="#{empresaBean.empresa.razaoSocial}"
+							id="razaoSocial" size="40" required="true"
+							placeholder="Razão Social" />
+						<p:message for="razaoSocial" display="icon" />
 
-								</p:fieldset>
+						<h:column>
+							<h:outputText value="*" style="color: #F00;float:right" />
 
+						</h:column>
+						<p:inputText value="#{empresaBean.empresa.nomeFant}" id="nomeFant"
+							size="40" required="true" placeholder="Nome Fantasia" />
+						<p:message for="nomeFant" display="icon" />
 
-								<p:fieldset legend="Endereço"
-									style="margin-top: 10px;font-size: 11px;">
-									<h:panelGrid columns="3" style="font-size: 13px;">
+						<h:column>
+							<h:outputText value="*" style="color: #F00;float:right" />
 
-										<h:column>
-											<h:outputText value="*" style="color: #F00;float:right" />
-											<h:outputText value="Cidade" style="float:right" />
-										</h:column>
-										<p:autoComplete id="cidade" forceSelection="true" var="cidade"
-											itemLabel="#{cidade.descCidade}" itemValue="#{cidade}"
-											completeMethod="#{autoCompleteController.completaCidade}"
-											dropdown="true" required="true" converter="converterCidade">
-											<p:ajax event="itemSelect"
-												listener="#{autoCompleteController.handleSelect}"
-												update="bairro" />
-										</p:autoComplete>
-										<p:message for="cidade" display="icon" />
+						</h:column>
 
-										<h:column>
-											<h:outputText value="*" style="color: #F00;float:right" />
-											<h:outputText value="Bairro" style="float:right" />
-										</h:column>
-										<p:autoComplete id="bairro"
-											value="#{empresaBean.endereco.bairroCidade}"
-											forceSelection="true" dropdown="true" scrollHeight="200"
-											completeMethod="#{autoCompleteController.completaBairro}"
-											var="bairro" itemLabel="#{bairro}" itemValue="#{bairro}"
-											required="true" converter="converterBairro">
-										</p:autoComplete>
-										<p:message for="bairro" display="icon" />
-										<h:column>
-											<h:outputText value="*" style="color: #F00;float:right" />
-											<h:outputText value="Logradouro" style="float:right" />
-										</h:column>
-										<p:inputText value="#{empresaBean.endereco.logradouro}"
-											id="lograd" size="40" required="true" />
-										<p:message for="lograd" display="icon" />
-
-										<h:column>
-											<h:outputText value="*" style="color: #F00;float:right" />
-											<h:outputText value="Numero" style="float:right" />
-										</h:column>
-										<p:inputText value="#{empresaBean.endereco.numero}"
-											id="numero" required="true" />
-										<p:message for="numero" display="icon" />
-										<h:column>
-											<h:outputText value="*" style="color: #F00;float:right" />
-											<h:outputText value="CEP" style="float:right" />
-										</h:column>
-										<p:inputMask value="#{empresaBean.endereco.cep}" id="cep"
-											required="true" mask="99999-999" label="CEP"
-											converter="converterCEP" />
-										<p:message for="cep" display="icon" />
-										<h:outputText value="Complemento" />
-										<p:inputTextarea value="#{empresaBean.endereco.complemento}"
-											maxlength="100" counterTemplate="{0} Caracteres"
-											counter="contador" cols="32" />
-										<h:outputText />
-									</h:panelGrid>
-									<h:outputText id="contador" style="float:right" />
-								</p:fieldset>
-								<p:fieldset legend="Login"
-									style="margin-top: 10px;font-size: 11px;">
-									<h:panelGrid columns="3" style="font-size: 13px;">
-										<h:column>
-											<h:outputText value="*" style="color: #F00;float:right" />
-											<h:outputText value="E-mail" style="float:right" />
-										</h:column>
-
-										<p:inputText value="#{empresaBean.cliente.email}" id="email"
-											size="40" required="true" />
-										<p:message for="email" display="icon" />
-
-										<h:column>
-											<h:outputText value="*" style="color: #F00;float:right" />
-											<h:outputText value="Confirma E-mail" style="float:right" />
-										</h:column>
-										<p:inputText value="#{empresaBean.confEmail}" id="confEmail"
-											size="40" required="true" />
-										<p:message for="confEmail" display="icon" />
-										<h:column>
-											<h:outputText value="*" style="color: #F00;float:right" />
-											<h:outputText value="Senha" style="float:right" />
-										</h:column>
-
-										<p:password id="pwd1" value="#{empresaBean.cliente.senha}"
-											match="pwd2" required="true" feedback="true"
-											promptLabel="Imforme uma Senha" weakLabel="Fraca"
-											goodLabel="Boa" strongLabel="Forte" />
-										<p:message for="pwd1" display="icon" />
-										<h:column>
-											<h:outputText value="*" style="color: #F00;float:right" />
-											<h:outputText value="Confirma Senha" style="float:right" />
-										</h:column>
-										<p:password id="pwd2" value="#{empresaBean.cliente.senha}"
-											required="true" />
-										<p:message for="pwd2" display="icon" />
-									</h:panelGrid>
-								</p:fieldset>
-								<h:panelGrid columns="2" style="font-size: 13px;margin:auto">
-									<h:form>
-										<p:commandButton value="Salvar" action="#{empresaBean.salvar}"
-											style="background-color: cornflowerblue;color: #000;"
-											update=":cadastroEmpresa" />
-										<p:commandButton value="Cancelar"
-											style="background-color: #E92B2B;color: #000" />
-									</h:form>
-								</h:panelGrid>
-							</h:panelGrid>
-						</p:panel>
-					</h:form>
+						<p:inputMask value="#{empresaBean.empresa.CNPJ}" id="cnpj"
+							mask="999.999.999-99" converter="converterCNPJ" required="true"
+							placeholder="CNPJ" />
+						<p:message for="cnpj" display="icon" />
+						<h:outputText />
+						<p:inputMask value="#{empresaBean.empresa.telefone}" id="telefone"
+							mask="(99) 9999-9999" converter="converterTelefone"
+							placeholder="Telefone" />
+						<h:outputText />
+					</h:panelGrid>
+					<p:fileUpload label="Procurar imagem" id="fileImage"
+						fileUploadListener="#{empresaBean.uploadAction}"
+						style="width: 512px;;margin: auto;margin-top:10px" required="true" />
 				</div>
 			</div>
-		</div>
+			<div class="panel panel-primary" style="margin-top: 10px">
+				<div class="panel-heading">
+					<h3 class="panel-title">Endereço</h3>
+				</div>
+				<div class="panel-body">
+					<h:panelGrid columns="3" style="font-size: 13px;">
+
+						<h:column>
+							<h:outputText value="*" style="color: #F00;float:right" />
+
+						</h:column>
+						<p:autoComplete id="cidade" forceSelection="true" var="cidade"
+							itemLabel="#{cidade.descCidade}" itemValue="#{cidade}"
+							completeMethod="#{autoCompleteController.completaCidade}"
+							dropdown="true" required="true" converter="converterCidade"
+							placeholder="Cidade">
+							<p:ajax event="itemSelect"
+								listener="#{autoCompleteController.handleSelect}"
+								update="bairro" />
+						</p:autoComplete>
+						<p:message for="cidade" display="icon" />
+
+						<h:column>
+							<h:outputText value="*" style="color: #F00;float:right" />
+
+						</h:column>
+						<p:autoComplete id="bairro"
+							value="#{empresaBean.endereco.bairroCidade}"
+							forceSelection="true" dropdown="true" scrollHeight="200"
+							completeMethod="#{autoCompleteController.completaBairro}"
+							var="bairro" itemLabel="#{bairro}" itemValue="#{bairro}"
+							required="true" converter="converterBairro" placeholder="Bairro">
+						</p:autoComplete>
+						<p:message for="bairro" display="icon" />
+						<h:column>
+							<h:outputText value="*" style="color: #F00;float:right" />
+
+						</h:column>
+						<p:inputText value="#{empresaBean.endereco.logradouro}"
+							id="lograd" size="40" required="true"
+							placeholder="Logradouro / Rua / Av." />
+						<p:message for="lograd" display="icon" />
+
+						<h:column>
+							<h:outputText value="*" style="color: #F00;float:right" />
+
+						</h:column>
+						<p:inputText value="#{empresaBean.endereco.numero}" id="numero"
+							required="true" placeholder="Número" />
+						<p:message for="numero" display="icon" />
+						<h:column>
+							<h:outputText value="*" style="color: #F00;float:right" />
+
+						</h:column>
+						<p:inputMask value="#{empresaBean.endereco.cep}" id="cep"
+							required="true" mask="99999-999" label="CEP"
+							converter="converterCEP" placeholder="Cep" />
+						<p:message for="cep" display="icon" />
+						<h:outputText />
+						<p:inputTextarea value="#{empresaBean.endereco.complemento}"
+							maxlength="100" counterTemplate="{0} Caracteres"
+							counter="contador" cols="32" placeholder="Complemento" />
+						<h:outputText />
+					</h:panelGrid>
+					<h:outputText id="contador" style="float:right" />
+				</div>
+			</div>
+			<div class="panel panel-primary" style="margin-top: 10px">
+				<div class="panel-heading">
+					<h3 class="panel-title">Login</h3>
+				</div>
+				<div class="panel-body">
+					<h:panelGrid columns="3" style="font-size: 13px;">
+						<h:column>
+							<h:outputText value="*" style="color: #F00;float:right" />
+
+						</h:column>
+
+						<p:inputText value="#{empresaBean.cliente.email}" id="email"
+							size="40" required="true" placeholder="E-mail" />
+						<p:message for="email" display="icon" />
+
+						<h:column>
+							<h:outputText value="*" style="color: #F00;float:right" />
+
+						</h:column>
+						<p:inputText value="#{empresaBean.confEmail}" id="confEmail"
+							size="40" required="true" placeholder="Confirma E-mail" />
+						<p:message for="confEmail" display="icon" />
+						<h:column>
+							<h:outputText value="*" style="color: #F00;float:right" />
+
+						</h:column>
+
+						<p:password id="pwd1" value="#{empresaBean.cliente.senha}"
+							match="pwd2" required="true" feedback="true"
+							promptLabel="Imforme uma Senha" weakLabel="Fraca" goodLabel="Boa"
+							strongLabel="Forte" placeholder="Senha" />
+						<p:message for="pwd1" display="icon" />
+						<h:column>
+							<h:outputText value="*" style="color: #F00;float:right" />
+
+						</h:column>
+						<p:password id="pwd2" value="#{empresaBean.cliente.senha}"
+							required="true" placeholder="Confirma Senha" />
+						<p:message for="pwd2" display="icon" />
+					</h:panelGrid>
+				</div>
+			</div>
+			<h:panelGrid columns="2" style="font-size: 13px;margin:auto">
+				<h:form>
+					<p:commandButton value="Salvar" action="#{empresaBean.salvar}"
+						styleClass="btn btn-success" update=":cadastroEmpresa" />
+					<p:commandButton value="Cancelar" styleClass="btn btn-danger" />
+				</h:form>
+			</h:panelGrid>
+
+		</h:form>
+
 	</ui:define>
 </ui:composition>
 </html>

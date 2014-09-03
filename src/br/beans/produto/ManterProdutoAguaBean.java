@@ -31,9 +31,17 @@ public class ManterProdutoAguaBean implements Serializable {
 	private List<Agua> listAgua;
 	private Agua agua;
 	private FileUpload arquivo;
-
+	private float valor;
 	public EmpresaBean getEmpresaBean() {
 		return empresaBean;
+	}
+
+	public float getValor() {
+		return valor;
+	}
+
+	public void setValor(float valor) {
+		this.valor = valor;
 	}
 
 	public void setEmpresaBean(EmpresaBean empresaBean) {
@@ -54,16 +62,14 @@ public class ManterProdutoAguaBean implements Serializable {
 
 	public void salvarAgua() {
 		agua.setEmpresa(empresa);
-
+		agua.setValor(valor);
 		ProdutoRN produtoRN = new ProdutoRN();
 		produtoRN.salve(agua);
 
 		this.arquivo.gravarArquivoTomCat("produto/agua/",
-				Integer.toString(agua.getIdProduto()));// produtoRN
-		// .ultimoElementoAdicionado().toString());
+				Integer.toString(agua.getIdProduto()));
 		this.arquivo.gravarArquivoProjeto("produto/agua/",
-				Integer.toString(agua.getIdProduto()));// produtoRN
-		// .ultimoElementoAdicionado().toString());
+				Integer.toString(agua.getIdProduto()));
 		construct();
 	}
 

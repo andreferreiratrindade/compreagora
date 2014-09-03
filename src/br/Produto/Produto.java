@@ -31,7 +31,6 @@ public abstract class Produto implements Serializable, CycleRecoverable {
 	private int idProduto;
 	@ManyToOne
 	@JoinColumn(name = "idEmpresa")
-	// , insertable = false, updatable = false)
 	private Empresa empresa;
 	private String descricao;
 	private BigDecimal valor;
@@ -84,6 +83,7 @@ public abstract class Produto implements Serializable, CycleRecoverable {
 		this.descricao = descricao;
 	}
 
+		
 	public BigDecimal getValor() {
 		return valor;
 	}

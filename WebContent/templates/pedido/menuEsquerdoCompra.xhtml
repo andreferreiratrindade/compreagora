@@ -65,25 +65,42 @@
 
 
 						<span style="float: right;">
+							<div class="visible-xs-block">
+								<p:commandLink id="lnkDeletar2"
+									oncomplete="dlgDeletarProduto.show()" update=":formDeletar">
+									<h:graphicImage library="imagens/icones" name="deletar.gif" />
+									<f:setPropertyActionListener value="#{pedidoProduto}"
+										target="#{pedidoBean.pedidoProduto}" />
+								</p:commandLink>
+								<p:tooltip for="lnkDeletar2">
+									<h:outputText value="Deletar" />
+								</p:tooltip>
+							</div>
 							<div class="hidden-xs">
 								<h:outputText value="R$" />
 								<h:outputText value="#{pedidoProduto.valorTotal()}">
 									<f:convertNumber pattern="#,###,##0.00" />
 								</h:outputText>
-							</div> &nbsp; <p:commandLink id="lnkDeletar"
-								oncomplete="dlgDeletarProduto.show()" update=":formDeletar">
-								<h:graphicImage library="imagens/icones" name="deletar.gif" />
-								<f:setPropertyActionListener value="#{pedidoProduto}"
-									target="#{pedidoBean.pedidoProduto}" />
-							</p:commandLink> <p:tooltip for="lnkDeletar">
-								<h:outputText value="Deletar" />
-							</p:tooltip>
+
+								&nbsp; <span data-toggle="modal" href="#modalDeletar"
+									class="text-center"> <p:commandLink id="lnkDeletar"
+										update=":formDeletar">
+										<h:graphicImage library="imagens/icones" name="deletar.gif" />
+										<f:setPropertyActionListener value="#{pedidoProduto}"
+											target="#{pedidoBean.pedidoProduto}" />
+									</p:commandLink> <p:tooltip for="lnkDeletar">
+										<h:outputText value="Deletar" />
+									</p:tooltip>
+								</span>
+
+							</div>
 						</span>
 
 					</h:column>
 				</h:dataTable>
 			</div>
-			<div style="margin-top: 17px; font-size: 16px; margin-bottom: 25px;">
+			<div
+				style="margin-top: 17px; font-size: 16px; margin-bottom: 25px; text-align: center">
 
 				<h:outputText value="Taxa de entrega:" />
 				&nbsp;
@@ -95,7 +112,7 @@
 
 			</div>
 
-			<div style="font-size: 18px;">
+			<div style="font-size: 18px; text-align: center">
 				<h:outputText value="Valor Total:" />
 				&nbsp;
 
@@ -106,17 +123,18 @@
 
 			</div>
 
-			<center>
+			<div class="col-lg-12 text-center col-xs-12 col-sm-12 col-md-12">
 
-				<span data-toggle="modal" href="#modalConcluirPedido" >
-					<p:commandLink value="Comprar"
+				<span data-toggle="modal" href="#modalConcluirPedido"
+					class="text-center"> <p:commandLink value="Comprar"
 						styleClass="btn btn-success col-lg-6 col-md-6 col-sm-12 col-xs-12"
-						style="margin-right: 46px;text-decoration: none;"
+						style="text-decoration: none;float: none;"
 						actionListener="#{pedidoBean.atualizaTaxaEntrega}"
-						update=":formCompraValorTotal :formOutroEndereco :idConcluirProduto" disabled="#{!pedidoBean.verificaValorMin()}">
+						update=":formCompraValorTotal"
+						disabled="#{!pedidoBean.verificaValorMin()}">
 					</p:commandLink>
 				</span>
-			</center>
+			</div>
 
 			<div style="margin-top: 24px;" class="col-md-12 col-lg-12">
 				<h:outputText value="Valor minimo R$ 6,00" style="margin-left:5px" />

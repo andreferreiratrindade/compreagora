@@ -10,55 +10,51 @@
 <ui:composition
 	template="/templates/manterEmpresa/principalManterEmpresa.xhtml">
 	<ui:define name="corpo">
-		<div id="desktop" style="margin-top: 10px;">
-			<div
-				style="width: 960px; margin: auto; height: 750px; margin-top: 10px">
-				<div style="float: right; width: 651px">
+		<h:form id="form">
+			<p:dataTable value="#{fdpEmpresaBean.formasDePagamento}" var="fdp">
+			<f:facet name="header">
+				Formas de Pagamentos disponiveis
+				</f:facet>
+				<p:column headerText="Imagem">
+					<h:graphicImage name="#{fdp.idFormaDePagamento}.png"
+						library="imagens/icones/formaDePagamento" />
+				</p:column>
+				<p:column headerText="Tipo">
+					<h:outputText value="#{fdp.tipo}" />
+
+				</p:column>
+				<p:column>
+					<p:commandLink value="Adicionar"
+						actionListener="#{fdpEmpresaBean.addFormaDePagamento}"
+						update=":form" styleClass="btn btn-info" />
 
 
-					<h:form id="form">
-						<p:dataTable value="#{fdpEmpresaBean.formasDePagamento}" var="fdp">
-							<p:column headerText="Imagem">
-								<h:graphicImage name="#{fdp.idFormaDePagamento}.png"
-									library="imagens/icones/formaDePagamento" />
-							</p:column>
-							<p:column headerText="Tipo">
-								<h:outputText value="#{fdp.tipo}" />
+				</p:column>
+			</p:dataTable>
 
-							</p:column>
-							<p:column>
-								<p:commandButton value="Adicionar"
-									actionListener="#{fdpEmpresaBean.addFormaDePagamento}"
-									update=":form">
+			<br />
+			<br />
+			<p:dataTable value="#{fdpEmpresaBean.formasDePagamentoEmpresa}"
+				var="fdp">
+				<f:facet name="header">
+				Formas de Pagamentos da Empresa
+				</f:facet>
+				<p:column headerText="Imagem">
+					<h:graphicImage name="#{fdp.idFormaDePagamento}.png"
+						library="imagens/icones/formaDePagamento" />
+				</p:column>
+				<p:column headerText="Tipo">
+					<h:outputText value="#{fdp.tipo}" />
+				</p:column>
+				<p:column>
+					<p:commandLink value="Remover"
+						actionListener="#{fdpEmpresaBean.removerFormaDePagamento}"
+						update=":form" styleClass="btn btn-danger" />
+					
+				</p:column>
+			</p:dataTable>
 
-								</p:commandButton>
-							</p:column>
-						</p:dataTable>
-
-						<br />
-						<br />
-						<p:dataTable value="#{fdpEmpresaBean.formasDePagamentoEmpresa}"
-							var="fdp">
-							<p:column headerText="Imagem">
-								<h:graphicImage name="#{fdp.idFormaDePagamento}.png"
-									library="imagens/icones/formaDePagamento" />
-							</p:column>
-							<p:column headerText="Tipo">
-								<h:outputText value="#{fdp.tipo}" />
-							</p:column>
-							<p:column>
-								<p:commandButton value="Remover"
-									actionListener="#{fdpEmpresaBean.removerFormaDePagamento}"
-									update=":form">
-								</p:commandButton>
-							</p:column>
-						</p:dataTable>
-
-					</h:form>
-
-				</div>
-			</div>
-		</div>
+		</h:form>
 	</ui:define>
 </ui:composition>
 </html>

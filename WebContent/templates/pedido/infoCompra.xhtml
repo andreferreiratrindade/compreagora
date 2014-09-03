@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+<ui:composition>
+	<div id="modalConcluirPedido" class="modal fade" tabindex="-1"
+		aria-hidden="true" data-focus-on="input:first">
+		<h:form id="formCompraValorTotal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header col-sm-12 col-lg-12 col-md-12 col-xs-12">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">×</button>
+						<h4 class="modal-title">Finalizar Pedido</h4>
+					</div>
+
+					<div class="modal-body col-sm-12 col-lg-12 col-md-12 col-xs-12">
+
+						<p:dataTable var="meuPedidoProduto"
+							styleClass="col-sm-12 col-lg-12 col-md-12 col-xs-12"
+							value="#{pedidoBean.pedido.pedidoProdutos}" paginator="true"
+							rows="5">
+							<f:facet name="header">Produtos</f:facet>
+							<p:column headerText="Descrição">
+								<h:outputText
+									value="#{meuPedidoProduto.produtoAvulso.produto.descricao}  " />
+							</p:column>
+							<p:column headerText="Valor">
+								<center>
+									<h:outputText value="R$ " />
+									<h:outputText
+										value="#{meuPedidoProduto.produtoAvulso.valorTotal()}">
+										<f:convertNumber pattern="#,###,##0.00" />
+									</h:outputText>
+								</center>
+							</p:column>
+							<p:column headerText="Personalizado">
+								<center>
+									<span data-toggle="modal" href="#modalDialogProduto"> <p:commandButton
+											icon="ui-icon-search"
+											disabled="#{meuPedidoProduto.observacao==null?true:false}"
+											update=":formDialogProduto">
+											<f:setPropertyActionListener
+												target="#{pedidoBean.pedidoProduto}"
+												value="#{meuPedidoProduto}" />
+										</p:commandButton>
+									</span>
+								</center>
+							</p:column>
+						</p:dataTable>
+
+
+						<div style="margin-top: 15px"
+							class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<span data-toggle="modal" href="#modalOutroEndereco"> <p:commandLink
+									actionListener="#{pedidoBean.novoEndereco}"
+									value="Outro Endereço" update=":formOutroEndereco"
+									styleClass="btn btn-primary" />
+							</span>
+
+							<h:panelGrid style="margin-top: 15px;">
+								<h:outputText
+									value="#{pedidoBean.enderecoCliente.endereco.logradouro}, #{pedidoBean.enderecoCliente.endereco.numero}, #{pedidoBean.enderecoCliente.endereco.bairroCidade} - #{pedidoBean.enderecoCliente.endereco.bairroCidade.cidade}" />							
+					
+								<h:outputText value="#{pedidoBean.enderecoCliente.endereco.cep}"
+									converter="converterCEP" />
+
+								<h:outputText
+									value="#{pedidoBean.enderecoCliente.endereco.complemento}" />
+							</h:panelGrid>
+
+						</div>
+						<div style="margin-top: 10px;"
+							class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+							<div class="text-center col-lg-12 col-md-12 col-sm-12 col-xs-12"
+								style="margin-bottom: 20px;">
+								<h:outputText value="Total à pagar R$"
+									style="font-size: 18px;font-style: oblique;" />
+								<h:outputText value="#{pedidoBean.pedido.valorTotal}"
+									style="font-size: 18px;font-style: oblique;">
+									<f:convertNumber pattern="#,###,##0.00" />
+								</h:outputText>
+							</div>
+
+
+							<div class="col-lg-12 col-md-12">
+
+								<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+
+									<h:panelGrid columns="2">
+										<h:dataTable value="#{pedidoBean.formasDePagamentoDM}"
+											var="fdp" style="width:50px">
+											<h:column>
+												<h:graphicImage library="imagens/icones/formaDePagamento"
+													name="#{fdp.idFormaDePagamento}.png" />
+											</h:column>
+										</h:dataTable>
+										<h:panelGrid>
+											<p:selectOneRadio value="#{pedidoBean.formaDePagamento}"
+												layout="grid" columns="1" style="margin-top:-3px">
+												<f:selectItems value="#{pedidoBean.formasDePagamento}"
+													var="fdp" itemLabel="#{fdp}" />
+												<f:ajax execute="@form" render=":formCompraValorTotal" />
+											</p:selectOneRadio>
+										</h:panelGrid>
+									</h:panelGrid>
+
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+									<h:outputText value="Troco para: " />
+
+
+									<p:inputText value="#{pedidoBean.troco}" size="5"
+										disabled="#{pedidoBean.formaDePagamento == 'Dinheiro' ? false : true}">
+
+										<p:ajax event="keyup" update="btComprar" />
+									</p:inputText>
+
+									<br /> <span> <h:outputText value="*"
+											style="color: #F00;" /> <h:outputText
+											value="Troco deve ser maior" />
+									</span> <br />
+									<h:outputText value="que o valor total do pedido" />
+								</div>
+							</div>
+						</div>
+						<br /> <br />
+					</div>
+					<div class="modal-footer ">
+						<p:commandLink value="Comprar" id="btComprar"
+							styleClass="btn btn-success" style="text-decoration: none;"
+							action="#{pedidoBean.salvarPedido}"
+							disabled="#{!pedidoBean.habilitarBotaoSalvar()}"
+							oncomplete="dlgConcluir.hide()">
+							<f:setPropertyActionListener
+								target="#{contextUtil.categoriaEmpresa}" value="#{-1}" />
+						</p:commandLink>
+						&nbsp;&nbsp; <a href="#" data-dismiss="modal"
+							class="btn btn-danger">Sair</a>
+
+					</div>
+				</div>
+			</div>
+
+		</h:form>
+	</div>
+
+
+
+	<!-- Outro Endereço -->
+	<div id="modalOutroEndereco" class="modal fade" tabindex="-1"
+		aria-hidden="true">
+		<h:form id="formOutroEndereco">
+			<div class="modal-dialog ">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">×</button>
+						<h4 class="modal-title">Outro Endereço de Entrega</h4>
+					</div>
+
+					<div class="modal-body ">
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+									<p:autoComplete id="cidade" forceSelection="true" var="cidade"
+										itemLabel="#{cidade.descCidade}" itemValue="#{cidade}"
+										value="#{pedidoBean.novoEnderecoCliente.endereco.bairroCidade.cidade}"
+										completeMethod="#{autoCompleteController.completaCidade}"
+										requiredMessage="Informe sua cidade" dropdown="true"
+										required="true" converter="converterCidade"
+										styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12">>
+							<p:ajax event="itemSelect"
+											listener="#{autoCompleteController.handleSelect}"
+											update="bairro" />
+									</p:autoComplete>
+									<p:watermark for="cidade" value="Cidade *" />
+									<p:message for="cidade" />
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+									<p:autoComplete id="bairro"
+										value="#{pedidoBean.novoEnderecoCliente.endereco.bairroCidade}"
+										forceSelection="true" dropdown="true" scrollHeight="200"
+										completeMethod="#{autoCompleteController.completaBairro}"
+										var="bairro" itemLabel="#{bairro.descBairro}"
+										requiredMessage="Informe seu bairro" itemValue="#{bairro}"
+										required="true" converter="converterBairro"
+										styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+									</p:autoComplete>
+									<p:watermark for="bairro" value="Bairro *" />
+									<p:message for="bairro" />
+								</div>
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+									style="margin-top: 10px;">
+									<p:inputText
+										value="#{pedidoBean.novoEnderecoCliente.endereco.logradouro}"
+										size="30" id="logradouro" required="true"
+										requiredMessage="Informe sua rua"
+										styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+									<p:watermark for="logradouro" value="Rua/Av./Logradouro *" />
+									<p:message for="logradouro" />
+								</div>
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+									style="margin-top: 10px;">
+									<p:inputText
+										value="#{pedidoBean.novoEnderecoCliente.endereco.numero}"
+										id="numero" required="true"
+										requiredMessage="Informe o número de sua casa"
+										styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+									<p:message for="numero" />
+									<p:watermark for="numero" value="Número *" />
+								</div>
+
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+									style="margin-top: 10px;">
+
+									<p:inputTextarea
+										value="#{pedidoBean.novoEnderecoCliente.endereco.complemento}"
+										maxlength="100" counterTemplate="{0} Caracteres" cols="32"
+										id="complemento"
+										styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+									<p:watermark for="complemento" value="Complemento" />
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+
+					<div class="modal-footer">
+						<span href="#" data-dismiss="modal"> <p:commandLink
+								actionListener="#{pedidoBean.salvarNovoEndereco}" value="Salvar"
+								update=":formCompraValorTotal formOutroEndereco "
+								styleClass="btn btn-primary" validateClient="true" />
+						</span> &nbsp; &nbsp; <span href="#" data-dismiss="modal"> <p:commandLink
+								value="Cancelar" styleClass="btn btn-danger" />
+						</span>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</div>
+
+
+	<!-- Deletar Produto  -->
+
+	<div id="modalDeletar" class="modal fade" tabindex="-1"
+		aria-hidden="true">
+		<h:form id="formDeletar">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">×</button>
+						<h4 class="modal-title">Deletar Produto</h4>
+					</div>
+
+					<div class="modal-body ">
+
+						<h:outputText
+							value="#{pedidoBean.pedidoProduto.produtoAvulso.produto.descricao}" />
+
+						<h:panelGrid style="float:right" columns="2">
+							<h:outputText value="R$ " />
+							<h:outputText
+								value="#{pedidoBean.pedidoProduto.produtoAvulso.valorTotal()}">
+								<f:convertNumber pattern="#,###,##0.00" />
+							</h:outputText>
+						</h:panelGrid>
+						<div class="modal-footer">
+							<h:form prependId="false">
+								<center>
+									<span href="#" data-dismiss="modal"><p:commandLink
+											value="Deletar" actionListener="#{pedidoBean.deletarProduto}"
+											oncomplete="dlgDeletarProduto.hide()" ajax="true"
+											update=":formPainel" styleClass="btn btn-info" /> </span>
+								</center>
+							</h:form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</div>
+
+	<div id="modalPersonalizarProduto" class="modal fade" tabindex="-1"
+		aria-hidden="true">
+		<h:form id="idEditar">
+			<div class="modal-dialog ">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">×</button>
+						<h4 class="modal-title">Personalizar Produto</h4>
+					</div>
+
+					<div class="modal-body ">
+
+						<h:panelGrid columns="3"
+							style="margin-left: 10px;font-size: 18px;">
+							<h:outputText
+								value="#{pedidoBean.pedidoProduto.produtoAvulso.produto.descricao} - " />
+							<h:outputText value="R$ " />
+							<h:outputText
+								value="#{pedidoBean.pedidoProduto.produtoAvulso.produto.valor}">
+								<f:convertNumber pattern="#,###,##0.00" />
+							</h:outputText>
+						</h:panelGrid>
+						<center>
+							<h:outputText value=" Click no item e arrasta.. " />
+						</center>
+						<div style="width: 445px; margin: auto; margin-top: 16px;">
+							<div
+								style="float: left; width: 203px; height: 40px; font-family: sans-serif; margin: auto; background: rgba(2, 73, 255, 0.25); border-radius: 10px;"></div>
+							<div
+								style="float: right; width: 203px; height: 40px; font-family: sans-serif; margin: auto; background: rgba(2, 73, 255, 0.25); border-radius: 10px; position: initial;"></div>
+						</div>
+
+						<h:panelGrid columns="2"
+							style="width: 357px; margin: auto; font-size: 18px; 
+						position: absolute; margin-top: 8px; margin-left: 81px;">
+							<h:outputText value="Disponíveis" />
+							<h:outputText value="Selecionados" style="float:right" />
+						</h:panelGrid>
+						<p:pickList id="pickList" value="#{pedidoBean.avulsoDual}"
+							var="avulso"
+							itemLabel=" #{avulso.descricao}   R$ #{avulso.valor}"
+							itemValue="#{avulso}" converter="converterAvulso" effect="bounce"
+							style="margin:auto">
+							<p:ajax listener="#{pedidoBean.atualizaAvulsoTotal}"
+								event="transfer" update="avulsoTotal" />
+
+						</p:pickList>
+						<div style="float: right; margin-right: 50px; font-size: 18px;">
+							<h:outputText value="Valor : R$ " />
+							<h:outputText value="#{pedidoBean.avulsoValorTotal}"
+								id="avulsoTotal">
+								<f:convertNumber pattern="#,###,##0.00" />
+							</h:outputText>
+						</div>
+						<br />
+
+						<h:outputText value="Observação:" />
+						<p:inputText value="#{pedidoBean.pedidoProduto.observacao}"
+							styleClass="col-lg-12 col-md-12" />
+
+						<div class="modal-footer">
+							<span href="#" data-dismiss="modal"> <p:commandLink
+									value="Adicionar" styleClass="btn btn-info"
+									actionListener="#{pedidoBean.salvaProdutoPersonalizado}"
+									update=":formPainel" />
+							</span> &nbsp;&nbsp; <span href="#" data-dismiss="modal"> <p:commandLink
+									value="Cancelar" styleClass="btn btn-danger" />
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</div>
+
+	<!-- Informar a situação do Produto se tiver observacao  -->
+	<div id="modalDialogProduto" class="modal fade" tabindex="-1"
+		aria-hidden="true" data-focus-on="input:first">
+		<h:form id="formDialogProduto">
+			<div class="modal-dialog ">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">×</button>
+						<h4 class="modal-title">Observações do Produto</h4>
+					</div>
+
+					<div class="modal-body ">
+
+						<h:dataTable var="avulso"
+							value="#{pedidoBean.pedidoProduto.produtoAvulso.avulsos}">
+							<h:column>
+								<h:outputText value="#{avulso.descricao}" />
+							</h:column>
+							<h:column>
+								<h:panelGrid style="float:right" columns="2">
+									<h:outputText value="R$ " />
+									<h:outputText value="#{avulso.valor}">
+										<f:convertNumber pattern="#,###,##0.00" />
+									</h:outputText>
+								</h:panelGrid>
+							</h:column>
+						</h:dataTable>
+						<br />
+						<h:outputText value="#{pedidoBean.pedidoProduto.observacao}" />
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</div>
+</ui:composition>
+</html>

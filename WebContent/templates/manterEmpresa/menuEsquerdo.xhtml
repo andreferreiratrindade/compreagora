@@ -6,58 +6,42 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core">
 <ui:composition>
-	<div id="desktop" style="margin-top: 66px;">
+	<h:form id="formPainel">
+		<ul class="nav nav-pills nav-stacked">
+			<li><p:commandLink value="Sobre a Empresa"
+					action="manterEmpresa.jsf?faces-redirect=true" /></li>
+			<li><p:commandLink value="Horarios de Funcionamento"
+					action="#{empresaBean.atualizarHorario}" /></li>
+			<li><p:commandLink value="Locais de Atendimento"
+					action="#{empresaBean.atualizarLocalAtendimento}" /></li>
+			<li><p:commandLink value="Formas De Pagamento"
+					action="#{pagPath.empresaformaDePagamento}" /></li>
+			<li><p:commandLink value="Categoria"
+					action="#{pagPath.manterCategoriaEmpresa}" /></li>
+			<li class="dropdown"><a class="dropdown-toggle"
+				data-toggle="dropdown" href="#"> Produtos <span class="caret"></span>
 
-		<div style="width: 960px; margin: auto;">
-			<div style="float: left; width: 300px;">
+			</a>
+				<ul class="dropdown-menu" role="menu" style="width: 100%;">
+					<li><p:commandLink value="Lanches"
+							action="#{pagPath.produtoLanche}" /></li>
 
-				<h:form id="formPainel">
-					<p:menu style="margin:auto;width: 179px;background-color:#FFF">
-						<p:submenu label="Configurações">
-							<p:menuitem value="Sobre a Empresa"
-								action="manterEmpresa.jsf?faces-redirect=true">
-							</p:menuitem>
+					<li><p:commandLink value="Bebidas"
+							action="#{pagPath.produtoBebida}" /></li>
+					<li><p:commandLink value="Pizza"
+							action="#{pagPath.produtoPizza}" /></li>
+					<li><p:commandLink value="Marmitex"
+							action="#{pagPath.produtoMarmitex}" /></li>
+					<li><p:commandLink value="Água"
+							action="#{pagPath.produtoAgua}" /></li>
+					<li><p:commandLink value="Gás" action="#{pagPath.produtoGas}" />
+					</li>
+					<li><p:commandLink value="Avulso" action="#{pagPath.avulsos}" />
+					</li>
+				</ul></li>
 
-							<p:menuitem value="Horarios de Funcionamento"
-								action="#{empresaBean.atualizarHorario}" />
-
-							<p:menuitem value="Locais de Atendimento"
-								action="#{empresaBean.atualizarLocalAtendimento}" />
-
-							<p:menuitem value="Formas De Pagamento"
-								action="#{pagPath.empresaformaDePagamento}" />
-
-							<p:menuitem value="Categoria"
-								action="#{pagPath.manterCategoriaEmpresa}" />
-						</p:submenu>
-						<p:submenu label="Produtos">
-							<p:menuitem value="Lanches" action="#{pagPath.produtoLanche}">
-							</p:menuitem>
-
-							<p:menuitem value="Bebidas" action="#{pagPath.produtoBebida}">
-							</p:menuitem>
-
-							<p:menuitem value="Pizza" action="#{pagPath.produtoPizza}">
-							</p:menuitem>
-
-							<p:menuitem value="Marmitex" action="#{pagPath.produtoMarmitex}">
-							</p:menuitem>
-
-							<p:menuitem value="Água" action="#{pagPath.produtoAgua}">
-							</p:menuitem>
-							<p:menuitem value="Gás" action="#{pagPath.produtoGas}">
-							</p:menuitem>
-						</p:submenu>
-						<p:submenu>
-							<p:menuitem value="Avulso" action="#{pagPath.avulsos}">
-							</p:menuitem>
-						</p:submenu>
-					</p:menu>
-				</h:form>
-			</div>
-		</div>
-	</div>
-
+		</ul>
+	</h:form>
 
 </ui:composition>
 </html>

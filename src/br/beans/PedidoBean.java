@@ -105,7 +105,7 @@ public class PedidoBean implements Serializable {
 	private ListDataModel<Gas> listGasDM;
 	private BigDecimal avulsoValorTotal;
 	private float troco;
-	private Endereco novoEnderecoCliente;
+	private EnderecoCliente novoEnderecoCliente;
 	private int idBairro;
 
 	public void setCategoriaEmpresa(Integer categoriaEmpresa) {
@@ -120,15 +120,14 @@ public class PedidoBean implements Serializable {
 		this.idBairro = idBairro;
 	}
 
-	public Endereco getNovoEnderecoCliente() {
-		if (novoEnderecoCliente == null) {
-			novoEnderecoCliente = new Endereco();
-			novoEnderecoCliente.setBairroCidade(new Bairro());
+	public EnderecoCliente getNovoEnderecoCliente() {
+		if(novoEnderecoCliente == null){
+			novoEnderecoCliente = new EnderecoCliente();
 		}
 		return novoEnderecoCliente;
 	}
 
-	public void setNovoEnderecoCliente(Endereco novoEnderecoCliente) {
+	public void setNovoEnderecoCliente(EnderecoCliente novoEnderecoCliente) {
 		this.novoEnderecoCliente = novoEnderecoCliente;
 	}
 
@@ -516,7 +515,6 @@ public class PedidoBean implements Serializable {
 		return tiposProdutos.contains(tipoProduto) ? true : false;
 	}
 
-	
 	public String adicionaEmpresa() {
 		String url = ("../principal.jsf");
 		FacesContext fc = FacesContext.getCurrentInstance();
@@ -826,8 +824,8 @@ public class PedidoBean implements Serializable {
 				ClienteRN usuarioRN = new ClienteRN();
 				this.cliente = usuarioRN.buscarPorEmail(login);
 				cliente.getEnderecoCliente().size();
-				enderecoCliente = cliente.getEnderecoCliente().get(0);
-				novoEndereco();
+				enderecoCliente = new EnderecoCliente();
+				enderecoCliente = cliente.getEnderecoCliente().get(0);		
 			}
 		}
 	}
@@ -855,25 +853,20 @@ public class PedidoBean implements Serializable {
 
 	public void novoEndereco() {
 
-		// novoEnderecoCliente = new Endereco();
-		// novoEnderecoCliente.setBairroCidade(new Bairro());
-		// novoEnderecoCliente =
-		// cliente.getEnderecoCliente().get(1).getEndereco();
-
-		// novoEnderecoCliente.setBairroCidade(new Bairro());
-		// novoEnderecoCliente.getEndereco().setBairroCidade(new Bairro());
-		// novoEnderecoCliente.getEndereco().setLogradouro("");
-		// novoEnderecoCliente.getEndereco().setNumero("");
-		// novoEnderecoCliente.getEndereco().setComplemento(null);
-		// novoEnderecoCliente.getEndereco().setCep("");
+		novoEnderecoCliente = cliente.getEnderecoCliente().get(1);
+		novoEnderecoCliente.getEndereco().setBairroCidade(new Bairro());
+		novoEnderecoCliente.getEndereco().setLogradouro("");
+		novoEnderecoCliente.getEndereco().setNumero("");
+		novoEnderecoCliente.getEndereco().setComplemento(null);
+		novoEnderecoCliente.getEndereco().setCep("");
 	}
 
 	public void salvarNovoEndereco() {
 		try {
 			EnderecoDAO endDAO = DAOFactoy.criarEndereco();
 
-			endDAO.update(novoEnderecoCliente);
-			enderecoCliente.setEndereco(novoEnderecoCliente);
+			endDAO.update(novoEnderecoCliente.getEndereco());
+			enderecoCliente.setEndereco(novoEnderecoCliente.getEndereco());
 			atualizaTaxaEntrega();
 
 		} catch (Exception e) {
@@ -894,9 +887,8 @@ public class PedidoBean implements Serializable {
 
 			pedido.setTaxa(empAtend.getTaxa());
 			pedido.calcularTotal();
+			empresaAtendeBairro = true;
 		}
-
-		empresaAtendeBairro = true;
 	}
 
 	public void atualizaTaxaEntrega() {

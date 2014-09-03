@@ -7,39 +7,35 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 <ui:composition>
 	<div class="container-fluid">
-
-		<div id="carousel-example-generic" class="carousel slide"
+		<div id="myCarousel" class="carousel slide" data-interval="3000"
 			data-ride="carousel">
+			<!-- Carousel indicators -->
 
+			<!-- Carousel items -->
 			<div class="carousel-inner">
-				<div class="item">
-					<p:graphicImage library="imagens/destaque/" name="promocao.png" />
- <div class="carousel-caption">
-        ...
-      </div>
+				<div class="active item">
+					<h:graphicImage library="imagens/destaque/" name="promocao.png"
+						styleClass="col-lg-6 col-sm-12 col-xs-12 col-md-6"
+						style="float:none;margin:auto" />
+
 				</div>
 				<div class="item">
-					<h:graphicImage library="imagens/destaque/" name="promocao2.png" />
- <div class="carousel-caption">
-        ...
-      </div>
+					<h:graphicImage library="imagens/destaque/" name="promocao2.png"
+						styleClass="col-lg-6col-sm-12 col-xs-12 col-md-6"
+						style="float:none;margin:auto" />
+
 				</div>
 				<div class="item">
-					<h:graphicImage library="imagens/destaque/" name="promocao3.png" />
- <div class="carousel-caption">
-        ...
-      </div>
+					<h:graphicImage library="imagens/destaque/" name="promocao3.png"
+						styleClass="col-lg-6 col-sm-12 col-xs-12 col-md-6"
+						style="float:none;margin:auto" />
 				</div>
 			</div>
+			<!-- Carousel nav -->
+			<a class="carousel-control left" href="#myCarousel" data-slide="prev">
 
-			<!-- Controls -->
-			<a class="left carousel-control" href="#carousel-example-generic"
-				role="button" data-slide="prev"><h:graphicImage
-					library="imagens/icones/slide" name="btn_prev.png" /> </a> <a
-				class="right carousel-control" href="#carousel-example-generic"
-				role="button" data-slide="next"> <h:graphicImage
-					library="imagens/icones/slide" name="btn_next.png" />
-			</a>
+			</a> <a class="carousel-control right" href="#myCarousel"
+				data-slide="next"> </a>
 		</div>
 	</div>
 </ui:composition>

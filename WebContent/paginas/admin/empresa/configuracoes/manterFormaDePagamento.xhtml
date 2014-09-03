@@ -9,56 +9,54 @@
 
 <ui:composition template="/templates/areaAdmin/principalAreaAdmin.xhtml">
 	<ui:define name="corpo">
-		<div id="desktop" style="margin-top: 10px;">
-			<div
-				style="width: 775px; margin: auto; height: 473px; margin-top: 10px">
-				<div style="float: right; width: 651px">
 
-					<h:form id="formGrid" style="margin:auto; width: 960px;">
+		<h:form id="formGrid">
 
-						<p:dataTable value="#{formaDePagamentoBean.formasDePagamento}"
-							var="formaPagamento" paginator="true" rows="30"
-							style="width:600px" ajax="false">
-							<f:facet name="header">
+			<p:dataTable value="#{formaDePagamentoBean.formasDePagamento}"
+				var="formaPagamento" paginator="true" rows="30" style="width:600px"
+				ajax="false">
+				<f:facet name="header">
 				Formas de Pagamento Cadastradas</f:facet>
-							<p:column headerText="Tipo">
-								<h:outputText value="#{formaPagamento.tipo}" />
-							</p:column>
-							<p:column headerText="Imagem">
-								<h:graphicImage library="imagens/icones/formaDePagamento"
-									name="#{formaPagamento.idFormaDePagamento}.png" />
-							</p:column>
-						</p:dataTable>
+				<p:column headerText="Tipo">
+					<h:outputText value="#{formaPagamento.tipo}" />
+				</p:column>
+				<p:column headerText="Imagem">
+					<h:graphicImage library="imagens/icones/formaDePagamento"
+						name="#{formaPagamento.idFormaDePagamento}.png" />
+				</p:column>
+			</p:dataTable>
 
 
+		</h:form>
+
+		<br />
+		<div class="col-lg-8">
+			<div class="panel panel-primary" style="margin-top: 10px">
+				<div class="panel-heading">
+					<h3 class="panel-title">Nova Foma de Pagamento</h3>
+				</div>
+				<div class="panel-body">
+					<h:form id="formNovo" style="margin:auto; ">
+
+						<h:panelGrid columns="2" style="margin:auto">
+							<h:column>
+								<h:outputText value="*" style="color: #F00;float:right" />
+								<h:outputText value="Descrição" style="float:right" />
+							</h:column>
+							<p:inputText
+								value="#{formaDePagamentoBean.formaDePagamento.tipo}" />
+						</h:panelGrid>
+						<center>
+							<p:fileUpload label="Procurar imagem"
+								fileUploadListener="#{formaDePagamentoBean.uploadAction}" />
+							<h:outputText
+								value="* A imagem a ser inserida deverá ter o formato de PNG" />
+						</center>
+						<br />
+						<p:commandButton value="Salvar"
+							actionListener="#{formaDePagamentoBean.salvar}"
+							update=":formGrid :formNovo" styleClass="btn btn-success" />
 					</h:form>
-
-					<br />
-					<p:fieldset legend="Nova Forma de Pagamento"
-						style="margin-top: 10px;  margin:auto; ">
-						<h:form id="formNovo" style="margin:auto; ">
-
-							<h:panelGrid columns="2" style="margin:auto">
-								<h:column>
-									<h:outputText value="*" style="color: #F00;float:right" />
-									<h:outputText value="Descrição" style="float:right" />
-								</h:column>
-								<p:inputText
-									value="#{formaDePagamentoBean.formaDePagamento.tipo}" />
-							</h:panelGrid>
-							<center>
-								<p:fileUpload label="Procurar imagem"
-									fileUploadListener="#{formaDePagamentoBean.uploadAction}" />
-								<h:outputText
-									value="* A imagem a ser inserida deverá ter o formato de PNG" />
-							</center>
-							<br />
-							<p:commandButton value="Adicionar Lanche"
-								actionListener="#{formaDePagamentoBean.salvar}"
-								update=":formGrid :formNovo"
-								style="background-color: cornflowerblue;color: #000;" />
-						</h:form>
-					</p:fieldset>
 				</div>
 			</div>
 		</div>

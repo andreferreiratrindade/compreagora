@@ -6,112 +6,115 @@
 	xmlns:sec="http://www.springframework.org/security/facelets/tags"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-<ui:composition template="/templates/manterEmpresa/principalManterEmpresa.xhtml">
+<ui:composition
+	template="/templates/manterEmpresa/principalManterEmpresa.xhtml">
 
 	<ui:define name="corpo">
-		<div id="desktop" style="margin-top: 10px;">
-			<div
-				style="width: 960px; margin: auto; height: 750px; margin-top: 10px">
-				<div style="float: right; width: 651px">
-					<h:form id="form">
 
-						<p:dataTable value="#{manterProdutoMarmitexBean.marmitexs}"
-							var="marmitex" paginator="true" rows="6"
-							emptyMessage="Nenhum produto encontrado." id="marmitexs">
-							<p:column headerText="Imagem">
-								<h:graphicImage library="imagens/produto/marmitex"
-									name="#{marmitex.idProduto}.gif" width="100" height="100" />
-							</p:column>
-							<p:column headerText="Descrição">
-								<h:outputText value="#{marmitex.descricao}" title="Descrição"
-									id="descricao" />
-							</p:column>
-							<p:column headerText="Ingredientes">
-								<p:inputTextarea value="#{marmitex.ingredientes}" cols="30"
-									rows="5" />
-							</p:column>
-							<p:column headerText="Valor">
-								<h:outputText value="R$ " />
-								<h:outputText value="#{marmitex.valor}" title="Valor" size="3"
-									id="valor">
-									<f:convertNumber pattern="#,###,##0.00" />
-								</h:outputText>
-							</p:column>
-							<p:column headerText="Ativo">
-								<center>
-									<h:graphicImage library="imagens/icones"
-										name="#{marmitex.ativo}.gif" width="13px" />
-								</center>
-							</p:column>
-							<p:column headerText="Atuzalizar">
+		<h:form id="form">
 
-								<p:commandButton value="Atualizar"
-									oncomplete="dlgAtualizarMarmitex.show()"
-									update=":formDlgAtualizarMarmitex"
-									style="background-color: cornflowerblue;color: #000;">
-									<f:setPropertyActionListener
-										target="#{manterProdutoMarmitexBean.marmitex}" value="#{marmitex}" />
-								</p:commandButton>
+			<p:dataTable value="#{manterProdutoMarmitexBean.marmitexs}"
+				var="marmitex" paginator="true" rows="6"
+				emptyMessage="Nenhum produto encontrado." id="marmitexs">
+				<p:column headerText="Imagem">
+					<h:graphicImage library="imagens/produto/marmitex"
+						name="#{marmitex.idProduto}.gif" width="100" height="100" />
+				</p:column>
+				<p:column headerText="Descrição">
+					<h:outputText value="#{marmitex.descricao}" title="Descrição"
+						id="descricao" />
+				</p:column>
+				<p:column headerText="Ingredientes">
+					<p:inputTextarea value="#{marmitex.ingredientes}" cols="30"
+						rows="5" />
+				</p:column>
+				<p:column headerText="Valor">
+					<h:outputText value="R$ " />
+					<h:outputText value="#{marmitex.valor}" title="Valor" size="3"
+						id="valor">
+						<f:convertNumber pattern="#,###,##0.00" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Ativo">
+					<center>
+						<h:graphicImage library="imagens/icones"
+							name="#{marmitex.ativo}.gif" width="13px" />
+					</center>
+				</p:column>
+				<p:column headerText="Atuzalizar">
 
-							</p:column>
-						</p:dataTable>
-					</h:form>
+					<p:commandLink value="Atualizar"
+						oncomplete="dlgAtualizarMarmitex.show()"
+						update=":formDlgAtualizarMarmitex" styleClass="btn btn-info">
+						<f:setPropertyActionListener
+							target="#{manterProdutoMarmitexBean.marmitex}"
+							value="#{marmitex}" />
+					</p:commandLink>
 
-					<p:fieldset legend="Novo Marmitex" style="margin-top: 10px;">
-						<h:form id="formNovoMarmitex">
+				</p:column>
+			</p:dataTable>
+		</h:form>
 
-							<h:panelGrid columns="2" style="margin:auto">
-								<h:column>
-									<h:outputText value="*" style="color: #F00;float:right" />
-									<h:outputText value="Descrição" style="float:right" />
-								</h:column>
-								<p:inputText value="#{manterProdutoMarmitexBean.marmitex.descricao}" />
-								<h:column>
-									<h:outputText value="*" style="color: #F00;float:right" />
-									<h:outputText value="Tempo de preparo" style="float:right" />
-								</h:column>
-								<p:inputText
-									value="#{manterProdutoMarmitexBean.marmitex.tempoEspera}" />
+		<div class="panel panel-primary" style="margin-top: 10px">
+			<div class="panel-heading">
+				<h3 class="panel-title">Novo Cadadstro - Marmitex</h3>
+			</div>
+			<div class="panel-body">
+				<h:form id="formNovoMarmitex">
 
-								<h:column>
-									<h:outputText value="*" style="color: #F00;float:right" />
-									<h:outputText value="Valor" style="float:right" />
-								</h:column>
-								<p:inputText value="#{manterProdutoMarmitexBean.marmitex.valor}">
-									<f:convertNumber pattern="#,###,##0.00" />
-								</p:inputText>
-								<h:column>
-									<h:outputText value="*" style="color: #F00;float:right" />
-									<h:outputText value="Ingredientes" style="float:right" />
-								</h:column>
-								<p:inputTextarea
-									value="#{manterProdutoMarmitexBean.marmitex.ingredientes}"
-									maxlength="200" counterTemplate="{0} Caracteres"
-									counter="contador" cols="32" />
+					<h:panelGrid columns="2" style="margin:auto">
+						<h:column>
+							<h:outputText value="*" style="color: #F00;float:right" />
+							<h:outputText value="Descrição" style="float:right" />
+						</h:column>
+						<p:inputText
+							value="#{manterProdutoMarmitexBean.marmitex.descricao}" />
+						<h:column>
+							<h:outputText value="*" style="color: #F00;float:right" />
+							<h:outputText value="Tempo de preparo" style="float:right" />
+						</h:column>
+						<p:inputText
+							value="#{manterProdutoMarmitexBean.marmitex.tempoEspera}" />
 
-							</h:panelGrid>
-							<h:outputText id="contador" style="margin-left: 505px;" />
-							<br />
+						<h:column>
+							<h:outputText value="*" style="color: #F00;float:right" />
+							<h:outputText value="Valor" style="float:right" />
+						</h:column>
+						<p:inputText value="#{manterProdutoMarmitexBean.marmitex.valor}">
+							<f:convertNumber pattern="#,###,##0.00" />
+						</p:inputText>
+						<h:column>
+							<h:outputText value="*" style="color: #F00;float:right" />
+							<h:outputText value="Ingredientes" style="float:right" />
+						</h:column>
+						<p:inputTextarea
+							value="#{manterProdutoMarmitexBean.marmitex.ingredientes}"
+							maxlength="200" counterTemplate="{0} Caracteres"
+							counter="contador" cols="32" />
 
-							<center>
-								<p:fileUpload label="Procurar imagem"
-									fileUploadListener="#{manterProdutoMarmitexBean.uploadAction}" />
-								<h:outputText
-									value="* A imagem a ser inserida deverá ter o formato de GIF" />
-							</center>
+					</h:panelGrid>
+					<h:outputText id="contador" style="margin-left: 505px;" />
+					<br />
+
+					<center>
+						<p:fileUpload label="Procurar imagem"
+							fileUploadListener="#{manterProdutoMarmitexBean.uploadAction}" />
+						<h:outputText
+							value="* A imagem a ser inserida deverá ter o formato de GIF" />
+					</center>
 
 
-							<br />
+					<br />
 
-							<p:commandButton value="Adicionar Marmitex"
-								actionListener="#{manterProdutoMarmitexBean.salvarMarmitex}"
-								update=":form:marmitexs :formNovoMarmitex"
-								style="background-color: cornflowerblue;color: #000;" />
-						</h:form>
-					</p:fieldset>
-				</div>
+					<p:commandLink value="Adicionar Marmitex"
+						actionListener="#{manterProdutoMarmitexBean.salvarMarmitex}"
+						update=":form:marmitexs :formNovoMarmitex"
+						styleClass="btn btn-success" />
+				</h:form>
+				
 			</div>
 		</div>
+
 
 		<h:form id="formDlgAtualizarMarmitex">
 			<p:dialog id="dlgAtualizarMarmitex" header="Atualizar Marmitex"
@@ -122,12 +125,12 @@
 					style="width:100px;height:100px;margin:auto" />
 				<h:panelGrid>
 					<h:outputText value="Descrição" />
-					<p:inputText value="#{manterProdutoMarmitexBean.marmitex.descricao}"
-						size="28" />
+					<p:inputText
+						value="#{manterProdutoMarmitexBean.marmitex.descricao}" size="28" />
 					<h:outputText value="Ingredientes" />
 					<p:inputTextarea
-						value="#{manterProdutoMarmitexBean.marmitex.ingredientes}" cols="30"
-						rows="5" />
+						value="#{manterProdutoMarmitexBean.marmitex.ingredientes}"
+						cols="30" rows="5" />
 				</h:panelGrid>
 				<h:panelGrid columns="2">
 					<h:outputText value="Valor" />
@@ -138,14 +141,14 @@
 					</p:inputText>
 
 					<p:selectBooleanCheckbox
-						value="#{manterProdutoMarmitexBean.marmitex.ativo}" style="foat:right" />
+						value="#{manterProdutoMarmitexBean.marmitex.ativo}"
+						style="foat:right" />
 				</h:panelGrid>
 
-				<p:commandButton update=":form:marmitexs"
+				<p:commandLink update=":form:marmitexs"
 					actionListener="#{manterProdutoMarmitexBean.atualizaProdutoMarmitex}"
-					value="Atualizar"
-					style="background-color: cornflowerblue;color: #000;"
-					oncomplete="dlgAtualizarMarmitex.hide()" />
+					value="Atualizar" oncomplete="dlgAtualizarMarmitex.hide()"
+					styleClass="btn btn-info" />
 			</p:dialog>
 		</h:form>
 	</ui:define>
