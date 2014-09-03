@@ -9,22 +9,19 @@
 <ui:composition template="/templates/empresa/principalEmpresa.xhtml">
 
 	<ui:define name="corpo">
-
-		<div id="desktop" style="margin-top: 10px;">
-			<div
-				style="width: 960px; margin: auto; height: 750px; margin-top: 10px">
-
-				<div style="float: right; width: 730px">
-					<h:outputText value="Relatório de todos os produtos cadastrados"
-						style="font-size : 20px" />
-					
-				<p:commandButton value="Gerar  Relatório" ajax="false"
-							actionListener="#{relatorioBean.allProdutos()}" />
-					
+		<h:form>
+			<div class="col-lg-6 col-md-8 col-xs-12 col-sm-12"
+				style="margin-top: 20px;">
+				<div class="panel panel-primary">
+					<div class="panel-heading">Relatório de Produtos Cadastrados</div>
+					<div class="panel-body">
+						<p:commandLink value="Gerar  Relatório" ajax="false"
+							actionListener="#{relatorioBean.allProdutos()}"
+							styleClass="btn btn-primary" />
+					</div>
 				</div>
 			</div>
-		</div>
-
+		</h:form>
 	</ui:define>
 </ui:composition>
 </html>

@@ -18,7 +18,8 @@
 
 				<h:form style="margin-bottom: 110px">
 
-					<div class="text-center col-lg-push-2 col-lg-10 col-md-12 col-sm-12 col-xs-12">
+					<div
+						class="text-center col-lg-push-2 col-lg-10 col-md-12 col-sm-12 col-xs-12">
 						<div class="text-center">
 							<div class="col-md-4  col-lg-3 col-sm-5 col-xs-12">
 								<p:autoComplete id="autoCompleteCidade" forceSelection="true"
@@ -54,13 +55,12 @@
 								<span class="col-xs-12"> <br></br></span>
 
 							</div>
-							<div class=" col-md-2 col-lg-3 col-sm-2 col-xs-6">
+							<div class=" col-md-2 col-lg-3 col-lg-push-0 col-sm-push-0 col-md-push-0 col-sm-2 col-xs-6  col-xs-push-3">
 								<p:commandLink update=":dataGridEmpresas" id="buscar"
 									value="Buscar" styleClass="btn btn-success btn-block"
 									actionListener="#{autoCompleteController.atualizaSelecaoEmpresa()}"
 									onclick="window.scrollTo(0, 200);" onstart="dlgLoading.show()"
 									onsuccess="dlgLoading.hide()">
-
 								</p:commandLink>
 							</div>
 						</div>
