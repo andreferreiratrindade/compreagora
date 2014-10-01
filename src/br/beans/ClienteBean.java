@@ -14,13 +14,12 @@ import javax.faces.model.ListDataModel;
 
 import org.springframework.util.DigestUtils;
 
+import br.AtendimentoLugares.Bairro;
 import br.Cliente.Cliente;
 import br.Cliente.ClienteDAO;
 import br.Cliente.ClienteRN;
 import br.Empresa.Empresa;
 import br.Empresa.EmpresaRN;
-import br.Endereco.Endereco;
-import br.EnderecoCliente.EnderecoCliente;
 import br.beans.menssagem.Menssagem;
 import br.util.Email.Email;
 import br.util.Email.EmailDestino;
@@ -33,11 +32,18 @@ public class ClienteBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Cliente cliente;
-	private String confEmail;
-	private Endereco endereco;
-	private EnderecoCliente enderecoCliente;
 	private DataModel<Cliente> listaCliente;
 	private String email = null;
+	private Bairro bairro;
+	
+	
+	public Bairro getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(Bairro bairro) {
+		this.bairro = bairro;
+	}
 
 	public ClienteBean() {
 		cliente = new Cliente();
@@ -93,35 +99,15 @@ public class ClienteBean implements Serializable {
 
 	public String cancelar() {
 		cliente = new Cliente();
-		endereco = new Endereco();
-		enderecoCliente = new EnderecoCliente();
-		enderecoCliente.setDescEndereco("Minha Casa");
 		return "cadastroCliente.jsf?faces-redirect=true";
 	}
 
-	public EnderecoCliente getEnderecoCliente() {
-		if (enderecoCliente == null) {
-			enderecoCliente = new EnderecoCliente();
-			enderecoCliente.setDescEndereco("Minha Casa");
-		}
-		return enderecoCliente;
-	}
 
-	public String getConfEmail() {
-		return confEmail;
-	}
 
-	public void setConfEmail(String confEmail) {
-		this.confEmail = confEmail;
-	}
-
-	public void setEnderecoCliente(EnderecoCliente enderecoCliente) {
-		this.enderecoCliente = enderecoCliente;
-	}
 
 	public String salvar() {
 
-		if (cliente.getEmail().equals(confEmail)) {
+		
 
 			ClienteRN clienteRN = new ClienteRN();
 
@@ -131,12 +117,12 @@ public class ClienteBean implements Serializable {
 
 				String senhaCripto = DigestUtils.md5DigestAsHex(senha
 						.getBytes());
+
 				this.cliente.setSenha(senhaCripto);
 
-				clienteRN.salvar(this.cliente, this.endereco,
-						this.enderecoCliente);
+				clienteRN.salvar(this.cliente);
 
-				emailCadastro(senha);
+			//	emailCadastro(senha);
 				return "login.jsf?faces-redirect=true";
 			} else {
 				FacesContext.getCurrentInstance().addMessage(
@@ -146,24 +132,7 @@ public class ClienteBean implements Serializable {
 								"Informe outro E-mail"));
 				return null;
 			}
-		} else {
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR,
-							"E-mail confirmado errado!!", " "));
-			return null;
-		}
-	}
-
-	public Endereco getEndereco() {
-		if (endereco == null) {
-			endereco = new Endereco();
-		}
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+		
 	}
 
 	public String alterarCliente() {
@@ -176,9 +145,6 @@ public class ClienteBean implements Serializable {
 			if (login != null) {
 				ClienteRN usuarioRN = new ClienteRN();
 				this.cliente = usuarioRN.buscarPorEmail(login);
-				enderecoCliente = cliente.getEnderecoCliente().get(0);
-				endereco = cliente.getEnderecoCliente().get(0).getEndereco();
-				confEmail = null;
 				return "/paginas/publico/alterarCliente.jsf?faces-redirect=true";
 			}
 		}
@@ -192,7 +158,7 @@ public class ClienteBean implements Serializable {
 		String senhaCripto = DigestUtils.md5DigestAsHex(senha.getBytes());
 		this.cliente.setSenha(senhaCripto);
 		ClienteRN clienteRN = new ClienteRN();
-		clienteRN.atualizarCliente(cliente, endereco, enderecoCliente);
+		clienteRN.atualizarCliente(cliente);
 		return "login.jsf?faces-redirect=true";
 	}
 

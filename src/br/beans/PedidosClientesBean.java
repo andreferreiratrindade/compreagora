@@ -22,13 +22,10 @@ import br.Cliente.Cliente;
 import br.Cliente.ClienteRN;
 import br.Empresa.Empresa;
 import br.Empresa.EmpresaRN;
-import br.EnderecoCliente.EnderecoCliente;
 import br.Pedido.Pedido;
 import br.Pedido.PedidoRN;
 import br.PedidoProduto.PedidoProduto;
 import br.Produto.Produto;
-import br.Produto.ProdutoAvulso.ProdutoAvulso;
-import br.Produto.ProdutoAvulso.ProdutoAvulsoDAO;
 import br.ProdutoAvulso.Avulso;
 import br.dataTableLazy.PedidosClientesLazy;
 import br.statusPedido.Aguardando;
@@ -36,7 +33,6 @@ import br.statusPedido.Concluido;
 import br.statusPedido.Enviado;
 import br.statusPedido.Processando;
 import br.statusPedido.StatusInterface;
-import br.util.DAOFactoy;
 
 @ManagedBean
 @ViewScoped
@@ -51,7 +47,6 @@ public class PedidosClientesBean implements Serializable {
 	private Cliente cliente = null;
 	private PedidoProduto pedidoProduto;
 	private List<PedidoProduto> pedidoProdutos;
-	private EnderecoCliente enderecoCliente = null;
 	private List<Avulso> avulsos;
 	private StreamedContent file;
 	private StatusInterface stPedido;
@@ -60,7 +55,9 @@ public class PedidosClientesBean implements Serializable {
 
 	public LazyDataModel<Pedido> getPedidosLazy() {
 		if (pedidosLazy == null) {
+
 			pedidosLazy = new PedidosClientesLazy(empresa.getIdEmpresa());
+
 		}
 		return pedidosLazy;
 	}
@@ -109,7 +106,7 @@ public class PedidosClientesBean implements Serializable {
 	public void setPedidoProduto(PedidoProduto pedidoProduto) {
 
 		this.pedidoProduto = pedidoProduto;
-		atualizaCampoAvulso();
+		// atualizaCampoAvulso();
 	}
 
 	public List<PedidoProduto> getPedidoProdutos() {
@@ -121,14 +118,6 @@ public class PedidosClientesBean implements Serializable {
 
 	public void setPedidoProdutos(List<PedidoProduto> pedidoProdutos) {
 		this.pedidoProdutos = pedidoProdutos;
-	}
-
-	public EnderecoCliente getEnderecoCliente() {
-		return enderecoCliente;
-	}
-
-	public void setEnderecoCliente(EnderecoCliente enderecoCliente) {
-		this.enderecoCliente = enderecoCliente;
 	}
 
 	public Produto getProduto() {
@@ -223,15 +212,12 @@ public class PedidosClientesBean implements Serializable {
 		this.pedido = pedido;
 	}
 
-	public void atualizaCampoAvulso() {
-		ProdutoAvulsoDAO produtoTemp = DAOFactoy.criarProdutoAvulso();
-		ProdutoAvulso produtoAvulsoTemp = null;
-		try {
-			produtoAvulsoTemp = produtoTemp.getUnico(pedidoProduto
-					.getProdutoAvulso().getIdProdutoAvulso());
-		} catch (Exception e) {
-			System.out.println("Deu erro");
-		}
-		avulsos = produtoAvulsoTemp.getAvulsos();
-	}
+	/*
+	 * public void atualizaCampoAvulso() { ProdutoAvulsoDAO produtoTemp =
+	 * DAOFactoy.criarProdutoAvulso(); ProdutoAvulso produtoAvulsoTemp = null;
+	 * try { produtoAvulsoTemp = produtoTemp.getUnico(pedidoProduto
+	 * .getProdutoAvulso().getIdProdutoAvulso()); } catch (Exception e) {
+	 * System.out.println("Deu erro"); } avulsos =
+	 * produtoAvulsoTemp.getAvulsos(); }
+	 */
 }

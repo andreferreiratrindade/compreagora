@@ -8,7 +8,9 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <ui:composition template="/templates/empresa/principalEmpresa.xhtml">
-
+<ui:define name="titulo">
+   Pedidos de Clientes
+	</ui:define>
 	<ui:define name="corpo">
 
 
@@ -32,13 +34,15 @@
 				<h:form id="formTablePedidos">
 					<p:dataTable value="#{pedidosClientesBean.pedidosLazy}"
 						var="pedido" id="listaPedidos" paginator="true" rows="10"
-						rowKey="#{pedido.idPedido}"
+						rowKey="#{pedido.idPedido}" 
 						selection="#{pedidosClientesBean.pedido}" selectionMode="single"
 						emptyMessage="Nenhum produto encontrado." lazy="true">
-						<p:ajax event="rowSelect"
-							update=":formInfoPedido :formEnderecoCliente"
-							listener="#{pedidosClientesBean.atualizaProdutos}" />
+						 <p:ajax event="rowSelect" onsuccess=""
+								update=":formInfoPedido :formEnderecoCliente"
+								listener="#{pedidosClientesBean.atualizaProdutos}">
 
+							</p:ajax>
+					
 						<p:column headerText="Pedido">
 							<h:outputText value="#{pedido.idPedido}" style="margin:auto" />
 						</p:column>
@@ -80,7 +84,7 @@
 				<h:form id="formInfoPedido"
 					style="display: #{pedidosClientesBean.pedido.idPedido == 0 ? 'none' : 'block'}; margin-top:10px">
 					<div class="col-lg-12 col-md-12 col-xs-12"
-						style="margin-top: 20px;">
+						style="margin-top: 20px;" id="divPedidoCliente">
 						<div class="panel panel-primary">
 							<div class="panel-heading">Pedido</div>
 							<div class="panel-body">

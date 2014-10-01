@@ -2,11 +2,6 @@ package br.Cliente;
 
 import java.util.List;
 
-import br.AtendimentoLugares.Bairro;
-import br.Endereco.Endereco;
-import br.Endereco.EnderecoDAO;
-import br.EnderecoCliente.EnderecoCliente;
-import br.EnderecoCliente.EnderecoClienteDAO;
 import br.Permissao.Permissao;
 import br.Permissao.PermissaoEnum;
 import br.Permissao.PermissaoRN;
@@ -33,8 +28,7 @@ public class ClienteRN {
 		this.clienteDAO.salve(cliente);
 	}
 
-	public void salvar(Cliente cliente, Endereco endereco,
-			EnderecoCliente enderecoCliente) {
+	public void salvar(Cliente cliente) {
 		PermissaoRN permissaoRN = new PermissaoRN();
 
 		Permissao permissao = permissaoRN
@@ -43,26 +37,6 @@ public class ClienteRN {
 		cliente.setPermissao(permissao);
 
 		clienteDAO.salve(cliente);
-
-		enderecoCliente.setCliente(cliente);
-		enderecoCliente.setEndereco(endereco);
-
-		EnderecoClienteDAO endClienteDAO = DAOFactoy.criarEnderecoCliente();
-
-		endClienteDAO.salve(enderecoCliente);
-
-		// Criando outro endereco
-		Bairro bairro = endereco.getBairroCidade();
-		endereco = new Endereco();
-		endereco.setBairroCidade(bairro);
-
-		enderecoCliente = new EnderecoCliente();
-		enderecoCliente.setCliente(cliente);
-		enderecoCliente.setEndereco(endereco);
-		enderecoCliente.setDescEndereco("Outro Endereço");
-
-		endClienteDAO.salve(enderecoCliente);
-
 	}
 
 	public List<Cliente> listar() {
@@ -81,12 +55,8 @@ public class ClienteRN {
 		return this.clienteDAO.buscarPorLogin(login);
 	}
 
-	public void atualizarCliente(Cliente cliente, Endereco endereco,
-			EnderecoCliente enderecoCliente) {
-		EnderecoDAO endDAO = DAOFactoy.criarEndereco();
-		endDAO.update(endereco);
-		EnderecoClienteDAO endClienteDAO = DAOFactoy.criarEnderecoCliente();
-		endClienteDAO.update(enderecoCliente);
+	public void atualizarCliente(Cliente cliente) {
+
 		this.clienteDAO.update(cliente);
 	}
 

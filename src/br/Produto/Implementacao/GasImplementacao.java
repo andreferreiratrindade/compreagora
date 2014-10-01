@@ -7,7 +7,7 @@ import br.Produto.Produto;
 public class GasImplementacao implements IProduto {
 
 	@Override
-	public void atualizar(Produto produto) {
+	public void atualizar(int idProduto) {
 		// TODO Auto-generated method stub
 		
 	}

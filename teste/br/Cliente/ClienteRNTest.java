@@ -9,10 +9,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import br.EnderecoCliente.EnderecoCliente;
-import br.EnderecoCliente.EnderecoClienteDAO;
 import br.builders.ClienteBuilder;
-import br.util.DAOFactoy;
 import br.util.JpaUtil;
 
 public class ClienteRNTest {
@@ -50,27 +47,6 @@ public class ClienteRNTest {
 
 	}
 
-	@Test
-	public void deveListarEnderecoClientes() {
-		EnderecoClienteDAO enderecoClienteDao = DAOFactoy
-				.criarEnderecoCliente();
-		List<EnderecoCliente> enderecoClientes = enderecoClienteDao.lista();
-
-		assertEquals(2, enderecoClientes.size());
-		assertEquals("André Ferreira Trindade", enderecoClientes.get(0)
-				.getCliente().getNome());
-	}
-
-	@Test
-	public void deveVerificarEnderecos() {
-		ClienteRN clienteRN = new ClienteRN();
-		Cliente cliente = clienteRN.buscarPorEmail("dede@gmail.com");
-
-		List<EnderecoCliente> enderecoClientes = cliente.getEnderecoCliente();
-
-		assertEquals(2, enderecoClientes.size());
-
-	}
 
 	@Test
 	public void deveRetornarClienteNull() {

@@ -80,14 +80,14 @@
 							</div>
 						</div>
 						<div>
-							<h:outputText value="#{pedidoBean.empresa.endereco.logradouro}, " />
-							<h:outputText value="#{pedidoBean.empresa.endereco.numero} - " />
+							<h:outputText value="#{pedidoBean.empresa.logradouro}, " />
+							<h:outputText value="#{pedidoBean.empresa.numero} - " />
 							<h:outputText
-								value="Bairro #{pedidoBean.empresa.endereco.bairroCidade}" />
+								value="Bairro #{pedidoBean.empresa.bairro}" />
 							<h:outputText
-								value=" - #{pedidoBean.empresa.endereco.bairroCidade.cidade} - " />
+								value=" - #{pedidoBean.empresa.cidade} - " />
 
-							<h:outputText value="#{pedidoBean.empresa.endereco.cep}"
+							<h:outputText value="#{pedidoBean.empresa.cep}"
 								converter="converterCEP" />
 						</div>
 
@@ -178,14 +178,14 @@
 						</div>
 					</div>
 					<div>
-						<h:outputText value="#{pedidoBean.empresa.endereco.logradouro}, " />
-						<h:outputText value="#{pedidoBean.empresa.endereco.numero} - " />
+						<h:outputText value="#{pedidoBean.empresa.logradouro}, " />
+						<h:outputText value="#{pedidoBean.empresa.numero} - " />
 						<h:outputText
-							value="Bairro #{pedidoBean.empresa.endereco.bairroCidade}" />
+							value="Bairro #{pedidoBean.empresa.bairro}" />
 						<h:outputText
-							value=" - #{pedidoBean.empresa.endereco.bairroCidade.cidade} - " />
+							value=" - #{pedidoBean.empresa.cidade} - " />
 
-						<h:outputText value="#{pedidoBean.empresa.endereco.cep}"
+						<h:outputText value="#{pedidoBean.empresa.cep}"
 							converter="converterCEP" />
 					</div>
 

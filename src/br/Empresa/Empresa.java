@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,12 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 import br.AtendimentoLugares.EmpresaAtendimento;
 import br.Empresa.Categoria.Categoria;
 import br.Empresa.FormaDePagamento.FormaDePagamento;
-import br.Endereco.Endereco;
 import br.Pedido.Pedido;
 
 import com.sun.xml.bind.CycleRecoverable;
@@ -34,9 +31,13 @@ public class Empresa implements Serializable, IEmpresaDiaDaSemana,
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idEmpresa;
-	@OneToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "idEndereco")
-	private Endereco endereco;
+	private String logradouro;
+	private String cep;
+	private String numero;
+	private String complemento;
+	private String bairro;
+	private String cidade;
+	private String UF;
 	private String CNPJ;
 	private String razaoSocial;
 	private String nomeFant;
@@ -63,6 +64,62 @@ public class Empresa implements Serializable, IEmpresaDiaDaSemana,
 	@ManyToMany
 	@JoinTable(name = "empresa_categoria", joinColumns = { @JoinColumn(name = "idEmpresa") }, inverseJoinColumns = { @JoinColumn(name = "idCategoria") })
 	private List<Categoria> categorias = new ArrayList<Categoria>();
+
+	public String getLogradouro() {
+		return logradouro;
+	}
+
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getUF() {
+		return UF;
+	}
+
+	public void setUF(String uF) {
+		UF = uF;
+	}
 
 	public Empresa() {
 		this.ativo = true;
@@ -97,14 +154,6 @@ public class Empresa implements Serializable, IEmpresaDiaDaSemana,
 
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
-	}
-
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
 	}
 
 	public List<HorarioFuncionamento> getHorarioFuncionamento() {
@@ -186,16 +235,20 @@ public class Empresa implements Serializable, IEmpresaDiaDaSemana,
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((CNPJ == null) ? 0 : CNPJ.hashCode());
+		result = prime * result + ((UF == null) ? 0 : UF.hashCode());
 		result = prime * result + (aberto ? 1231 : 1237);
 		result = prime * result + (ativo ? 1231 : 1237);
+		result = prime * result + ((bairro == null) ? 0 : bairro.hashCode());
 		result = prime * result
 				+ ((categorias == null) ? 0 : categorias.hashCode());
+		result = prime * result + ((cep == null) ? 0 : cep.hashCode());
+		result = prime * result + ((cidade == null) ? 0 : cidade.hashCode());
+		result = prime * result
+				+ ((complemento == null) ? 0 : complemento.hashCode());
 		result = prime
 				* result
 				+ ((empresaAtendimentos == null) ? 0 : empresaAtendimentos
 						.hashCode());
-		result = prime * result
-				+ ((endereco == null) ? 0 : endereco.hashCode());
 		result = prime
 				* result
 				+ ((formasDePagamento == null) ? 0 : formasDePagamento
@@ -206,7 +259,10 @@ public class Empresa implements Serializable, IEmpresaDiaDaSemana,
 						.hashCode());
 		result = prime * result + idEmpresa;
 		result = prime * result
+				+ ((logradouro == null) ? 0 : logradouro.hashCode());
+		result = prime * result
 				+ ((nomeFant == null) ? 0 : nomeFant.hashCode());
+		result = prime * result + ((numero == null) ? 0 : numero.hashCode());
 		result = prime * result + ((pedidos == null) ? 0 : pedidos.hashCode());
 		result = prime * result
 				+ ((razaoSocial == null) ? 0 : razaoSocial.hashCode());
@@ -229,24 +285,44 @@ public class Empresa implements Serializable, IEmpresaDiaDaSemana,
 				return false;
 		} else if (!CNPJ.equals(other.CNPJ))
 			return false;
+		if (UF == null) {
+			if (other.UF != null)
+				return false;
+		} else if (!UF.equals(other.UF))
+			return false;
 		if (aberto != other.aberto)
 			return false;
 		if (ativo != other.ativo)
+			return false;
+		if (bairro == null) {
+			if (other.bairro != null)
+				return false;
+		} else if (!bairro.equals(other.bairro))
 			return false;
 		if (categorias == null) {
 			if (other.categorias != null)
 				return false;
 		} else if (!categorias.equals(other.categorias))
 			return false;
+		if (cep == null) {
+			if (other.cep != null)
+				return false;
+		} else if (!cep.equals(other.cep))
+			return false;
+		if (cidade == null) {
+			if (other.cidade != null)
+				return false;
+		} else if (!cidade.equals(other.cidade))
+			return false;
+		if (complemento == null) {
+			if (other.complemento != null)
+				return false;
+		} else if (!complemento.equals(other.complemento))
+			return false;
 		if (empresaAtendimentos == null) {
 			if (other.empresaAtendimentos != null)
 				return false;
 		} else if (!empresaAtendimentos.equals(other.empresaAtendimentos))
-			return false;
-		if (endereco == null) {
-			if (other.endereco != null)
-				return false;
-		} else if (!endereco.equals(other.endereco))
 			return false;
 		if (formasDePagamento == null) {
 			if (other.formasDePagamento != null)
@@ -260,10 +336,20 @@ public class Empresa implements Serializable, IEmpresaDiaDaSemana,
 			return false;
 		if (idEmpresa != other.idEmpresa)
 			return false;
+		if (logradouro == null) {
+			if (other.logradouro != null)
+				return false;
+		} else if (!logradouro.equals(other.logradouro))
+			return false;
 		if (nomeFant == null) {
 			if (other.nomeFant != null)
 				return false;
 		} else if (!nomeFant.equals(other.nomeFant))
+			return false;
+		if (numero == null) {
+			if (other.numero != null)
+				return false;
+		} else if (!numero.equals(other.numero))
 			return false;
 		if (pedidos == null) {
 			if (other.pedidos != null)

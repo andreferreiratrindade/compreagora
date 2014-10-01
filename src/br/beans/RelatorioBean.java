@@ -20,7 +20,6 @@ import br.Cliente.Cliente;
 import br.Cliente.ClienteRN;
 import br.Empresa.Empresa;
 import br.Empresa.EmpresaRN;
-import br.EnderecoCliente.EnderecoCliente;
 import br.Pedido.Pedido;
 import br.Pedido.PedidoRN;
 import br.relatorio.RelatorioCliente;
@@ -83,9 +82,8 @@ public class RelatorioBean {
 		PedidoRN pedidoRN = new PedidoRN();
 		Pedido pedido = pedidoRN.getPedido(10);
 		empresa = pedido.getEmpresa();
-		EnderecoCliente endCliente = pedido.getEnderecoCliente();
-		ImpressoraNaoFiscal imp = new ImpressoraEntrega(pedido, empresa,
-				endCliente);
+
+		ImpressoraNaoFiscal imp = new ImpressoraEntrega(pedido, empresa);
 
 		imp.gerarArquivo();
 		downloadFileTxt(imp.getNomeArquivo());

@@ -20,6 +20,7 @@
 	border: 1px solid #C0C0C0;
 	border-right: none;
 	height: 46px;
+	padding: 8px;
 }
 
 .step .col-md-2:last-child {
@@ -41,9 +42,9 @@
 
 .step .activestep {
 	color: #F58723;
-	height: 60px;
-	margin-top: -7px;
-	padding-top: 7px;
+height: 64px;
+margin-top: -9px;
+padding-top: 15px;
 	border-left: 6px solid #5CB85C !important;
 	border-right: 6px solid #5CB85C !important;
 	border-top: 3px solid #5CB85C !important;

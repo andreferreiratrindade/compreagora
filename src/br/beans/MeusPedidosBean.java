@@ -19,11 +19,8 @@ import br.Cliente.ClienteRN;
 import br.Pedido.Pedido;
 import br.Pedido.PedidoRN;
 import br.PedidoProduto.PedidoProduto;
-import br.Produto.ProdutoAvulso.ProdutoAvulso;
-import br.Produto.ProdutoAvulso.ProdutoAvulsoDAO;
 import br.ProdutoAvulso.Avulso;
 import br.dataTableLazy.MeusPedidoLazy;
-import br.util.DAOFactoy;
 
 @ManagedBean(name = "meusPedidosBean")
 @ViewScoped
@@ -70,7 +67,7 @@ public class MeusPedidosBean implements Serializable {
 
 	public void setPedidoProduto(PedidoProduto pedidoProduto) {
 		this.pedidoProduto = pedidoProduto;
-		atualizaCampoAvulso();
+	//	atualizaCampoAvulso();
 	}
 
 	public List<PedidoProduto> getPedidoProdutos() {
@@ -156,7 +153,7 @@ public class MeusPedidosBean implements Serializable {
 
 	}
 
-	public void atualizaCampoAvulso() {
+/*	public void atualizaCampoAvulso() {
 		ProdutoAvulsoDAO produtoTemp = DAOFactoy.criarProdutoAvulso();
 		ProdutoAvulso produtoAvulsoTemp = null;
 		try {
@@ -167,7 +164,7 @@ public class MeusPedidosBean implements Serializable {
 		}
 		avulsos = produtoAvulsoTemp.getAvulsos();
 	}
-
+*/
 	public List<Avulso> getAvulsos() {
 		if (avulsos == null) {
 			avulsos = new ArrayList<Avulso>();

@@ -18,9 +18,7 @@ public class PedidoWithFilterByClient implements IFiltroPedido {
 			int maxPerPage, int id, String sortFiel, SortOrder sortOrder) {
 		EasyCriteria<Pedido> easyCriteria = EasyCriteriaFactory
 				.createQueryCriteria(em, Pedido.class);
-		easyCriteria.innerJoin("enderecoCliente")
-				.innerJoin("enderecoCliente.cliente")
-				.andEquals("enderecoCliente.cliente.idCliente", id);
+		easyCriteria.innerJoin("cliente").andEquals("cliente.idCliente", id);
 
 		switch (sortOrder.ordinal()) {
 
@@ -48,9 +46,7 @@ public class PedidoWithFilterByClient implements IFiltroPedido {
 	public int countPedido(EntityManager em, int id) {
 		EasyCriteria<Pedido> easyCriteria = EasyCriteriaFactory
 				.createQueryCriteria(em, Pedido.class);
-		easyCriteria.innerJoin("enderecoCliente")
-				.innerJoin("enderecoCliente.cliente")
-				.andEquals("enderecoCliente.cliente.idCliente", id);
+		easyCriteria.innerJoin("cliente").andEquals("cliente.idCliente", id);
 
 		List<Pedido> pedidos = easyCriteria.getResultList();
 		if (pedidos == null) {

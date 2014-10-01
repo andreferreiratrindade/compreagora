@@ -14,7 +14,7 @@ import javax.servlet.ServletContext;
 import br.Empresa.Empresa;
 import br.Pedido.Pedido;
 import br.PedidoProduto.PedidoProduto;
-import br.ProdutoAvulso.Avulso;
+import br.ProdutoAvulso.PedidoProdutoAvulso;
 
 public class ImpressoraPreparo extends ImpressoraNaoFiscal {
 	public final static String COZINHA = "Cozinha";
@@ -58,10 +58,9 @@ public class ImpressoraPreparo extends ImpressoraNaoFiscal {
 			linhasTxt.println(LINHA);
 
 			for (PedidoProduto x : pedido.getPedidoProdutos()) {
-				linhasTxt.println(x.getProdutoAvulso().getProduto()
-						.getDescricao());
+				linhasTxt.println(x.getDescricao());
 
-				for (Avulso y : x.getProdutoAvulso().getAvulsos()) {
+				for (PedidoProdutoAvulso y : x.getAvulsos()) {
 					linhasTxt.println("## " + y.getDescricao());
 				}
 				linhasTxt.println(x.getObservacao() == null ? " " : "> "

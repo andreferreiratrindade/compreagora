@@ -22,6 +22,10 @@ public abstract class PedidoLazy extends LazyDataModel<Pedido> {
 		this.id = id;
 	}
 
+	public PedidoLazy() {
+
+	}
+
 	@Override
 	public abstract List<Pedido> load(int startingAt, int maxPerPage,
 			String sortField, SortOrder sortOrder, Map<String, String> filters);

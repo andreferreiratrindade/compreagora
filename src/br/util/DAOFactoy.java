@@ -11,12 +11,10 @@ import br.Empresa.Categoria.CategoriaDao;
 import br.Empresa.Categoria.CategoriaEmpresaDao;
 import br.Empresa.FormaDePagamento.FormaDePagamentoDao;
 import br.Endereco.EnderecoDAO;
-import br.EnderecoCliente.EnderecoClienteDAO;
 import br.Pedido.PedidoDAO;
 import br.PedidoProduto.PedidoProdutoDAO;
 import br.Permissao.PermissaoDAO;
 import br.Produto.ProdutoDAO;
-import br.Produto.ProdutoAvulso.ProdutoAvulsoDAO;
 import br.ProdutoAvulso.AvulsoDAO;
 
 public class DAOFactoy {
@@ -83,12 +81,6 @@ public class DAOFactoy {
 		return dao;
 	}
 
-	public static EnderecoClienteDAO criarEnderecoCliente() {
-		EnderecoClienteDAO dao = new EnderecoClienteDAO();
-		dao.setSession(JpaUtil.getEntityManager());
-		return dao;
-	}
-
 	public static HorarioFuncionamentoDAO criarHorarioFuncionamento() {
 		HorarioFuncionamentoDAO dao = new HorarioFuncionamentoDAO();
 		dao.setSession(JpaUtil.getEntityManager());
@@ -109,13 +101,6 @@ public class DAOFactoy {
 
 	public static AvulsoDAO criarAvulso() {
 		AvulsoDAO dao = new AvulsoDAO();
-		dao.setSession(JpaUtil.getEntityManager());
-		return dao;
-	}
-
-	public static ProdutoAvulsoDAO criarProdutoAvulso() {
-		ProdutoAvulsoDAO dao = new ProdutoAvulsoDAO();
-
 		dao.setSession(JpaUtil.getEntityManager());
 		return dao;
 	}

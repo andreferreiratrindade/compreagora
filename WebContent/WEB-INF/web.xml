@@ -27,7 +27,7 @@
 	<filter-mapping>
 		<filter-name>conexaoFiter</filter-name>
 		<url-pattern>*.jsf</url-pattern>
-		<url-pattern>/webservice/*</url-pattern>
+		
 	</filter-mapping>
 	<servlet-mapping>
 		<servlet-name>Faces Servlet</servlet-name>
@@ -76,21 +76,6 @@
 		<param-value>bootstrap</param-value>
 	</context-param>
 
-	<!-- WEBSERVICE -->
-	<listener>
-		<listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>
-	</listener>
-	<servlet>
-		<description>Webservices do Clinete</description>
-		<display-name>clienteWS</display-name>
-		<servlet-name>clienteWS</servlet-name>
-		<servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>clienteWS</servlet-name>
-		<url-pattern>/webservice/clienteWS</url-pattern>
-	</servlet-mapping>
 
 	<!-- Pagina de Erro -->
 	<error-page>

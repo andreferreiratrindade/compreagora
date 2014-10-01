@@ -9,9 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.primefaces.model.SortOrder;
 
@@ -26,8 +24,6 @@ import br.Empresa.EmpresaDAO;
 import br.Empresa.EmpresaRN;
 import br.Empresa.FormaDePagamento.FormaDePagamento;
 import br.Empresa.FormaDePagamento.FormaDePagamentoRN;
-import br.EnderecoCliente.EnderecoCliente;
-import br.EnderecoCliente.EnderecoClienteDAO;
 import br.PedidoProduto.PedidoProduto;
 import br.Produto.Lanche;
 import br.Produto.ProdutoDAO;
@@ -66,9 +62,6 @@ public class PedidoRNTest {
 
 		Lanche lanche = (Lanche) produtoRN.getProduto(1);
 
-		EnderecoClienteDAO endClienteDao = DAOFactoy.criarEnderecoCliente();
-		EnderecoCliente enderecoCliente = endClienteDao.getUnico(1);
-
 		PedidoProduto pedidoProduto = new PedidoProduto();
 		pedidoProduto.addProduto(lanche);
 
@@ -87,7 +80,8 @@ public class PedidoRNTest {
 		pedido.setFormaDePagamento(formaDePagamento);
 		
 		PedidoRN pedidoRN = new PedidoRN();
-		pedidoRN.salvar(enderecoCliente, empresa, pedido);
+		pedido.setEmpresa(empresa);
+		pedidoRN.salvar(pedido);
 
 	}
 
@@ -185,22 +179,13 @@ public class PedidoRNTest {
 		ClienteRN clienteRN = new ClienteRN();
 		Cliente cliente = clienteRN.buscarPorEmail("dede@gmail.com");
 
-		List<EnderecoCliente> enderecosCliente = cliente.getEnderecoCliente();
-		EnderecoCliente enderecoCliente = enderecosCliente.get(0);
-
-		List<Pedido> pedidos = enderecoCliente.getPedidos();
+		List<Pedido> pedidos = cliente.getPedidos();
 
 		assertEquals(1, pedidos.size());
 
 	}
 
-	@Test
-	public void deveRetornarTempoDePercurso() {
-		PedidoRN pedidoRN = new PedidoRN();
-
-		int tempo = pedidoRN.calculaTempoDePercurso(1, 1);
-		assertEquals(7, tempo);
-	}
+	
 
 	@Test
 	public void deveCalcularTempo() {

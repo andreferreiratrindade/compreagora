@@ -9,12 +9,9 @@ import org.primefaces.model.SortOrder;
 
 import br.AtendimentoLugares.EmpresaAtendimento;
 import br.AtendimentoLugares.EmpresaAtendimentoRN;
-import br.Empresa.Empresa;
 import br.Empresa.Categoria.CategoriaENUM;
-import br.EnderecoCliente.EnderecoCliente;
 import br.Pedido.Filtro.IFiltroPedido;
 import br.PedidoProduto.PedidoProduto;
-import br.PedidoProduto.PedidoProdutoDAO;
 import br.Produto.Implementacao.AguaImplementacao;
 import br.Produto.Implementacao.BebidaImplementacao;
 import br.Produto.Implementacao.GasImplementacao;
@@ -47,32 +44,28 @@ public class PedidoRN {
 
 		IProduto produtoI;
 
-		PedidoProdutoDAO pedidoProdutoDAO = DAOFactoy.criarPedidoProduto();
+		
 		for (PedidoProduto x : pedidoProdutos) {
 
-			x.setPedido(pedido);
-			produtoI = (IProduto) mapProduto.get(x.getProdutoAvulso()
-					.getProduto().getQualificacao());
-			produtoI.atualizar(x.getProdutoAvulso().getProduto());
-			pedidoProdutoDAO.update(x);
+			
+			produtoI = (IProduto) mapProduto.get(x.getQualificacao());
+			produtoI.atualizar(x.getIdProduto());
+		
 		}
 
 	}
 
-	public void salvar(EnderecoCliente enderecoCliente, Empresa empresa,
-			Pedido pedido) {
-		int idEmpresa = empresa.getIdEmpresa();
-		int idBairro = enderecoCliente.getEndereco().getBairroCidade()
-				.getIdBairro();
+	public void salvar(Pedido pedido) {
+		int idEmpresa = pedido.getEmpresa().getIdEmpresa();
 
-		int tempo = calculaTempo(idEmpresa, idBairro);
+		int tempo = calculaTempo(idEmpresa, pedido.getCidade(),
+				pedido.getBairro());
 
-		pedido.setEnderecoCliente(enderecoCliente);
 		pedido.calcularTempoEspera(tempo);
-		pedido.setEmpresa(empresa);
+
 		pedido.setDataHoraIn(new Date());
 		pedido.setStatusPedido(1);
-		pedido.inserirPedidoNoPedidoProdutos();
+	//	pedido.inserirPedidoNoPedidoProdutos();
 
 		this.pedidoDAO.salve(pedido);
 		atualizaProdutos(pedido);
@@ -87,14 +80,15 @@ public class PedidoRN {
 		return tempo;
 	}
 
-	public int calculaTempoDePercurso(int idEmpresa, int idBairro) {
+	public int calculaTempoDePercurso(int idEmpresa, String cidade,
+			String bairro) {
 
 		int tempo = 0;
 
 		EmpresaAtendimentoRN empresaAtendimentoRN = new EmpresaAtendimentoRN();
 
 		EmpresaAtendimento empAten = empresaAtendimentoRN
-				.empresaAtendimentoEmpresaComBairro(idEmpresa, idBairro);
+				.empresaAtendimentoEmpresaComBairro(idEmpresa, cidade, bairro);
 
 		if (empAten != null) {
 			tempo += empAten.getTempoEspera();
@@ -103,10 +97,10 @@ public class PedidoRN {
 		return tempo;
 	}
 
-	public int calculaTempo(int idEmpresa, int idBairro) {
+	public int calculaTempo(int idEmpresa, String cidade, String bairro) {
 		int tempo = 0;
 
-		tempo += calculaTempoDePercurso(idEmpresa, idBairro);
+		tempo += calculaTempoDePercurso(idEmpresa, cidade, bairro);
 
 		tempo += calculaTempoDeTodosPedidos(idEmpresa);
 

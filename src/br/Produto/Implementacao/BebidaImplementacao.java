@@ -10,11 +10,10 @@ public class BebidaImplementacao implements IProduto {
 	private List<Produto> lista;
 
 	@Override
-	public void atualizar(Produto produto) {
+	public void atualizar(int idProduto) {
 		ProdutoRN produtoRN = new ProdutoRN();
 		try {
-			Bebida bebida = (Bebida) produtoRN.getProduto(produto
-					.getIdProduto());
+			Bebida bebida = (Bebida) produtoRN.getProduto(idProduto);
 			bebida.implementaEstoque();
 
 			produtoRN.atualizarProduto(bebida);

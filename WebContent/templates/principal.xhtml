@@ -10,7 +10,7 @@
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="keywords"
 		content="lanchonete, restaurante, compre agora, delivery" />
-	<title>Compre Agora</title>
+	<title><ui:insert name="titulo">Compre Agora</ui:insert></title>
 	<link rel="shortcut icon" href="#{resource['imagens/icones:logo.gif']}" />
 	<h:outputStylesheet library="/css" name="estilo.css" />
 
@@ -33,7 +33,11 @@
 				<ui:include src="topo.xhtml" />
 			</ui:insert>
 		</div>
-
+		<div id="titulo" class="text-center">
+			<h2>
+				<ui:insert name="titulo"></ui:insert>
+			</h2>
+		</div>
 
 		<div id="corpo" style="margin-top: 0px; margin-bottom: 20px;">
 
@@ -46,11 +50,34 @@
 			</ui:insert>
 		</div>
 
-		<div id="rodape2" style="background: #1d1d3a;;margin-top: 50px;" >
+		<div id="rodape2" style="background: #1d1d3a;; margin-top: 50px;">
 			<ui:insert name="rodape2">
 				<ui:include src="rodape2.xhtml" />
 			</ui:insert>
 		</div>
+		<script type="text/javascript">
+			function findCEP() {
+				$.ajax({
+					url : "http://apps.widenet.com.br/busca-cep/api/cep.json",
+					type : "GET",
+					data : {
+						"code" : "35051-000"
+					},
+					dataType : "json",
+					success : function(data) {
+						$("#cep").val(data.code);
+						$("#cidade").val(data.city);
+						$("#logradouro").val(data.address);
+						$("#bairro").val(data.district);
+						$("#uf").val(data.state);
+					},
+					error : function() {
+						alert(result.message || "Houve um erro desconhecido");
+					}
+				});
+
+			}
+		</script>
 	</div>
 </h:body>
 </html>

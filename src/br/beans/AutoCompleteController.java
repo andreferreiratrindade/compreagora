@@ -6,15 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-import javax.faces.model.ListDataModel;
 
 import org.primefaces.event.SelectEvent;
 
@@ -25,15 +21,6 @@ import br.AtendimentoLugares.CidadeRN;
 import br.Empresa.Empresa;
 import br.Empresa.EmpresaRN;
 import br.Empresa.Categoria.CategoriaENUM;
-import br.Produto.Agua;
-import br.Produto.Bebida;
-import br.Produto.Gas;
-import br.Produto.Lanche;
-import br.Produto.Marmitex;
-import br.Produto.Pizza;
-import br.Produto.ProdutoRN;
-import br.Produto.Filtro.WithStatusIndisponivel;
-import br.beans.util.ContextUtil;
 
 @ManagedBean(name = "autoCompleteController")
 @ViewScoped

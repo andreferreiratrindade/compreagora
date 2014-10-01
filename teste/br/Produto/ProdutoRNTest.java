@@ -2,7 +2,6 @@ package br.Produto;
 
 import static org.junit.Assert.assertEquals;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.junit.AfterClass;
@@ -117,7 +116,7 @@ public class ProdutoRNTest {
 		ProdutoRN produtoRN = new ProdutoRN();
 		Produto produto = produtoRN.getProduto(1);
 
-		assertEquals(5.90, produto.getValor().abs());
+		assertEquals(5.90, produto.getValor(),0.00001);
 
 	}
 }

@@ -1,33 +1,21 @@
 package br.Cliente;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-
-import br.EnderecoCliente.EnderecoCliente;
+import br.Pedido.Pedido;
 import br.Permissao.Permissao;
 
-import com.sun.xml.bind.CycleRecoverable;
-
-@XmlRootElement
-@XmlAccessorType(value = XmlAccessType.FIELD)
 @Entity(name = "cliente")
-public class Cliente implements Serializable, CycleRecoverable {
+public class Cliente implements Serializable {
 	/**
 	 * 
 	 */
@@ -36,24 +24,84 @@ public class Cliente implements Serializable, CycleRecoverable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idCliente;
 	private String nome;
-	private String login; // utilizado apenas para saber qual empresa pertence a
-	// este usuario
+	private String login; // utilizado apenas para saber qual empresa pertence a este usuario
 	private String email;
 	private String senha;
 	private String telefone;
 	private String celular;
 	private String cpf;
 	private boolean ativo;
-
+	private String logradouro;
+	private String cep;
+	private String numero;
+	private String complemento;
+	private String bairro;
+	private String cidade;
+	private String UF;
+	
+	@OneToMany
+	@JoinColumn(name = "idCliente")
+	private List<Pedido> pedidos;
+	
 	@ManyToOne
 	@JoinColumn(name = "idPermissao")
 	private Permissao permissao;
 
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "idCliente")
-	@XmlTransient
-	@JsonIgnore
-	private List<EnderecoCliente> enderecoCliente = new ArrayList<EnderecoCliente>();
+	public String getUF() {
+		return UF;
+	}
+
+	public void setUF(String uF) {
+		UF = uF;
+	}
+
+	public String getLogradouro() {
+		return logradouro;
+	}
+
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
 
 	public int getIdCliente() {
 		return idCliente;
@@ -93,6 +141,14 @@ public class Cliente implements Serializable, CycleRecoverable {
 
 	public String getSenha() {
 		return senha;
+	}
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 
 	public void setSenha(String senha) {
@@ -139,15 +195,6 @@ public class Cliente implements Serializable, CycleRecoverable {
 		this.permissao = permissao;
 	}
 
-	@JsonIgnore
-	public List<EnderecoCliente> getEnderecoCliente() {
-		return enderecoCliente;
-	}
-
-	public void setEnderecoCliente(List<EnderecoCliente> enderecoCliente) {
-		this.enderecoCliente = enderecoCliente;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -156,8 +203,6 @@ public class Cliente implements Serializable, CycleRecoverable {
 		result = prime * result + ((celular == null) ? 0 : celular.hashCode());
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result
-				+ ((enderecoCliente == null) ? 0 : enderecoCliente.hashCode());
 		result = prime * result + idCliente;
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
@@ -195,11 +240,6 @@ public class Cliente implements Serializable, CycleRecoverable {
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
-		if (enderecoCliente == null) {
-			if (other.enderecoCliente != null)
-				return false;
-		} else if (!enderecoCliente.equals(other.enderecoCliente))
-			return false;
 		if (idCliente != other.idCliente)
 			return false;
 		if (login == null) {
@@ -229,14 +269,4 @@ public class Cliente implements Serializable, CycleRecoverable {
 			return false;
 		return true;
 	}
-
-	@Override
-	public Object onCycleDetected(Context arg0) {
-
-		Cliente c = new Cliente();
-		c.setIdCliente(this.idCliente);
-		return c;
-
-	}
-
 }

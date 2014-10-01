@@ -54,11 +54,11 @@
 					<h:column>
 						<span style="font-size: 16px;"> <h:outputText
 								id="textoDescricao"
-								value="#{pedidoProduto.produtoAvulso.produto.descricao}" />
+								value="#{pedidoProduto.descricao}" />
 						</span>
 						<p:tooltip for="textoDescricao">
 							<h:outputText
-								value="#{pedidoProduto.produtoAvulso.produto.descricao}" />
+								value="#{pedidoProduto.descricao}" />
 						</p:tooltip>
 					</h:column>
 					<h:column>
@@ -78,7 +78,7 @@
 							</div>
 							<div class="hidden-xs">
 								<h:outputText value="R$" />
-								<h:outputText value="#{pedidoProduto.valorTotal()}">
+								<h:outputText value="#{pedidoProduto.valor}">
 									<f:convertNumber pattern="#,###,##0.00" />
 								</h:outputText>
 
@@ -129,7 +129,7 @@
 					class="text-center"> <p:commandLink value="Comprar"
 						styleClass="btn btn-success col-lg-6 col-md-6 col-sm-12 col-xs-12"
 						style="text-decoration: none;float: none;"
-						actionListener="#{pedidoBean.atualizaTaxaEntrega}"
+						actionListener="#{pedidoBean.atualizaTaxaEntregaEnderecoCliente}"
 						update=":formCompraValorTotal"
 						disabled="#{!pedidoBean.verificaValorMin()}">
 					</p:commandLink>
@@ -142,6 +142,7 @@
 		</div>
 
 	</h:form>
+	
 
 </ui:composition>
 </html>

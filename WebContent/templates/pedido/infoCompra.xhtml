@@ -25,14 +25,12 @@
 							rows="5">
 							<f:facet name="header">Produtos</f:facet>
 							<p:column headerText="Descrição">
-								<h:outputText
-									value="#{meuPedidoProduto.produtoAvulso.produto.descricao}  " />
+								<h:outputText value="#{meuPedidoProduto.descricao}  " />
 							</p:column>
 							<p:column headerText="Valor">
 								<center>
 									<h:outputText value="R$ " />
-									<h:outputText
-										value="#{meuPedidoProduto.produtoAvulso.valorTotal()}">
+									<h:outputText value="#{meuPedidoProduto.valor}">
 										<f:convertNumber pattern="#,###,##0.00" />
 									</h:outputText>
 								</center>
@@ -61,15 +59,13 @@
 									styleClass="btn btn-primary" />
 							</span>
 
-							<h:panelGrid style="margin-top: 15px;">
+							<h:panelGrid style="margin-top: 15px;" >
 								<h:outputText
-									value="#{pedidoBean.enderecoCliente.endereco.logradouro}, #{pedidoBean.enderecoCliente.endereco.numero}, #{pedidoBean.enderecoCliente.endereco.bairroCidade} - #{pedidoBean.enderecoCliente.endereco.bairroCidade.cidade}" />							
-					
-								<h:outputText value="#{pedidoBean.enderecoCliente.endereco.cep}"
-									converter="converterCEP" />
+									value="#{pedidoBean.pedido.logradouro}, #{pedidoBean.pedido.numero}, #{pedidoBean.pedido.bairro} - #{pedidoBean.pedido.cidade} -  #{pedidoBean.pedido.UF}" />
+								<h:outputText value="#{pedidoBean.pedido.cep}"
+									 />
 
-								<h:outputText
-									value="#{pedidoBean.enderecoCliente.endereco.complemento}" />
+								<h:outputText value="#{pedidoBean.pedido.complemento}" />
 							</h:panelGrid>
 
 						</div>
@@ -142,7 +138,6 @@
 						</p:commandLink>
 						&nbsp;&nbsp; <a href="#" data-dismiss="modal"
 							class="btn btn-danger">Sair</a>
-
 					</div>
 				</div>
 			</div>
@@ -155,7 +150,7 @@
 	<!-- Outro Endereço -->
 	<div id="modalOutroEndereco" class="modal fade" tabindex="-1"
 		aria-hidden="true">
-		<h:form id="formOutroEndereco">
+		<h:form id="formOutroEndereco" prependId="false">
 			<div class="modal-dialog ">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -167,78 +162,77 @@
 					<div class="modal-body ">
 						<div class="container-fluid">
 							<div class="row">
-								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-									<p:autoComplete id="cidade" forceSelection="true" var="cidade"
-										itemLabel="#{cidade.descCidade}" itemValue="#{cidade}"
-										value="#{pedidoBean.novoEnderecoCliente.endereco.bairroCidade.cidade}"
-										completeMethod="#{autoCompleteController.completaCidade}"
-										requiredMessage="Informe sua cidade" dropdown="true"
-										required="true" converter="converterCidade"
-										styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12">>
-							<p:ajax event="itemSelect"
-											listener="#{autoCompleteController.handleSelect}"
-											update="bairro" />
-									</p:autoComplete>
-									<p:watermark for="cidade" value="Cidade *" />
-									<p:message for="cidade" />
-								</div>
-								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-									<p:autoComplete id="bairro"
-										value="#{pedidoBean.novoEnderecoCliente.endereco.bairroCidade}"
-										forceSelection="true" dropdown="true" scrollHeight="200"
-										completeMethod="#{autoCompleteController.completaBairro}"
-										var="bairro" itemLabel="#{bairro.descBairro}"
-										requiredMessage="Informe seu bairro" itemValue="#{bairro}"
-										required="true" converter="converterBairro"
-										styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-									</p:autoComplete>
-									<p:watermark for="bairro" value="Bairro *" />
-									<p:message for="bairro" />
+
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+									style="margin-top: 10px;">
+									<p:inputText id="cep" size="9" maxlength="8" value="#{pedidoBean.pedido.cep}"/>
+									<a onclick="findCEP()" href="#" class="btn btn-info">Buscar</a>
+									<p:watermark for="cep" value="Cep" />
 								</div>
 								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
 									style="margin-top: 10px;">
-									<p:inputText
-										value="#{pedidoBean.novoEnderecoCliente.endereco.logradouro}"
-										size="30" id="logradouro" required="true"
+									<p:inputText value="#{pedidoBean.pedido.logradouro}" size="30"
+										id="logradouro" required="true"
 										requiredMessage="Informe sua rua"
 										styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
 									<p:watermark for="logradouro" value="Rua/Av./Logradouro *" />
 									<p:message for="logradouro" />
 								</div>
-								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
 									style="margin-top: 10px;">
-									<p:inputText
-										value="#{pedidoBean.novoEnderecoCliente.endereco.numero}"
-										id="numero" required="true"
-										requiredMessage="Informe o número de sua casa"
+									<p:inputText value="#{pedidoBean.pedido.bairro}" size="30"
+										id="bairro" required="true"
+										requiredMessage="Informe seu bairro"
+										styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+									<p:watermark for="bairro" value="Bairro *" />
+									<p:message for="bairro" />
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+									style="margin-top: 10px;">
+									<p:inputText value="#{pedidoBean.pedido.cidade}" size="30"
+										id="cidade" required="true"
+										requiredMessage="Informe sua cidade"
+										styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+									<p:watermark for="cidade" value="Cidade *" />
+									<p:message for="cidade" />
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+									style="margin-top: 10px;">
+									<p:inputText value="#{pedidoBean.pedido.UF}" id="uf"
+										required="true" requiredMessage="Informe seu Estado"
+										styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+									<p:message for="uf" />
+									<p:watermark for="uf" value="Estado *" />
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+									style="margin-top: 10px;">
+									<p:inputText value="#{pedidoBean.pedido.numero}" id="numero"
+										required="true" requiredMessage="Informe o número de sua casa"
 										styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
 									<p:message for="numero" />
 									<p:watermark for="numero" value="Número *" />
 								</div>
-
 								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
 									style="margin-top: 10px;">
-
-									<p:inputTextarea
-										value="#{pedidoBean.novoEnderecoCliente.endereco.complemento}"
-										maxlength="100" counterTemplate="{0} Caracteres" cols="32"
-										id="complemento"
+									<p:inputText value="#{pedidoBean.pedido.complemento}" id="complemento"
+										
 										styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+									
 									<p:watermark for="complemento" value="Complemento" />
-
 								</div>
-
 							</div>
 						</div>
 					</div>
 
 
 					<div class="modal-footer">
-						<span href="#" data-dismiss="modal"> <p:commandLink
-								actionListener="#{pedidoBean.salvarNovoEndereco}" value="Salvar"
-								update=":formCompraValorTotal formOutroEndereco "
-								styleClass="btn btn-primary" validateClient="true" />
-						</span> &nbsp; &nbsp; <span href="#" data-dismiss="modal"> <p:commandLink
+						<p:commandLink actionListener="#{pedidoBean.atualizaTaxaEntrega}"
+							value="Salvar" update=":formCompraValorTotal formOutroEndereco"
+							styleClass="btn btn-primary" validateClient="true"
+							onsuccess="clickSuccess()">
+
+						</p:commandLink>
+						&nbsp; &nbsp; <span href="#" data-dismiss="modal"> <p:commandLink
 								value="Cancelar" styleClass="btn btn-danger" />
 						</span>
 					</div>
@@ -246,7 +240,6 @@
 			</div>
 		</h:form>
 	</div>
-
 
 	<!-- Deletar Produto  -->
 
@@ -262,14 +255,10 @@
 					</div>
 
 					<div class="modal-body ">
-
-						<h:outputText
-							value="#{pedidoBean.pedidoProduto.produtoAvulso.produto.descricao}" />
-
+						<h:outputText value="#{pedidoBean.pedidoProduto.descricao}" />
 						<h:panelGrid style="float:right" columns="2">
 							<h:outputText value="R$ " />
-							<h:outputText
-								value="#{pedidoBean.pedidoProduto.produtoAvulso.valorTotal()}">
+							<h:outputText value="#{pedidoBean.pedidoProduto.valor}">
 								<f:convertNumber pattern="#,###,##0.00" />
 							</h:outputText>
 						</h:panelGrid>
@@ -304,11 +293,9 @@
 
 						<h:panelGrid columns="3"
 							style="margin-left: 10px;font-size: 18px;">
-							<h:outputText
-								value="#{pedidoBean.pedidoProduto.produtoAvulso.produto.descricao} - " />
+							<h:outputText value="#{pedidoBean.pedidoProduto.descricao} - " />
 							<h:outputText value="R$ " />
-							<h:outputText
-								value="#{pedidoBean.pedidoProduto.produtoAvulso.produto.valor}">
+							<h:outputText value="#{pedidoBean.pedidoProduto.valor}">
 								<f:convertNumber pattern="#,###,##0.00" />
 							</h:outputText>
 						</h:panelGrid>
@@ -380,7 +367,7 @@
 					<div class="modal-body ">
 
 						<h:dataTable var="avulso"
-							value="#{pedidoBean.pedidoProduto.produtoAvulso.avulsos}">
+							value="#{pedidoBean.pedidoProduto.avulsos}">
 							<h:column>
 								<h:outputText value="#{avulso.descricao}" />
 							</h:column>

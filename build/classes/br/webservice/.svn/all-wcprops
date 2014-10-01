@@ -1,11 +1,11 @@
 K 25
 svn:wc:ra_dav:version-url
-V 49
-/svn/compreagora/!svn/ver/3/tcc/src/br/webservice
+V 51
+/svn/compreagora/!svn/ver/3/tcc/teste/br/webservice
 END
-ClienteWS.java
+ClienteWSTest.java
 K 25
 svn:wc:ra_dav:version-url
-V 64
-/svn/compreagora/!svn/ver/3/tcc/src/br/webservice/ClienteWS.java
+V 70
+/svn/compreagora/!svn/ver/3/tcc/teste/br/webservice/ClienteWSTest.java
 END

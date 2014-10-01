@@ -1,7 +1,6 @@
 package br.statusPedido;
 
 import br.Empresa.Empresa;
-import br.EnderecoCliente.EnderecoCliente;
 import br.Pedido.Pedido;
 import br.Pedido.PedidoRN;
 import br.relatorio.impressora.ImpressoraEntrega;
@@ -32,8 +31,8 @@ public class Processando implements StatusInterface {
 	private void gerarArquivo(Pedido pedido) {
 
 		Empresa empresa = pedido.getEmpresa();
-		EnderecoCliente endCliente = pedido.getEnderecoCliente();
-		imp = new ImpressoraEntrega(pedido, empresa, endCliente);
+
+		imp = new ImpressoraEntrega(pedido, empresa);
 
 		imp.gerarArquivo();
 

@@ -15,6 +15,10 @@ public class PedidosClientesLazy extends PedidoLazy {
 		super(id);
 	}
 
+	public PedidosClientesLazy() {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * 
 	 */

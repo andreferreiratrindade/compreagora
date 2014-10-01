@@ -6,8 +6,6 @@ import br.AtendimentoLugares.Cidade;
 import br.AtendimentoLugares.CidadeDAO;
 import br.Cliente.Cliente;
 import br.Cliente.ClienteRN;
-import br.Endereco.Endereco;
-import br.EnderecoCliente.EnderecoCliente;
 import br.Permissao.Permissao;
 import br.Permissao.PermissaoEnum;
 import br.Permissao.PermissaoRN;
@@ -37,11 +35,6 @@ public class ClienteBuilder {
 		BairroDAO bairroDao = DAOFactoy.criarBairro();
 		bairroDao.salve(bairro);
 
-		Endereco endereco = new Endereco();
-		endereco.setBairroCidade(bairro);
-
-		EnderecoCliente enderecoCliente = new EnderecoCliente();
-		enderecoCliente.setDescEndereco("Minha Casa");
 
 		Cliente tempCliente = new Cliente();
 		tempCliente.setAtivo(true);
@@ -49,6 +42,6 @@ public class ClienteBuilder {
 		tempCliente.setNome("André Ferreira Trindade");
 
 		ClienteRN clienteRN = new ClienteRN();
-		clienteRN.salvar(tempCliente, endereco, enderecoCliente);
+		clienteRN.salvar(tempCliente);
 	}
 }

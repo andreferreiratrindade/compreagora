@@ -6,9 +6,12 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <ui:composition template="/templates/principal.xhtml">
+	<ui:define name="titulo">
+    Cadastro
+	</ui:define>
 	<ui:define name="corpo">
 		<div style="margin-top: 60px;">
-			<h:form id="cadastro">
+			<h:form id="cadastro" prependId="false">
 				<div class="container-fluid">
 					<div class="row">
 						<div
@@ -31,8 +34,8 @@
 										style="margin-top: 10px">
 										<p:inputText value="#{clienteBean.cliente.email}" size="30"
 											id="email" required="true"
-											validatorMessage="E-mail confirmado errado" label="E-mail"
-											requiredMessage="Informe seu e-mail" match="confEmail"
+											validatorMessage="E-mail deve ser de no minimo 5 caracteres"
+											label="E-mail" requiredMessage="Informe seu e-mail"
 											styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 											<f:validateLength minimum="5" />
 										</p:inputText>
@@ -79,66 +82,62 @@
 											styleClass="col-lg-12 col-md-12 col-sm-6 col-xs-12" />
 										<p:watermark for="celular" value="Celular" />
 									</div>
-
-									<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
-										style="margin-top: 10px">
-										<p:autoComplete id="cidade" forceSelection="true" var="cidade"
-											itemLabel="#{cidade.descCidade}" itemValue="#{cidade}"
-											completeMethod="#{autoCompleteController.completaCidade}"
-											dropdown="true" required="true" converter="converterCidade"
-											requiredMessage="Informe sua cidade"
-											styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-											<p:ajax event="itemSelect"
-												listener="#{autoCompleteController.handleSelect}"
-												update="bairro" />
-										</p:autoComplete>
-										<p:watermark for="cidade" value="Cidade *" />
-										<p:message for="cidade" />
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+										style="margin-top: 10px;">
+										<p:inputText id="cep" size="9" maxlength="8" />
+										<a onclick="findCEP()" href="#" class="btn btn-info">Buscar</a>
+										<p:watermark for="cep" value="Cep" />
 									</div>
-									<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
-										style="margin-top: 10px">
-										<p:autoComplete id="bairro"
-											value="#{clienteBean.endereco.bairroCidade}"
-											forceSelection="true"
-											completeMethod="#{autoCompleteController.completaBairro}"
-											var="bairro" itemLabel="#{bairro}" itemValue="#{bairro}"
-											required="true" converter="converterBairro" dropdown="true"
-											scrollHeight="200" requiredMessage="Informe seu bairro"
-											styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-										</p:autoComplete>
-										<p:watermark for="bairro" value="Bairro *" />
-										<p:message for="bairro" />
-									</div>
-									<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
-										style="margin-top: 10px">
-										<p:inputText value="#{clienteBean.endereco.numero}"
-											id="numero" required="true" label="Numero"
-											requiredMessage="Informe o número de sua casa"
-											styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
-										<p:message for="numero" display="tooltip" />
-										<p:watermark for="numero" value="Número *" />
-									</div>
-									<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12"
-										style="margin-top: 10px">
-
-										<p:inputText value="#{clienteBean.endereco.logradouro}"
-											size="30" id="logradouro" required="true" label="Logradouro"
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+										style="margin-top: 10px;">
+										<p:inputText value="#{clienteBean.cliente.logradouro}"
+											size="30" id="logradouro" required="true"
 											requiredMessage="Informe sua rua"
 											styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
 										<p:watermark for="logradouro" value="Rua/Av./Logradouro *" />
 										<p:message for="logradouro" />
 									</div>
-
-
-									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
-										style="margin-top: 10px">
-
-										<p:inputText value="#{clienteBean.endereco.complemento}"
-											maxlength="100" counterTemplate="{0} Caracteres"
-											counter="contador" cols="32" id="complemento"
-											style="margin-top: 10px"
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+										style="margin-top: 10px;">
+										<p:inputText value="#{clienteBean.cliente.bairro}" size="30"
+											id="bairro" required="true"
+											requiredMessage="Informe seu bairro"
 											styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
-										<h:outputText id="contador" style="float:right;" />
+										<p:watermark for="bairro" value="Bairro *" />
+										<p:message for="bairro" />
+									</div>
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+										style="margin-top: 10px;">
+										<p:inputText value="#{clienteBean.cliente.cidade}" size="30"
+											id="cidade" required="true"
+											requiredMessage="Informe sua cidade"
+											styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+										<p:watermark for="cidade" value="Cidade *" />
+										<p:message for="cidade" />
+									</div>
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+										style="margin-top: 10px;">
+										<p:inputText value="#{clienteBean.cliente.UF}" id="uf"
+											required="true" requiredMessage="Informe seu Estado"
+											styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+										<p:message for="uf" />
+										<p:watermark for="uf" value="Estado *" />
+									</div>
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+										style="margin-top: 10px;">
+										<p:inputText value="#{clienteBean.cliente.numero}" id="numero"
+											required="true"
+											requiredMessage="Informe o número de sua casa"
+											styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+										<p:message for="numero" />
+										<p:watermark for="numero" value="Número *" />
+									</div>
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+										style="margin-top: 10px;">
+										<p:inputText value="#{clienteBean.cliente.complemento}"
+											id="complemento"
+											styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+
 										<p:watermark for="complemento" value="Complemento" />
 									</div>
 

@@ -2,20 +2,13 @@ package br.Endereco;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import br.AtendimentoLugares.Bairro;
-
-import com.sun.xml.bind.CycleRecoverable;
 
 @Entity(name = "endereco")
-public class Endereco implements Serializable, CycleRecoverable {
+public class Endereco implements Serializable {
 
 	/**
 	 * 
@@ -28,24 +21,8 @@ public class Endereco implements Serializable, CycleRecoverable {
 	private String cep;
 	private String numero;
 	private String complemento;
-	@ManyToOne
-	@JoinColumn(name = "bairroCidade")
-	private Bairro bairroCidade;
-
-	public Endereco() {
-		bairroCidade = new Bairro();
-	}
-
-	public Bairro getBairroCidade() {
-		if (bairroCidade == null) {
-			bairroCidade = new Bairro();
-		}
-		return bairroCidade;
-	}
-
-	public void setBairroCidade(Bairro bairroCidade) {
-		this.bairroCidade = bairroCidade;
-	}
+	private String bairro;
+	private String cidade;
 
 	public int getIdEndereco() {
 		return idEndereco;
@@ -91,9 +68,9 @@ public class Endereco implements Serializable, CycleRecoverable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((bairroCidade == null) ? 0 : bairroCidade.hashCode());
+		result = prime * result + ((bairro == null) ? 0 : bairro.hashCode());
 		result = prime * result + ((cep == null) ? 0 : cep.hashCode());
+		result = prime * result + ((cidade == null) ? 0 : cidade.hashCode());
 		result = prime * result
 				+ ((complemento == null) ? 0 : complemento.hashCode());
 		result = prime * result + idEndereco;
@@ -101,6 +78,22 @@ public class Endereco implements Serializable, CycleRecoverable {
 				+ ((logradouro == null) ? 0 : logradouro.hashCode());
 		result = prime * result + ((numero == null) ? 0 : numero.hashCode());
 		return result;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
 	}
 
 	@Override
@@ -112,15 +105,20 @@ public class Endereco implements Serializable, CycleRecoverable {
 		if (getClass() != obj.getClass())
 			return false;
 		Endereco other = (Endereco) obj;
-		if (bairroCidade == null) {
-			if (other.bairroCidade != null)
+		if (bairro == null) {
+			if (other.bairro != null)
 				return false;
-		} else if (!bairroCidade.equals(other.bairroCidade))
+		} else if (!bairro.equals(other.bairro))
 			return false;
 		if (cep == null) {
 			if (other.cep != null)
 				return false;
 		} else if (!cep.equals(other.cep))
+			return false;
+		if (cidade == null) {
+			if (other.cidade != null)
+				return false;
+		} else if (!cidade.equals(other.cidade))
 			return false;
 		if (complemento == null) {
 			if (other.complemento != null)
@@ -140,15 +138,6 @@ public class Endereco implements Serializable, CycleRecoverable {
 		} else if (!numero.equals(other.numero))
 			return false;
 		return true;
-	}
-
-	@Override
-	public Object onCycleDetected(Context arg0) {
-
-		Endereco e = new Endereco();
-		e.setIdEndereco(this.idEndereco);
-
-		return e;
 	}
 
 }

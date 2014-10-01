@@ -24,8 +24,8 @@ public class EmpresaAtendimentoRN {
 	}
 
 	public EmpresaAtendimento empresaAtendimentoEmpresaComBairro(
-			int idEmpresa, int idBairro) {
+			int idEmpresa, String cidade, String bairro) {
 		return this.empresaAtendimentoDAO.empresaAtendimentoEmpresaComBairro(
-				idEmpresa, idBairro);
+				idEmpresa, cidade, bairro);
 	}
 }

@@ -188,8 +188,6 @@ public class EmpresaBean implements Serializable {
 		String senhaCripto = DigestUtils.md5DigestAsHex(senha.getBytes());
 		this.cliente.setSenha(senhaCripto);
 
-		empresa.setEndereco(endereco);
-
 		EmpresaRN empresaRN = new EmpresaRN();
 
 		empresaRN.salvar(empresa, cliente);

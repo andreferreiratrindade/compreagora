@@ -1,7 +1,6 @@
 package br.ProdutoAvulso;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -16,11 +15,9 @@ import javax.persistence.ManyToOne;
 import br.Empresa.Empresa;
 import br.Empresa.Categoria.CategoriaENUM;
 
-import com.sun.xml.bind.CycleRecoverable;
-
 @Entity(name = "avulso")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Avulso implements Serializable, CycleRecoverable {
+public class Avulso implements Serializable {
 	/**
 	 * 
 	 */
@@ -29,7 +26,7 @@ public class Avulso implements Serializable, CycleRecoverable {
 	@GeneratedValue
 	private int idAvulso;
 	private String descricao;
-	private BigDecimal valor;
+	private float valor;
 	private boolean ativo;
 	private int tempoEspera;
 	@Enumerated(EnumType.STRING)
@@ -39,7 +36,7 @@ public class Avulso implements Serializable, CycleRecoverable {
 	private Empresa empresa;
 
 	public Avulso() {
-		valor = new BigDecimal(0);
+		
 	}
 
 	public CategoriaENUM getTipoAvulso() {
@@ -74,13 +71,7 @@ public class Avulso implements Serializable, CycleRecoverable {
 		return descricao;
 	}
 
-	public BigDecimal getValor() {
-		return valor;
-	}
 
-	public void setValor(float valor) {
-		this.valor = new BigDecimal(Float.toString(valor));
-	}
 
 	public Empresa getEmpresa() {
 		return empresa;
@@ -110,7 +101,7 @@ public class Avulso implements Serializable, CycleRecoverable {
 		result = prime * result + tempoEspera;
 		result = prime * result
 				+ ((tipoAvulso == null) ? 0 : tipoAvulso.hashCode());
-		result = prime * result + ((valor == null) ? 0 : valor.hashCode());
+		result = prime * result + Float.floatToIntBits(valor);
 		return result;
 	}
 
@@ -141,20 +132,18 @@ public class Avulso implements Serializable, CycleRecoverable {
 			return false;
 		if (tipoAvulso != other.tipoAvulso)
 			return false;
-		if (valor == null) {
-			if (other.valor != null)
-				return false;
-		} else if (!valor.equals(other.valor))
+		if (Float.floatToIntBits(valor) != Float.floatToIntBits(other.valor))
 			return false;
 		return true;
 	}
 
-	@Override
-	public Object onCycleDetected(Context arg0) {
-		Avulso avulso = new Avulso();
-		avulso.setIdAvulso(getIdAvulso());
-
-		return avulso;
+	public float getValor() {
+		return valor;
 	}
+
+	public void setValor(float valor) {
+		this.valor = valor;
+	}
+
 
 }

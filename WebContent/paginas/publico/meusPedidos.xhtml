@@ -8,6 +8,9 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <ui:composition template="/templates/principal.xhtml">
 
+	<ui:define name="titulo">
+   Meus Pedidos
+	</ui:define>
 	<ui:define name="corpo">
 
 		<div id="desktop" class="container-fluid">
@@ -120,14 +123,12 @@
           						  Produtos  
         						</f:facet>
 										<p:column headerText="Descrição">
-											<h:outputText
-												value="#{pedidoProduto.produtoAvulso.produto.descricao}" />
+											<h:outputText value="#{pedidoProduto.descricao}" />
 										</p:column>
 										<p:column headerText="Valor">
 											<center>
 												<h:outputText value="R$ " />
-												<h:outputText
-													value="#{pedidoProduto.produtoAvulso.produto.valor}">
+												<h:outputText value="#{pedidoProduto.valor}">
 													<f:convertNumber pattern="#,###,##0.00" />
 												</h:outputText>
 											</center>
@@ -196,24 +197,18 @@
 									<div class="panel-body">
 
 										<h:panelGrid columns="2">
-											<h:outputText
-												value="#{meusPedidosBean.pedido.enderecoCliente.endereco.logradouro}, " />
+											<h:outputText value="#{meusPedidosBean.pedido.logradouro}, " />
 
-											<h:outputText
-												value="#{meusPedidosBean.pedido.enderecoCliente.endereco.numero}" />
+											<h:outputText value="#{meusPedidosBean.pedido.numero}" />
 
-											<h:outputText
-												value="Bairro #{meusPedidosBean.pedido.enderecoCliente.endereco.bairroCidade}" />
+											<h:outputText value="Bairro #{meusPedidosBean.pedido.bairro}" />
 
-											<h:outputText
-												value="#{meusPedidosBean.pedido.enderecoCliente.endereco.bairroCidade.cidade}" />
-
-											<h:outputText
-												value="#{meusPedidosBean.pedido.enderecoCliente.endereco.cep}"
+											<h:outputText value="#{meusPedidosBean.pedido.cidade}" />
+											<h:outputText value="#{meusPedidosBean.pedido.UF}" />
+											<h:outputText value="#{meusPedidosBean.pedido.cep}"
 												converter="converterCEP" />
 
-											<h:outputText
-												value="#{meusPedidosBean.pedido.enderecoCliente.endereco.complemento}" />
+											<h:outputText value="#{meusPedidosBean.pedido.complemento}" />
 										</h:panelGrid>
 									</div>
 								</div>
@@ -242,23 +237,24 @@
 										</h:panelGrid>
 										<h:panelGrid columns="2" style="float:right">
 											<h:outputText
-												value="#{meusPedidosBean.pedido.empresa.endereco.logradouro}, " />
+												value="#{meusPedidosBean.pedido.empresa.logradouro}, " />
 
 											<h:outputText
-												value="#{meusPedidosBean.pedido.empresa.endereco.numero}" />
+												value="#{meusPedidosBean.pedido.empresa.numero}" />
 
 											<h:outputText
-												value="Bairro #{meusPedidosBean.pedido.empresa.endereco.bairroCidade}" />
+												value="Bairro #{meusPedidosBean.pedido.empresa.bairro}" />
 
 											<h:outputText
-												value="#{meusPedidosBean.pedido.empresa.endereco.bairroCidade.cidade}" />
-
+												value="#{meusPedidosBean.pedido.empresa.cidade}" />
+<h:outputText
+												value="#{meusPedidosBean.pedido.empresa.UF}" />
 											<h:outputText
-												value="#{meusPedidosBean.pedido.empresa.endereco.cep}"
+												value="#{meusPedidosBean.pedido.empresa.cep}"
 												converter="converterCEP" />
 
 											<h:outputText
-												value="#{meusPedidosBean.pedido.empresa.endereco.complemento}" />
+												value="#{meusPedidosBean.pedido.empresa.complemento}" />
 										</h:panelGrid>
 
 									</div>
@@ -385,7 +381,7 @@
 			<h:form id="CelularInfoPedido">
 				<p:dialog id="celularInfoDialogPedido" header="Pedido"
 					widgetVar="celularInfoDialogPedido" resizable="false" modal="true"
-					style="margin:auto;width:100%"  width="100%">
+					style="margin:auto;width:100%" width="100%">
 					<h:panelGrid columns="2">
 						<h:outputText value="Inicio" style="font-size:20px" />
 						<h:outputText value="#{meusPedidosBean.pedido.dataHoraIn}">
@@ -406,13 +402,13 @@
         						</f:facet>
 						<p:column headerText="Descrição">
 							<h:outputText
-								value="#{pedidoProduto.produtoAvulso.produto.descricao}" />
+								value="#{pedidoProduto.descricao}" />
 						</p:column>
 						<p:column headerText="Valor">
 							<center>
 								<h:outputText value="R$ " />
 								<h:outputText
-									value="#{pedidoProduto.produtoAvulso.produto.valor}">
+									value="#{pedidoProduto.valor}">
 									<f:convertNumber pattern="#,###,##0.00" />
 								</h:outputText>
 							</center>

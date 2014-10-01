@@ -11,10 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
-import com.sun.xml.bind.CycleRecoverable;
-
 @Entity(name = "cidade")
-public class Cidade implements Serializable, CycleRecoverable {
+public class Cidade implements Serializable {
 
 	/**
 	 * 
@@ -89,15 +87,6 @@ public class Cidade implements Serializable, CycleRecoverable {
 		if (idCidade != other.idCidade)
 			return false;
 		return true;
-	}
-
-	@Override
-	public Object onCycleDetected(Context arg0) {
-		
-		Cidade c = new Cidade();
-		c.setIdCidade(this.idCidade);
-
-		return c;
 	}
 
 }

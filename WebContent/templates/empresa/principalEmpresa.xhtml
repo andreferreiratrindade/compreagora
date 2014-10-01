@@ -10,7 +10,7 @@
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="keywords"
 		content="lanchonete, restaurante, compre agora, delivery" />
-	<title>Compre Agora</title>
+	<title><ui:insert name="titulo">Compre Agora</ui:insert></title>
 	<link rel="shortcut icon" href="#{resource['imagens/icones:logo.gif']}" />
 
 	<h:outputStylesheet library="/css" name="estilo.css" />
@@ -33,6 +33,12 @@
 				<ui:include src="../topo.xhtml" />
 			</ui:insert>
 		</div>
+		<div id="titulo" class="text-center">
+			<h2>
+				<ui:insert name="titulo"></ui:insert>
+			</h2>
+		</div>
+
 	</div>
 	<div class="container" style="margin-top: 100px;">
 		<div class="row row-offcanvas row-offcanvas-left">

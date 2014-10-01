@@ -12,14 +12,13 @@
 			<h:form id="formSelecioneCategoria">
 				<div class="row step">
 
+				
 					<p:commandLink value="Lanchonete"
 						actionListener="#{autoCompleteController.menuSelecionaLanche}"
 						update="formSelecioneCategoria :dataGridEmpresas"
 						onclick="window.scrollTo(0,0);" style="text-decoration: none;"
 						styleClass="#{autoCompleteController.categoriaEmpresa == 0 ? 'activestep': '' } col-md-2 col-sm-2 ">
-						<span class="fa fa-pencil"></span>
-
-
+						
 					</p:commandLink>
 
 					<p:commandLink value="Pizzaria" style="text-decoration: none;"
@@ -83,7 +82,6 @@
 								<li class="active"><p:commandLink value="Lanchonete"
 										actionListener="#{autoCompleteController.menuSelecionaLanche}"
 										update="formSelecioneCategoriaCelular :dataGridEmpresas"
-										
 										style="text-decoration: none;"
 										styleClass="#{autoCompleteController.categoriaEmpresa == 0 ? 'activestep': '' } col-md-2 col-sm-2 ">
 										<span class="fa fa-pencil"></span>

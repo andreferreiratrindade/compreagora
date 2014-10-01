@@ -11,7 +11,6 @@ import br.Empresa.Categoria.CategoriaDao;
 import br.Empresa.Categoria.CategoriaENUM;
 import br.Empresa.FormaDePagamento.FormaDePagamento;
 import br.Empresa.FormaDePagamento.FormaDePagamentoDao;
-import br.Endereco.Endereco;
 import br.util.DAOFactoy;
 
 public class EmpresaBuilder {
@@ -61,17 +60,13 @@ public class EmpresaBuilder {
 
 		Bairro bairro = bairroDao.buscarPorDescricao("Nova Vila Bretas");
 
-		Endereco endereco = new Endereco();
-		endereco.setLogradouro("Rua 1");
-		endereco.setBairroCidade(bairro);
-
 		Empresa empresa = new Empresa();
 		empresa.setRazaoSocial("Empresa 1");
 		empresa.addCategoria(categoria);
 		empresa.addCategoria(categoriaDao
 				.getCategoriaComEnum(CategoriaENUM.Bebida));
 		empresa.addFormaDePagamento(fdp);
-		empresa.setEndereco(endereco);
+
 
 		empresaDAO = DAOFactoy.criarEmpresa();
 		empresaDAO.salve(empresa);
@@ -90,15 +85,13 @@ public class EmpresaBuilder {
 
 		Bairro bairro = bairroDao.buscarPorDescricao("Centro");
 
-		Endereco endereco = new Endereco();
-		endereco.setLogradouro("Rua 1");
-		endereco.setBairroCidade(bairro);
+
 
 		Empresa empresa = new Empresa();
 		empresa.setRazaoSocial("Empresa 2");
 		empresa.addCategoria(categoria);
 		empresa.addFormaDePagamento(fdp);
-		empresa.setEndereco(endereco);
+
 
 		empresaDAO = DAOFactoy.criarEmpresa();
 		empresaDAO.salve(empresa);
@@ -117,15 +110,11 @@ public class EmpresaBuilder {
 
 		Bairro bairro = bairroDao.buscarPorDescricao("Nova Vila Bretas");
 
-		Endereco endereco = new Endereco();
-		endereco.setLogradouro("Rua 1");
-		endereco.setBairroCidade(bairro);
-
 		Empresa empresa = new Empresa();
 		empresa.setRazaoSocial("Empresa 3");
 		empresa.addCategoria(categoria);
 		empresa.addFormaDePagamento(fdp);
-		empresa.setEndereco(endereco);
+	
 
 		empresaDAO = DAOFactoy.criarEmpresa();
 		empresaDAO.salve(empresa);
@@ -144,15 +133,11 @@ public class EmpresaBuilder {
 
 		Bairro bairro = bairroDao.buscarPorDescricao("Nova Vila Bretas");
 
-		Endereco endereco = new Endereco();
-		endereco.setLogradouro("Rua 1");
-		endereco.setBairroCidade(bairro);
 
 		Empresa empresa = new Empresa();
 		empresa.setRazaoSocial("Empresa 4");
 		empresa.addCategoria(categoria);
 		empresa.addFormaDePagamento(fdp);
-		empresa.setEndereco(endereco);
 
 		empresaDAO = DAOFactoy.criarEmpresa();
 		empresaDAO.salve(empresa);

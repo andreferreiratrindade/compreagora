@@ -12,22 +12,19 @@ import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 
 import br.Empresa.Empresa;
-import br.EnderecoCliente.EnderecoCliente;
 import br.Pedido.Pedido;
 import br.PedidoProduto.PedidoProduto;
-import br.ProdutoAvulso.Avulso;
+import br.ProdutoAvulso.PedidoProdutoAvulso;
 
 public class ImpressoraEntrega extends ImpressoraNaoFiscal {
 	public final static String ENTREGADOR = "Entregador";
 	private Pedido pedido;
 	private Empresa empresa;
-	private EnderecoCliente endCliente;
 
-	public ImpressoraEntrega(Pedido pedido, Empresa empresa,
-			EnderecoCliente endCliente) {
+	public ImpressoraEntrega(Pedido pedido, Empresa empresa) {
 		this.pedido = pedido;
 		this.empresa = empresa;
-		this.endCliente = endCliente;
+
 	}
 
 	@Override
@@ -61,11 +58,10 @@ public class ImpressoraEntrega extends ImpressoraNaoFiscal {
 			linhasTxt.println(LINHA_SEPARA);
 
 			for (PedidoProduto x : pedido.getPedidoProdutos()) {
-				linhasTxt.println(String.format("%7s  %9s", x
-						.getProdutoAvulso().getProduto().getDescricao(), "R$ "
-						+ x.getProdutoAvulso().getProduto().getValor()));
+				linhasTxt.println(String.format("%7s  %9s", x.getDescricao(),
+						"R$ " + x.getValor()));
 
-				for (Avulso y : x.getProdutoAvulso().getAvulsos()) {
+				for (PedidoProdutoAvulso y : x.getAvulsos()) {
 					linhasTxt.println(String.format("%7s  %9s",
 							"## " + y.getDescricao(), "R$ " + y.getValor()));
 				}
@@ -82,15 +78,13 @@ public class ImpressoraEntrega extends ImpressoraNaoFiscal {
 
 			linhasTxt.println("**********ENDEREÇO*********");
 			linhasTxt.println(LINHA_SEPARA);
-			linhasTxt.println(endCliente.getEndereco().getLogradouro());
-			linhasTxt
-					.println("numero: " + endCliente.getEndereco().getNumero());
-			linhasTxt.println(endCliente.getEndereco().getBairroCidade()
-					.getDescBairro());
-			linhasTxt.println(endCliente.getEndereco().getBairroCidade()
-					.getCidade().getDescCidade());
-			linhasTxt.println("CEP: " + endCliente.getEndereco().getCep());
-			linhasTxt.println(endCliente.getEndereco().getComplemento());
+			linhasTxt.println(pedido.getLogradouro());
+			linhasTxt.println("numero: " + pedido.getNumero());
+			linhasTxt.println(pedido.getBairro());
+			linhasTxt.println(pedido.getCidade());
+			linhasTxt.println(pedido.getUF());
+			linhasTxt.println("CEP: " + pedido.getCep());
+			linhasTxt.println(pedido.getComplemento());
 
 			int i = 0;
 			while (i < 10) {
@@ -114,8 +108,6 @@ public class ImpressoraEntrega extends ImpressoraNaoFiscal {
 
 	@Override
 	public void gerarNomeArquivo() {
-
-	
 
 		nomeArquivo = ENTREGADOR + pedido.getIdPedido();
 

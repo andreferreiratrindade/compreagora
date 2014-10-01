@@ -78,6 +78,32 @@
 			<ui:include src="../rodape2.xhtml" />
 		</ui:insert>
 	</div>
+	<script type="text/javascript">
+		function findCEP() {
+			$.ajax({
+				url : "http://apps.widenet.com.br/busca-cep/api/cep.json",
+				type : "GET",
+				data : {
+					"code" : "35051-000"
+				},
+				dataType : "json",
+				success : function(data) {
+					$("#cep").val(data.code);
+					$("#cidade").val(data.city);
+					$("#logradouro").val(data.address);
+					$("#bairro").val(data.district);
+					$("#uf").val(data.state);
+				},
+				error : function() {
+					alert(result.message || "Houve um erro desconhecido");
+				}
+			});
 
+		}
+		
+		function clickSuccess(){
+			$('#modalOutroEndereco').modal('hide');
+		}
+	</script>
 </h:body>
 </html>

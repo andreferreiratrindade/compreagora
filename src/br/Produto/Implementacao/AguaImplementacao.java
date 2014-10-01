@@ -9,10 +9,10 @@ import br.Produto.ProdutoRN;
 public class AguaImplementacao implements IProduto {
 
 	@Override
-	public void atualizar(Produto produto) {
+	public void atualizar(int idProduto) {
 		ProdutoRN produtoRN = new ProdutoRN();
 		try {
-			Agua agua = (Agua) produtoRN.getProduto(produto.getIdProduto());
+			Agua agua = (Agua) produtoRN.getProduto(idProduto);
 			agua.implementaEstoque();
 
 			produtoRN.atualizarProduto(agua);

@@ -8,10 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -25,16 +23,12 @@ import br.AtendimentoLugares.EmpresaAtendimento;
 import br.AtendimentoLugares.EmpresaAtendimentoRN;
 import br.Cliente.Cliente;
 import br.Cliente.ClienteRN;
-import br.Constantes.EnumProduto;
 import br.Empresa.Empresa;
 import br.Empresa.EmpresaRN;
 import br.Empresa.Categoria.Categoria;
 import br.Empresa.Categoria.CategoriaENUM;
 import br.Empresa.FormaDePagamento.FormaDePagamento;
 import br.Empresa.FormaDePagamento.FormaDePagamentoRN;
-import br.Endereco.Endereco;
-import br.Endereco.EnderecoDAO;
-import br.EnderecoCliente.EnderecoCliente;
 import br.Pedido.Pedido;
 import br.Pedido.PedidoRN;
 import br.PedidoProduto.PedidoProduto;
@@ -47,12 +41,8 @@ import br.Produto.Pizza;
 import br.Produto.Produto;
 import br.Produto.ProdutoRN;
 import br.Produto.Filtro.WithStatusIndisponivel;
-import br.Produto.Implementacao.BebidaImplementacao;
-import br.Produto.Implementacao.IProduto;
-import br.Produto.Implementacao.LancheImplementacao;
 import br.ProdutoAvulso.Avulso;
 import br.ProdutoAvulso.AvulsoRN;
-import br.util.DAOFactoy;
 
 @ManagedBean(name = "pedidoBean")
 @SessionScoped
@@ -60,7 +50,6 @@ public class PedidoBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private static final int TOTAL_PRODUTO = 13;
-
 	private DualListModel<Avulso> avulsoDual;
 	private Cliente cliente = null;
 	private Empresa empresa = null;
@@ -76,7 +65,6 @@ public class PedidoBean implements Serializable {
 	private Pedido pedido;
 	private PedidoProduto pedidoProduto;
 	private String endCliente = null;
-	private EnderecoCliente enderecoCliente = null;
 	private DataModel<Lanche> lanchesDM;
 	private DataModel<Bebida> bebidasDM;
 	private EmpresaRN empresaRN;
@@ -87,7 +75,7 @@ public class PedidoBean implements Serializable {
 	private DataModel<Produto> produtosDM;
 	private String cidadeEntrega;
 	private String bairroEntrega;
-	private BigDecimal valorTotalMaisTaxa;
+	private float valorTotalMaisTaxa;
 	private List<Bebida> bebidas;
 	private List<Lanche> lanches;
 	private List<Pizza> pizzas;
@@ -103,10 +91,18 @@ public class PedidoBean implements Serializable {
 	private ListDataModel<Pizza> listPizzaDM;
 	private ListDataModel<Agua> listAguaDM;
 	private ListDataModel<Gas> listGasDM;
-	private BigDecimal avulsoValorTotal;
+	private float avulsoValorTotal;
 	private float troco;
-	private EnderecoCliente novoEnderecoCliente;
 	private int idBairro;
+	private Bairro bairro;
+
+	public Bairro getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(Bairro bairro) {
+		this.bairro = bairro;
+	}
 
 	public void setCategoriaEmpresa(Integer categoriaEmpresa) {
 		this.categoriaEmpresa = categoriaEmpresa;
@@ -120,17 +116,6 @@ public class PedidoBean implements Serializable {
 		this.idBairro = idBairro;
 	}
 
-	public EnderecoCliente getNovoEnderecoCliente() {
-		if(novoEnderecoCliente == null){
-			novoEnderecoCliente = new EnderecoCliente();
-		}
-		return novoEnderecoCliente;
-	}
-
-	public void setNovoEnderecoCliente(EnderecoCliente novoEnderecoCliente) {
-		this.novoEnderecoCliente = novoEnderecoCliente;
-	}
-
 	public int getItemMenu() {
 		return itemMenu;
 	}
@@ -139,22 +124,22 @@ public class PedidoBean implements Serializable {
 		this.itemMenu = itemMenu;
 	}
 
-	public BigDecimal getAvulsoValorTotal() {
+	public float getAvulsoValorTotal() {
 		return avulsoValorTotal;
 	}
 
-	public void setAvulsoValorTotal(BigDecimal avulsoValorTotal) {
+	public void setAvulsoValorTotal(float avulsoValorTotal) {
 		this.avulsoValorTotal = avulsoValorTotal;
 	}
 
 	public void atualizaAvulsoTotal() {
 
-		avulsoValorTotal = pedidoProduto.getProdutoAvulso().getProduto()
-				.getValor();
-
+		BigDecimal avulsoBD = new BigDecimal(pedidoProduto.getValor());
 		for (Avulso x : avulsoDual.getTarget()) {
-			avulsoValorTotal.add(x.getValor());
+
+			avulsoBD.add(new BigDecimal(x.getValor()));
 		}
+		avulsoValorTotal = avulsoBD.floatValue();
 	}
 
 	public Marmitex getMarmitex() {
@@ -305,22 +290,21 @@ public class PedidoBean implements Serializable {
 	public void atualizaAvulsos() {
 
 		int idEmpresa = empresa.getIdEmpresa();
-		CategoriaENUM tipoAvulso = pedidoProduto.getProdutoAvulso()
-				.getProduto().getQualificacao();
+		CategoriaENUM tipoAvulso = pedidoProduto.getQualificacao();
 
 		AvulsoRN avulsoRN = new AvulsoRN();
 
 		List<Avulso> avulsoSorce = avulsoRN.listar(idEmpresa, tipoAvulso);
 
-		List<Avulso> avulsoTarget = pedidoProduto.getProdutoAvulso()
-				.getAvulsos();
+		List<Avulso> avulsoTarget = pedidoProduto.convertToAvulso();
 
 		avulsoDual = new DualListModel<Avulso>(avulsoSorce, avulsoTarget);
 	}
 
 	public void removerAvulso() {
 
-		pedidoProduto.getProdutoAvulso().getAvulsos().remove(avulso);
+		pedidoProduto.removeAvulso(avulso);
+
 		atualizaAvulsos();
 	}
 
@@ -336,13 +320,9 @@ public class PedidoBean implements Serializable {
 		this.pedidoProdutos = pedidoProdutos;
 	}
 
-	public BigDecimal getValorTotalMaisTaxa() {
+	public float getValorTotalMaisTaxa() {
 		valorTotalMaisTaxa = pedido.getValorTotalMaisTaxa();
 		return valorTotalMaisTaxa;
-	}
-
-	public void setValorTotalMaisTaxa(BigDecimal valorTotalMaisTaxa) {
-		this.valorTotalMaisTaxa = valorTotalMaisTaxa;
 	}
 
 	public String getCidadeEntrega() {
@@ -375,14 +355,6 @@ public class PedidoBean implements Serializable {
 
 	public void setEndCliente(String endCliente) {
 		this.endCliente = endCliente;
-	}
-
-	public EnderecoCliente getEnderecoCliente() {
-		return enderecoCliente;
-	}
-
-	public void setEnderecoCliente(EnderecoCliente enderecoCliente) {
-		this.enderecoCliente = enderecoCliente;
 	}
 
 	public DataModel<Pedido> getPedidosDM() {
@@ -426,6 +398,17 @@ public class PedidoBean implements Serializable {
 	}
 
 	public Empresa getEmpresa() {
+		if (empresa == null) {
+			FacesContext fContext = FacesContext.getCurrentInstance();
+			ExternalContext extContext = fContext.getExternalContext();
+			try {
+				extContext.redirect(extContext.getRequestContextPath()
+						+ "/principal.jsf");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		return empresa;
 	}
 
@@ -493,7 +476,6 @@ public class PedidoBean implements Serializable {
 		formasDePagamentoDM = empresaTemp.getFormasDePagamento();
 		for (FormaDePagamento x : formasDePagamentoDM) {
 			formasDePagamento.add(x.getTipo());
-
 		}
 		formaDePagamento = "Dinheiro";
 		pedido = new Pedido();
@@ -501,7 +483,7 @@ public class PedidoBean implements Serializable {
 		pedidoProduto = new PedidoProduto();
 
 		avulsoDual = new DualListModel<Avulso>();
-		atualizaTaxaEntregaFirst();
+	//	atualizaTaxaEntregaFirst();
 	}
 
 	public void converteTipoProduto(List<Categoria> tiposProdutos) {
@@ -626,8 +608,9 @@ public class PedidoBean implements Serializable {
 		PedidoRN pedidoRN = new PedidoRN();
 		pedido.setFormaDePagamento(converteFormaDePagamento());
 		pedido.setTroco(troco);
-
-		pedidoRN.salvar(enderecoCliente, empresa, pedido);
+		pedido.setEmpresa(empresa);
+		pedido.setCliente(cliente);
+		pedidoRN.salvar(pedido);
 		novoPedido();
 
 		return "/paginas/publico/meusPedidos.jsf?faces-redirect=true";
@@ -642,8 +625,7 @@ public class PedidoBean implements Serializable {
 			pedidoProdutos.add(pedidoProdutoTemp);
 			pedido.setPedidoProdutos(pedidoProdutos);
 			pedido.calcularTotal();
-			System.out.println("Valor total calculado: "
-					+ pedido.getValorTotal());
+
 		}
 	}
 
@@ -772,7 +754,9 @@ public class PedidoBean implements Serializable {
 	}
 
 	public void salvaProdutoPersonalizado() {
-		pedidoProduto.getProdutoAvulso().setAvulsos(avulsoDual.getTarget());
+		// pedidoProduto.setAvulsos(avulsoDual.getTarget());
+		pedidoProduto.convertToPedidoProdutoAvulso(avulsoDual.getTarget());
+
 		pedidoProdutos.add(pedidoProduto);
 		pedido.setPedidoProdutos(pedidoProdutos);
 		pedido.calcularTotal();
@@ -823,11 +807,31 @@ public class PedidoBean implements Serializable {
 			if (login != null) {
 				ClienteRN usuarioRN = new ClienteRN();
 				this.cliente = usuarioRN.buscarPorEmail(login);
-				cliente.getEnderecoCliente().size();
-				enderecoCliente = new EnderecoCliente();
-				enderecoCliente = cliente.getEnderecoCliente().get(0);		
+				
 			}
 		}
+		populandoEnderecoPedido();
+	}
+
+	public void populandoEnderecoPedido() {
+	
+		pedido.setBairro(cliente.getBairro());
+		pedido.setLogradouro(cliente.getLogradouro());
+		pedido.setCep(cliente.getCep());
+		pedido.setCidade(cliente.getCidade());
+		pedido.setComplemento(cliente.getComplemento());
+		pedido.setNumero(cliente.getNumero());
+		pedido.setUF(cliente.getUF());
+	}
+
+	public void novoEndereco() {
+		pedido.setBairro("");
+		pedido.setLogradouro("");
+		pedido.setCep("");
+		pedido.setCidade("");
+		pedido.setComplemento("");
+		pedido.setNumero("");
+		pedido.setUF("");
 	}
 
 	public void novoPedido() {
@@ -844,67 +848,47 @@ public class PedidoBean implements Serializable {
 	public void deletarProduto() {
 
 		if (pedidoProduto != null) {
-			pedido.removeValor(pedidoProduto.valorTotal().floatValue());
+			pedido.removeValor(pedidoProduto.getValor());
 			pedidoProdutos.remove(pedidoProduto);
 			pedidoProduto = null;
 		}
 
 	}
 
-	public void novoEndereco() {
-
-		novoEnderecoCliente = cliente.getEnderecoCliente().get(1);
-		novoEnderecoCliente.getEndereco().setBairroCidade(new Bairro());
-		novoEnderecoCliente.getEndereco().setLogradouro("");
-		novoEnderecoCliente.getEndereco().setNumero("");
-		novoEnderecoCliente.getEndereco().setComplemento(null);
-		novoEnderecoCliente.getEndereco().setCep("");
-	}
-
-	public void salvarNovoEndereco() {
-		try {
-			EnderecoDAO endDAO = DAOFactoy.criarEndereco();
-
-			endDAO.update(novoEnderecoCliente.getEndereco());
-			enderecoCliente.setEndereco(novoEnderecoCliente.getEndereco());
-			atualizaTaxaEntrega();
-
-		} catch (Exception e) {
-
-		}
-
-	}
-
-	public void atualizaTaxaEntregaFirst() {
+	public void atualizaTaxaEntregaEnderecoCliente() {
+		clienteLogado();
 		int idEmpresa = empresa.getIdEmpresa();
 
 		EmpresaAtendimentoRN empresaAtendimentoRN = new EmpresaAtendimentoRN();
+
 		EmpresaAtendimento empAtend = new EmpresaAtendimento();
 		empAtend = empresaAtendimentoRN.empresaAtendimentoEmpresaComBairro(
-				idEmpresa, idBairro);
+				idEmpresa, pedido.getCidade(), pedido.getBairro());
 
 		if (empAtend != null) {
-
 			pedido.setTaxa(empAtend.getTaxa());
-			pedido.calcularTotal();
 			empresaAtendeBairro = true;
-		}
+
+		} else {
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR,
+							"Empresa não atende a essa localidade", " "));
+			empresaAtendeBairro = false;
+		}	
 	}
 
 	public void atualizaTaxaEntrega() {
-		clienteLogado();
+		
 		int idEmpresa = empresa.getIdEmpresa();
-		int idBairroCliente = enderecoCliente.getEndereco().getBairroCidade()
-				.getIdBairro();
 
 		EmpresaAtendimentoRN empresaAtendimentoRN = new EmpresaAtendimentoRN();
 
 		EmpresaAtendimento empAtend = new EmpresaAtendimento();
 		empAtend = empresaAtendimentoRN.empresaAtendimentoEmpresaComBairro(
-				idEmpresa, idBairroCliente);
+				idEmpresa, pedido.getCidade(), pedido.getBairro());
 
-		if ((empAtend != null)
-				&& (enderecoCliente.getEndereco().getLogradouro() != null)) {
+		if (empAtend != null) {
 			pedido.setTaxa(empAtend.getTaxa());
 			empresaAtendeBairro = true;
 
@@ -920,7 +904,7 @@ public class PedidoBean implements Serializable {
 
 	public void salvarObservacao() {
 		int idElemento;
-		pedidoProduto.getProdutoAvulso().setAvulsos(avulsoDual.getTarget());
+		pedidoProduto.convertToPedidoProdutoAvulso(avulsoDual.getTarget());
 		idElemento = pedidoProdutos.lastIndexOf(pedidoProduto);
 		pedidoProdutos.set(idElemento, pedidoProduto);
 
@@ -930,7 +914,7 @@ public class PedidoBean implements Serializable {
 
 	public boolean verificaValorMin() {
 
-		return pedido.getValorTotal().floatValue() > 6 ? true : false;
+		return pedido.getValorTotal() > 6 ? true : false;
 	}
 
 	public boolean verificaEstoque() {
@@ -949,27 +933,11 @@ public class PedidoBean implements Serializable {
 	public boolean habilitarBotaoSalvar() {
 		boolean ii = false;
 
-		if ((troco > pedido.getValorTotal().floatValue()) || (troco == 0)) {
+		if ((troco > pedido.getValorTotal()) || (troco == 0)) {
 			ii = true;
 		}
 
 		return (ii && (empresaAtendeBairro));
-	}
-
-	public void verificaQuantidadeEstoque() {
-
-		Map<EnumProduto, IProduto> mapProduto = new HashMap<EnumProduto, IProduto>();
-
-		mapProduto.put(EnumProduto.lanche, new LancheImplementacao());
-		mapProduto.put(EnumProduto.bebida, new BebidaImplementacao());
-
-		for (PedidoProduto x : pedidoProdutos) {
-			mapProduto.get(x.getProdutoAvulso().getProduto().getQualificacao())
-					.getList().add(x.getProdutoAvulso().getProduto());
-		}
-
-		// List<Bebida> bebidas = new ArrayList<Bebida>();
-
 	}
 
 	public void detalhesProdutoMarmitex() {
