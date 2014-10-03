@@ -37,7 +37,7 @@
 						rowKey="#{pedido.idPedido}" 
 						selection="#{pedidosClientesBean.pedido}" selectionMode="single"
 						emptyMessage="Nenhum produto encontrado." lazy="true">
-						 <p:ajax event="rowSelect" onsuccess=""
+						 <p:ajax event="rowSelect" 
 								update=":formInfoPedido :formEnderecoCliente"
 								listener="#{pedidosClientesBean.atualizaProdutos}">
 
@@ -47,7 +47,7 @@
 							<h:outputText value="#{pedido.idPedido}" style="margin:auto" />
 						</p:column>
 						<p:column headerText="Nome do solicitante">
-							<h:outputText value="#{pedido.enderecoCliente.cliente.nome}" />
+							<h:outputText value="#{pedido.cliente.nome}" />
 						</p:column>
 						<p:column headerText="Valor">
 
@@ -99,7 +99,7 @@
 									</h:outputText>
 
 									<h:outputText
-										value="#{pedidosClientesBean.pedido.enderecoCliente.cliente.nome}"
+										value="#{pedidosClientesBean.pedido.cliente.nome}"
 										style="font-size:20px" />
 
 								</h:panelGrid>
@@ -121,13 +121,13 @@
 									<f:facet name="header">Produtos</f:facet>
 									<p:column headerText="Descrição">
 										<h:outputText
-											value="#{pedidoProduto.produtoAvulso.produto.descricao}" />
+											value="#{pedidoProduto.descricao}" />
 									</p:column>
 									<p:column headerText="Valor">
 										<center>
 											<h:outputText value="R$ " />
 											<h:outputText
-												value="#{pedidoProduto.produtoAvulso.valorTotal()}">
+												value="#{pedidoProduto.valor}">
 												<f:convertNumber pattern="#,###,##0.00" />
 											</h:outputText>
 										</center>
@@ -201,24 +201,24 @@
 
 								<div class="col-lg-12 col-sm-12 col-xs-12 col-md-12">
 									<h:outputText
-										value="#{pedidosClientesBean.pedido.enderecoCliente.cliente.nome} - #{pedidosClientesBean.pedido.enderecoCliente.cliente.email}, " />
+										value="#{pedidosClientesBean.pedido.cliente.nome} - #{pedidosClientesBean.pedido.cliente.email}, " />
 									&nbsp;
 									<h:outputText
-										value="#{pedidosClientesBean.pedido.enderecoCliente.cliente.telefone}"
+										value="#{pedidosClientesBean.pedido.cliente.telefone}"
 										converter="converterTelefone" />
 								</div>
 
 								<div class="col-lg-12 col-sm-12 col-xs-12 col-md-12">
 									<h:outputText
-										value="#{pedidosClientesBean.pedido.enderecoCliente.endereco.logradouro}, #{pedidosClientesBean.pedido.enderecoCliente.endereco.numero} - #{pedidosClientesBean.pedido.enderecoCliente.endereco.bairroCidade.descBairro}, #{pedidosClientesBean.pedido.enderecoCliente.endereco.bairroCidade.cidade.descCidade} " />
+										value="#{pedidosClientesBean.pedido.logradouro}, #{pedidosClientesBean.pedido.numero} - #{pedidosClientesBean.pedido.bairro}, #{pedidosClientesBean.pedido.cidade} - #{pedidosClientesBean.pedido.UF}" />
 									&nbsp;
 									<h:outputText
-										value="#{pedidosClientesBean.pedido.enderecoCliente.endereco.cep}"
+										value="#{pedidosClientesBean.pedido.cep}"
 										converter="converterCEP" />
 									<h:outputText />
 
 									<h:outputText
-										value=" #{pedidosClientesBean.pedido.enderecoCliente.endereco.complemento}" />
+										value=" #{pedidosClientesBean.pedido.complemento}" />
 
 									<h:outputText />
 								</div>

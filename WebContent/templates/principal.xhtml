@@ -70,12 +70,21 @@
 						$("#logradouro").val(data.address);
 						$("#bairro").val(data.district);
 						$("#uf").val(data.state);
+						$("#numero").focus();
 					},
 					error : function() {
 						alert(result.message || "Houve um erro desconhecido");
 					}
 				});
 
+			}
+			
+			function pedidoAncora(){
+				this.location = "#pedidoInfo";
+			}
+			
+			function pedidoEmpresaAncora(){
+				this.location = "#formInfoPedido";
 			}
 		</script>
 	</div>

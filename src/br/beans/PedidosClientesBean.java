@@ -212,12 +212,4 @@ public class PedidosClientesBean implements Serializable {
 		this.pedido = pedido;
 	}
 
-	/*
-	 * public void atualizaCampoAvulso() { ProdutoAvulsoDAO produtoTemp =
-	 * DAOFactoy.criarProdutoAvulso(); ProdutoAvulso produtoAvulsoTemp = null;
-	 * try { produtoAvulsoTemp = produtoTemp.getUnico(pedidoProduto
-	 * .getProdutoAvulso().getIdProdutoAvulso()); } catch (Exception e) {
-	 * System.out.println("Deu erro"); } avulsos =
-	 * produtoAvulsoTemp.getAvulsos(); }
-	 */
 }
