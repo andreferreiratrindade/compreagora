@@ -29,19 +29,17 @@
 						</h:panelGrid>
 					</h:panelGrid>
 
-					<h:panelGrid columns="2">
-						<h:outputText value="Cidade: " style="float:right;" />
-						<h:outputText
-							value="#{empresaBean.empresa.endereco.bairroCidade.cidade}" />
-						<h:outputText value="Bairro: " style="float:right;" />
-						<h:outputText value="#{empresaBean.empresa.endereco.bairroCidade}" />
-						<h:outputText value="Logradouro: " style="float:right;" />
-						<h:outputText value="#{empresaBean.empresa.endereco.logradouro}" />
-						<h:outputText value="Numero: " style="float:right;" />
-						<h:outputText value="#{empresaBean.empresa.endereco.numero}" />
-						<h:outputText value="CEP: " style="float:right;" />
-						<h:outputText value="#{empresaBean.empresa.endereco.cep}" />
-					</h:panelGrid>
+					<div>
+							<h:outputText value="#{empresaBean.empresa.logradouro}, " />
+							<h:outputText value="#{empresaBean.empresa.numero} - " />
+							<h:outputText
+								value="Bairro #{empresaBean.empresa.bairro}" />
+							<h:outputText
+								value=" - #{empresaBean.empresa.cidade} - " />
+
+							<h:outputText value="#{empresaBean.empresa.cep}"
+								converter="converterCEP" />
+						</div>
 				</div>
 			</div>
 		</h:form>

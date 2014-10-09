@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- <?xml version="1.0" encoding="ISO-8859-1"?> -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:p="http://primefaces.org/ui"
@@ -13,10 +13,8 @@
 					actionListener="#{empresaBean.abrirOufecharEmpresa}"
 					style="margin:auto">
 
-					<h:graphicImage library="imagens/empresa" width="125px"
-						style="margin-bottom: 40px;"
-						name="#{empresaBean.empresa.aberto}.png" />
-				</p:commandLink>
+					
+				</p:commandLink><h:graphicImage library="imagens/empresa" width="125px" style="margin-bottom: 40px; height: 127px; " name="#{empresaBean.empresa.aberto}.png" />
 			</center>
 			<ul class="nav nav-pills nav-stacked">
 
@@ -24,7 +22,7 @@
 						action="#{pagPath.pedidosDeClientes}" /></li>
 
 				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#"> Relatórios <span class="caret"></span>
+					data-toggle="dropdown" href="#"> RelatÃ³rios <span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu" role="menu" style="width: 100%;">
 						<li><h:commandLink value="Produtos Cadastrados"
@@ -36,7 +34,7 @@
 					</ul>
 				</li>
 				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#"> Manutenção <span class="caret"></span>
+					data-toggle="dropdown" href="#"> ManutenÃ§Ã£o <span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu" role="menu" style="width: 100%;">
 
@@ -46,11 +44,10 @@
 								action="#{pagPath.manterProdutoBebida}" /></li>
 						<li><h:commandLink value="Marmitex"
 								action="#{pagPath.manterProdutoMarmitex}" /></li>
-						<li><h:commandLink value="Pizza"
-								action="#{pagPath.manterProdutoPizza}" /></li>
-						<li><h:commandLink value="Gás"
-								action="#{pagPath.manterProdutoGas}" /></li>
-						<li><h:commandLink value="Água"
+						
+						<li><h:commandLink value="GÃ¡s"
+								action="#{pagPath.manterProdutoGas}" /><li><h:commandLink value="Pizza" action="#{pagPath.manterProdutoPizza}" /></li></li>
+						<li><h:commandLink value="Ãgua"
 								action="#{pagPath.manterProdutoAgua}" /></li>
 
 					</ul>

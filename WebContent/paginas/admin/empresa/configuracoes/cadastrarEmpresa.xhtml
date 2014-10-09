@@ -12,7 +12,7 @@
 	<ui:define name="corpo">
 
 
-		<h:form id="cadastroEmpresa">
+		<h:form id="cadastroEmpresa" prependId="false">
 
 			<span style="margin-left: 9px; font-size: 15px;"> <h:outputText
 					value="*" style="color: #F00;" /> <h:outputText
@@ -20,7 +20,7 @@
 			</span>
 			<div class="panel panel-primary" style="margin-top: 10px">
 				<div class="panel-heading">
-					<h3 class="panel-title">Novo Cadadstro - Água</h3>
+					<h3 class="panel-title">Novo Cadastro - Água</h3>
 				</div>
 				<div class="panel-body">
 					<h:panelGrid columns="3" style="font-size: 13px;">
@@ -66,108 +66,102 @@
 					<h3 class="panel-title">Endereço</h3>
 				</div>
 				<div class="panel-body">
-					<h:panelGrid columns="3" style="font-size: 13px;">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+						style="margin-top: 10px;">
+						<p:inputText id="cep" size="9" maxlength="8" />
+						<a onclick="findCEP()" href="#" class="btn btn-info">Buscar</a>
+						<p:watermark for="cep" value="Cep" />
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+						style="margin-top: 10px;">
+						<p:inputText value="#{empresaBean.empresa.logradouro}" size="30"
+							id="logradouro" required="true" requiredMessage="Informe sua rua"
+							styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+						<p:watermark for="logradouro" value="Rua/Av./Logradouro *" />
+						<p:message for="logradouro" />
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+						style="margin-top: 10px;">
+						<p:inputText value="#{empresaBean.empresa.bairro}" size="30"
+							id="bairro" required="true" requiredMessage="Informe seu bairro"
+							styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+						<p:watermark for="bairro" value="Bairro *" />
+						<p:message for="bairro" />
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+						style="margin-top: 10px;">
+						<p:inputText value="#{empresaBean.empresa.cidade}" size="30"
+							id="cidade" required="true" requiredMessage="Informe sua cidade"
+							styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+						<p:watermark for="cidade" value="Cidade *" />
+						<p:message for="cidade" />
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+						style="margin-top: 10px;">
+						<p:inputText value="#{empresaBean.empresa.UF}" id="uf"
+							required="true" requiredMessage="Informe seu Estado"
+							styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+						<p:message for="uf" />
+						<p:watermark for="uf" value="Estado *" />
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+						style="margin-top: 10px;">
+						<p:inputText value="#{empresaBean.empresa.numero}" id="numero"
+							required="true" requiredMessage="Informe o número de sua casa"
+							styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+						<p:message for="numero" />
+						<p:watermark for="numero" value="Número *" />
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+						style="margin-top: 10px;">
+						<p:inputText value="#{empresaBean.empresa.complemento}"
+							id="complemento"
+							styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
 
-						<h:column>
-							<h:outputText value="*" style="color: #F00;float:right" />
-
-						</h:column>
-						<p:autoComplete id="cidade" forceSelection="true" var="cidade"
-							itemLabel="#{cidade.descCidade}" itemValue="#{cidade}"
-							completeMethod="#{autoCompleteController.completaCidade}"
-							dropdown="true" required="true" converter="converterCidade"
-							placeholder="Cidade">
-							<p:ajax event="itemSelect"
-								listener="#{autoCompleteController.handleSelect}"
-								update="bairro" />
-						</p:autoComplete>
-						<p:message for="cidade" display="icon" />
-
-						<h:column>
-							<h:outputText value="*" style="color: #F00;float:right" />
-
-						</h:column>
-						<p:autoComplete id="bairro"
-							value="#{empresaBean.endereco.bairroCidade}"
-							forceSelection="true" dropdown="true" scrollHeight="200"
-							completeMethod="#{autoCompleteController.completaBairro}"
-							var="bairro" itemLabel="#{bairro}" itemValue="#{bairro}"
-							required="true" converter="converterBairro" placeholder="Bairro">
-						</p:autoComplete>
-						<p:message for="bairro" display="icon" />
-						<h:column>
-							<h:outputText value="*" style="color: #F00;float:right" />
-
-						</h:column>
-						<p:inputText value="#{empresaBean.endereco.logradouro}"
-							id="lograd" size="40" required="true"
-							placeholder="Logradouro / Rua / Av." />
-						<p:message for="lograd" display="icon" />
-
-						<h:column>
-							<h:outputText value="*" style="color: #F00;float:right" />
-
-						</h:column>
-						<p:inputText value="#{empresaBean.endereco.numero}" id="numero"
-							required="true" placeholder="Número" />
-						<p:message for="numero" display="icon" />
-						<h:column>
-							<h:outputText value="*" style="color: #F00;float:right" />
-
-						</h:column>
-						<p:inputMask value="#{empresaBean.endereco.cep}" id="cep"
-							required="true" mask="99999-999" label="CEP"
-							converter="converterCEP" placeholder="Cep" />
-						<p:message for="cep" display="icon" />
-						<h:outputText />
-						<p:inputTextarea value="#{empresaBean.endereco.complemento}"
-							maxlength="100" counterTemplate="{0} Caracteres"
-							counter="contador" cols="32" placeholder="Complemento" />
-						<h:outputText />
-					</h:panelGrid>
-					<h:outputText id="contador" style="float:right" />
+						<p:watermark for="complemento" value="Complemento" />
+					</div>
 				</div>
-			</div>
-			<div class="panel panel-primary" style="margin-top: 10px">
-				<div class="panel-heading">
-					<h3 class="panel-title">Login</h3>
-				</div>
-				<div class="panel-body">
-					<h:panelGrid columns="3" style="font-size: 13px;">
-						<h:column>
-							<h:outputText value="*" style="color: #F00;float:right" />
+				<div class="panel panel-primary" style="margin-top: 10px">
+					<div class="panel-heading">
+						<h3 class="panel-title">Login</h3>
+					</div>
+					<div class="panel-body">
+						<h:panelGrid columns="3" style="font-size: 13px;">
+							<h:column>
+								<h:outputText value="*" style="color: #F00;float:right" />
 
-						</h:column>
+							</h:column>
 
-						<p:inputText value="#{empresaBean.cliente.email}" id="email"
-							size="40" required="true" placeholder="E-mail" />
-						<p:message for="email" display="icon" />
+							<p:inputText value="#{empresaBean.cliente.email}" id="email"
+								size="40" required="true" placeholder="E-mail" />
+							<p:message for="email" display="icon" />
 
-						<h:column>
-							<h:outputText value="*" style="color: #F00;float:right" />
+							<h:column>
+								<h:outputText value="*" style="color: #F00;float:right" />
 
-						</h:column>
-						<p:inputText value="#{empresaBean.confEmail}" id="confEmail"
-							size="40" required="true" placeholder="Confirma E-mail" />
-						<p:message for="confEmail" display="icon" />
-						<h:column>
-							<h:outputText value="*" style="color: #F00;float:right" />
+							</h:column>
+							<p:inputText value="#{empresaBean.confEmail}" id="confEmail"
+								size="40" required="true" placeholder="Confirma E-mail" />
+							<p:message for="confEmail" display="icon" />
+							<h:column>
+								<h:outputText value="*" style="color: #F00;float:right" />
 
-						</h:column>
+							</h:column>
 
-						<p:password id="pwd1" value="#{empresaBean.cliente.senha}"
-							match="pwd2" required="true" feedback="true"
-							promptLabel="Imforme uma Senha" weakLabel="Fraca" goodLabel="Boa"
-							strongLabel="Forte" placeholder="Senha" />
-						<p:message for="pwd1" display="icon" />
-						<h:column>
-							<h:outputText value="*" style="color: #F00;float:right" />
+							<p:password id="pwd1" value="#{empresaBean.cliente.senha}"
+								match="pwd2" required="true" feedback="true"
+								promptLabel="Imforme uma Senha" weakLabel="Fraca"
+								goodLabel="Boa" strongLabel="Forte" placeholder="Senha" />
+							<p:message for="pwd1" display="icon" />
+							<h:column>
+								<h:outputText value="*" style="color: #F00;float:right" />
 
-						</h:column>
-						<p:password id="pwd2" value="#{empresaBean.cliente.senha}"
-							required="true" placeholder="Confirma Senha" />
-						<p:message for="pwd2" display="icon" />
-					</h:panelGrid>
+							</h:column>
+							<p:password id="pwd2" value="#{empresaBean.cliente.senha}"
+								required="true" placeholder="Confirma Senha" />
+							<p:message for="pwd2" display="icon" />
+						</h:panelGrid>
+					</div>
 				</div>
 			</div>
 			<h:panelGrid columns="2" style="font-size: 13px;margin:auto">
@@ -177,7 +171,6 @@
 					<p:commandButton value="Cancelar" styleClass="btn btn-danger" />
 				</h:form>
 			</h:panelGrid>
-
 		</h:form>
 
 	</ui:define>

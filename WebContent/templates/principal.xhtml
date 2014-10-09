@@ -50,9 +50,10 @@
 			</ui:insert>
 		</div>
 
-		<div id="rodape2" style="background: #1d1d3a;; margin-top: 50px;">
-			<ui:insert name="rodape2">
-				<ui:include src="rodape2.xhtml" />
+
+		<div id="rodape" style="margin-top: 50px; margin-bottom: 22px">
+			<ui:insert name="rodape">
+				<ui:include src="rodape.xhtml" />
 			</ui:insert>
 		</div>
 		<script type="text/javascript">
@@ -78,12 +79,12 @@
 				});
 
 			}
-			
-			function pedidoAncora(){
+
+			function pedidoAncora() {
 				this.location = "#pedidoInfo";
 			}
-			
-			function pedidoEmpresaAncora(){
+
+			function pedidoEmpresaAncora() {
 				this.location = "#formInfoPedido";
 			}
 		</script>

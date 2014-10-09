@@ -5,13 +5,13 @@
                         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
 
 
-	<http auto-config="true">
+	<http auto-config="true" use-expressions="true">
 		<intercept-url pattern="/paginas/admin/**" access="ROLE_SUP" />
 
 		<intercept-url pattern="/paginas/restrito/**" access="ROLE_ADM" />
 
 		<intercept-url pattern="/paginas/publico/alterarCliente**"
-			access="ROLE_CLI" />
+			access="hasRole('ROLE_ADM') or hasRole('ROLE_CLI') or hasRole('ROLE_SUP')" />
 
 		<intercept-url pattern="/paginas/categoria/escolhaProduto/**"
 			access="ROLE_CLI" />

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+<ui:composition>
+	<div style="margin: auto;" class="container-fluid text-center">
+		<div class="col-sm-4 text-center"
+			style=" float: none; margin: auto;">
+			<hr class="half-rule"></hr>
+			<h:form style="font-family: cursive;margin-top: 18px;"
+				styleClass="row">
+
+				<div class="col-xs-12" style="margin-bottom: 22px;">
+					<p:commandLink style=" font-size:20px;"
+						styleClass="col-xs-6 pull-left"> Quem somos ?</p:commandLink>
+					<p:commandLink id="faleConosco" style="font-size:20px;"
+						styleClass="col-xs-6 pull-right"
+						action="#{pagPath.clienteEmailContato}">
+				Fale conosco
+				<f:setPropertyActionListener
+							target="#{contextUtil.categoriaEmpresa}" value="#{-1}" />
+					</p:commandLink>
+
+				</div>
+
+				<div class="col-xs-4">
+
+					<h:commandLink>
+						<h:graphicImage library="imagens/ImagensForm" name="facebook.png"
+							style="width: 45px" />
+					</h:commandLink>
+				</div>
+
+
+				<div class="col-xs-4">
+					<h:commandLink>
+						<h:graphicImage library="imagens/ImagensForm" name="twitter.png"
+							style="width: 45px" />
+					</h:commandLink>
+				</div>
+
+				<div class="col-xs-4">
+					<h:commandLink>
+						<h:graphicImage library="imagens/ImagensForm" name="google.png"
+							style="width: 45px" />
+
+					</h:commandLink>
+				</div>
+
+			</h:form>
+		</div>
+	</div>
+</ui:composition>
+</html>
