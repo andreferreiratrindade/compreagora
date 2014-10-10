@@ -65,10 +65,10 @@ public class PedidoRN {
 
 		pedido.setDataHoraIn(new Date());
 		pedido.setStatusPedido(1);
-	//	pedido.inserirPedidoNoPedidoProdutos();
+	
 
 		this.pedidoDAO.salve(pedido);
-		atualizaProdutos(pedido);
+		//atualizaProdutos(pedido);
 	}
 
 	public int calculaTempoDeTodosPedidos(int idEmpresa) {

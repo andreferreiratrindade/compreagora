@@ -6,20 +6,20 @@
 
 
 	<http auto-config="true" use-expressions="true">
-		<intercept-url pattern="/paginas/admin/**" access="ROLE_SUP" />
+		<intercept-url pattern="/paginas/admin/**" access="hasRole('ROLE_SUP')" />
 
-		<intercept-url pattern="/paginas/restrito/**" access="ROLE_ADM" />
+		<intercept-url pattern="/paginas/restrito/**" access="hasRole('ROLE_ADM')" />
 
 		<intercept-url pattern="/paginas/publico/alterarCliente**"
 			access="hasRole('ROLE_ADM') or hasRole('ROLE_CLI') or hasRole('ROLE_SUP')" />
 
 		<intercept-url pattern="/paginas/categoria/escolhaProduto/**"
-			access="ROLE_CLI" />
+			access="hasRole('ROLE_CLI')" />
 		<intercept-url pattern="/paginas/publico/meusPedidos**"
-			access="ROLE_CLI" />
+			access="hasRole('ROLE_CLI')" />
 		<intercept-url pattern="/paginas/restrito_empresa/**"
-			access="ROLE_ADM" />
-		<intercept-url pattern="/paginas/admin/**" access="ROLE_SUP" />
+			access="hasRole('ROLE_ADM')" />
+		<intercept-url pattern="/paginas/admin/**" access="hasRole('ROLE_SUP')" />
 
 		<form-login login-page="/paginas/publico/login.jsf"
 			always-use-default-target="false" default-target-url="/principal.jsf"

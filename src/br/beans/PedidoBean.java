@@ -134,12 +134,18 @@ public class PedidoBean implements Serializable {
 
 	public void atualizaAvulsoTotal() {
 
-		BigDecimal avulsoBD = new BigDecimal(pedidoProduto.getValor());
+		BigDecimal avulsoBD = new BigDecimal("0");
+		BigDecimal aux = new BigDecimal("0");
+		
 		for (Avulso x : avulsoDual.getTarget()) {
 
-			avulsoBD.add(new BigDecimal(x.getValor()));
+			aux = aux.add(avulsoBD.add(new BigDecimal(Float.toString(x
+					.getValor()))));
+
 		}
-		avulsoValorTotal = avulsoBD.floatValue();
+		avulsoValorTotal = aux.add(new BigDecimal(pedidoProduto.getValor()))
+				.floatValue();
+		System.out.println(avulsoValorTotal);
 	}
 
 	public Marmitex getMarmitex() {
@@ -483,7 +489,7 @@ public class PedidoBean implements Serializable {
 		pedidoProduto = new PedidoProduto();
 
 		avulsoDual = new DualListModel<Avulso>();
-	//	atualizaTaxaEntregaFirst();
+		// atualizaTaxaEntregaFirst();
 	}
 
 	public void converteTipoProduto(List<Categoria> tiposProdutos) {
@@ -807,14 +813,14 @@ public class PedidoBean implements Serializable {
 			if (login != null) {
 				ClienteRN usuarioRN = new ClienteRN();
 				this.cliente = usuarioRN.buscarPorEmail(login);
-				
+
 			}
 		}
 		populandoEnderecoPedido();
 	}
 
 	public void populandoEnderecoPedido() {
-	
+
 		pedido.setBairro(cliente.getBairro());
 		pedido.setLogradouro(cliente.getLogradouro());
 		pedido.setCep(cliente.getCep());
@@ -875,11 +881,11 @@ public class PedidoBean implements Serializable {
 					new FacesMessage(FacesMessage.SEVERITY_ERROR,
 							"Empresa não atende a essa localidade", " "));
 			empresaAtendeBairro = false;
-		}	
+		}
 	}
 
 	public void atualizaTaxaEntrega() {
-		
+
 		int idEmpresa = empresa.getIdEmpresa();
 
 		EmpresaAtendimentoRN empresaAtendimentoRN = new EmpresaAtendimentoRN();

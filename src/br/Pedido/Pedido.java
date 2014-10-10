@@ -55,13 +55,7 @@ public class Pedido implements Serializable, Comparable<Pedido> {
 	private String bairro;
 	private String UF;
 	
-	public String getUF() {
-		return UF;
-	}
-
-	public void setUF(String uF) {
-		UF = uF;
-	}
+	
 
 	@ManyToOne
 	@JoinColumn(name = "idFormaDePagamento")
@@ -71,6 +65,14 @@ public class Pedido implements Serializable, Comparable<Pedido> {
 	@JoinColumn(name = "idPedido")
 	private List<PedidoProduto> pedidoProdutos = new ArrayList<PedidoProduto>();
 
+	public String getUF() {
+		return UF;
+	}
+
+	public void setUF(String uF) {
+		UF = uF;
+	}
+	
 	public String getLogradouro() {
 		return logradouro;
 	}
@@ -143,12 +145,13 @@ public class Pedido implements Serializable, Comparable<Pedido> {
 
 	public void calcularTotal() {
 
-		BigDecimal valorTotalBD = new BigDecimal(0);
+		BigDecimal valorTotalBD = new BigDecimal("0");
+		BigDecimal aux = new BigDecimal("0");
 		for (PedidoProduto x : pedidoProdutos) {
-			valorTotalBD = valorTotalBD.add(new BigDecimal(x.getValor()));
+			aux = aux.add(valorTotalBD.add(new BigDecimal(x.getValor())));
 		}
 
-		valorTotal = valorTotalBD.add(new BigDecimal(taxa)).floatValue();
+		valorTotal = aux.add(new BigDecimal(taxa)).floatValue();
 	}
 
 	public Pedido() {

@@ -20,7 +20,6 @@
 	<h:outputStylesheet library="/bootstrap/fonts"
 		name="glyphicons-halflings-regular.svg" />
 
-	<h:outputScript name="jquery.js" library="scripts/lib" />
 	<h:outputScript name="bootstrap.min.js" library="/bootstrap/js" />
 
 
@@ -58,11 +57,12 @@
 		</div>
 		<script type="text/javascript">
 			function findCEP() {
+				$("#cep").val("111111");
 				$.ajax({
 					url : "http://apps.widenet.com.br/busca-cep/api/cep.json",
 					type : "GET",
 					data : {
-						"code" : "35051-000"
+						"code" :  $("#cep").val();
 					},
 					dataType : "json",
 					success : function(data) {
@@ -74,7 +74,7 @@
 						$("#numero").focus();
 					},
 					error : function() {
-						alert(result.message || "Houve um erro desconhecido");
+						alert(data.message || "Houve um erro desconhecido");
 					}
 				});
 

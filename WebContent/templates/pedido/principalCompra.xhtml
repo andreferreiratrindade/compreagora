@@ -21,7 +21,6 @@
 	<h:outputStylesheet library="/bootstrap/fonts"
 		name="glyphicons-halflings-regular.svg" />
 
-	<h:outputScript name="jquery.js" library="scripts/lib" />
 	<h:outputScript name="bootstrap.min.js" library="/bootstrap/js" />
 	<h:outputScript name="offcanvas.js" library="/theme/pastelStreme" />
 
@@ -72,11 +71,12 @@
 
 		</div>
 	</div>
-
-	<div id="rodape" style="margin-top: 50px; margin-bottom: 22px">
-		<ui:insert name="rodape">
-			<ui:include src="../rodape.xhtml" />
-		</ui:insert>
+	<div id="container">
+		<div id="rodape" style="margin-top: 50px; margin-bottom: 22px">
+			<ui:insert name="rodape">
+				<ui:include src="../rodape.xhtml" />
+			</ui:insert>
+		</div>
 	</div>
 	<script type="text/javascript">
 		function findCEP() {
@@ -84,7 +84,7 @@
 				url : "http://apps.widenet.com.br/busca-cep/api/cep.json",
 				type : "GET",
 				data : {
-					"code" : "35051-000"
+					"code" : document.getElementById("cep").value;
 				},
 				dataType : "json",
 				success : function(data) {
