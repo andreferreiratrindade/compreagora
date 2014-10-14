@@ -131,7 +131,7 @@ public class MeusPedidosBean implements Serializable {
 	}
 
 	public void atualizaPedidoProdutos() {
-
+System.out.println("Atualiza Pedido Produtos");
 		if (pedido != null) {
 
 			if ((pedido.getIdPedido() != 0)) {

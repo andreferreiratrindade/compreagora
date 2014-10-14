@@ -287,4 +287,9 @@ public class EmpresaBean implements Serializable {
 
 		return empresa;
 	}
+	
+	public void atualizarEmpresa(){
+		EmpresaRN empresaRN = new EmpresaRN();
+		empresaRN.update(empresa);
+	}
 }

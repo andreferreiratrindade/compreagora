@@ -12,6 +12,7 @@
 		content="lanchonete, restaurante, compre agora, delivery" />
 	<title><ui:insert name="titulo">Compre Agora</ui:insert></title>
 	<link rel="shortcut icon" href="#{resource['imagens/icones:logo.gif']}" />
+
 	<h:outputStylesheet library="/css" name="estilo.css" />
 
 	<h:outputStylesheet library="/bootstrap/css" name="bootstrap.css" />
@@ -19,7 +20,7 @@
 		name="pastel-stream.css" />
 	<h:outputStylesheet library="/bootstrap/fonts"
 		name="glyphicons-halflings-regular.svg" />
-
+	<h:outputScript name="cepAutoComplete.js" library="/scripts" />
 	<h:outputScript name="bootstrap.min.js" library="/bootstrap/js" />
 
 
@@ -55,39 +56,7 @@
 				<ui:include src="rodape.xhtml" />
 			</ui:insert>
 		</div>
-		<script type="text/javascript">
-			function findCEP() {
-				$("#cep").val("111111");
-				$.ajax({
-					url : "http://apps.widenet.com.br/busca-cep/api/cep.json",
-					type : "GET",
-					data : {
-						"code" :  $("#cep").val();
-					},
-					dataType : "json",
-					success : function(data) {
-						$("#cep").val(data.code);
-						$("#cidade").val(data.city);
-						$("#logradouro").val(data.address);
-						$("#bairro").val(data.district);
-						$("#uf").val(data.state);
-						$("#numero").focus();
-					},
-					error : function() {
-						alert(data.message || "Houve um erro desconhecido");
-					}
-				});
 
-			}
-
-			function pedidoAncora() {
-				this.location = "#pedidoInfo";
-			}
-
-			function pedidoEmpresaAncora() {
-				this.location = "#formInfoPedido";
-			}
-		</script>
 	</div>
 </h:body>
 </html>

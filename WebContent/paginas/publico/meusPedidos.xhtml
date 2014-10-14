@@ -34,10 +34,11 @@
 						<p:dataTable value="#{meusPedidosBean.pedidosLazy}" var="pedido"
 							emptyMessage="Nenhum produto encontrado." paginator="true"
 							rows="10" selection="#{meusPedidosBean.pedido}"
-							rowKey="#{pedido.idPedido}" selectionMode="single" lazy="true" >
+							rowKey="#{pedido.idPedido}" selectionMode="single" lazy="true">
 
 							<p:ajax event="rowSelect" update=":pedidoInfo :localEntregaInfo"
-								listener="#{meusPedidosBean.atualizaPedidoProdutos}" oncomplete="pedidoAncora()"/>
+								listener="#{meusPedidosBean.atualizaPedidoProdutos}"
+								/>
 
 							<f:facet name="header">Meus Pedidos</f:facet>
 
@@ -247,10 +248,8 @@
 
 											<h:outputText
 												value="#{meusPedidosBean.pedido.empresa.cidade}" />
-<h:outputText
-												value="#{meusPedidosBean.pedido.empresa.UF}" />
-											<h:outputText
-												value="#{meusPedidosBean.pedido.empresa.cep}"
+											<h:outputText value="#{meusPedidosBean.pedido.empresa.UF}" />
+											<h:outputText value="#{meusPedidosBean.pedido.empresa.cep}"
 												converter="converterCEP" />
 
 											<h:outputText
@@ -268,9 +267,8 @@
 							widgetVar="infoDialogProduto" resizable="false" modal="true"
 							showEffect="slite">
 							<h:panelGrid style="width:300px">
-
 								<h:panelGrid>
-									<h:dataTable var="avulso" value="#{meusPedidosBean.avulsos}">
+									<h:dataTable var="avulso" value="#{meusPedidosBean.pedidoProduto.avulsos}">
 										<h:column>
 											<h:outputText value="#{avulso.descricao}" />
 										</h:column>
@@ -365,10 +363,10 @@
 
 							<p:commandLink value="Detalhes" style="right: -30px;"
 								styleClass="btn btn-info" update=":CelularInfoPedido"
-								oncomplete="celularInfoDialogPedido.show()">
+								oncomplete="celularInfoDialogPedido.show()" >
 								<f:setPropertyActionListener target="#{meusPedidosBean.pedido}"
 									value="#{pedido}" />
-								<f:ajax execute="#{meusPedidosBean.atualizaPedidoProdutos()}" />
+								<f:ajax event="click" listener="#{meusPedidosBean.atualizaPedidoProdutos()}" />
 							</p:commandLink>
 
 						</h:column>
@@ -394,21 +392,19 @@
 								timeZone="America/Sao_Paulo" />
 						</h:outputText>
 					</h:panelGrid>
-					<p:dataTable value="#{meusPedidosBean.pedidoProdutos}"
+					<p:dataTable value="#{meusPedidosBean.pedido.pedidoProdutos}"
 						var="pedidoProduto" emptyMessage="Nenhum produto encontrado."
 						style="margin:auto;margin-top:20px;width: 100%; ">
 						<f:facet name="header">  
           						  Produtos  
         						</f:facet>
 						<p:column headerText="Descrição">
-							<h:outputText
-								value="#{pedidoProduto.descricao}" />
+							<h:outputText value="#{pedidoProduto.descricao}" />
 						</p:column>
 						<p:column headerText="Valor">
 							<center>
 								<h:outputText value="R$ " />
-								<h:outputText
-									value="#{pedidoProduto.valor}">
+								<h:outputText value="#{pedidoProduto.valor}">
 									<f:convertNumber pattern="#,###,##0.00" />
 								</h:outputText>
 							</center>
@@ -416,7 +412,7 @@
 					</p:dataTable>
 
 
-					<h:panelGrid>
+					<h:panelGrid columns="2" >
 
 						<h:graphicImage library="imagens/icones/formaDePagamento"
 							name="#{meusPedidosBean.pedido.formaDePagamento.idFormaDePagamento}.png" />
@@ -425,11 +421,11 @@
 							style="margin-left:5px" />
 
 
-						<h:outputText value="Valor" />
+						<h:outputText value="Valor R$" />
 						<h:outputText value="#{meusPedidosBean.pedido.valorTotal}">
 							<f:convertNumber pattern="#,###,##0.00" />
 						</h:outputText>
-						<h:outputText value="Status" />
+						<h:outputText value="Status:" />
 						<h:column>
 							<center>
 								<h:graphicImage width="30" height="30" library="imagens/status"

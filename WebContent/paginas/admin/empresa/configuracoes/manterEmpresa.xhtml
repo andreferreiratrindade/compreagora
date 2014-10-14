@@ -17,31 +17,113 @@
 					<h3 class="panel-title">Informações Gerais</h3>
 				</div>
 				<div class="panel-body">
-					<h:panelGrid columns="2">
-						<h:graphicImage width="150" height="100" library="imagens/empresa"
-							name="Empresa#{empresaBean.empresa.idEmpresa}.jpg"
-							style="float:left" />
-						<h:panelGrid columns="2">
-							<h:outputText value="Razão Social: " style="float:right;" />
-							<h:outputText value="#{empresaBean.empresa.razaoSocial}" />
-							<h:outputText value="Telefone: " style="float:right;" />
-							<h:outputText value="#{empresaBean.empresa.telefone}" />
-						</h:panelGrid>
+
+					<h:graphicImage width="150" height="100" library="imagens/empresa"
+						name="Empresa#{empresaBean.empresa.idEmpresa}.jpg"
+						style="float:left" />
+
+
+					<h:panelGrid columns="3" style="font-size: 13px;">
+						<h:column>
+							<h:outputText value="*" style="color: #F00;float:right" />
+
+						</h:column>
+						<p:inputText value="#{empresaBean.empresa.razaoSocial}"
+							id="razaoSocial" size="40" required="true"
+							placeholder="Razão Social"
+							styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+						<p:message for="razaoSocial" display="icon" />
+
+						<h:column>
+							<h:outputText value="*" style="color: #F00;float:right" />
+
+						</h:column>
+						<p:inputText value="#{empresaBean.empresa.nomeFant}" id="nomeFant"
+							size="40" required="true" placeholder="Nome Fantasia"
+							styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+						<p:message for="nomeFant" display="icon" />
+
+						<h:column>
+							<h:outputText value="*" style="color: #F00;float:right" />
+
+						</h:column>
+
+						<p:inputMask value="#{empresaBean.empresa.CNPJ}" id="cnpj"
+							mask="999.999.999-99" converter="converterCNPJ" required="true"
+							placeholder="CNPJ" />
+						<p:message for="cnpj" display="icon" />
+						<h:outputText />
+						<p:inputMask value="#{empresaBean.empresa.telefone}" id="telefone"
+							mask="(99) 9999-9999" converter="converterTelefone"
+							placeholder="Telefone" />
+						<h:outputText />
 					</h:panelGrid>
 
-					<div>
-							<h:outputText value="#{empresaBean.empresa.logradouro}, " />
-							<h:outputText value="#{empresaBean.empresa.numero} - " />
-							<h:outputText
-								value="Bairro #{empresaBean.empresa.bairro}" />
-							<h:outputText
-								value=" - #{empresaBean.empresa.cidade} - " />
-
-							<h:outputText value="#{empresaBean.empresa.cep}"
-								converter="converterCEP" />
-						</div>
 				</div>
 			</div>
+			<div class="panel panel-primary" style="margin-top: 10px">
+				<div class="panel-heading">
+					<h3 class="panel-title">Endereço</h3>
+				</div>
+				<div class="panel-body">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+						style="margin-top: 10px;">
+						<p:inputText id="cep" size="9" maxlength="8" />
+						<a onclick="findCEP()" href="#" class="btn btn-info">Buscar</a>
+						<p:watermark for="cep" value="Cep" />
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+						style="margin-top: 10px;">
+						<p:inputText value="#{empresaBean.empresa.logradouro}" size="30"
+							id="logradouro" required="true" requiredMessage="Informe sua rua"
+							styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+						<p:watermark for="logradouro" value="Rua/Av./Logradouro *" />
+						<p:message for="logradouro" />
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+						style="margin-top: 10px;">
+						<p:inputText value="#{empresaBean.empresa.bairro}" size="30"
+							id="bairro" required="true" requiredMessage="Informe seu bairro"
+							styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+						<p:watermark for="bairro" value="Bairro *" />
+						<p:message for="bairro" />
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+						style="margin-top: 10px;">
+						<p:inputText value="#{empresaBean.empresa.cidade}" size="30"
+							id="cidade" required="true" requiredMessage="Informe sua cidade"
+							styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+						<p:watermark for="cidade" value="Cidade *" />
+						<p:message for="cidade" />
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+						style="margin-top: 10px;">
+						<p:inputText value="#{empresaBean.empresa.UF}" id="uf"
+							required="true" requiredMessage="Informe seu Estado"
+							styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+						<p:message for="uf" />
+						<p:watermark for="uf" value="Estado *" />
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+						style="margin-top: 10px;">
+						<p:inputText value="#{empresaBean.empresa.numero}" id="numero"
+							required="true" requiredMessage="Informe o número de sua casa"
+							styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+						<p:message for="numero" />
+						<p:watermark for="numero" value="Número *" />
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+						style="margin-top: 10px;">
+						<p:inputText value="#{empresaBean.empresa.complemento}"
+							id="complemento"
+							styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
+
+						<p:watermark for="complemento" value="Complemento" />
+					</div>
+				</div>
+			</div>
+			<p:commandLink styleClass="btn btn-success" value="Salvar" actionListener="#{empresaBean.atualizarEmpresa()}">
+			</p:commandLink>
 		</h:form>
 	</ui:define>
 </ui:composition>

@@ -20,7 +20,7 @@
 	<h:outputStylesheet library="/theme/pastelStreme" name="offcanvas.css" />
 	<h:outputStylesheet library="/bootstrap/fonts"
 		name="glyphicons-halflings-regular.svg" />
-
+<h:outputScript name="cepAutoComplete.js" library="/scripts" />
 	<h:outputScript name="bootstrap.min.js" library="/bootstrap/js" />
 	<h:outputScript name="offcanvas.js" library="/theme/pastelStreme" />
 
@@ -78,32 +78,6 @@
 			</ui:insert>
 		</div>
 	</div>
-	<script type="text/javascript">
-		function findCEP() {
-			$.ajax({
-				url : "http://apps.widenet.com.br/busca-cep/api/cep.json",
-				type : "GET",
-				data : {
-					"code" : document.getElementById("cep").value;
-				},
-				dataType : "json",
-				success : function(data) {
-					$("#cep").val(data.code);
-					$("#cidade").val(data.city);
-					$("#logradouro").val(data.address);
-					$("#bairro").val(data.district);
-					$("#uf").val(data.state);
-				},
-				error : function() {
-					alert(result.message || "Houve um erro desconhecido");
-				}
-			});
-
-		}
-
-		function clickSuccess() {
-			$('#modalOutroEndereco').modal('hide');
-		}
-	</script>
+	
 </h:body>
 </html>
