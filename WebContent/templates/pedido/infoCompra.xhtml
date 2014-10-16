@@ -59,11 +59,10 @@
 									styleClass="btn btn-primary" />
 							</span>
 
-							<h:panelGrid style="margin-top: 15px;" >
+							<h:panelGrid style="margin-top: 15px;">
 								<h:outputText
 									value="#{pedidoBean.pedido.logradouro}, #{pedidoBean.pedido.numero}, #{pedidoBean.pedido.bairro} - #{pedidoBean.pedido.cidade} -  #{pedidoBean.pedido.UF}" />
-								<h:outputText value="#{pedidoBean.pedido.cep}"
-									 />
+								<h:outputText value="#{pedidoBean.pedido.cep}" />
 
 								<h:outputText value="#{pedidoBean.pedido.complemento}" />
 							</h:panelGrid>
@@ -165,7 +164,8 @@
 
 								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
 									style="margin-top: 10px;">
-									<p:inputText id="cep" size="9" maxlength="8" value="#{pedidoBean.pedido.cep}"/>
+									<p:inputText id="cep" size="9" maxlength="8"
+										value="#{pedidoBean.pedido.cep}" />
 									<a onclick="findCEP()" href="#" class="btn btn-info">Buscar</a>
 									<p:watermark for="cep" value="Cep" />
 								</div>
@@ -214,10 +214,10 @@
 								</div>
 								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
 									style="margin-top: 10px;">
-									<p:inputText value="#{pedidoBean.pedido.complemento}" id="complemento"
-										
+									<p:inputText value="#{pedidoBean.pedido.complemento}"
+										id="complemento"
 										styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
-									
+
 									<p:watermark for="complemento" value="Complemento" />
 								</div>
 							</div>
@@ -263,21 +263,20 @@
 							</h:outputText>
 						</h:panelGrid>
 						<div class="modal-footer">
-							<h:form prependId="false">
-								<center>
-									<span href="#" data-dismiss="modal"><p:commandLink
-											value="Deletar" actionListener="#{pedidoBean.deletarProduto}"
-											oncomplete="dlgDeletarProduto.hide()" ajax="true"
-											update=":formPainel" styleClass="btn btn-info" /> </span>
-								</center>
-							</h:form>
+
+							<center>
+								<span href="#" data-dismiss="modal"><h:commandLink
+										value="Deletar" actionListener="#{pedidoBean.deletarProduto}"
+										 styleClass="btn btn-info" > <f:ajax render=":formPainel"> </f:ajax> </h:commandLink> </span>
+							</center>
+
 						</div>
 					</div>
 				</div>
 			</div>
 		</h:form>
 	</div>
-<!-- Personalizar Produto  -->
+	<!-- Personalizar Produto  -->
 	<div id="modalPersonalizarProduto" class="modal fade" tabindex="-1"
 		aria-hidden="true">
 		<h:form id="idEditar">

@@ -852,11 +852,12 @@ public class PedidoBean implements Serializable {
 	}
 
 	public void deletarProduto() {
-
+		
 		if (pedidoProduto != null) {
 			pedido.removeValor(pedidoProduto.getValor());
 			pedidoProdutos.remove(pedidoProduto);
 			pedidoProduto = null;
+			
 		}
 
 	}
@@ -920,7 +921,7 @@ public class PedidoBean implements Serializable {
 
 	public boolean verificaValorMin() {
 
-		return pedido.getValorTotal() > 6 ? true : false;
+		return pedido.getValorTotal() >= 6 ? true : false;
 	}
 
 	public boolean verificaEstoque() {

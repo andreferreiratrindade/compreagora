@@ -68,10 +68,12 @@ public class PedidoRN {
 	
 
 		this.pedidoDAO.salve(pedido);
-		//atualizaProdutos(pedido);
+		atualizaProdutos(pedido);
 	}
 
 	public int calculaTempoDeTodosPedidos(int idEmpresa) {
+		
+	
 		List<Pedido> pedidos = this.pedidoDAO.pedidosPeloStatus(idEmpresa);
 		int tempo = 0;
 		for (Pedido x : pedidos) {

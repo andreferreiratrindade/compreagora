@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.apache.poi.hssf.record.formula.functions.AggregateFunction;
 import org.primefaces.model.SortOrder;
 
 import br.Pedido.Filtro.IFiltroPedido;
@@ -104,4 +105,5 @@ public class PedidoDAO implements Dao<Pedido> {
 
 		return easyCriteria.getResultList();
 	}
+
 }

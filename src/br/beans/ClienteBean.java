@@ -121,7 +121,7 @@ public class ClienteBean implements Serializable {
 				this.cliente.setSenha(senhaCripto);
 
 				clienteRN.salvar(this.cliente);
-
+				
 			//	emailCadastro(senha);
 				return "login.jsf?faces-redirect=true";
 			} else {

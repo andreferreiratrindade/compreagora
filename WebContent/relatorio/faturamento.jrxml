@@ -136,7 +136,7 @@
 				<textElement textAlignment="Right">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Valor Total:   R$]]></text>
+				<text><![CDATA[Valor Total:   ]]></text>
 			</staticText>
 			<textField pattern="¤ #,##0.00">
 				<reportElement x="439" y="7" width="100" height="20" uuid="de737956-ca5b-4720-91d5-15d9ccde4324"/>
