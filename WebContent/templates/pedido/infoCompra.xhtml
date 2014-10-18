@@ -54,7 +54,7 @@
 						<div style="margin-top: 15px"
 							class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<span data-toggle="modal" href="#modalOutroEndereco"> <p:commandLink
-									actionListener="#{pedidoBean.novoEndereco}"
+									
 									value="Outro Endereço" update=":formOutroEndereco"
 									styleClass="btn btn-primary" />
 							</span>
@@ -165,13 +165,13 @@
 								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
 									style="margin-top: 10px;">
 									<p:inputText id="cep" size="9" maxlength="8"
-										value="#{pedidoBean.pedido.cep}" />
+										value="#{pedidoBean.cepEntrega}" />
 									<a onclick="findCEP()" href="#" class="btn btn-info">Buscar</a>
 									<p:watermark for="cep" value="Cep" />
 								</div>
 								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
 									style="margin-top: 10px;">
-									<p:inputText value="#{pedidoBean.pedido.logradouro}" size="30"
+									<p:inputText value="#{pedidoBean.ruaEntrega}" size="30"
 										id="logradouro" required="true"
 										requiredMessage="Informe sua rua"
 										styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
@@ -180,7 +180,7 @@
 								</div>
 								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
 									style="margin-top: 10px;">
-									<p:inputText value="#{pedidoBean.pedido.bairro}" size="30"
+									<p:inputText value="#{pedidoBean.bairroEntrega}" size="30"
 										id="bairro" required="true"
 										requiredMessage="Informe seu bairro"
 										styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
@@ -189,7 +189,7 @@
 								</div>
 								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
 									style="margin-top: 10px;">
-									<p:inputText value="#{pedidoBean.pedido.cidade}" size="30"
+									<p:inputText value="#{pedidoBean.cidadeEntrega}" size="30"
 										id="cidade" required="true"
 										requiredMessage="Informe sua cidade"
 										styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
@@ -198,7 +198,7 @@
 								</div>
 								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
 									style="margin-top: 10px;">
-									<p:inputText value="#{pedidoBean.pedido.UF}" id="uf"
+									<p:inputText value="#{pedidoBean.ufEntrega}" id="uf"
 										required="true" requiredMessage="Informe seu Estado"
 										styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
 									<p:message for="uf" />
@@ -206,7 +206,7 @@
 								</div>
 								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
 									style="margin-top: 10px;">
-									<p:inputText value="#{pedidoBean.pedido.numero}" id="numero"
+									<p:inputText value="#{pedidoBean.numeroEntrega}" id="numero"
 										required="true" requiredMessage="Informe o número de sua casa"
 										styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
 									<p:message for="numero" />
@@ -214,7 +214,7 @@
 								</div>
 								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
 									style="margin-top: 10px;">
-									<p:inputText value="#{pedidoBean.pedido.complemento}"
+									<p:inputText value="#{pedidoBean.complementoEntrega}"
 										id="complemento"
 										styleClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" />
 
@@ -226,7 +226,7 @@
 
 
 					<div class="modal-footer">
-						<p:commandLink actionListener="#{pedidoBean.atualizaTaxaEntrega}"
+						<p:commandLink actionListener="#{pedidoBean.salvarOutroEndereco}"
 							value="Salvar" update=":formCompraValorTotal formOutroEndereco"
 							styleClass="btn btn-primary" validateClient="true"
 							onsuccess="clickSuccess()">

@@ -75,6 +75,20 @@ public class PedidoBean implements Serializable {
 	private DataModel<Produto> produtosDM;
 	private String cidadeEntrega;
 	private String bairroEntrega;
+	private String ruaEntrega;
+	private String numeroEntrega;
+	private String cepEntrega;
+	private String ufEntrega;
+	private String complementoEntrega;
+
+	public String getComplementoEntrega() {
+		return complementoEntrega;
+	}
+
+	public void setComplementoEntrega(String complementoEntrega) {
+		this.complementoEntrega = complementoEntrega;
+	}
+
 	private float valorTotalMaisTaxa;
 	private List<Bebida> bebidas;
 	private List<Lanche> lanches;
@@ -95,6 +109,46 @@ public class PedidoBean implements Serializable {
 	private float troco;
 	private int idBairro;
 	private Bairro bairro;
+
+	public String getRuaEntrega() {
+		return ruaEntrega;
+	}
+
+	public void setRuaEntrega(String ruaEntrega) {
+		this.ruaEntrega = ruaEntrega;
+	}
+
+	public String getNumeroEntrega() {
+		return numeroEntrega;
+	}
+
+	public void setNumeroEntrega(String numeroEntrega) {
+		this.numeroEntrega = numeroEntrega;
+	}
+
+	public String getCepEntrega() {
+		return cepEntrega;
+	}
+
+	public void setCepEntrega(String cepEntrega) {
+		this.cepEntrega = cepEntrega;
+	}
+
+	public String getUfEntrega() {
+		return ufEntrega;
+	}
+
+	public void setUfEntrega(String ufEntrega) {
+		this.ufEntrega = ufEntrega;
+	}
+
+	public boolean isEmpresaAtendeBairro() {
+		return empresaAtendeBairro;
+	}
+
+	public void setEmpresaAtendeBairro(boolean empresaAtendeBairro) {
+		this.empresaAtendeBairro = empresaAtendeBairro;
+	}
 
 	public Bairro getBairro() {
 		return bairro;
@@ -136,7 +190,7 @@ public class PedidoBean implements Serializable {
 
 		BigDecimal avulsoBD = new BigDecimal("0");
 		BigDecimal aux = new BigDecimal("0");
-		
+
 		for (Avulso x : avulsoDual.getTarget()) {
 
 			aux = aux.add(avulsoBD.add(new BigDecimal(Float.toString(x
@@ -830,16 +884,6 @@ public class PedidoBean implements Serializable {
 		pedido.setUF(cliente.getUF());
 	}
 
-	public void novoEndereco() {
-		pedido.setBairro("");
-		pedido.setLogradouro("");
-		pedido.setCep("");
-		pedido.setCidade("");
-		pedido.setComplemento("");
-		pedido.setNumero("");
-		pedido.setUF("");
-	}
-
 	public void novoPedido() {
 
 		pedidoLanches = new ArrayList<Lanche>();
@@ -852,12 +896,12 @@ public class PedidoBean implements Serializable {
 	}
 
 	public void deletarProduto() {
-		
+
 		if (pedidoProduto != null) {
 			pedido.removeValor(pedidoProduto.getValor());
 			pedidoProdutos.remove(pedidoProduto);
 			pedidoProduto = null;
-			
+
 		}
 
 	}
@@ -909,6 +953,17 @@ public class PedidoBean implements Serializable {
 
 	}
 
+	public void salvarOutroEndereco() {
+		pedido.setLogradouro(ruaEntrega);
+		pedido.setUF(ufEntrega);
+		pedido.setBairro(bairroEntrega);
+		pedido.setCep(cepEntrega);
+		pedido.setCidade(cidadeEntrega);
+		pedido.setNumero(numeroEntrega);
+		pedido.setComplemento(complementoEntrega);
+		atualizaTaxaEntrega();
+	}
+
 	public void salvarObservacao() {
 		int idElemento;
 		pedidoProduto.convertToPedidoProdutoAvulso(avulsoDual.getTarget());
@@ -925,6 +980,13 @@ public class PedidoBean implements Serializable {
 	}
 
 	public boolean verificaEstoque() {
+
+		List<PedidoProduto> produtosTemp = new ArrayList<PedidoProduto>();
+		produtosTemp = pedido.getPedidoProdutos();
+
+		for (PedidoProduto x : produtosTemp) {
+			x.getIdProduto();
+		}
 
 		return true;
 	}

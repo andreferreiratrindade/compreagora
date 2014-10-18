@@ -74,7 +74,6 @@ public class ProdutoRN {
 
 	public void alterarFiltro(IFiltroProduto filtro) {
 		this.produtoDAO.alteraFiltro(filtro);
-
 	}
 
 }

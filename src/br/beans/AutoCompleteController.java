@@ -153,7 +153,7 @@ public class AutoCompleteController implements Serializable {
 
 	public String mudaTelaLanche() {
 
-		return "/paginas/categoria/escolhaProduto/SelecionaProdutoLanche";
+return "/paginas/categoria/escolhaProduto/SelecionaProdutoLanche?faces-redirect=true";
 
 	}
 

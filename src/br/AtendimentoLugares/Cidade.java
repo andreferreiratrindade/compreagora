@@ -22,8 +22,8 @@ public class Cidade implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idCidade;
 	private String descCidade;
-	@OneToMany
-	@JoinColumn(name = "idCidade")
+	@OneToMany(mappedBy="cidade")
+	
 	private List<Bairro> bairros = new ArrayList<Bairro>();
 
 	public int getIdCidade() {

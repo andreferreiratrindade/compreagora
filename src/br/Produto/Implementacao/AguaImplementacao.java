@@ -27,4 +27,10 @@ public class AguaImplementacao implements IProduto {
 		return null;
 	}
 
+	@Override
+	public boolean verificaEstoque(int idProduto,int quantidade) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

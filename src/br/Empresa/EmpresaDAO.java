@@ -45,8 +45,9 @@ public class EmpresaDAO implements Dao<Empresa> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Empresa> lista() {
-		Query query = session.createQuery(" SELECT e FROM empresa e");
-		return (List<Empresa>) query.getResultList();
+		EasyCriteria<Empresa> easyCriteriaEmp = EasyCriteriaFactory
+				.createQueryCriteria(session, Empresa.class);
+		return easyCriteriaEmp.getResultList();
 	}
 
 	@Override

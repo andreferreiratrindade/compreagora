@@ -8,7 +8,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <ui:composition template="/templates/empresa/principalEmpresa.xhtml">
-<ui:define name="titulo">
+	<ui:define name="titulo">
    Pedidos de Clientes
 	</ui:define>
 	<ui:define name="corpo">
@@ -34,15 +34,15 @@
 				<h:form id="formTablePedidos">
 					<p:dataTable value="#{pedidosClientesBean.pedidosLazy}"
 						var="pedido" id="listaPedidos" paginator="true" rows="10"
-						rowKey="#{pedido.idPedido}" 
+						rowKey="#{pedido.idPedido}"
 						selection="#{pedidosClientesBean.pedido}" selectionMode="single"
 						emptyMessage="Nenhum produto encontrado." lazy="true">
-						 <p:ajax event="rowSelect" 
-								update=":formInfoPedido :formEnderecoCliente"
-								listener="#{pedidosClientesBean.atualizaProdutos}">
+						<p:ajax event="rowSelect"
+							update=":formInfoPedido :formEnderecoCliente"
+							listener="#{pedidosClientesBean.atualizaProdutos}">
 
-							</p:ajax>
-					
+						</p:ajax>
+
 						<p:column headerText="Pedido">
 							<h:outputText value="#{pedido.idPedido}" style="margin:auto" />
 						</p:column>
@@ -50,7 +50,7 @@
 							<h:outputText value="#{pedido.cliente.nome}" />
 						</p:column>
 						<p:column headerText="Valor">
-
+							<h:outputText value="R$" />
 							<h:outputText value="#{pedido.valorTotal}" style="margin:auto">
 								<f:convertNumber pattern="#,###,##0.00" />
 							</h:outputText>
@@ -120,14 +120,12 @@
 									style="min-width:350px;margin:auto ;margin-top:10px">
 									<f:facet name="header">Produtos</f:facet>
 									<p:column headerText="Descrição">
-										<h:outputText
-											value="#{pedidoProduto.descricao}" />
+										<h:outputText value="#{pedidoProduto.descricao}" />
 									</p:column>
 									<p:column headerText="Valor">
 										<center>
 											<h:outputText value="R$ " />
-											<h:outputText
-												value="#{pedidoProduto.valor}">
+											<h:outputText value="#{pedidoProduto.valor}">
 												<f:convertNumber pattern="#,###,##0.00" />
 											</h:outputText>
 										</center>
@@ -212,8 +210,7 @@
 									<h:outputText
 										value="#{pedidosClientesBean.pedido.logradouro}, #{pedidosClientesBean.pedido.numero} - #{pedidosClientesBean.pedido.bairro}, #{pedidosClientesBean.pedido.cidade} - #{pedidosClientesBean.pedido.UF}" />
 									&nbsp;
-									<h:outputText
-										value="#{pedidosClientesBean.pedido.cep}"
+									<h:outputText value="#{pedidosClientesBean.pedido.cep}"
 										converter="converterCEP" />
 									<h:outputText />
 
@@ -235,7 +232,8 @@
 						<h:panelGrid style="width:300px">
 
 							<h:panelGrid>
-								<h:dataTable var="avulso" value="#{pedidosClientesBean.avulsos}">
+								<h:dataTable var="avulso"
+									value="#{pedidosClientesBean.pedidoProduto.avulsos}">
 									<h:column>
 										<h:outputText value="#{avulso.descricao}" />
 									</h:column>
@@ -310,7 +308,10 @@
 								<h:outputText value="Valor Total: " />
 							</h:column>
 							<h:column>
-								<h:outputText value="#{pedidosClientesBean.pedido.valorTotal}" />
+								<h:outputText value="R$ " />
+								<h:outputText value="#{pedidosClientesBean.pedido.valorTotal}">
+									<f:convertNumber pattern="#,###,##0.00" />
+								</h:outputText>
 							</h:column>
 							<h:column>
 								<h:outputText value="Status Atual: " />
@@ -325,7 +326,7 @@
 						<br />
 						<p:commandLink
 							actionListener="#{pedidosClientesBean.imprimirPedido()}"
-							value="Imprimir" styleClass="btn btn-info"
+							value="Imprimir" styleClass="btn btn-info" style="display:#{pedidosClientesBean.pedido.statusPedido>=4?'none':'block'}"
 							disabled="#{pedidosClientesBean.pedido.statusPedido>=4?true:false}"
 							onclick="PrimeFaces.monitorDownload(start, stop);" ajax="false">
 							<p:fileDownload value="#{pedidosClientesBean.file}" />
