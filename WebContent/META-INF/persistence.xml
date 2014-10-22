@@ -19,18 +19,17 @@
 		</properties>
 	</persistence-unit>
 
-	<persistence-unit name="web"
-		transaction-type="RESOURCE_LOCAL">
+	<persistence-unit name="web" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 
 		<properties>
 			<property name=" hibernate.dialect " value=" org.hibernate.dialect.MySQL5InnoDBDialect " />
 			<property name="javax.persistence.jdbc.url"
-				value="jdbc:mysql://mysql-compreagora.whelastic.net/interdiciplinar" />
+				value="jdbc:mysql://mysql-env-2912307.jelastic.hostdime.com/interdiciplinar" />
 			<property name="javax.persistence.jdbc.user" value="root" />
-			<property name="javax.persistence.jdbc.password" value="RmzuaerftW" />
+			<property name="javax.persistence.jdbc.password" value="YxvjLKSWS8" />
 			<property name="javax.persistence.jdbc.driver" value=" com.mysql.jdbc.Driver " />
-			
+
 			<property name="hibernate.connection.shutdown" value="true" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 		</properties>
@@ -44,7 +43,6 @@
 			<property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:." />
 			<property name="javax.persistence.jdbc.user" value="sa" />
 			<property name="javax.persistence.jdbc.password" value="" />
-			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
 			<property name="hibernate.connection.shutdown" value="true" />
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />

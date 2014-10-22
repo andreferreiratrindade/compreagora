@@ -25,9 +25,9 @@
 		<properties>
 			<property name=" hibernate.dialect " value=" org.hibernate.dialect.MySQL5InnoDBDialect " />
 			<property name="javax.persistence.jdbc.url"
-				value="jdbc:mysql://mysql-compreagora.whelastic.net/interdiciplinar" />
+				value="jdbc:mysql://mysql-env-2912307.jelastic.hostdime.com/interdiciplinar" />
 			<property name="javax.persistence.jdbc.user" value="root" />
-			<property name="javax.persistence.jdbc.password" value="RmzuaerftW" />
+			<property name="javax.persistence.jdbc.password" value="YxvjLKSWS8" />
 			<property name="javax.persistence.jdbc.driver" value=" com.mysql.jdbc.Driver " />
 
 			<property name="hibernate.connection.shutdown" value="true" />

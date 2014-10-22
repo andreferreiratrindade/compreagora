@@ -2,7 +2,7 @@
 <Context reloadable="true">
 	<Resource name="jdbc/InterdiciplinarDB" auth="Container"
 		type="javax.sql.DataSource" maxActive="100" maxIdle="30" maxWait="10000"
-		username="root" password="RmzuaerftW" driverClassName="com.mysql.jdbc.Driver"
-		url="jdbc:mysql://mysql-compreagora.whelastic.net/interdiciplinar?autoReconnect=true" />
+		username="root" password="YxvjLKSWS8" driverClassName="com.mysql.jdbc.Driver"
+		url="jdbc:mysql://mysql-env-2912307.jelastic.hostdime.com/interdiciplinar?autoReconnect=true" />
 
 </Context>

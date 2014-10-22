@@ -55,9 +55,9 @@
 	<b:bean id="dataSourceWeb"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<b:property name="url"
-			value="jdbc:mysql://mysql-compreagora.whelastic.net/interdiciplinar" />
+			value="jdbc:mysql://mysql-env-2912307.jelastic.hostdime.com/interdiciplinar" />
 		<b:property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<b:property name="username" value="root" />
-		<b:property name="password" value="RmzuaerftW" />
+		<b:property name="password" value="YxvjLKSWS8" />
 	</b:bean>
 </b:beans>

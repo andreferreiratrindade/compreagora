@@ -55,13 +55,11 @@ public class Pedido implements Serializable, Comparable<Pedido> {
 	private String bairro;
 	private String UF;
 	
-	
-
 	@ManyToOne
 	@JoinColumn(name = "idFormaDePagamento")
 	private FormaDePagamento formaDePagamento;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "idPedido")
 	private List<PedidoProduto> pedidoProdutos = new ArrayList<PedidoProduto>();
 
