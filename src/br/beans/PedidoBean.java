@@ -80,6 +80,14 @@ public class PedidoBean implements Serializable {
 	private String cepEntrega;
 	private String ufEntrega;
 	private String complementoEntrega;
+private String menssagem;
+	public String getMenssagem() {
+	return menssagem;
+}
+
+public void setMenssagem(String menssagem) {
+	this.menssagem = menssagem;
+}
 
 	public String getComplementoEntrega() {
 		return complementoEntrega;
@@ -919,12 +927,10 @@ public class PedidoBean implements Serializable {
 		if (empAtend != null) {
 			pedido.setTaxa(empAtend.getTaxa());
 			empresaAtendeBairro = true;
-
+menssagem = null;
 		} else {
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR,
-							"Empresa não atende a essa localidade", " "));
+			menssagem ="Empresa não atende a essa localidade";
+			
 			empresaAtendeBairro = false;
 		}
 	}
@@ -942,18 +948,17 @@ public class PedidoBean implements Serializable {
 		if (empAtend != null) {
 			pedido.setTaxa(empAtend.getTaxa());
 			empresaAtendeBairro = true;
-
+			menssagem = null;
 		} else {
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR,
-							"Empresa não atende a essa localidade", " "));
+			menssagem = "Empresa não atende a essa localidade";
+			
 			empresaAtendeBairro = false;
 		}
 
 	}
 
 	public void salvarOutroEndereco() {
+		
 		pedido.setLogradouro(ruaEntrega);
 		pedido.setUF(ufEntrega);
 		pedido.setBairro(bairroEntrega);

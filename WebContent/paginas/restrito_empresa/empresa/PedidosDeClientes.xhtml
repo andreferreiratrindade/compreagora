@@ -70,13 +70,13 @@
 							sortBy="#{pedido.dataHoraIn}">
 							<h:outputText value="#{pedido.dataHoraIn}">
 								<f:convertDateTime type="date" dateStyle="short"
-									pattern="dd/MM/yyyy HH:mm" timeZone="America/Sao_Paulo" />
+									pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/> 
 							</h:outputText>
 						</p:column>
 						<p:column headerText="Data de Termino">
 							<h:outputText value="#{pedido.dataHoraFim}">
 								<f:convertDateTime type="date" dateStyle="short"
-									pattern="dd/MM/yyyy HH:mm" timeZone="America/Sao_Paulo" />
+									pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/> 
 							</h:outputText>
 						</p:column>
 					</p:dataTable>
@@ -95,7 +95,7 @@
 									<h:outputText value="#{pedidosClientesBean.pedido.dataHoraIn}"
 										style="float:right;font-size:20px">
 										<f:convertDateTime type="date" pattern="dd/MM/yyyy HH:mm"
-											timeZone="America/Sao_Paulo" />
+											timeZone="GMT-3"/> 
 									</h:outputText>
 
 									<h:outputText

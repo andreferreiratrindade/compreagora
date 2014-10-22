@@ -13,8 +13,10 @@
 				styleClass="row">
 
 				<div class="col-xs-12" style="margin-bottom: 22px;">
-					<p:commandLink style=" font-size:20px;"
-						styleClass="col-xs-6 pull-left"> Quem somos ?</p:commandLink>
+					<a data-toggle="modal" href="#modalQuemSomos"
+						style="font-size: 20px;" class="text-center col-xs-6 pull-left">
+						Quem Somos ?</a>
+
 					<p:commandLink id="faleConosco" style="font-size:20px;"
 						styleClass="col-xs-6 pull-right"
 						action="#{pagPath.clienteEmailContato}">
@@ -50,6 +52,35 @@
 				</div>
 
 			</h:form>
+		</div>
+	</div>
+
+	<div id="modalQuemSomos" class="modal fade" tabindex="-1"
+		aria-hidden="true">
+
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">×</button>
+					<h4 class="modal-title">Quem Somos ?</h4>
+				</div>
+
+				<div class="modal-body ">
+					CompreAgora é um site de delivery desenvolvido por André Ferreira
+					Trindade e Frank da Silva Almeida com fins acadêmicos para a
+					obtenção do bacharel ado em Ciência da Computação. O sistema se
+					encontra em fase de teste, então, todas as empresas disponíveis são
+					meramente fictícias. Ajude-nos com sua avaliação, envie-nos um
+					e-mail com suas ideias de melhorias, desde já agradecemos pela
+					ajuda.
+					<div class="modal-footer">
+						<center>
+							<a href="#" data-dismiss="modal" class="btn btn-info">Sair</a>
+						</center>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </ui:composition>

@@ -5,9 +5,11 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
@@ -20,7 +22,9 @@ import br.Cliente.ClienteDAO;
 import br.Cliente.ClienteRN;
 import br.Empresa.Empresa;
 import br.Empresa.EmpresaRN;
+import br.beans.empresa.EmpresaBean;
 import br.beans.menssagem.Menssagem;
+import br.util.TipoMensagem;
 import br.util.Email.Email;
 import br.util.Email.EmailDestino;
 
@@ -35,8 +39,7 @@ public class ClienteBean implements Serializable {
 	private DataModel<Cliente> listaCliente;
 	private String email = null;
 	private Bairro bairro;
-	
-	
+
 	public Bairro getBairro() {
 		return bairro;
 	}
@@ -102,37 +105,35 @@ public class ClienteBean implements Serializable {
 		return "cadastroCliente.jsf?faces-redirect=true";
 	}
 
-
-
-
 	public String salvar() {
 
-		
+		ClienteRN clienteRN = new ClienteRN();
 
-			ClienteRN clienteRN = new ClienteRN();
+		if (clienteRN.verificaEmailCadastrado(cliente.getEmail())) {
 
-			if (clienteRN.verificaEmailCadastrado(cliente.getEmail())) {
+			String senha = this.cliente.getSenha();
 
-				String senha = this.cliente.getSenha();
+			String senhaCripto = DigestUtils.md5DigestAsHex(senha.getBytes());
 
-				String senhaCripto = DigestUtils.md5DigestAsHex(senha
-						.getBytes());
+			this.cliente.setSenha(senhaCripto);
 
-				this.cliente.setSenha(senhaCripto);
+			clienteRN.salvar(this.cliente);
 
-				clienteRN.salvar(this.cliente);
-				
-			//	emailCadastro(senha);
-				return "login.jsf?faces-redirect=true";
-			} else {
-				FacesContext.getCurrentInstance().addMessage(
-						null,
-						new FacesMessage(FacesMessage.SEVERITY_ERROR,
-								"E-mail já foi Cadastrado!!",
-								"Informe outro E-mail"));
-				return null;
-			}
-		
+			emailCadastro(senha);
+
+			FacesContext.getCurrentInstance().getExternalContext().getFlash()
+					.put("mensagem", "Usuário cadastrado com sucesso.");
+
+			return "login.jsf?faces-redirect=true";
+
+		} else {
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR,
+							"E-mail já foi Cadastrado!!",
+							"Informe outro E-mail"));
+			return null;
+		}
 	}
 
 	public String alterarCliente() {
@@ -148,8 +149,7 @@ public class ClienteBean implements Serializable {
 				return "/paginas/publico/alterarCliente.jsf?faces-redirect=true";
 			}
 		}
-		
-		
+
 		return "login.jsf?faces-redirect=true";
 	}
 
@@ -263,13 +263,13 @@ public class ClienteBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO,
-							"E-mail enviado com sucesso!!", ""));
+							"E-mail enviado com sucesso", ""));
 		} catch (Exception e) {
 			// TODO: handle exception
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR,
-							"Login não encontrado!!", ""));
+							"E-mail não encontrado no sistema.", ""));
 		}
 	}
 

@@ -15,6 +15,7 @@ import javax.faces.context.FacesContext;
 import br.Cliente.Cliente;
 import br.Cliente.ClienteRN;
 import br.Empresa.Categoria.Categoria;
+import br.util.TipoMensagem;
 
 @ManagedBean
 @SessionScoped
@@ -27,7 +28,6 @@ public class ContextUtil implements Serializable {
 	private Cliente clienteLogado = null;
 	private int categoriaEmpresa;
 	private String categoriaEmpresaStr;
-
 	private Map<Integer, String> mapCategoriaEmp;
 	private List<Long> tiposProdutos;
 
@@ -100,6 +100,5 @@ public class ContextUtil implements Serializable {
 	public void setClienteLogado(Cliente cliente) {
 		this.clienteLogado = cliente;
 	}
-	
-	
+
 }

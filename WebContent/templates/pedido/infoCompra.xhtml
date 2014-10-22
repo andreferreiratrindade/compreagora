@@ -8,7 +8,7 @@
 <ui:composition>
 	<div id="modalConcluirPedido" class="modal fade" tabindex="-1"
 		aria-hidden="true" data-focus-on="input:first">
-		<h:form id="formCompraValorTotal">
+		<h:form id="formCompraValorTotal" prependId="false">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header col-sm-12 col-lg-12 col-md-12 col-xs-12">
@@ -18,7 +18,7 @@
 					</div>
 
 					<div class="modal-body col-sm-12 col-lg-12 col-md-12 col-xs-12">
-
+						<div class="alert alert-danger" role="alert" style="display: #{pedidoBean.menssagem != null ? 'block':'none'}"><strong>Erro</strong> -- #{pedidoBean.menssagem}</div>
 						<p:dataTable var="meuPedidoProduto"
 							styleClass="col-sm-12 col-lg-12 col-md-12 col-xs-12"
 							value="#{pedidoBean.pedido.pedidoProdutos}" paginator="true"
@@ -54,7 +54,6 @@
 						<div style="margin-top: 15px"
 							class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<span data-toggle="modal" href="#modalOutroEndereco"> <p:commandLink
-									
 									value="Outro Endereço" update=":formOutroEndereco"
 									styleClass="btn btn-primary" />
 							</span>
@@ -267,7 +266,10 @@
 							<center>
 								<span href="#" data-dismiss="modal"><h:commandLink
 										value="Deletar" actionListener="#{pedidoBean.deletarProduto}"
-										 styleClass="btn btn-info" > <f:ajax render=":formPainel"> </f:ajax> </h:commandLink> </span>
+										styleClass="btn btn-info">
+										<f:ajax render=":formPainel">
+										</f:ajax>
+									</h:commandLink> </span>
 							</center>
 
 						</div>

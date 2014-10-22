@@ -29,9 +29,12 @@
 				<ul class="nav navbar-nav">
 					<li><h:commandLink action="/principal.jsf?faces-redirect=true"
 							id="home" value="Inicio" /></li>
-					<li><h:commandLink oncomplete="dlgAjuda.show()" id="lnkAjuda" value="Ajuda"/></li>
+					<li>
+					<a data-toggle="modal" href="#modalAjuda"
+									class="text-center"> Ajuda</a>
+					</li>
 					<li><h:commandLink id="faleConosco" value="Fale Conosco"
-									action="/paginas/publico/clienteEmailContato.jsf?faces-redirect=true"/></li>
+							action="/paginas/publico/clienteEmailContato.jsf?faces-redirect=true" /></li>
 				</ul>
 				<sec:isAnonymous>
 					<ul class="nav navbar-nav navbar-right">
@@ -123,5 +126,29 @@
 		</div>
 		<!-- /.container-fluid --> </nav>
 	</h:form>
+	<div id="modalAjuda" class="modal fade" tabindex="-1"
+		aria-hidden="true">
+
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">×</button>
+					<h4 class="modal-title">Ajuda</h4>
+				</div>
+
+				<div class="modal-body ">
+
+<h:graphicImage library="imagens/ImagensForm" name="comoRealizarCompra.png"/>
+
+					<div class="modal-footer">
+						<center>
+							<a href="#" data-dismiss="modal" class="btn btn-info">Sair</a>
+						</center>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </ui:composition>
 </html>

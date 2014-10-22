@@ -36,11 +36,13 @@
 
 					<div
 						class="col-lg-3 col-md-9 col-md-push-2 text-center col-lg-push-0 col-sm-12 col-xs-12">
-						<p:commandLink value="Personalizar"
-							actionListener="#{pedidoBean.personalizaPizza()}"
-							disabled="#{!pizza.ativo}" styleClass="btn btn-warning"
-							oncomplete="dlgEditarProduto.show()" update=":idEditar">
-						</p:commandLink>
+						<span data-toggle="modal" href="#modalPersonalizarProduto">
+							<p:commandLink value="Personalizar"
+								actionListener="#{pedidoBean.personalizaPizza()}"
+								disabled="#{!pizza.ativo}" styleClass="btn btn-warning"
+								 update=":idEditar">
+							</p:commandLink>
+						</span>
 						<div class="visible-lg-block visible-md-block">
 							<span class="col-lg-12 col-md-12"></span>
 
@@ -50,7 +52,7 @@
 							value="#{pizza.ativo ? 'Adicionar' : 'Indisponivel'}"
 							actionListener="#{pedidoBean.adicionaPizza()}"
 							disabled="#{!pizza.ativo}" update=":formPainel" id="buttonAdd"
-							styleClass="btn btn-info" style="width:108px;">
+							styleClass="btn btn-info" style="width:113px;">
 						</p:commandLink>
 					</div>
 				</div>

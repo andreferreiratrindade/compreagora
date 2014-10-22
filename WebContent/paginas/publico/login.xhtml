@@ -5,10 +5,11 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:sec="http://www.springframework.org/security/facelets/tags"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <ui:composition template="/templates/principal.xhtml">
 
-<ui:define name="titulo">
+	<ui:define name="titulo">
     Login
 	</ui:define>
 	<ui:define name="corpo">
@@ -19,6 +20,8 @@
 
 				<div
 					class="col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-0 col-md-5 col-lg-4 col-sm-6 col-xs-12">
+					<div class="alert alert-success" role="alert"
+						style="display: #{flash.mensagem != null ? 'block':'none'}">#{flash.mensagem}</div>
 
 					<div class=" panel panel-primary">
 						<div class="panel-heading">Login</div>
@@ -56,46 +59,64 @@
 								</form>
 
 								<h:form styleClass="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-									<p:commandLink value="Esqueci minha Senha"
-										oncomplete="dlgEsqueciSenha.show()" />
+									<a data-toggle="modal" href="#modalPerdiSenha"
+										class="btn btn-info"> Esqueci minha senha </a>
 								</h:form>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<p:dialog id="dlgEsqueciSenha" header="Esqueci Minha Senha"
-				widgetVar="dlgEsqueciSenha" modal="true" showEffect="slide"
-				dynamic="true" width="307px">
-				<h:form id="formDlgEsqueciSenha">
-					<p:messages id="menssagens" showDetail="true" autoUpdate="true"
-						closable="true" />
-					<h:panelGrid columns="1">
-						<h:outputText value="Para recuperar a senha é facil." />
-						<h:outputText
-							value="Informe seu e-mail e iremos te enviar uma nova senha." />
-						<br />
-					</h:panelGrid>
-
-					<h:outputText value="E-mail" />
-					<h:panelGrid columns="1">
-						<p:inputText value="#{clienteBean.email}" size="35"
-							required="true" id="email" />
-
-						<p:commandLink onstart="dlgLoading.show()"
-							onsuccess="dlgLoading.hide()" value="Enviar"
-							actionListener="#{clienteBean.esqueciMinhaSenha}"
-							styleClass="buttonAdd" style="float:right;margin-top:10px"
-							update=":formDlgEsqueciSenha" />
-					</h:panelGrid>
-				</h:form>
-			</p:dialog>
-			<p:dialog id="dlgLoading" closable="false" draggable="false"
-				widgetVar="dlgLoading" modal="true">
-				<h:graphicImage library="imagens/icones" name="carregando.gif" />
-			</p:dialog>
 
 		</div>
+		<div id="modalPerdiSenha" class="modal fade" tabindex="-1"
+			aria-hidden="true">
+			<h:form id="formDlgEsqueciSenha">
+				<div class="modal-dialog modal-md">
+
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">×</button>
+							<h4 class="modal-title">Quem Somos ?</h4>
+						</div>
+
+						<div class="modal-body ">
+							<p:messages id="menssagens" showDetail="true" autoUpdate="true"
+								closable="true" />
+							<h:panelGrid columns="1">
+								<h:outputText value="Para recuperar a senha é facil." />
+								<h:outputText
+									value="Informe seu e-mail e iremos te enviar uma nova senha." />
+								<br />
+							</h:panelGrid>
+
+							<h:outputText value="E-mail" />
+							<h:panelGrid columns="1">
+								<p:inputText value="#{clienteBean.email}" size="35"
+									required="true" id="email" />
+
+
+							</h:panelGrid>
+
+							<div class="modal-footer">
+								<p:commandLink value="Enviar" styleClass="btn btn-info"
+									actionListener="#{clienteBean.esqueciMinhaSenha}"
+									update="formDlgEsqueciSenha"  />
+								 <a href="#" data-dismiss="modal" class="btn btn-danger">Sair</a>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</h:form>
+		</div>
+		<script type="text/javascript">
+
+		function clickSuccess() {
+			$('#modalPerdiSenha').modal('hide');
+		}
+		</script>
 	</ui:define>
 </ui:composition>
 </html>
