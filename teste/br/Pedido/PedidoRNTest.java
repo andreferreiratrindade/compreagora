@@ -28,7 +28,9 @@ import br.PedidoProduto.PedidoProduto;
 import br.Produto.Lanche;
 import br.Produto.ProdutoDAO;
 import br.Produto.ProdutoRN;
+import br.builders.CidadeEBairroBuilder;
 import br.builders.ClienteBuilder;
+import br.builders.EmpresaBuilder;
 import br.util.DAOFactoy;
 import br.util.JpaUtil;
 
@@ -37,8 +39,8 @@ public class PedidoRNTest {
 	@Before
 	public void setUp() {
 		JpaUtil.getEntityManager().getTransaction().begin();
-		initFormaDePagamento();
-		initEmrpesa();
+
+		initEmpresa();
 		initProduto();
 		initCliente();
 		initSalvaPedido();
@@ -75,10 +77,10 @@ public class PedidoRNTest {
 		Pedido pedido = new Pedido();
 		pedido.setPedidoProdutos(pedidosProdutos);
 		pedido.calcularTotal();
-		System.out.println(pedido.getValorTotal());
-		
+
 		pedido.setFormaDePagamento(formaDePagamento);
-		
+		pedido.setBairro("Nova Vila Bretas");
+		pedido.setCidade("Governador Valadares");
 		PedidoRN pedidoRN = new PedidoRN();
 		pedido.setEmpresa(empresa);
 		pedidoRN.salvar(pedido);
@@ -101,35 +103,10 @@ public class PedidoRNTest {
 
 	}
 
-	public void initEmrpesa() {
+	public void initEmpresa() {
+		EmpresaBuilder empresaBuilder = new EmpresaBuilder();
+		empresaBuilder.criar();
 
-		FormaDePagamentoRN formaDePagamentoRN = new FormaDePagamentoRN();
-		FormaDePagamento formaDePagamento = formaDePagamentoRN
-				.peloTipo("Dinheiro");
-
-		FormaDePagamento formaDePagamento2 = formaDePagamentoRN
-				.peloTipo("Visa Credito");
-		Empresa empresa = new Empresa();
-		empresa.setNomeFant("Lanchonete Doce Mel");
-
-		empresa.addFormaDePagamento(formaDePagamento);
-		empresa.addFormaDePagamento(formaDePagamento2);
-
-		BairroDAO bairroDao = DAOFactoy.criarBairro();
-		Bairro bairro = bairroDao.getUnico(1);
-
-		EmpresaAtendimentoDAO empresaAtendimentoDao = DAOFactoy
-				.criarEmpresaAtendimento();
-		EmpresaAtendimento empresaAtendimento = new EmpresaAtendimento();
-
-		empresaAtendimento.setBairro(bairro);
-		empresaAtendimento.setTempoEspera(7); // Tempo em minutos...
-
-		EmpresaDAO empresaDAO = DAOFactoy.criarEmpresa();
-		empresaDAO.salve(empresa);
-
-		empresaAtendimento.setEmpresa(empresa);
-		empresaAtendimentoDao.salve(empresaAtendimento);
 	}
 
 	public void initProduto() {
@@ -182,15 +159,15 @@ public class PedidoRNTest {
 		List<Pedido> pedidos = cliente.getPedidos();
 
 		assertEquals(1, pedidos.size());
-
 	}
-
-	
 
 	@Test
 	public void deveCalcularTempo() {
 
 		PedidoRN pedidoRN = new PedidoRN();
+		Pedido pedido = pedidoRN.getPedido(1);
+		pedido.setStatusPedido(3);
+		pedidoRN.atualizar(pedido);
 		int tempo = pedidoRN.calculaTempoDeTodosPedidos(1);
 		assertEquals(22, tempo);
 	}
@@ -253,8 +230,8 @@ public class PedidoRNTest {
 	public void deveRetornarOValorTotal() {
 		PedidoRN pedidoRN = new PedidoRN();
 		Pedido pedido = pedidoRN.getPedido(1);
-		
-		assertEquals(10, pedido.getValorTotal());
+
+		assertEquals(10, pedido.getValorTotal(), 0.00001);
 	}
 
 }

@@ -41,6 +41,15 @@ public class PedidoProduto implements Serializable {
 	private List<PedidoProdutoAvulso> avulsos = new ArrayList<PedidoProdutoAvulso>();
 	@Enumerated(EnumType.STRING)
 	private CategoriaENUM qualificacao;
+	private int tempoEspera;
+	
+	public int getTempoEspera() {
+		return tempoEspera;
+	}
+
+	public void setTempoEspera(int tempoEspera) {
+		this.tempoEspera = tempoEspera;
+	}
 
 	public String getDescricao() {
 		return descricao;
@@ -99,6 +108,7 @@ public class PedidoProduto implements Serializable {
 		this.valor = produto.getValor();
 		this.idProduto = produto.getIdProduto();
 		this.qualificacao = produto.getQualificacao();
+		this.tempoEspera = produto.getTempoEspera();
 	}
 
 	public float getValor() {
@@ -122,9 +132,6 @@ public class PedidoProduto implements Serializable {
 		avulsos.add(ppa);
 	}
 
-	public int tempoEsperaTotal() {
-		return 0;
-	}
 
 	public int getIdPedidoProduto() {
 		return idPedidoProduto;

@@ -383,7 +383,7 @@ public class Pedido implements Serializable, Comparable<Pedido> {
 	public void calcularTempoEspera(int tempo) {
 
 		for (PedidoProduto x : pedidoProdutos) {
-			tempo += x.tempoEsperaTotal();
+			tempo += x.getTempoEspera();
 		}
 
 		dataHoraFim = new Date();

@@ -88,7 +88,7 @@ public class PedidoDAO implements Dao<Pedido> {
 		EasyCriteria<Pedido> easyCriteria = EasyCriteriaFactory
 				.createQueryCriteria(session, Pedido.class);
 
-		easyCriteria.andBetween("statusPedido", 1, 4);
+		easyCriteria.andBetween("statusPedido", 1, 3);
 
 		return (List<Pedido>) easyCriteria.getResultList();
 	}

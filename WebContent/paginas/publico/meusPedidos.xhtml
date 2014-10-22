@@ -78,7 +78,7 @@
 								style="text-align: center;">
 								<h:outputText value="#{pedido.dataHoraIn}">
 									<f:convertDateTime type="date" pattern="dd/MM/yyyy HH:mm"
-										timeZone="America/Sao_Paulo" />
+										timeZone="GMT-3"/> 
 								</h:outputText>
 							</p:column>
 							<p:column headerText="Chegada Prevista"
@@ -86,7 +86,7 @@
 								styleClass="hidden-sm hidden-xs">
 								<h:outputText value="#{pedido.dataHoraFim}" style="margin:auto">
 									<f:convertDateTime type="date" pattern="dd/MM/yyyy HH:mm"
-										timeZone="America/Sao_Paulo" />
+										timeZone="GMT-3"/> 
 								</h:outputText>
 							</p:column>
 						</p:dataTable>

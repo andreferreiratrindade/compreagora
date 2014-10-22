@@ -75,6 +75,7 @@ public class EmpresaBuilder {
 
 		empresaAtendimento.setBairro(bairro);
 		empresaAtendimento.setEmpresa(empresa);
+		empresaAtendimento.setTempoEspera(7);
 		empresaAtendimentoDao.salve(empresaAtendimento);
 	}
 
