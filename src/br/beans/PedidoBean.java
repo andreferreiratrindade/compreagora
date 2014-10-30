@@ -80,14 +80,15 @@ public class PedidoBean implements Serializable {
 	private String cepEntrega;
 	private String ufEntrega;
 	private String complementoEntrega;
-private String menssagem;
-	public String getMenssagem() {
-	return menssagem;
-}
+	private String menssagem;
 
-public void setMenssagem(String menssagem) {
-	this.menssagem = menssagem;
-}
+	public String getMenssagem() {
+		return menssagem;
+	}
+
+	public void setMenssagem(String menssagem) {
+		this.menssagem = menssagem;
+	}
 
 	public String getComplementoEntrega() {
 		return complementoEntrega;
@@ -909,7 +910,6 @@ public void setMenssagem(String menssagem) {
 			pedido.removeValor(pedidoProduto.getValor());
 			pedidoProdutos.remove(pedidoProduto);
 			pedidoProduto = null;
-
 		}
 
 	}
@@ -927,10 +927,10 @@ public void setMenssagem(String menssagem) {
 		if (empAtend != null) {
 			pedido.setTaxa(empAtend.getTaxa());
 			empresaAtendeBairro = true;
-menssagem = null;
+			menssagem = null;
 		} else {
-			menssagem ="Empresa não atende a essa localidade";
-			
+			menssagem = "Empresa não atende a essa localidade";
+
 			empresaAtendeBairro = false;
 		}
 	}
@@ -951,14 +951,14 @@ menssagem = null;
 			menssagem = null;
 		} else {
 			menssagem = "Empresa não atende a essa localidade";
-			
+
 			empresaAtendeBairro = false;
 		}
 
 	}
 
 	public void salvarOutroEndereco() {
-		
+
 		pedido.setLogradouro(ruaEntrega);
 		pedido.setUF(ufEntrega);
 		pedido.setBairro(bairroEntrega);

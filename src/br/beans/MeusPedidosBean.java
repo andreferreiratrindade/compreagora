@@ -67,7 +67,7 @@ public class MeusPedidosBean implements Serializable {
 
 	public void setPedidoProduto(PedidoProduto pedidoProduto) {
 		this.pedidoProduto = pedidoProduto;
-	//	atualizaCampoAvulso();
+		// atualizaCampoAvulso();
 	}
 
 	public List<PedidoProduto> getPedidoProdutos() {
@@ -140,29 +140,25 @@ public class MeusPedidosBean implements Serializable {
 				pedido = pedidoRN.getPedido(pedido.getIdPedido());
 				pedido.getPedidoProdutos().size();
 				idPedidoTemp = pedido.getIdPedido();
-				
+
 			} else if (idPedidoTemp != 0) {
 				PedidoRN pedidoRN = new PedidoRN();
 
 				pedido = pedidoRN.getPedido(idPedidoTemp);
-				pedido.getPedidoProdutos().size();			
+				pedido.getPedidoProdutos().size();
 			}
 		}
 
 	}
 
-/*	public void atualizaCampoAvulso() {
-		ProdutoAvulsoDAO produtoTemp = DAOFactoy.criarProdutoAvulso();
-		ProdutoAvulso produtoAvulsoTemp = null;
-		try {
-			produtoAvulsoTemp = produtoTemp.getUnico(pedidoProduto
-					.getProdutoAvulso().getIdProdutoAvulso());
-		} catch (Exception e) {
-			System.out.println("Deu erro");
-		}
-		avulsos = produtoAvulsoTemp.getAvulsos();
-	}
-*/
+	/*
+	 * public void atualizaCampoAvulso() { ProdutoAvulsoDAO produtoTemp =
+	 * DAOFactoy.criarProdutoAvulso(); ProdutoAvulso produtoAvulsoTemp = null;
+	 * try { produtoAvulsoTemp = produtoTemp.getUnico(pedidoProduto
+	 * .getProdutoAvulso().getIdProdutoAvulso()); } catch (Exception e) {
+	 * System.out.println("Deu erro"); } avulsos =
+	 * produtoAvulsoTemp.getAvulsos(); }
+	 */
 	public List<Avulso> getAvulsos() {
 		if (avulsos == null) {
 			avulsos = new ArrayList<Avulso>();

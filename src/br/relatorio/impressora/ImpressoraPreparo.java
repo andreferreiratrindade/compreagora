@@ -56,16 +56,17 @@ public class ImpressoraPreparo extends ImpressoraNaoFiscal {
 			linhasTxt.println(LINHA);
 			linhasTxt.println("********** PRODUTOS *********");
 			linhasTxt.println(LINHA);
-
+int count =1;
 			for (PedidoProduto x : pedido.getPedidoProdutos()) {
-				linhasTxt.println(x.getDescricao());
+				linhasTxt.println(count+" - "+(x.getDescricao().length() > 24 ?  x.getDescricao().substring(0, 24):x.getDescricao()));
 
 				for (PedidoProdutoAvulso y : x.getAvulsos()) {
-					linhasTxt.println("## " + y.getDescricao());
+					linhasTxt.println("     ." + y.getDescricao());
 				}
-				linhasTxt.println(x.getObservacao() == null ? " " : "> "
+				linhasTxt.println(x.getObservacao() == null ? " " : "Obs: "
 						+ x.getObservacao());
 				linhasTxt.println(LINHA_SEPARA);
+				count++;
 			}
 
 			int i = 0;

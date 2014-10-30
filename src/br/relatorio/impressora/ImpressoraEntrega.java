@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -37,7 +39,7 @@ public class ImpressoraEntrega extends ImpressoraNaoFiscal {
 					.getContext();
 
 			gerarNomeArquivo();
-
+			DecimalFormat df = new DecimalFormat("#.00");
 			String caminho = context.getRealPath("relatorio/" + nomeArquivo
 					+ ".txt");
 
@@ -57,23 +59,31 @@ public class ImpressoraEntrega extends ImpressoraNaoFiscal {
 			linhasTxt.println("********** PRODUTOS *********");
 			linhasTxt.println(LINHA_SEPARA);
 
+			int count = 1;
 			for (PedidoProduto x : pedido.getPedidoProdutos()) {
-				linhasTxt.println(String.format("%7s  %9s", x.getDescricao(),
-						"R$ " + x.getValor()));
+				linhasTxt
+						.println(String.format("%7s  %9s",
+								count + " - " + x.getDescricao(),
+								"R$ " + df.format(x.getValor())));
 
 				for (PedidoProdutoAvulso y : x.getAvulsos()) {
 					linhasTxt.println(String.format("%7s  %9s",
-							"## " + y.getDescricao(), "R$ " + y.getValor()));
+							"     ." + y.getDescricao(),
+							"R$ " + df.format(y.getValor())));
 				}
 
 				linhasTxt.println(LINHA_SEPARA);
+				count++;
 			}
-			linhasTxt.println(String.format("%7s  %9s", "taxa de entrega: ",
-					"R$ " + pedido.getTaxa()));
+			linhasTxt.println(String.format("%7s  %9s", "Taxa de entrega: ",
+					"R$ " + df.format(pedido.getTaxa())));
 			linhasTxt.println(String.format("%7s  %9s", "VALOR TOTAL:     ",
-					"R$ " + pedido.getValorTotal()));
+					"R$ " + df.format(pedido.getValorTotal())));
 			linhasTxt.println(String.format("%7s  %9s", "troco para:      ",
-					"R$ " + pedido.getTroco()));
+					"R$ " + df.format(pedido.getTroco())));
+			linhasTxt.println(String.format("%7s  %9s", "troco:      ", "R$ "
+					+ df.format(pedido.getTroco())));
+
 			linhasTxt.println(LINHA);
 
 			linhasTxt.println("**********ENDEREÇO*********");
@@ -83,8 +93,11 @@ public class ImpressoraEntrega extends ImpressoraNaoFiscal {
 			linhasTxt.println(pedido.getBairro());
 			linhasTxt.println(pedido.getCidade());
 			linhasTxt.println(pedido.getUF());
-			linhasTxt.println("CEP: " + pedido.getCep());
-			linhasTxt.println(pedido.getComplemento());
+			linhasTxt.println("CEP: "
+					+ (pedido.getCep() == null ? "" : pedido.getCep()));
+			linhasTxt.println("Obs.: "
+					+ (pedido.getComplemento() == null ? "" : pedido
+							.getComplemento()));
 
 			int i = 0;
 			while (i < 10) {
