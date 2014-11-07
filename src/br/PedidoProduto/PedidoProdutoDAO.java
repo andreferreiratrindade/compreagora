@@ -42,5 +42,4 @@ public class PedidoProdutoDAO implements Dao<PedidoProduto> {
 		return session.find(PedidoProduto.class, id);
 	}
 
-
 }

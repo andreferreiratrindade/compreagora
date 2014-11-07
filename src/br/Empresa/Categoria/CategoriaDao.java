@@ -58,9 +58,9 @@ public class CategoriaDao implements Dao<Categoria> {
 		List<Categoria> categorias = easyCriteria.getResultList();
 
 		if (categorias != null) {
-			
+
 		}
-		
+
 		return categorias.get(0);
 	}
 

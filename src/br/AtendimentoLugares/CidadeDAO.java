@@ -45,7 +45,7 @@ public class CidadeDAO implements Dao<Cidade> {
 		EasyCriteria<Cidade> easyCriteria = EasyCriteriaFactory
 				.createQueryCriteria(session, Cidade.class);
 
-		easyCriteria.andStringLike("descCidade", "%"+term+"%");
+		easyCriteria.andStringLike("descCidade", "%" + term + "%");
 
 		return easyCriteria.getResultList();
 	}

@@ -10,10 +10,7 @@ public class AvulsoLancheImp implements AvulsoImp {
 	@Override
 	public List<Avulso> getAvulsos(int idEmpresa,
 			List<Avulso> pedidoProdutoAvulsos) {
-		
-		
-		
-		
+
 		AvulsoRN avulsoRN = new AvulsoRN();
 		List<Avulso> avulsos = null;
 		// avulsos = avulsoRN.listarLanche(idEmpresa);

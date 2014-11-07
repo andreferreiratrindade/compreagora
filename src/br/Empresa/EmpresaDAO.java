@@ -80,16 +80,14 @@ public class EmpresaDAO implements Dao<Empresa> {
 			CategoriaENUM categoria) {
 		EasyCriteria<Empresa> easyCriteriaEmp = EasyCriteriaFactory
 				.createQueryCriteria(session, Empresa.class);
-		
+
 		easyCriteriaEmp.andEquals("ativo", true);
 		easyCriteriaEmp.innerJoin("categorias");
 		easyCriteriaEmp.andEquals("categorias.tipoCategoria", categoria);
-	
+
 		easyCriteriaEmp.innerJoin("empresaAtendimentos.bairro");
 		easyCriteriaEmp.andEquals("empresaAtendimentos.bairro.idBairro",
 				idBairro);
-		
-		
 
 		return easyCriteriaEmp.getResultList();
 	}

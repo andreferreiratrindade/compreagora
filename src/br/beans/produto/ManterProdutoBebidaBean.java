@@ -19,7 +19,7 @@ import br.util.FileUpload;
 @ManagedBean
 @ViewScoped
 public class ManterProdutoBebidaBean implements Serializable {
-	
+
 	/**
 	 * 
 	 */
@@ -31,9 +31,7 @@ public class ManterProdutoBebidaBean implements Serializable {
 	private Empresa empresa;
 	private List<Bebida> bebidas;
 	private Bebida bebida;
-	private FileUpload arquivo ;
-
-
+	private FileUpload arquivo;
 
 	public List<Bebida> getBebidas() {
 		return bebidas;
@@ -47,7 +45,6 @@ public class ManterProdutoBebidaBean implements Serializable {
 		this.empresa = empresa;
 	}
 
-
 	public Bebida getBebida() {
 		return bebida;
 	}
@@ -56,14 +53,11 @@ public class ManterProdutoBebidaBean implements Serializable {
 		this.bebida = refri;
 	}
 
-
-
 	public void novoBebida() {
 		bebida = new Bebida();
 		bebida.setEmpresa(empresa);
 		arquivo = new FileUpload();
 	}
-
 
 	public void salvarBebida() {
 
@@ -76,8 +70,6 @@ public class ManterProdutoBebidaBean implements Serializable {
 				.ultimoElementoAdicionado().toString());
 		construct();
 	}
-
-
 
 	public Empresa getEmpresa() {
 
@@ -109,7 +101,7 @@ public class ManterProdutoBebidaBean implements Serializable {
 		novoBebida();
 		ProdutoRN produtoRN = new ProdutoRN();
 		bebidas = produtoRN.listarBebida(empresa.getIdEmpresa());
-		
+
 	}
 
 	public EmpresaBean getEmpresaBean() {

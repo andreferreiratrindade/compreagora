@@ -21,7 +21,7 @@ public class PizzaImplementacao implements IProduto {
 	}
 
 	@Override
-	public boolean verificaEstoque(int idProduto,int quantidade)  {
+	public boolean verificaEstoque(int idProduto, int quantidade) {
 		ProdutoRN produtoRN = new ProdutoRN();
 		Pizza pizza = (Pizza) produtoRN.getProduto(idProduto);
 		return pizza.isAtivo();

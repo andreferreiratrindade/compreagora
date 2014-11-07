@@ -13,10 +13,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.primefaces.model.SortOrder;
 
-import br.AtendimentoLugares.Bairro;
-import br.AtendimentoLugares.BairroDAO;
-import br.AtendimentoLugares.EmpresaAtendimento;
-import br.AtendimentoLugares.EmpresaAtendimentoDAO;
 import br.Cliente.Cliente;
 import br.Cliente.ClienteRN;
 import br.Empresa.Empresa;
@@ -28,7 +24,6 @@ import br.PedidoProduto.PedidoProduto;
 import br.Produto.Lanche;
 import br.Produto.ProdutoDAO;
 import br.Produto.ProdutoRN;
-import br.builders.CidadeEBairroBuilder;
 import br.builders.ClienteBuilder;
 import br.builders.EmpresaBuilder;
 import br.util.DAOFactoy;

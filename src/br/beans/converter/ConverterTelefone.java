@@ -29,6 +29,6 @@ public class ConverterTelefone implements Converter, Serializable {
 		if (valor != null || !valor.toString().isEmpty()) {
 			return InputMask.stringToMask(InputMask.TELEFONE, valor.toString());
 		}
-		return  valor.toString();
+		return valor.toString();
 	}
 }

@@ -58,8 +58,6 @@ public class EmpresaAtendimentoRNTest {
 		Empresa empresa = new Empresa();
 		empresa.setNomeFant("Rei do Hamburguer");
 
-
-
 		Cliente cliente = new Cliente();
 		cliente.setNome("Empresa1");
 		cliente.setEmail("empresa@gmail.com");
@@ -98,13 +96,14 @@ public class EmpresaAtendimentoRNTest {
 		int idBairro = 1;
 
 		EmpresaAtendimento empresaAtendimento = empresaAtendimentoRN
-				.empresaAtendimentoEmpresaComBairro(idEmpresa, "Nova Vila Bretas", "Governador Valdares");
+				.empresaAtendimentoEmpresaComBairro(idEmpresa,
+						"Nova Vila Bretas", "Governador Valdares");
 		assertEquals(5, empresaAtendimento.getTaxa(), 0.00001);
 	}
-	
+
 	@Test
-	public void deveRetornarUmaEmpresa(){
-		
+	public void deveRetornarUmaEmpresa() {
+
 	}
 
 }

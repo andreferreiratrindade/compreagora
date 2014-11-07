@@ -78,7 +78,6 @@ public abstract class Produto implements Serializable, CycleRecoverable {
 		this.descricao = descricao;
 	}
 
-
 	public float getValor() {
 		return valor;
 	}

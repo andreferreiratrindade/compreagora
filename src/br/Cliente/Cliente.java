@@ -24,7 +24,8 @@ public class Cliente implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idCliente;
 	private String nome;
-	private String login; // utilizado apenas para saber qual empresa pertence a este usuario
+	private String login; // utilizado apenas para saber qual empresa pertence a
+							// este usuario
 	private String email;
 	private String senha;
 	private String telefone;
@@ -38,11 +39,11 @@ public class Cliente implements Serializable {
 	private String bairro;
 	private String cidade;
 	private String UF;
-	
+
 	@OneToMany
 	@JoinColumn(name = "idCliente")
 	private List<Pedido> pedidos;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "idPermissao")
 	private Permissao permissao;

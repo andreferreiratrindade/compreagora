@@ -48,20 +48,17 @@ public class ProdutoDAO implements Dao<Produto> {
 		return (List<Produto>) query.getResultList();
 	}
 
-	
 	public List<Lanche> listaLanche(int idEmpresa) {
 
 		return filtro.listarLanche(idEmpresa, em);
 
 	}
 
-	
 	public List<Bebida> listaBebida(int idEmpresa) {
 
 		return filtro.listarBebida(idEmpresa, em);
 	}
 
-	
 	public List<Produto> listaProduto(int idEmpresa) {
 
 		EasyCriteria<Produto> easyCriteria = EasyCriteriaFactory

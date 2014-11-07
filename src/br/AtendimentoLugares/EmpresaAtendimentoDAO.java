@@ -70,9 +70,13 @@ public class EmpresaAtendimentoDAO implements Dao<EmpresaAtendimento> {
 			EasyCriteria<EmpresaAtendimento> easyCriteria = EasyCriteriaFactory
 					.createQueryCriteria(session, EmpresaAtendimento.class);
 
-			easyCriteria.innerJoin("bairro").andEquals("bairro.descBairro", bairro).innerJoin("empresa")
-					.andEquals("empresa.idEmpresa", idEmpresa).innerJoin("bairro.cidade").andEquals("bairro.cidade.descCidade", cidade);
-					
+			easyCriteria.innerJoin("bairro")
+					.andEquals("bairro.descBairro", bairro)
+					.innerJoin("empresa")
+					.andEquals("empresa.idEmpresa", idEmpresa)
+					.innerJoin("bairro.cidade")
+					.andEquals("bairro.cidade.descCidade", cidade);
+
 			List<EmpresaAtendimento> empAtendimentos = easyCriteria
 					.getResultList();
 

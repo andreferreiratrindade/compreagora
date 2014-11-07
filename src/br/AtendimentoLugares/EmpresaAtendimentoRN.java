@@ -23,9 +23,13 @@ public class EmpresaAtendimentoRN {
 		return this.empresaAtendimentoDAO.lista();
 	}
 
-	public EmpresaAtendimento empresaAtendimentoEmpresaComBairro(
-			int idEmpresa, String cidade, String bairro) {
+	public EmpresaAtendimento empresaAtendimentoEmpresaComBairro(int idEmpresa,
+			String cidade, String bairro) {
 		return this.empresaAtendimentoDAO.empresaAtendimentoEmpresaComBairro(
 				idEmpresa, cidade, bairro);
+	}
+	
+	public EmpresaAtendimento getEmpresaAtendimentoPeloBairroEmpresa(int idBairro, int idEmpresa){
+		return empresaAtendimentoDAO.getEmpresaAtendimentoPeloBairroEmpresa(idBairro, idEmpresa);
 	}
 }

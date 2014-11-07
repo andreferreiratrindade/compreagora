@@ -32,6 +32,7 @@ public class ManterProdutoAguaBean implements Serializable {
 	private Agua agua;
 	private FileUpload arquivo;
 	private float valor;
+
 	public EmpresaBean getEmpresaBean() {
 		return empresaBean;
 	}

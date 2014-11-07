@@ -15,7 +15,6 @@ import javax.faces.context.FacesContext;
 import br.Cliente.Cliente;
 import br.Cliente.ClienteRN;
 import br.Empresa.Categoria.Categoria;
-import br.util.TipoMensagem;
 
 @ManagedBean
 @SessionScoped

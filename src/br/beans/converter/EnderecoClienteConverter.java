@@ -7,8 +7,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@FacesConverter(value="enderecoClienteConverter")
-public class EnderecoClienteConverter implements Converter,Serializable{
+@FacesConverter(value = "enderecoClienteConverter")
+public class EnderecoClienteConverter implements Converter, Serializable {
 
 	/**
 	 * 

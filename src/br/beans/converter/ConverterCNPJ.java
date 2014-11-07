@@ -24,7 +24,8 @@ public class ConverterCNPJ implements Converter, Serializable {
 		return valor;
 	}
 
-	@Override  
-    public String getAsString(FacesContext arg0, UIComponent arg1, Object valor) {  
-    	 return InputMask.stringToMask(InputMask.CNPJ, valor.toString());   
-    }}
+	@Override
+	public String getAsString(FacesContext arg0, UIComponent arg1, Object valor) {
+		return InputMask.stringToMask(InputMask.CNPJ, valor.toString());
+	}
+}

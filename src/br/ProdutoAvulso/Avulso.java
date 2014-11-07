@@ -36,7 +36,7 @@ public class Avulso implements Serializable {
 	private Empresa empresa;
 
 	public Avulso() {
-		
+
 	}
 
 	public CategoriaENUM getTipoAvulso() {
@@ -70,8 +70,6 @@ public class Avulso implements Serializable {
 	public String getDescricao() {
 		return descricao;
 	}
-
-
 
 	public Empresa getEmpresa() {
 		return empresa;
@@ -144,6 +142,5 @@ public class Avulso implements Serializable {
 	public void setValor(float valor) {
 		this.valor = valor;
 	}
-
 
 }

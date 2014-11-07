@@ -12,7 +12,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -42,7 +41,7 @@ public class PedidoProduto implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private CategoriaENUM qualificacao;
 	private int tempoEspera;
-	
+
 	public int getTempoEspera() {
 		return tempoEspera;
 	}
@@ -58,7 +57,6 @@ public class PedidoProduto implements Serializable {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
 
 	public void setValor(float valor) {
 		this.valor = valor;
@@ -131,7 +129,6 @@ public class PedidoProduto implements Serializable {
 		ppa.setValor(avulso.getValor());
 		avulsos.add(ppa);
 	}
-
 
 	public int getIdPedidoProduto() {
 		return idPedidoProduto;

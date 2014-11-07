@@ -734,12 +734,12 @@ a.linkmenup {
 }
 
 .ui-paginator-bottom {
-	background-color: #FF7A00;
+	background-color: #F4F4F4;
 	border-radius: 10px;
 }
 
 .ui-paginator-top {
-	background-color: #FF7A00;
+	background-color: #F4F4F4;
 	border-radius: 10px;
 }
 
@@ -773,7 +773,7 @@ a.linkmenup {
 }
 
 .ui-datatable-header {
-	background-color: #FF7A00;
+	background-color: #F4F4F4;
 	border-radius: 10px;
 }
 

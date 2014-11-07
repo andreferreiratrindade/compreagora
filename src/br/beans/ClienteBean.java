@@ -5,11 +5,9 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.context.Flash;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
@@ -22,9 +20,7 @@ import br.Cliente.ClienteDAO;
 import br.Cliente.ClienteRN;
 import br.Empresa.Empresa;
 import br.Empresa.EmpresaRN;
-import br.beans.empresa.EmpresaBean;
 import br.beans.menssagem.Menssagem;
-import br.util.TipoMensagem;
 import br.util.Email.Email;
 import br.util.Email.EmailDestino;
 

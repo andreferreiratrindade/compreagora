@@ -19,11 +19,10 @@ public class Concluido implements StatusInterface {
 		return "Concluido";
 	}
 
-
 	@Override
 	public void apagarArquivo() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

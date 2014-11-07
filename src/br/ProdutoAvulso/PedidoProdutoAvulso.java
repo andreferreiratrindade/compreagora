@@ -25,8 +25,7 @@ public class PedidoProdutoAvulso implements Serializable {
 	private int idAvulso;
 	@Enumerated(EnumType.STRING)
 	private CategoriaENUM qualificacao;
-	
-	
+
 	public CategoriaENUM getQualificacao() {
 		return qualificacao;
 	}

@@ -76,7 +76,7 @@ public class Relatorio {
 
 		JasperExportManager.exportReportToPdfStream(jasperPrint,
 				servletOutputStream);
-				
+
 		FacesContext.getCurrentInstance().responseComplete();
 	}
 

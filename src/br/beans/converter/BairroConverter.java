@@ -10,9 +10,8 @@ import javax.faces.convert.FacesConverter;
 import br.AtendimentoLugares.Bairro;
 import br.AtendimentoLugares.BairroRN;
 
-
 @FacesConverter(value = "converterBairro")
-public class BairroConverter implements Converter,Serializable {
+public class BairroConverter implements Converter, Serializable {
 
 	/**
 	 * 

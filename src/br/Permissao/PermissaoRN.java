@@ -9,10 +9,10 @@ public class PermissaoRN {
 		this.session = DAOFactoy.criarPermissao();
 	}
 
-	public void salve(Permissao permissao){
+	public void salve(Permissao permissao) {
 		session.salve(permissao);
 	}
-	
+
 	public Permissao getPermissaoByDescricao(String descricao) {
 		return session.getPermissaoByDescricao(descricao);
 	}

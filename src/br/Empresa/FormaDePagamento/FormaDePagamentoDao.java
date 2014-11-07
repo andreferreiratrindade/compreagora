@@ -57,7 +57,4 @@ public class FormaDePagamentoDao implements Dao<FormaDePagamento> {
 		return easyCriteria.getSingleResult();
 	}
 
-	
-
-	
 }

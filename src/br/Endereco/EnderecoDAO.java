@@ -7,9 +7,8 @@ import javax.persistence.Query;
 
 import br.dao.Dao;
 
-
 public class EnderecoDAO implements Dao<Endereco> {
-	
+
 	private EntityManager session;
 
 	public EntityManager getSession() {
@@ -47,6 +46,5 @@ public class EnderecoDAO implements Dao<Endereco> {
 	public Endereco getUnico(int id) {
 		return this.session.find(Endereco.class, id);
 	}
-
 
 }

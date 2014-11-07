@@ -20,6 +20,7 @@ import org.primefaces.model.DualListModel;
 
 import br.AtendimentoLugares.Bairro;
 import br.AtendimentoLugares.EmpresaAtendimento;
+import br.AtendimentoLugares.EmpresaAtendimentoDAO;
 import br.AtendimentoLugares.EmpresaAtendimentoRN;
 import br.Cliente.Cliente;
 import br.Cliente.ClienteRN;
@@ -81,6 +82,15 @@ public class PedidoBean implements Serializable {
 	private String ufEntrega;
 	private String complementoEntrega;
 	private String menssagem;
+	private float taxa;
+	
+	public float getTaxa() {
+		return taxa;
+	}
+
+	public void setTaxa(float taxa) {
+		this.taxa = taxa;
+	}
 
 	public String getMenssagem() {
 		return menssagem;
@@ -567,12 +577,17 @@ public class PedidoBean implements Serializable {
 	}
 
 	public String adicionaEmpresa() {
-		String url = ("../principal.jsf");
+		String url = ("/principal.jsf");
 		FacesContext fc = FacesContext.getCurrentInstance();
 		ExternalContext ec = fc.getExternalContext();
 		try {
-
 			novo();
+		EmpresaAtendimentoRN empresaAtendimentoRN = new 	EmpresaAtendimentoRN();
+			EmpresaAtendimento empAtend = empresaAtendimentoRN.getEmpresaAtendimentoPeloBairroEmpresa(idBairro, empresa.getIdEmpresa());
+		pedido.setTaxa(empAtend.getTaxa());
+	pedido.calcularTotal();
+			
+			
 
 			Map<Integer, String> mapTipoEnum = new HashMap<Integer, String>();
 			mapTipoEnum.put(CategoriaENUM.Lanche.ordinal(), mudaTelaLanche());
@@ -587,12 +602,13 @@ public class PedidoBean implements Serializable {
 			return mapTipoEnum.get(categoriaEmpresa);
 
 		} catch (Exception e) {
-			try {
-				ec.redirect(url);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			System.out.println(e.toString());
+//			try {
+//				ec.redirect(url);
+//			} catch (IOException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}
 		}
 		return null;
 	}
@@ -686,7 +702,7 @@ public class PedidoBean implements Serializable {
 	}
 
 	public void adicionaLanche() {
-		if (verificaQuantidade()) {
+		
 			Produto produto = null;
 			produto = (Lanche) (lanchesDM.getRowData());
 			PedidoProduto pedidoProdutoTemp = new PedidoProduto();
@@ -695,11 +711,11 @@ public class PedidoBean implements Serializable {
 			pedido.setPedidoProdutos(pedidoProdutos);
 			pedido.calcularTotal();
 
-		}
+		
 	}
 
 	public void adicionaPizza() {
-		if (verificaQuantidade()) {
+		
 			Produto produto = null;
 			produto = (Pizza) (listPizzaDM.getRowData());
 			PedidoProduto pedidoProdutoTemp = new PedidoProduto();
@@ -707,11 +723,11 @@ public class PedidoBean implements Serializable {
 			pedidoProdutos.add(pedidoProdutoTemp);
 			pedido.setPedidoProdutos(pedidoProdutos);
 			pedido.calcularTotal();
-		}
+		
 	}
 
 	public void adicionaMarmitex() {
-		if (verificaQuantidade()) {
+		
 			Produto produto = null;
 			produto = (Marmitex) (marmitexsDM.getRowData());
 			PedidoProduto pedidoProdutoTemp = new PedidoProduto();
@@ -719,11 +735,11 @@ public class PedidoBean implements Serializable {
 			pedidoProdutos.add(pedidoProdutoTemp);
 			pedido.setPedidoProdutos(pedidoProdutos);
 			pedido.calcularTotal();
-		}
+		
 	}
 
 	public void adicionaAgua() {
-		if (verificaQuantidade()) {
+		
 			Produto produto = null;
 			produto = (Agua) (listAguaDM.getRowData());
 			PedidoProduto pedidoProdutoTemp = new PedidoProduto();
@@ -731,11 +747,11 @@ public class PedidoBean implements Serializable {
 			pedidoProdutos.add(pedidoProdutoTemp);
 			pedido.setPedidoProdutos(pedidoProdutos);
 			pedido.calcularTotal();
-		}
+	
 	}
 
 	public void adicionaGas() {
-		if (verificaQuantidade()) {
+		
 			Produto produto = null;
 			produto = (Gas) (listGasDM.getRowData());
 			PedidoProduto pedidoProdutoTemp = new PedidoProduto();
@@ -743,12 +759,12 @@ public class PedidoBean implements Serializable {
 			pedidoProdutos.add(pedidoProdutoTemp);
 			pedido.setPedidoProdutos(pedidoProdutos);
 			pedido.calcularTotal();
-		}
+	
 	}
 
 	public void adicionaBebida() {
 
-		if (verificaQuantidade()) {
+		
 			Produto produto = null;
 			produto = (Bebida) (bebidasDM.getRowData());
 			PedidoProduto pedidoProdutoTemp = new PedidoProduto();
@@ -756,12 +772,12 @@ public class PedidoBean implements Serializable {
 			pedidoProdutos.add(pedidoProdutoTemp);
 			pedido.setPedidoProdutos(pedidoProdutos);
 			pedido.calcularTotal();
-		}
+	
 
 	}
 
 	public void personalizaLanche() {
-		if (verificaQuantidade()) {
+		
 			lanche = (Lanche) (lanchesDM.getRowData());
 			pedidoProduto = new PedidoProduto();
 			pedidoProduto.addProduto(lanche);
@@ -769,57 +785,56 @@ public class PedidoBean implements Serializable {
 			atualizaAvulsoTotal();
 			atualizaAvulsos();
 
-		}
 	}
 
 	public void personalizaMarmitex() {
-		if (verificaQuantidade()) {
+	
 			marmitex = (Marmitex) (marmitexsDM.getRowData());
 			pedidoProduto = new PedidoProduto();
 			pedidoProduto.addProduto(marmitex);
 			atualizaAvulsoTotal();
 			atualizaAvulsos();
-		}
+	
 	}
 
 	public void personalizaBebida() {
-		if (verificaQuantidade()) {
+		
 			bebida = (Bebida) (bebidasDM.getRowData());
 			pedidoProduto = new PedidoProduto();
 			pedidoProduto.addProduto(bebida);
 			atualizaAvulsoTotal();
 			atualizaAvulsos();
-		}
+		
 	}
 
 	public void personalizaAgua() {
-		if (verificaQuantidade()) {
+		
 			agua = (Agua) (listAguaDM.getRowData());
 			pedidoProduto = new PedidoProduto();
 			pedidoProduto.addProduto(agua);
 			atualizaAvulsoTotal();
 			atualizaAvulsos();
-		}
+
 	}
 
 	public void personalizaPizza() {
-		if (verificaQuantidade()) {
+		
 			pizza = (Pizza) (listPizzaDM.getRowData());
 			pedidoProduto = new PedidoProduto();
 			pedidoProduto.addProduto(pizza);
 			atualizaAvulsoTotal();
 			atualizaAvulsos();
-		}
+	
 	}
 
 	public void personalizaGas() {
-		if (verificaQuantidade()) {
+		
 			gas = (Gas) (listGasDM.getRowData());
 			pedidoProduto = new PedidoProduto();
 			pedidoProduto.addProduto(gas);
 			atualizaAvulsoTotal();
 			atualizaAvulsos();
-		}
+
 	}
 
 	public void salvaProdutoPersonalizado() {
@@ -829,26 +844,6 @@ public class PedidoBean implements Serializable {
 		pedidoProdutos.add(pedidoProduto);
 		pedido.setPedidoProdutos(pedidoProdutos);
 		pedido.calcularTotal();
-	}
-
-	public boolean verificaQuantidade() {
-
-		if (pedido.getPedidoProdutos().size() < TOTAL_PRODUTO) {
-
-			return true;
-		} else {
-
-			FacesContext
-					.getCurrentInstance()
-					.addMessage(
-							null,
-							new FacesMessage(
-									FacesMessage.SEVERITY_ERROR,
-									"Quantidade de Produto por pedido excedido..",
-									" "));
-			return false;
-		}
-
 	}
 
 	public PedidoProduto getPedidoProduto() {
@@ -926,6 +921,7 @@ public class PedidoBean implements Serializable {
 
 		if (empAtend != null) {
 			pedido.setTaxa(empAtend.getTaxa());
+			pedido.calcularTotal();
 			empresaAtendeBairro = true;
 			menssagem = null;
 		} else {
@@ -947,6 +943,7 @@ public class PedidoBean implements Serializable {
 
 		if (empAtend != null) {
 			pedido.setTaxa(empAtend.getTaxa());
+			pedido.calcularTotal();
 			empresaAtendeBairro = true;
 			menssagem = null;
 		} else {

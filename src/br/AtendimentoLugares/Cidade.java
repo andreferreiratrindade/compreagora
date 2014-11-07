@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity(name = "cidade")
@@ -22,8 +21,7 @@ public class Cidade implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idCidade;
 	private String descCidade;
-	@OneToMany(mappedBy="cidade")
-	
+	@OneToMany(mappedBy = "cidade")
 	private List<Bairro> bairros = new ArrayList<Bairro>();
 
 	public int getIdCidade() {

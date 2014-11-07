@@ -116,7 +116,7 @@ public class ProdutoRNTest {
 		ProdutoRN produtoRN = new ProdutoRN();
 		Produto produto = produtoRN.getProduto(1);
 
-		assertEquals(5.90, produto.getValor(),0.00001);
+		assertEquals(5.90, produto.getValor(), 0.00001);
 
 	}
 }

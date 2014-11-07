@@ -6,9 +6,9 @@ public class EmailDestino {
 	private String assunto;
 	private String mensagem;
 	private String servidor;
-	
+
 	public String getServidor() {
-		
+
 		return servidor;
 	}
 
@@ -29,7 +29,7 @@ public class EmailDestino {
 	}
 
 	public void setEmail(String email) {
-		
+
 		this.email = email;
 		this.servidor = this.email.split("\\@")[1];
 		this.servidor = this.servidor.split("\\.")[0];

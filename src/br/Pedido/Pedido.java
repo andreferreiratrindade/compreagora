@@ -54,7 +54,7 @@ public class Pedido implements Serializable, Comparable<Pedido> {
 	private String cidade;
 	private String bairro;
 	private String UF;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "idFormaDePagamento")
 	private FormaDePagamento formaDePagamento;
@@ -70,7 +70,7 @@ public class Pedido implements Serializable, Comparable<Pedido> {
 	public void setUF(String uF) {
 		UF = uF;
 	}
-	
+
 	public String getLogradouro() {
 		return logradouro;
 	}

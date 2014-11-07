@@ -9,7 +9,7 @@ public class GasImplementacao implements IProduto {
 	@Override
 	public void atualizar(int idProduto) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -19,7 +19,7 @@ public class GasImplementacao implements IProduto {
 	}
 
 	@Override
-	public boolean verificaEstoque(int idProduto,int quantidade)  {
+	public boolean verificaEstoque(int idProduto, int quantidade) {
 		// TODO Auto-generated method stub
 		return false;
 	}

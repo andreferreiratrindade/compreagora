@@ -92,7 +92,7 @@ public class CategoriaEmpresa implements Serializable, CycleRecoverable {
 
 	@Override
 	public Object onCycleDetected(Context arg0) {
-	
+
 		CategoriaEmpresa c = new CategoriaEmpresa();
 		c.setIdCategoriaEmpresa(this.idCategoriaEmpresa);
 		return c;

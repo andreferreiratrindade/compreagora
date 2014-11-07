@@ -7,27 +7,23 @@ import org.junit.Test;
 public class EmpresaBeanTest {
 
 	@BeforeClass
-	public static void setDown(){
-		
-	
-		
+	public static void setDown() {
+
 	}
-	
-	
+
 	@AfterClass
-	public static void setUp(){
-		
-		
+	public static void setUp() {
+
 	}
-	
+
 	@Test
 	public void deveAtualizarListaFormaDePagamento() {
 
 		EmpresaBean empresaBean = new EmpresaBean();
-//		empresaBean.atualizaListaFormaDePagamento();
-		
-//		empresaBean
-	
+		// empresaBean.atualizaListaFormaDePagamento();
+
+		// empresaBean
+
 	}
 
 }

@@ -12,10 +12,8 @@ public class AvulsoBebidaImp implements AvulsoImp {
 			List<Avulso> pedidoProdutoAvulsos) {
 		AvulsoRN avulsoRN = new AvulsoRN();
 		List<Avulso> avulsos = null;
-	//	avulsos = avulsoRN.listar(idEmpresa);
-		
-		
-		
+		// avulsos = avulsoRN.listar(idEmpresa);
+
 		if (pedidoProdutoAvulsos.size() != avulsos.size()) {
 			for (Avulso x : pedidoProdutoAvulsos) {
 

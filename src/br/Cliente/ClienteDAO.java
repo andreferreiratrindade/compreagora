@@ -31,13 +31,12 @@ public class ClienteDAO implements Dao<Cliente> {
 	}
 
 	public Cliente buscarPorEmail(String email) {
-		
+
 		EasyCriteria<Cliente> easyCriteria = EasyCriteriaFactory
 				.createQueryCriteria(session, Cliente.class);
-		
+
 		easyCriteria.andEquals("email", email);
 
-		
 		List<Cliente> clientes = easyCriteria.getResultList();
 
 		if (clientes.isEmpty()) {

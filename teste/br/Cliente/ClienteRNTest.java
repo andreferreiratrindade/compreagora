@@ -14,7 +14,6 @@ import br.util.JpaUtil;
 
 public class ClienteRNTest {
 
-
 	@BeforeClass
 	public static void setUp() {
 		JpaUtil.getEntityManager().getTransaction().begin();
@@ -46,7 +45,6 @@ public class ClienteRNTest {
 		assertEquals(1, clientes.size());
 
 	}
-
 
 	@Test
 	public void deveRetornarClienteNull() {

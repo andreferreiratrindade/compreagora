@@ -23,8 +23,6 @@ public class RelatorioTodosProdutos extends RelatorioFacade {
 	@Override
 	public void gerarRelatorio() {
 
-
-		
 		ProdutoRN produtoRN = new ProdutoRN();
 		List<Produto> produtos = produtoRN.listarProdutos(idEmpresa);
 		relatorio.setLista(produtos);

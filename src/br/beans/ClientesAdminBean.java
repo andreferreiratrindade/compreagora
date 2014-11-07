@@ -18,7 +18,7 @@ import br.util.Email.EmailDestino;
 
 @ManagedBean(name = "clientesAdminBean")
 @RequestScoped
-public class ClientesAdminBean implements Serializable{
+public class ClientesAdminBean implements Serializable {
 	/**
 	 * 
 	 */

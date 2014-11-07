@@ -14,7 +14,7 @@ import br.util.Email.SendEmail;
 
 @ManagedBean
 @ViewScoped
-public class EmailFaleConosco implements Serializable{
+public class EmailFaleConosco implements Serializable {
 	/**
 	 * 
 	 */

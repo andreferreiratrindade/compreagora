@@ -1,129 +1,128 @@
 package br.util.Email;
 
-
 import java.util.List;
 import java.util.Map;
 
 public class EmailConfing {
-    
-    public static final String TYPE_TEXT_PLAIN = "text/plain";
-    public static final String TYPE_TEXT_HTML = "text/html";
 
-    private String smtpHostMail;
-    private String smtpPortMail;
-    private String smtpAuth;
-    private String smtpStarttls;
-    private String fromNameMail;
-    private String userMail;
-    private String passMail;
-    private String subjectMail;
-    private String bodyMail;
-    private Map<String, String> toMailsUsers;
-    private List<String> fileMails;
-    private String charsetMail;
-    private String typeTextMail;
+	public static final String TYPE_TEXT_PLAIN = "text/plain";
+	public static final String TYPE_TEXT_HTML = "text/html";
 
-    public String getSmtpHostMail() {
-        return smtpHostMail;
-    }
+	private String smtpHostMail;
+	private String smtpPortMail;
+	private String smtpAuth;
+	private String smtpStarttls;
+	private String fromNameMail;
+	private String userMail;
+	private String passMail;
+	private String subjectMail;
+	private String bodyMail;
+	private Map<String, String> toMailsUsers;
+	private List<String> fileMails;
+	private String charsetMail;
+	private String typeTextMail;
 
-    public void setSmtpHostMail(String smtpHostMail) {
-        this.smtpHostMail = smtpHostMail;
-    }
+	public String getSmtpHostMail() {
+		return smtpHostMail;
+	}
 
-    public String getSmtpPortMail() {
-        return smtpPortMail;
-    }
+	public void setSmtpHostMail(String smtpHostMail) {
+		this.smtpHostMail = smtpHostMail;
+	}
 
-    public void setSmtpPortMail(String smtpPortMail) {
-        this.smtpPortMail = smtpPortMail;
-    }
+	public String getSmtpPortMail() {
+		return smtpPortMail;
+	}
 
-    public String getSmtpAuth() {
-        return smtpAuth;
-    }
+	public void setSmtpPortMail(String smtpPortMail) {
+		this.smtpPortMail = smtpPortMail;
+	}
 
-    public void setSmtpAuth(String smtpAuth) {
-        this.smtpAuth = smtpAuth;
-    }
+	public String getSmtpAuth() {
+		return smtpAuth;
+	}
 
-    public String getSmtpStarttls() {
-        return smtpStarttls;
-    }
+	public void setSmtpAuth(String smtpAuth) {
+		this.smtpAuth = smtpAuth;
+	}
 
-    public void setSmtpStarttls(String smtpStarttls) {
-        this.smtpStarttls = smtpStarttls;
-    }
+	public String getSmtpStarttls() {
+		return smtpStarttls;
+	}
 
-    public String getFromNameMail() {
-        return fromNameMail;
-    }
+	public void setSmtpStarttls(String smtpStarttls) {
+		this.smtpStarttls = smtpStarttls;
+	}
 
-    public void setFromNameMail(String fromNameMail) {
-        this.fromNameMail = fromNameMail;
-    }
+	public String getFromNameMail() {
+		return fromNameMail;
+	}
 
-    public String getUserMail() {
-        return userMail;
-    }
+	public void setFromNameMail(String fromNameMail) {
+		this.fromNameMail = fromNameMail;
+	}
 
-    public void setUserMail(String userMail) {
-        this.userMail = userMail;
-    }
+	public String getUserMail() {
+		return userMail;
+	}
 
-    public String getPassMail() {
-        return passMail;
-    }
+	public void setUserMail(String userMail) {
+		this.userMail = userMail;
+	}
 
-    public void setPassMail(String passMail) {
-        this.passMail = passMail;
-    }
+	public String getPassMail() {
+		return passMail;
+	}
 
-    public String getSubjectMail() {
-        return subjectMail;
-    }
+	public void setPassMail(String passMail) {
+		this.passMail = passMail;
+	}
 
-    public void setSubjectMail(String subjectMail) {
-        this.subjectMail = subjectMail;
-    }
+	public String getSubjectMail() {
+		return subjectMail;
+	}
 
-    public String getBodyMail() {
-        return bodyMail;
-    }
+	public void setSubjectMail(String subjectMail) {
+		this.subjectMail = subjectMail;
+	}
 
-    public void setBodyMail(String bodyMail) {
-        this.bodyMail = bodyMail;
-    }
+	public String getBodyMail() {
+		return bodyMail;
+	}
 
-    public Map<String, String> getToMailsUsers() {
-        return toMailsUsers;
-    }
+	public void setBodyMail(String bodyMail) {
+		this.bodyMail = bodyMail;
+	}
 
-    public void setToMailsUsers(Map<String, String> toMailsUsers) {
-        this.toMailsUsers = toMailsUsers;
-    }
+	public Map<String, String> getToMailsUsers() {
+		return toMailsUsers;
+	}
 
-    public List<String> getFileMails() {
-        return fileMails;
-    }
+	public void setToMailsUsers(Map<String, String> toMailsUsers) {
+		this.toMailsUsers = toMailsUsers;
+	}
 
-    public void setFileMails(List<String> fileMails) {
-        this.fileMails = fileMails;
-    }
+	public List<String> getFileMails() {
+		return fileMails;
+	}
 
-    public String getCharsetMail() {
-        return charsetMail;
-    }
+	public void setFileMails(List<String> fileMails) {
+		this.fileMails = fileMails;
+	}
 
-    public void setCharsetMail(String charsetMail) {
-        this.charsetMail = charsetMail;
-    }
+	public String getCharsetMail() {
+		return charsetMail;
+	}
 
-    public String getTypeTextMail() {
-        return typeTextMail;
-    }
+	public void setCharsetMail(String charsetMail) {
+		this.charsetMail = charsetMail;
+	}
 
-    public void setTypeTextMail(String typeTextMail) {
-        this.typeTextMail = typeTextMail;
-    }
+	public String getTypeTextMail() {
+		return typeTextMail;
+	}
+
+	public void setTypeTextMail(String typeTextMail) {
+		this.typeTextMail = typeTextMail;
+	}
 }

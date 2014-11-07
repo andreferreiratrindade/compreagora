@@ -35,7 +35,6 @@ public class ClienteBuilder {
 		BairroDAO bairroDao = DAOFactoy.criarBairro();
 		bairroDao.salve(bairro);
 
-
 		Cliente tempCliente = new Cliente();
 		tempCliente.setAtivo(true);
 		tempCliente.setEmail("dede@gmail.com");

@@ -44,13 +44,11 @@ public class PedidoRN {
 
 		IProduto produtoI;
 
-		
 		for (PedidoProduto x : pedidoProdutos) {
 
-			
 			produtoI = (IProduto) mapProduto.get(x.getQualificacao());
 			produtoI.atualizar(x.getIdProduto());
-		
+
 		}
 
 	}
@@ -65,15 +63,13 @@ public class PedidoRN {
 
 		pedido.setDataHoraIn(new Date());
 		pedido.setStatusPedido(1);
-	
 
 		this.pedidoDAO.salve(pedido);
 		atualizaProdutos(pedido);
 	}
 
 	public int calculaTempoDeTodosPedidos(int idEmpresa) {
-		
-	
+
 		List<Pedido> pedidos = this.pedidoDAO.pedidosPeloStatus(idEmpresa);
 		int tempo = 0;
 		for (Pedido x : pedidos) {

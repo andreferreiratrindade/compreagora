@@ -64,7 +64,5 @@ public class FormaDePagamentoDaoTest {
 		FormaDePagamento fdp = fdpRN.peloTipo("Dinheiro");
 		assertEquals("Dinheiro", fdp.getTipo());
 	}
-	
-	
 
 }

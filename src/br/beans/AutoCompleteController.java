@@ -36,6 +36,7 @@ public class AutoCompleteController implements Serializable {
 	private int categoriaEmpresa;
 	private String urlPedido;
 
+
 	public String getUrlPedido() {
 		return urlPedido;
 	}
@@ -153,7 +154,7 @@ public class AutoCompleteController implements Serializable {
 
 	public String mudaTelaLanche() {
 
-return "/paginas/categoria/escolhaProduto/SelecionaProdutoLanche?faces-redirect=true";
+		return "/paginas/categoria/escolhaProduto/SelecionaProdutoLanche?faces-redirect=true";
 
 	}
 

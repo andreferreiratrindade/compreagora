@@ -67,7 +67,6 @@ public class EmpresaBuilder {
 				.getCategoriaComEnum(CategoriaENUM.Bebida));
 		empresa.addFormaDePagamento(fdp);
 
-
 		empresaDAO = DAOFactoy.criarEmpresa();
 		empresaDAO.salve(empresa);
 
@@ -86,13 +85,10 @@ public class EmpresaBuilder {
 
 		Bairro bairro = bairroDao.buscarPorDescricao("Centro");
 
-
-
 		Empresa empresa = new Empresa();
 		empresa.setRazaoSocial("Empresa 2");
 		empresa.addCategoria(categoria);
 		empresa.addFormaDePagamento(fdp);
-
 
 		empresaDAO = DAOFactoy.criarEmpresa();
 		empresaDAO.salve(empresa);
@@ -115,7 +111,6 @@ public class EmpresaBuilder {
 		empresa.setRazaoSocial("Empresa 3");
 		empresa.addCategoria(categoria);
 		empresa.addFormaDePagamento(fdp);
-	
 
 		empresaDAO = DAOFactoy.criarEmpresa();
 		empresaDAO.salve(empresa);
@@ -133,7 +128,6 @@ public class EmpresaBuilder {
 		FormaDePagamento fdp = fdpDao.pesquisaPeloTipo("Dinheiro");
 
 		Bairro bairro = bairroDao.buscarPorDescricao("Nova Vila Bretas");
-
 
 		Empresa empresa = new Empresa();
 		empresa.setRazaoSocial("Empresa 4");

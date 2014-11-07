@@ -12,15 +12,15 @@ import br.Produto.Marmitex;
 import br.Produto.Pizza;
 
 public interface IFiltroProduto {
-	public List<Lanche> listarLanche(int idEmpresa,EntityManager em);
+	public List<Lanche> listarLanche(int idEmpresa, EntityManager em);
 
-	public List<Bebida> listarBebida(int idEmpresa,EntityManager em);
+	public List<Bebida> listarBebida(int idEmpresa, EntityManager em);
 
-	public List<Marmitex> listarMarmitex(int idEmpresa,EntityManager em);
+	public List<Marmitex> listarMarmitex(int idEmpresa, EntityManager em);
 
-	public List<Pizza> listarPizza(int idEmpresa,EntityManager em);
+	public List<Pizza> listarPizza(int idEmpresa, EntityManager em);
 
-	public List<Agua> listarAgua(int idEmpresa,EntityManager em);
+	public List<Agua> listarAgua(int idEmpresa, EntityManager em);
 
-	public List<Gas> listarGas(int idEmpresa,EntityManager em);
+	public List<Gas> listarGas(int idEmpresa, EntityManager em);
 }

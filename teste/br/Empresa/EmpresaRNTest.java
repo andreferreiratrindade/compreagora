@@ -71,8 +71,6 @@ public class EmpresaRNTest {
 		fdpRN.salvar(formaDePagamento);
 	}
 
-	
-
 	@Test
 	public void deveListarAvulsosCadastrados() {
 		AvulsoRN avulsoRN = new AvulsoRN();
@@ -82,7 +80,7 @@ public class EmpresaRNTest {
 
 	@Test
 	public void deveListarEmpresas() {
-		
+
 		EmpresaRN empresaRN = new EmpresaRN();
 		List<Empresa> empresas = empresaRN.listar();
 
@@ -170,12 +168,14 @@ public class EmpresaRNTest {
 
 		assertEquals(3, empresas.size());
 	}
-	
+
 	@Test
-	public void deveVerificarLocalAtendimento(){
+	public void deveVerificarLocalAtendimento() {
 		EmpresaAtendimentoRN empresaAtendimentoRN = new EmpresaAtendimentoRN();
 		EmpresaAtendimento empresaAtendimento = new EmpresaAtendimento();
-		empresaAtendimento = empresaAtendimentoRN.empresaAtendimentoEmpresaComBairro(1, "Governador Valadares", "Nova Vila Bretas");
+		empresaAtendimento = empresaAtendimentoRN
+				.empresaAtendimentoEmpresaComBairro(1, "Governador Valadares",
+						"Nova Vila Bretas");
 		assertNotNull(empresaAtendimento);
 	}
 }

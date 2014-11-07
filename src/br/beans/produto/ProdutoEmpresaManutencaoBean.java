@@ -81,7 +81,6 @@ public class ProdutoEmpresaManutencaoBean implements Serializable {
 		return lanchesDM;
 	}
 
-	
 	public DataModel<Bebida> getbebidasDM() {
 
 		return bebidasDM;

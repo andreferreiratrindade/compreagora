@@ -35,6 +35,4 @@ public class FormaDePagamentoRN {
 		return this.dao.pesquisaPeloTipo(string);
 	}
 
-	
-
 }

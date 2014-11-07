@@ -49,5 +49,4 @@ public class CategoriaEmpresaDao implements Dao<CategoriaEmpresa> {
 		return null;
 	}
 
-
 }

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -61,10 +60,9 @@ public class ImpressoraEntrega extends ImpressoraNaoFiscal {
 
 			int count = 1;
 			for (PedidoProduto x : pedido.getPedidoProdutos()) {
-				linhasTxt
-						.println(String.format("%7s  %9s",
-								count + " - " + x.getDescricao(),
-								"R$ " + df.format(x.getValor())));
+				linhasTxt.println(String.format("%7s  %9s",
+						count + " - " + x.getDescricao(),
+						"R$ " + df.format(x.getValor())));
 
 				for (PedidoProdutoAvulso y : x.getAvulsos()) {
 					linhasTxt.println(String.format("%7s  %9s",

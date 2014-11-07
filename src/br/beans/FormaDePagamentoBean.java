@@ -26,7 +26,6 @@ public class FormaDePagamentoBean {
 		formaDePagamento = new FormaDePagamento();
 	}
 
-
 	public List<FormaDePagamento> getFormasDePagamento() {
 		return formasDePagamento;
 	}
@@ -47,7 +46,6 @@ public class FormaDePagamentoBean {
 
 		formaDePagamento = new FormaDePagamento();
 	}
-
 
 	public void uploadAction(FileUploadEvent event) {
 		this.arquivo.fileUpload(event);

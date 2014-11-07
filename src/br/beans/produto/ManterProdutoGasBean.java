@@ -123,6 +123,5 @@ public class ManterProdutoGasBean implements Serializable {
 	public void setArquivo(FileUpload arquivo) {
 		this.arquivo = arquivo;
 	}
-	
 
 }
